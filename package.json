@@ -1,0 +1,34 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "ABDJ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayfine/capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dayfine/capstone/issues"
+  },
+  "homepage": "https://github.com/dayfine/capstone#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "concurrently": "^3.5.0",
+    "eslint": "^4.10.0",
+    "eslint-config-fullstack": "^3.0.0",
+    "eslint-plugin-react": "^7.4.0",
+    "morgan": "^1.9.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "pg": "^7.3.0",
+    "pg-native": "^2.2.0",
+    "sequelize": "^4.20.1"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "parser": "babel-eslint",
+  "extends": "fullstack",
+  "root": true
+}
