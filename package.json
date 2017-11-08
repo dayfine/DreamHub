@@ -1,34 +1,40 @@
 {
-  "name": "capstone",
+  "name": "test",
   "version": "1.0.0",
-  "description": "ABDJ",
-  "main": "index.js",
+  "private": true,
+  "main": "/server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dayfine/capstone.git"
+    "start:dev": "webpack -w & nodemon server --ignore public/",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dayfine/capstone/issues"
-  },
-  "homepage": "https://github.com/dayfine/capstone#readme",
-  "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "concurrently": "^3.5.0",
-    "eslint": "^4.10.0",
-    "eslint-config-fullstack": "^3.0.0",
-    "eslint-plugin-react": "^7.4.0",
-    "morgan": "^1.9.0"
-  },
+  "description": "",
   "dependencies": {
+    "axios": "^0.17.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "pg": "^7.3.0",
-    "pg-native": "^2.2.0",
-    "sequelize": "^4.20.1"
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.14",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "sequelize": "^4.22.5",
+    "webpack": "^3.8.1"
   }
 }
