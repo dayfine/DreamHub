@@ -1,6 +1,10 @@
 .DS_Store
 package-lock.json
 
+# production
+/build
+client/build
+
 # Logs
 logs
 *.log

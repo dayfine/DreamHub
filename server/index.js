@@ -6,8 +6,11 @@ const
   db = require('./db'),
   port = process.env.PORT || 3001
 
+// Only serve build directory in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
+} else {
+  require('../secrets')
 }
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -30,6 +33,7 @@ app.use((err, req, res, next) => {
 })
 
 db.sync()
+  .then(() => db.seed())
   .then(() => {
     console.log('db synced')
     app.listen(port, () => console.log(`listening on port ${port}`))
