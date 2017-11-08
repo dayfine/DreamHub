@@ -12,8 +12,8 @@ class App extends Component {
   render(){
     return (
       <main>
-        <a href='/api/auth/google'><button>Login with Google</button></a>
         <Form />
+        <a href='/api/auth/google'><button>Login with Google</button></a>
       </main>
     )
   }

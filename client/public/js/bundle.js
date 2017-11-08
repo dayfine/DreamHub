@@ -21223,6 +21223,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'main',
         null,
+        _react2.default.createElement(_Form2.default, null),
         _react2.default.createElement(
           'a',
           { href: '/api/auth/google' },
@@ -21231,8 +21232,7 @@ var App = function (_Component) {
             null,
             'Login with Google'
           )
-        ),
-        _react2.default.createElement(_Form2.default, null)
+        )
       );
     }
   }]);
@@ -21309,7 +21309,7 @@ var Form = function (_Component) {
         _react2.default.createElement(
           'form',
           { onSubmit: handleSubmit },
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Write your story', autoFocus: true, onChange: handleChange }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Write your goals', autoFocus: true, onChange: handleChange }),
           _react2.default.createElement(
             'button',
             null,
