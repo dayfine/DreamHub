@@ -3,7 +3,8 @@ const Sequelize = conn.Sequelize;
 
 const Goal = conn.define('goal', {
   title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   description: {
     type: Sequelize.TEXT

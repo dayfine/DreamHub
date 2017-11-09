@@ -3,7 +3,8 @@ const Sequelize = conn.Sequelize;
 
 const Task = conn.define('task', {
   title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   description: {
     type: Sequelize.TEXT
@@ -13,6 +14,10 @@ const Task = conn.define('task', {
   },
   priority: {
     type: Sequelize.INTEGER
+  },
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'Created'
   }
 });
 
