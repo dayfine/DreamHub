@@ -1,6 +1,11 @@
 import React from 'react';
-import {Motion, spring} from '../../src/react-motion';
-import range from 'lodash.range';
+import {Motion, spring} from 'react-motion';
+import range from 'lodash/range';
+
+import { STATUS } from '../../constants'
+
+import Card from './Card'
+import Column from './Column'
 
 const springSetting1 = {stiffness: 180, damping: 10};
 const springSetting2 = {stiffness: 120, damping: 17};
@@ -20,7 +25,7 @@ const allColors = [
   '#EF767A', '#456990', '#49BEAA', '#49DCB1', '#EEB868', '#EF767A', '#456990',
   '#49BEAA', '#49DCB1', '#EEB868', '#EF767A',
 ];
-const [count, width, height] = [11, 70, 90];
+const [count, width, height] = [1, 190, 150];
 // indexed by visual position
 const layout = range(count).map(n => {
   const row = Math.floor(n / 3);
@@ -60,9 +65,9 @@ export default class Demo extends React.Component {
     const {order, lastPress, isPressed, mouseCircleDelta: [dx, dy]} = this.state;
     if (isPressed) {
       const mouseXY = [pageX - dx, pageY - dy];
-      const col = clamp(Math.floor(mouseXY[0] / width), 0, 2);
-      const row = clamp(Math.floor(mouseXY[1] / height), 0, Math.floor(count / 3));
-      const index = row * 3 + col;
+      const row = clamp(Math.floor(mouseXY[0] / width), 0, 2);
+      const col = clamp(Math.floor(mouseXY[1] / height), 0, Math.floor(count / 3));
+      const index = row + col * 3;
       const newOrder = reinsert(order, order.indexOf(lastPress), index);
       this.setState({mouseXY, order: newOrder});
     }
@@ -84,7 +89,12 @@ export default class Demo extends React.Component {
   render() {
     const {order, lastPress, isPressed, mouseXY} = this.state;
     return (
-      <div className="demo2">
+      <div style={{height: '100%', minHeight: 800}}>
+        {Object.values(STATUS).map(status => {
+          return (<Column header={status}/>)
+        })}
+
+
         {order.map((_, key) => {
           let style;
           let x;
@@ -108,20 +118,23 @@ export default class Demo extends React.Component {
             };
           }
           return (
+
             <Motion key={key} style={style}>
               {({translateX, translateY, scale, boxShadow}) =>
                 <div
                   onMouseDown={this.handleMouseDown.bind(null, key, [x, y])}
                   onTouchStart={this.handleTouchStart.bind(null, key, [x, y])}
-                  className="demo2-ball"
                   style={{
+                    position: 'absolute',
                     backgroundColor: allColors[key],
                     WebkitTransform: `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`,
                     transform: `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`,
                     zIndex: key === lastPress ? 99 : visualPosition,
                     boxShadow: `${boxShadow}px 5px 5px rgba(0,0,0,0.5)`,
                   }}
-                />
+                >
+                   <Card />
+                </div>
               }
             </Motion>
           );

@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { views as GoalForm } from './Goals';
+import React, { Component } from 'react'
+import { views as Kanban } from './Kanban'
 
 class App extends Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
   }
 
-  componentDidMoun(){
+  componentDidMoun () {
 
   }
 
-  render(){
+  render () {
     return (
       <main>
-        <GoalForm />
+        <Kanban />
         <a href='/api/auth/google'><button>Login with Google</button></a>
       </main>
     )
   }
 }
 
-export default App;
+export default App

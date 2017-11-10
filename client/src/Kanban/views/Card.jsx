@@ -1,41 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
-class Form extends Component {
-  constructor(){
-    super();
-    this.state = {
-      message: ''
-    }
+import { withStyles } from 'material-ui/styles'
+import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit(event){
-    event.preventDefault();
-    console.log('Submit Event target value:', event.target.value);
-  }
-
-  handleChange(event){
-    console.log('Change event', event.target.value);
-    this.setState({message: event.target.value});
-
-  }
-
-  render(){
-    const { handleSubmit, handleChange } = this;
-    const { message } = this.state
-    return (
-      <div>
-        <form onSubmit={ handleSubmit }>
-          <input type="text" placeholder='Write your goals' autoFocus onChange={ handleChange }/>
-          <button>Submit</button>
-        </form>
-        <br />
-        <div>{ message }</div>
-      </div>
-    )
+const styles = {
+  agileCard: {
+    width: 150,
+    height: 120
   }
 }
 
-export default Form;
+const AgileCard = props => {
+  const { classes } = props
+  return (
+    <div className={classes.agileCard}>
+      <Card>
+        <CardContent>
+            every card shows a goal
+          </CardContent>
+      </Card>
+    </div>
+
+  )
+}
+
+const StyledComponent = withStyles(styles)(AgileCard)
+
+const mapState = state => ({
+  timer: state.timer
+})
+
+export default connect(mapState)(StyledComponent)
