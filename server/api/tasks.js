@@ -2,26 +2,26 @@ const router = require('express').Router();
 const { Task } = require('../db').models;
 
 router.get('/', (req, res, next) => {
-  Goals.getGoals(req.body.userId)
-    .then(goals => res.send(goals))
+  Task.getTasks(req.body.userId)
+    .then(tasks => res.send(tasks))
     .catch(next);
   });
 });
 
 router.post('/', (req, res, next) => {
-  Goals.addGoal(req.body.userId, req.body)
-    .then(goal => res.send(goal))
+  Task.addTask(req.body.userId, req.body)
+    .then(task => res.send(task))
     .catch(next);
 });
 
 router.put('/:id', (req, res, next) => {
-  Goals.editGoal(req.params.id, req.body.userId, req.body)
-    .then(goal => res.send(goal))
+  Task.editTask(req.params.id, req.body.userId, req.body)
+    .then(task => res.send(task))
     .catch(next);
 });
 
 router.delete('/:id', (req, res, next) => {
-  Goals.deleteGoal(req.params.id, req.body.userId)
+  Task.deleteTask(req.params.id, req.body.userId)
     .then(() => res.sendStatus(201))
     .catch(next);
 });
