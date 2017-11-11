@@ -5,7 +5,6 @@ router.get('/', (req, res, next) => {
   Goal.getGoals(req.body.userId)
     .then(goals => res.send(goals))
     .catch(next);
-  });
 });
 
 router.post('/', (req, res, next) => {
