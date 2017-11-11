@@ -1,6 +1,17 @@
 import { ADD_CARD, UPDATE_CARD, MOVE_CARD, DELETE_CARD, FETCH_CARDS } from './actionTypes.js'
 
-const initialState = []
+const initialState = [
+  {
+    goal: 'Learn Spanish',
+    tasks: [ {description: 'Memorize vocabulary'} ],
+    status: 'Completed'
+  },
+  {
+    goal: 'Prep For Technical Interviews',
+    tasks: [ {description: 'Do algo question'} ],
+    status: 'In Progress'
+  }
+]
 
 export default (state = initialState, action) => {
   switch (action.type) {
