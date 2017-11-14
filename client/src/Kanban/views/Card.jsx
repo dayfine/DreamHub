@@ -12,13 +12,13 @@ const styles = {
 }
 
 const AgileCard = props => {
-  const { classes } = props
+  const { classes, goal } = props
   return (
     <div className={classes.agileCard}>
       <Card>
         <CardContent>
-            every card shows a goal
-          </CardContent>
+          {JSON.stringify(goal)}
+        </CardContent>
       </Card>
     </div>
 

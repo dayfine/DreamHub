@@ -6,16 +6,16 @@ import Grid from 'material-ui/Grid'
 import Column from './Column'
 
 import { STATUS } from '../../constants'
+import { goalMapper } from '../util/mappers'
 
 const Kanban = props => {
-  const { goals } = props
-  console.log(goals)
+  const { goalEntries } = props
   return (
     <Grid container>
-      {Object.values(STATUS).map(status => {
+      {goalEntries.map(([status, ...goals]) => {
         return (
           <Grid item xs={4} key={status}>
-            <Column header={status} goals={goals.status} />
+            <Column header={status} goals={goals} />
           </Grid>
         )
       })}
@@ -24,7 +24,7 @@ const Kanban = props => {
 }
 
 const mapState = state => ({
-  goals: state.goals  // fitler here
+  goalEntries: Object.entries(goalMapper(state.goals))  // fitler here
 })
 
 export default connect(mapState)(Kanban)

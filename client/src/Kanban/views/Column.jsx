@@ -5,7 +5,9 @@ const Column = ({header, goals}) => {
   return (
     <div>
       <div>{header}</div>
-      <Card />
+      {goals.map(goal => {
+        return (<Card goal={goal} />)
+      })}
     </div>
   )
 }
