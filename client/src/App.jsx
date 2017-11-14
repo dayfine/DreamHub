@@ -6,7 +6,7 @@ class App extends Component {
     super();
   }
 
-  componentDidMoun(){
+  componentDidMount(){
 
   }
 
