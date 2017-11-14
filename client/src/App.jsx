@@ -17,9 +17,9 @@ class App extends Component {
   }
   render () {
     return (
-      <div>
+      <div style={{height: '100vh'}}>
         <NavBar />
-        <Grid container style={{paddingTop: 64}}>
+        <Grid container style={{paddingTop: 90}}>
           <Grid item xs={2}>
             <a href='/api/auth/google'><button>Login with Google</button></a>
           </Grid>

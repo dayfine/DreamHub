@@ -7,17 +7,17 @@ import Typography from 'material-ui/Typography'
 
 const Column = ({header, goals}) => {
   return (
-    <Paper>
-      <Typography type='headline' >
-        {goals.length} goals
-      </Typography>
-      <Typography type='display1' >
-        <div>{header}</div>
-      </Typography>
-
+    <Paper style={{backgroundColor: '#eee', height: '100%'}}>
+      <div style={{padding: 10}}>
+        <Typography type='headline' >
+          {goals.length} goals
+        </Typography>
+        <Typography type='display1' >
+          <div>{header}</div>
+        </Typography>
+      </div>
       <Divider light />
       {goals.map(goal => {
-        // console.log(goal)
         return (<Card key={goal.title} goal={goal} />)
       })}
     </Paper>

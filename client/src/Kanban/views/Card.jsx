@@ -6,15 +6,14 @@ import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
 const styles = {
   agileCard: {
-    width: 150,
-    height: 120
+    margin: 5
   }
 }
 
 const AgileCard = props => {
   const { classes, goal } = props
   return (
-    <Card>
+    <Card className={classes.agileCard}>
       <CardHeader title={goal.title} />
       <CardContent>
         {JSON.stringify(goal.tasks)}

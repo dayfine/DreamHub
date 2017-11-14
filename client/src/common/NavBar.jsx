@@ -20,7 +20,6 @@ const style = theme => ({
     marginLeft: -12,
     marginRight: 20
   }
-
 })
 
 const NavBar = props => {

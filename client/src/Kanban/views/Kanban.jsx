@@ -12,7 +12,7 @@ const Kanban = props => {
   const { goalEntries } = props
 
   return (
-    <Grid container>
+    <Grid container style={{height: 'calc(100vh - 90px)'}}>
       {goalEntries.map(([status, goals]) => {
         return (
           <Grid item xs={3} key={status}>
