@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import Card from './Card'
 
 import Paper from 'material-ui/Paper'
@@ -7,12 +9,14 @@ import Typography from 'material-ui/Typography'
 
 import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
+import { updateCard } from '../actions'
 
 const columnTarget = {
   drop (props, monitor) {
-    console.log(props)
+    // console.log(props)
+    const { id } = monitor.getItem()
     const status = props.header
-    // props.moveCard(props.x, props.y)
+    props.updateCard(id, { status })
   }
 }
 
@@ -43,6 +47,8 @@ const Column = props => {
   )
 }
 
+const mapDispatch = ({ updateCard })
+
 const DropTargetComp = DropTarget(DragItemTypes.CARD, columnTarget, collect)(Column)
 
-export default DropTargetComp
+export default connect(null, mapDispatch)(DropTargetComp)

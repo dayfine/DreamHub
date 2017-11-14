@@ -15,7 +15,8 @@ const styles = {
 
 const cardSource = {
   beginDrag (props) {
-    return {}
+    console.log('source Prop', props)
+    return { id: props.goal.id }
   }
 }
 
