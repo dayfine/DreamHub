@@ -1,38 +1,56 @@
 import React, { Component } from 'react';
 
-class Form extends Component {
-  constructor(){
-    super();
-    this.state = {
-      message: ''
-    }
+const Goal = () => {
+  return(
+    <div>
 
+    </div>
+  );
+}
+
+
+class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    console.log('Submit Event target value:', event.target.value);
+  handleChange(ev) {
+    this.setState({ value: ev.target.value });
   }
 
-  handleChange(event){
-    console.log('Change event', event.target.value);
-    this.setState({message: event.target.value});
-
+  handleSubmit(ev) {
+    ev.preventDefault();
+    console.log('Submit Event target value:', this.state.value);
   }
 
-  render(){
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+    this.textInput.onClick('destroy');
+  }
+
+  render() {
+    const { value } = this.state;
     const { handleSubmit, handleChange } = this;
-    const { message } = this.state
+
+    console.log(this.props);
+
     return (
-      <div>
-        <form onSubmit={ handleSubmit }>
-          <input type="text" placeholder='Write your goals' autoFocus onChange={ handleChange }/>
-          <button>Submit</button>
+      <div id="container" className="row">
+        <form onSubmit={ handleSubmit } id="goal-form" className="col-xs-12 col-sm-4">
+          <input type="text" name="goal-input" id="goal-input" autoFocus="true" placeholder="Add new goal..." value={ value } onChange={ handleChange } />
+          <button type="submit" id="goal-btn" className="btn btn-sm">+</button>
         </form>
-        <br />
-        <div>{ message }</div>
+        <div id="goal-list" className="col-xs-12 col-sm-8">
+          <h2>Pool of Ideas</h2>
+          <ul className="list-unstyled">
+            <Goal />
+          </ul>
+        </div>
       </div>
     )
   }

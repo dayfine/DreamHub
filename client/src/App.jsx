@@ -12,9 +12,10 @@ class App extends Component {
 
   render(){
     return (
-      <main>
+      <main className="container-fluid">
+        <h1>Get It Done</h1>
         <GoalForm />
-        <a href='/api/auth/google'><button>Login with Google</button></a>
+        {/*<a href='/api/auth/google'><button>Login with Google</button></a>*/}
       </main>
     )
   }
