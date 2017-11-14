@@ -3,3 +3,7 @@ export const STATUS = {
   IN_PROGRESS: 'In Progress',
   COMPLETED: 'Completed'
 }
+
+export const DragItemTypes = {
+  CARD: 'card'
+}
