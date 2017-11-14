@@ -10,11 +10,12 @@ import { goalMapper } from '../util/mappers'
 
 const Kanban = props => {
   const { goalEntries } = props
+
   return (
     <Grid container>
-      {goalEntries.map(([status, ...goals]) => {
+      {goalEntries.map(([status, goals]) => {
         return (
-          <Grid item xs={4} key={status}>
+          <Grid item xs={3} key={status}>
             <Column header={status} goals={goals} />
           </Grid>
         )

@@ -2,12 +2,12 @@ import { ADD_CARD, UPDATE_CARD, MOVE_CARD, DELETE_CARD, FETCH_CARDS } from './ac
 
 const initialState = [
   {
-    goal: 'Learn Spanish',
+    title: 'Learn Spanish',
     tasks: [ {description: 'Memorize vocabulary'} ],
     status: 'Completed'
   },
   {
-    goal: 'Prep For Technical Interviews',
+    title: 'Prep For Technical Interviews',
     tasks: [ {description: 'Do algo question'} ],
     status: 'In Progress'
   }
