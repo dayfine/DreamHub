@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getGoals, createGoal, removeGoal } from '../actions';
+import { createGoal, removeGoal } from '../actions';
 
 class Form extends Component {
   constructor(props) {
@@ -18,12 +18,10 @@ class Form extends Component {
   handleSubmit(ev) {
     ev.preventDefault();
     this.props.createGoal(1, this.state.value); // userId hardcoded
-    getGoals();
   }
 
   handleDelete(id) {
     this.props.removeGoal(id * 1);
-    getGoals();
   }
 
   render() {
@@ -54,6 +52,6 @@ const mapStateToProps = ({ goals }) => {
   return { goals };
 };
 
-const mapDispatch = { getGoals, createGoal, removeGoal };
+const mapDispatch = { createGoal, removeGoal };
 
 export default connect(mapStateToProps, mapDispatch)(Form);
