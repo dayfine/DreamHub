@@ -12,7 +12,7 @@ const Goal = conn.define('goal', {
 });
 
 Goal.getGoals = function(userId) {
-  return Goal.findAll({ where: { userId } });
+  return Goal.findAll({/*{ where: { userId } }*/});
 };
 
 Goal.addGoal = function(userId, reqBody) {
