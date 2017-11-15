@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Goal.addGoal(req.body.userId, req.body)
+  Goal.addGoal(req.body)
     .then(goal => res.send(goal))
     .catch(next);
 });

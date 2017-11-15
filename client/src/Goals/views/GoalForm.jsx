@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getGoals, createGoal } from '../actions';
 
 class Form extends Component {
   constructor(props) {
@@ -15,14 +16,8 @@ class Form extends Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-    console.log('Submit Event target value:', this.state.value);
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-    this.textInput.onClick('destroy');
+    this.props.createGoal(1, this.state.value); // userId hardcoded
+    getGoals();
   }
 
   render() {
@@ -53,4 +48,6 @@ const mapStateToProps = ({ goals }) => {
   return { goals };
 };
 
-export default connect(mapStateToProps)(Form);
+const mapDispatch = { getGoals, createGoal };
+
+export default connect(mapStateToProps, mapDispatch)(Form);

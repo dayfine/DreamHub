@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <main className="container-fluid">
         <h1>Get It Done</h1>
-        <GoalForm { ...this.props } />
+        <GoalForm />
         <a href='/api/auth/google'><button>Login with Google</button></a>
       </main>
     )

@@ -12,15 +12,11 @@ const Goal = conn.define('goal', {
 });
 
 Goal.getGoals = function(userId) {
-  return Goal.findAll({/*{ where: { userId } }*/});
+  return Goal.findAll({/*{ where: { userId }}*/});
 };
 
-Goal.addGoal = function(userId, reqBody) {
-  return Goal.create(Object.assign({}, { userId }, req.body));
-    // .then(goal => {
-    //   goal.userId = userId;
-    //   return goal.save();
-    // });
+Goal.addGoal = function(reqBody) {
+  return Goal.create(Object.assign({}, reqBody));
 };
 
 Goal.editGoal = function(id, userId, reqBody) {
