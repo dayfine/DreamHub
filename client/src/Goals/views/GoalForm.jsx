@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getGoals, createGoal } from '../actions';
+import { getGoals, createGoal, removeGoal } from '../actions';
 
 class Form extends Component {
   constructor(props) {
@@ -8,6 +8,7 @@ class Form extends Component {
     this.state = { value: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(ev) {
@@ -20,9 +21,14 @@ class Form extends Component {
     getGoals();
   }
 
+  handleDelete(id) {
+    this.props.removeGoal(id * 1);
+    getGoals();
+  }
+
   render() {
     const { value } = this.state;
-    const { handleSubmit, handleChange } = this;
+    const { handleSubmit, handleChange, handleDelete } = this;
     const { goals } = this.props;
 
     return (
@@ -35,7 +41,7 @@ class Form extends Component {
           <h2>Pool of Ideas</h2>
           <ul className="list-unstyled">
             {
-              goals.map(goal => <li key={ goal.id }>{ goal.title }</li>)
+              goals.map(goal => <li key={ goal.id }>{ goal.title } <button onClick={ () => handleDelete(`${ goal.id }`) } className="btn btn-sm btn-danger">x</button></li>)
             }
           </ul>
         </div>
@@ -48,6 +54,6 @@ const mapStateToProps = ({ goals }) => {
   return { goals };
 };
 
-const mapDispatch = { getGoals, createGoal };
+const mapDispatch = { getGoals, createGoal, removeGoal };
 
 export default connect(mapStateToProps, mapDispatch)(Form);

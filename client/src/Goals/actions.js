@@ -17,3 +17,9 @@ export const createGoal = (userId, title) => dispatch => {
     .then(res => res.data)
     .then(goal => dispatch(addGoal(goal)))
 }
+
+export const removeGoal = (id) => dispatch => {
+  axios.delete(`/api/goals/${id}`)
+    .then(res => res.data)
+    .then(() => dispatch(deleteGoal(id)))
+}

@@ -20,8 +20,8 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  Goal.deleteGoal(req.params.id, req.body.userId)
-    .then(() => res.sendStatus(201))
+  Goal.deleteGoal(req.params.id, 1) // userId hardcoded
+    .then(() => res.sendStatus(202))
     .catch(next);
 });
 

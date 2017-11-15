@@ -20,7 +20,7 @@ Goal.addGoal = function(reqBody) {
 };
 
 Goal.editGoal = function(id, userId, reqBody) {
-  return Goal.findOne({ where: { id, userId } })
+  return Goal.findOne({ where: { id, userId }})
     .then(goal => {
       Object.assign(goal, reqBody);
       return goal.save();
@@ -28,7 +28,7 @@ Goal.editGoal = function(id, userId, reqBody) {
 };
 
 Goal.deleteGoal = function(id, userId) {
-  return Goal.findOne({ where: { id, userId } })
+  return Goal.findOne({ where: { id, userId }})
     .then(goal => goal.destroy());
 };
 
