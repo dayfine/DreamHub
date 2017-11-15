@@ -23,3 +23,10 @@ export const removeGoal = (id) => dispatch => {
     .then(res => res.data)
     .then(() => dispatch(deleteGoal(id)))
 }
+
+export const editGoal = (goal) => dispatch => {
+  console.log(goal.id)
+  axios.put(`/api/goals/${goal.id}`, goal)
+    .then(res => res.data)
+    .then(goal => dispatch(updateGoal(goal)))
+}

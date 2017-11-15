@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGoal, removeGoal } from '../actions';
+import { createGoal, removeGoal, editGoal } from '../actions';
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = { value: '', showForm: false, currentGoal: {} };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    // this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange(ev) {
@@ -25,8 +26,8 @@ class Form extends Component {
   }
 
   render() {
-    const { value } = this.state;
-    const { handleSubmit, handleChange, handleDelete } = this;
+    const { value, showForm } = this.state;
+    const { handleSubmit, handleChange, handleDelete, handleEdit } = this;
     const { goals } = this.props;
 
     return (
@@ -37,21 +38,45 @@ class Form extends Component {
         </form>
         <div id="goal-list" className="col-xs-12 col-sm-8">
           <h2>Pool of Ideas</h2>
-          <ul className="list-unstyled">
+          <ul>
             {
-              goals.map(goal => <li key={ goal.id }>{ goal.title } <button onClick={ () => handleDelete(`${ goal.id }`) } className="btn btn-sm btn-danger">x</button></li>)
+              goals.map(goal => {
+                return (
+                  <li key={ goal.id }>{ goal.title }
+                    <button onClick={ () => handleDelete(`${ goal.id }`) } className="btn btn-sm btn-danger">x</button>
+                    <button onClick={ () =>  this.setState({ showForm: true, currentGoal: goal })} className="btn btn-sm btn-primary">Edit</button>
+                  </li>
+                )
+              })
             }
           </ul>
+          {
+            !showForm ? null : <EditGoalForm { ...this.props } { ...this.state } />
+          }
         </div>
       </div>
     )
   }
 }
 
+const EditGoalForm = ({ value, currentGoal, editGoal }) => {
+  const handleEdit = (ev) => {
+    ev.preventDefault();
+    editGoal(currentGoal, ev.target.value); // fix this
+  }
+
+  return (
+    <form onSubmit={ handleEdit }>
+      <input type="text" value={ value } />
+      <button className="btn btn-sm btn-primary">Save</button>
+    </form>
+  )
+};
+
 const mapStateToProps = ({ goals }) => {
   return { goals };
 };
 
-const mapDispatch = { createGoal, removeGoal };
+const mapDispatch = { createGoal, removeGoal, editGoal };
 
 export default connect(mapStateToProps, mapDispatch)(Form);
