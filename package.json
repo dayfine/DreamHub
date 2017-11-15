@@ -2,6 +2,7 @@
   "name": "capstone",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "main": "/server/index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

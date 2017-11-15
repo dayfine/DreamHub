@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-
-const Goal = () => {
-  return(
-    <div>
-
-    </div>
-  );
-}
-
+import { connect } from 'react-redux';
 
 class Form extends Component {
   constructor(props) {
@@ -36,8 +28,7 @@ class Form extends Component {
   render() {
     const { value } = this.state;
     const { handleSubmit, handleChange } = this;
-
-    console.log(this.props);
+    const { goals } = this.props;
 
     return (
       <div id="container" className="row">
@@ -48,7 +39,9 @@ class Form extends Component {
         <div id="goal-list" className="col-xs-12 col-sm-8">
           <h2>Pool of Ideas</h2>
           <ul className="list-unstyled">
-            <Goal />
+            {
+              goals.map(goal => <li key={ goal.id }>{ goal.title }</li>)
+            }
           </ul>
         </div>
       </div>
@@ -56,4 +49,8 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapStateToProps = ({ goals }) => {
+  return { goals };
+};
+
+export default connect(mapStateToProps)(Form);

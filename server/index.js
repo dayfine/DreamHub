@@ -15,10 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
-app.use(express.static(path.join(__dirname, '..', 'node_modules')));
-app.use(express.static(path.join(__dirname, '..', 'dist')));
-
 app.use('/api', require('./api'))
 
 app.use((req, res, next) => {
