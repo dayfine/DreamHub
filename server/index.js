@@ -3,6 +3,7 @@ const
   app = express(),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
+  path = require('path'),
   db = require('./db'),
   port = process.env.PORT || 3001
 
@@ -13,6 +14,10 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
+
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'node_modules')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.use('/api', require('./api'))
 
