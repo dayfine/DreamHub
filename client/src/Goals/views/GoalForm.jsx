@@ -20,7 +20,7 @@ class Form extends Component {
   // handles adding new goal
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.createGoal(1, this.state.value); // userId hardcoded
+    this.props.createGoal(this.props.userId, this.state.value);
     this.setState({ value: '' });
   }
 
@@ -37,7 +37,7 @@ class Form extends Component {
   // handles saving edited goal
   handleSave(ev) {
     ev.preventDefault();
-    this.props.editGoal(this.state.currentGoal, 1); // userId hardcoded
+    this.props.editGoal(this.state.currentGoal, this.props.userId);
     this.setState({ showForm: false });
   }
 
