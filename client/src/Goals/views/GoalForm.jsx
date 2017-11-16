@@ -33,7 +33,7 @@ class Form extends Component {
     return (
       <div>
         <form onSubmit={ handleSubmit }>
-          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." id="goal-input" />
+          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." className="goal-input" />
           <button type="submit" className="btn btn-sm btn-primary">+</button>
         </form>
         <div>
@@ -42,8 +42,7 @@ class Form extends Component {
               goals.map(goal => {
                 return (
                   <li key={ goal.id } className="goal-item"><span className="goal-title">{ goal.title }</span>
-                    <button onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="btn btn-sm btn-secondary">Edit</button>
-                    <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">x</button>
+                    <button onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="btn btn-sm btn-secondary">Edit</button> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">x</button>
                   </li>
                 )
               })

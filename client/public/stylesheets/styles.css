@@ -44,7 +44,7 @@ footer {
   padding: 1em 2em;
 }
 
-#goal-input {
+.goal-input {
   height: 50px;
   border: none;
   border-bottom: 1px solid #000;
@@ -55,9 +55,10 @@ footer {
 }
 
 .goal-item {
-  padding-bottom: 0.6em;
+  padding-bottom: 10px;
 }
 
 .goal-title {
-  padding-right: 1em;
+  font-size: 1.5em;
+  padding-right: 10px;
 }
