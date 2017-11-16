@@ -54,11 +54,20 @@ footer {
   padding: 0;
 }
 
+.goal-input-sm {
+  border: none;
+  font-size: 1.4em;
+}
+
 .goal-item {
   padding-bottom: 10px;
 }
 
 .goal-title {
-  font-size: 1.5em;
+  font-size: 1.4em;
   padding-right: 10px;
+}
+
+.goal-edit {
+  display: inline-block;
 }
