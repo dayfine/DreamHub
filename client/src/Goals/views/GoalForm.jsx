@@ -31,20 +31,19 @@ class Form extends Component {
     const { goals } = this.props;
 
     return (
-      <div id="container" className="row">
-        <form onSubmit={ handleSubmit } id="goal-form" className="col-xs-12 col-sm-4">
-          <input type="text" name="goal-input" id="goal-input" autoFocus="true" placeholder="Add new goal..." value={ value } onChange={ handleChange } />
-          <button type="submit" id="goal-btn" className="btn btn-sm">+</button>
+      <div>
+        <form onSubmit={ handleSubmit }>
+          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." id="goal-input" />
+          <button type="submit" className="btn btn-sm btn-primary">+</button>
         </form>
-        <div id="goal-list" className="col-xs-12 col-sm-8">
-          <h2>Pool of Ideas</h2>
+        <div>
           <ul>
             {
               goals.map(goal => {
                 return (
-                  <li key={ goal.id }>{ goal.title }
-                    <button onClick={ () => handleDelete(`${ goal.id }`) } className="btn btn-sm btn-danger">x</button>
-                    <button onClick={ () =>  this.setState({ showForm: true, currentGoal: goal })} className="btn btn-sm btn-primary">Edit</button>
+                  <li key={ goal.id } className="goal-item"><span className="goal-title">{ goal.title }</span>
+                    <button onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="btn btn-sm btn-secondary">Edit</button>
+                    <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">x</button>
                   </li>
                 )
               })

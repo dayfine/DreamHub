@@ -1,13 +1,15 @@
-/*
-font-family: 'Barlow', sans-serif;
-font-family: 'Barlow Condensed', sans-serif;
-font-family: 'Open Sans', sans-serif;
-*/
-
 html,
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 0 auto;
+  min-height: 500px;
+  text-align: center;
 }
 
 a:hover {
@@ -25,15 +27,15 @@ ul {
 
 h1 {
   font-size: 3em;
-  margin: 20px;
+  padding-top: 1em;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.125em;
 }
 
 footer {
@@ -42,43 +44,20 @@ footer {
   padding: 1em 2em;
 }
 
-#container {
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
-#goal-hed {
-  margin: 1em 0;
-}
-
-#goal-form {
-  max-width: 1200px;
-}
-
 #goal-input {
   height: 50px;
   border: none;
   border-bottom: 1px solid #000;
   font-size: 30px;
   font-weight: 300;
-  margin: 3em 0;
+  margin: 1em 0;
   padding: 0;
 }
 
-#goal-form:active,
-#goal-form:focus {
-  outline: 0;
+.goal-item {
+  padding-bottom: 0.6em;
 }
 
-#goal-btn {
-  background-color: #eef;
-  font-size: 14px;
-}
-
-#goal-list {
-  margin: 3em 0;
-}
-
-.container-fluid {
-  min-height: 600px;
+.goal-title {
+  padding-right: 1em;
 }
