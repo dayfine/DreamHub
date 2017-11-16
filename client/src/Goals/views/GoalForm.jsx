@@ -59,14 +59,16 @@ class Form extends Component {
                 <li key={ goal.id } className="goal-item">
                   {
                     showForm && currentGoal.id === goal.id ? (
+                    <span>
                     <form onSubmit={ handleSave } className="goal-edit">
                       <input type="text" onChange={ handleEdit } value={ currentGoal.title } className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button>
-                    </form>
+                    </form> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete</button>
+                    </span>
                     ) : (
-                    <span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title }</span>
+                    <span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span>
                     )
                   }
-                  <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">x</button>
+
                 </li>
               )
             })

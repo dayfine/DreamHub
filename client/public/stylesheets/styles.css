@@ -48,7 +48,7 @@ footer {
   height: 50px;
   border: none;
   border-bottom: 1px solid #000;
-  font-size: 30px;
+  font-size: 2em;
   font-weight: 300;
   margin: 1em 0;
   padding: 0;
@@ -57,6 +57,7 @@ footer {
 .goal-input-sm {
   border: none;
   font-size: 1.4em;
+  height: 1.4em;
 }
 
 .goal-item {
