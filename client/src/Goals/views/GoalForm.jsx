@@ -42,7 +42,7 @@ class Form extends Component {
   }
 
   render() {
-    const { value, showForm } = this.state;
+    const { value, showForm, currentGoal } = this.state;
     const { handleSubmit, handleChange, handleDelete, handleEdit, handleSave } = this;
     const { goals } = this.props;
 
@@ -58,13 +58,13 @@ class Form extends Component {
               return (
                 <li key={ goal.id } className="goal-item">
                   {
-                    !showForm ? (
-                        <span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}  className="goal-title">{ goal.title }</span>
-                      ) : (
-                        <form onSubmit={ handleSave } className="goal-edit">
-                          <input type="text" onChange={ handleEdit } value={ this.state.currentGoal.title } className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button>
-                        </form>
-                      )
+                    showForm && currentGoal.id === goal.id ? (
+                    <form onSubmit={ handleSave } className="goal-edit">
+                      <input type="text" onChange={ handleEdit } value={ currentGoal.title } className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button>
+                    </form>
+                    ) : (
+                    <span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title }</span>
+                    )
                   }
                   <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">x</button>
                 </li>
