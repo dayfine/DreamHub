@@ -2,6 +2,7 @@
   "name": "capstone",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "main": "/server/index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -14,15 +15,19 @@
     "url": "git+https://github.com/dayfine/capstone.git"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.2",
     "express": "^4.16.2",
     "express-http-proxy": "^1.0.7",
+    "jquery": "^3.2.1",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
+    "path": "^0.12.7",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
+    "popper": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

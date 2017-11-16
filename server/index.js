@@ -3,6 +3,7 @@ const
   app = express(),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
+  path = require('path'),
   db = require('./db'),
   port = process.env.PORT || 3001
 

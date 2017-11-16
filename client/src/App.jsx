@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { views as GoalForm } from './Goals';
+import store, { getGoals } from './Store';
 import { Route, Switch } from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
@@ -13,6 +15,7 @@ const styles = {}
 class App extends Component {
   componentDidMount () {
     // fetch from store here
+    store.dispatch(getGoals());
   }
 
   render () {
@@ -36,6 +39,14 @@ class App extends Component {
                 )
               })}
             </Switch>
+             <main>
+              <h1>Do It!</h1>
+              {
+                // TO DO:
+                // if user not logged in: <a href='/api/auth/google'><button>Login with Google</button></a> else:
+                <GoalForm userId={ 1 } /> // userId hardcoded. need to change this.
+              }
+            </main>
           </Grid>
         </Grid>
       </div>

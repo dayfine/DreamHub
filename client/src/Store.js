@@ -22,3 +22,4 @@ const
   )
 
 export default createStore(rootReducer, initialState, enhancers)
+export * from './Goals';

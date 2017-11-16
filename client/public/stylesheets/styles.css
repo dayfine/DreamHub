@@ -1,1 +1,98 @@
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
+  margin: 0;
+  padding: 0;
+}
 
+main {
+  margin: 0 auto;
+  min-height: 500px;
+  text-align: center;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  font-size: 3em;
+  padding-top: 1em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.125em;
+}
+
+p {
+  text-align: left;
+}
+
+footer {
+  position: static;
+  bottom: 0;
+  padding: 1em 2em;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.goal-input {
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-size: 2em;
+  font-weight: 300;
+  margin: 1em 0;
+  padding: 5px;
+}
+
+.goal-input-sm {
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  font-size: 1.4em;
+  height: 1.4em;
+  padding: 5px;
+  margin: 0 10px 10px 0;
+  width: 60%;
+}
+
+.goal-textinput {
+  display: block;
+  font-size: 17px;
+  height: 100px;
+  width: 100%;
+}
+
+.goal-item {
+  border: 1px solid #ced4da;
+  border-radius: 1rem;
+  padding: 10px;
+  margin-bottom: 1em;
+  width: 400px;
+}
+
+.goal-title {
+  font-size: 1.4em;
+  padding-right: 10px;
+}
+
+.goal-edit {
+  display: inline-block;
+}

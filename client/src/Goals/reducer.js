@@ -1,17 +1,15 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes.js'
+import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes';
 
-const initialState = []
-
-export default (state = initialState, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case ADD_GOAL:
-      return [ ...state, action.newGoal ]
+      return [ ...state, action.goal ]
 
     case UPDATE_GOAL:
-      const lnIdx = state.findIndex(elem => elem.id === action.updatedGoal.id)
+      const lnIdx = state.findIndex(elem => elem.id === action.goal.id)
       const nextState = state.slice()
 
-      nextState.splice(lnIdx, 1, action.updatedGoal)
+      nextState.splice(lnIdx, 1, action.goal)
       return nextState
 
     case DELETE_GOAL:
