@@ -38,10 +38,19 @@ h3 {
   font-size: 1.125em;
 }
 
+p {
+  text-align: left;
+}
+
 footer {
   position: static;
   bottom: 0;
   padding: 1em 2em;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 .goal-input {
@@ -51,17 +60,32 @@ footer {
   font-size: 2em;
   font-weight: 300;
   margin: 1em 0;
-  padding: 0;
+  padding: 5px;
 }
 
 .goal-input-sm {
-  border: none;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
   font-size: 1.4em;
   height: 1.4em;
+  padding: 5px;
+  margin: 0 10px 10px 0;
+  width: 60%;
+}
+
+.goal-textinput {
+  display: block;
+  font-size: 17px;
+  height: 100px;
+  width: 100%;
 }
 
 .goal-item {
-  padding-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 1rem;
+  padding: 10px;
+  margin-bottom: 1em;
+  width: 400px;
 }
 
 .goal-title {

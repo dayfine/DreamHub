@@ -47,7 +47,7 @@ class Form extends Component {
     const { goals } = this.props;
 
     return (
-      <div>
+      <div id="container">
         <form onSubmit={ handleSubmit }>
           <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." className="goal-input" />
           <button type="submit" className="btn btn-sm btn-primary">+</button>
@@ -59,13 +59,15 @@ class Form extends Component {
                 <li key={ goal.id } className="goal-item">
                   {
                     showForm && currentGoal.id === goal.id ? (
-                    <span>
                     <form onSubmit={ handleSave } className="goal-edit">
-                      <input type="text" onChange={ handleEdit } value={ currentGoal.title } className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button>
-                    </form> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete</button>
-                    </span>
+                      <input type="text" onChange={ handleEdit } value={ currentGoal.title } autofocus="true" className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
+                      <textarea className="goal-input-sm goal-textinput" />
+                    </form>
                     ) : (
-                    <span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span>
+                    <div>
+                      <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger btn-del">Delete Goal</button></p>
+                      <p>{ goal.description }</p>
+                    </div>
                     )
                   }
 
