@@ -39,7 +39,7 @@ router.post('/:id', (req, res, next) => {
 	.then(newFriend => {
 		User.addFriends(newFriend)//where friendId = logged in id
 		res.send(newFriend)
-	}
+	})
 	.catch(next)
 });
 
