@@ -1,0 +1,4 @@
+export const ADD_FRIEND = 'FRIENDS/ADD'
+export const UPDATE_FRIEND = 'FRIENDS/UPDATE'
+export const DELETE_FRIEND = 'FRIENDS/DELETE'
+export const FETCH_FRIENDS = 'FRIENDS/FETCH'

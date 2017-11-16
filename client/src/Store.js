@@ -3,10 +3,11 @@ import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import { reducer as GoalsReducer } from './Goals'
+// import { reducer as GoalsReducer } from './Goals'
+import { reducer as kanbanReducer } from './Kanban'
 
 const rootReducer = combineReducers({
-  goals: GoalsReducer
+  goals: kanbanReducer
 })
 
 const initialState = {}
