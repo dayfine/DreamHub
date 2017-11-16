@@ -8,6 +8,8 @@ import Button from 'material-ui/Button'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 
+import { views as Auth } from '../Auth'
+
 const style = theme => ({
   root: {
     width: '100%',
@@ -34,7 +36,7 @@ const NavBar = props => {
           Welcome to Capstone
 
         </Typography>
-        <Button color='inherit'>Login</Button>
+        <Auth />
       </Toolbar>
     </AppBar>
   )

@@ -4,14 +4,14 @@ import { Route, Switch } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 
 import { views as Kanban } from './Kanban'
-// import { views as Auth } from './Auth'
+
 import NavBar from './common/NavBar'
 import SideBar from './common/SideBar'
 
 const styles = {}
 
 class App extends Component {
-  componentDidMoun () {
+  componentDidMount () {
     // fetch from store here
   }
 
