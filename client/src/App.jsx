@@ -30,9 +30,9 @@ class App extends Component {
           <Grid item xs={10}>
             <Switch>
               <Route path='/' exact component={Kanban} />
-              {viewPaths.map(_ => {
+              {viewPaths.map((_, idx) => {
                 return (
-                  <Route path={_.path} component={_.view} />
+                  <Route key={idx} path={_.path} component={_.view} />
                 )
               })}
             </Switch>

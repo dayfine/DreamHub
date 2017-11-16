@@ -8,9 +8,9 @@ const SideBar = props => {
   const { viewPaths } = props
   return (
     <List>
-      {viewPaths.map(_ => {
+      {viewPaths.map((_, idx) => {
         return (
-          <ListItem button component={NavLink} to={_.path}>
+          <ListItem button component={NavLink} to={_.path} key={idx}>
             <ListItemText disableTypography primary={_.name} />
           </ListItem>
         )
