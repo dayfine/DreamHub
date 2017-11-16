@@ -30,7 +30,8 @@ class Form extends Component {
 
   // handles editing goal
   handleEdit(ev) {
-    const currentGoal = Object.assign({}, this.state.currentGoal, { title: ev.target.value });
+    const { name, value } = ev.target;
+    const currentGoal = Object.assign({}, this.state.currentGoal, { [ name ]: value });
     this.setState({ currentGoal });
   }
 
@@ -60,13 +61,13 @@ class Form extends Component {
                   {
                     showForm && currentGoal.id === goal.id ? (
                     <form onSubmit={ handleSave } className="goal-edit">
-                      <input type="text" onChange={ handleEdit } value={ currentGoal.title } autofocus="true" className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
-                      <textarea className="goal-input-sm goal-textinput" />
+                      <input type="text" onChange={ handleEdit } name="title" value={ currentGoal.title } autoFocus className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
+                      <textarea onChange={ handleEdit } name="description" value={ currentGoal.description || '' } className="goal-input-sm goal-textinput" />
                     </form>
                     ) : (
                     <div>
-                      <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger btn-del">Delete Goal</button></p>
-                      <p>{ goal.description }</p>
+                      <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
+                      <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
                     </div>
                     )
                   }
