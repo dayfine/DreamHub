@@ -15,8 +15,11 @@ class App extends Component {
     return (
       <main>
         <h1>Do It!</h1>
-        <GoalForm />
-        {/*<a href='/api/auth/google'><button>Login with Google</button></a>*/}
+        {
+          // TO DO:
+          // if user not logged in: <a href='/api/auth/google'><button>Login with Google</button></a> else:
+          <GoalForm userId={ 1 } /> // userId hardcoded. need to change this.
+        }
       </main>
     )
   }
