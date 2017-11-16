@@ -13,7 +13,7 @@ class Kanban extends Component {
   render () {
     const { goalEntries } = this.props
     return (
-      <Grid container style={{height: 'calc(100vh - 90px)'}}>
+      <Grid container style={{height: 'calc(100vh - 80px)'}}>
         {goalEntries.map(([status, goals]) => {
           return (
             <Grid item xs={3} key={status}>
