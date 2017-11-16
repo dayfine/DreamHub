@@ -31,6 +31,16 @@ router.get('/', (req, res, next) => {
 	// 	res.send('not logged in');
 	// }
 // })
+// get all friends
 
+// add new friend
+router.post('/:id', (req, res, next) => {
+	User.findById(req.params.id)
+	.then(newFriend => {
+		User.addFriends(newFriend)//where friendId = logged in id
+		res.send(newFriend)
+	}
+	.catch(next)
+});
 
 module.exports = router;
