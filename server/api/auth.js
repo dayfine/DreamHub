@@ -29,7 +29,7 @@ router.post('/auth', (req, res, next)=> {
   return res.sendStatus(403);
 });
 
-const checkAuth = (req, res, next)=> {
+const ensureAuth = (req, res, next)=> {
   const token = req.headers['authorization'];
   //bearer etc
   if(token){
@@ -45,7 +45,7 @@ const checkAuth = (req, res, next)=> {
   }
 };
 
-router.get('/data', checkAuth, (req, res, next)=> {
+router.get('/data', ensureAuth, (req, res, next)=> {
   console.log(req.user)//
   res.send(testData[req.user.id]);
 })
