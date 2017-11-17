@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const AuthForm = props => {
+  console.log(props)
   return (
     <a href='//localhost:3001/api/auth/google'>
       <button>Login with Google</button>

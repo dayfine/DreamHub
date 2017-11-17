@@ -8,6 +8,9 @@ const User = conn.define('user', {
   email: {
     type: Sequelize.STRING
   },
+  password: {
+    type: Sequelize.STRING
+  },
   googleId: {
     type: Sequelize.STRING
   }

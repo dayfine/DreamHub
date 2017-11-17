@@ -7,6 +7,7 @@ import { views as GoalForm } from './Goals'
 // import { views as TaskForm } from './Tasks'
 import { views as Kanban } from './Kanban'
 import { views as Friends } from './Friends'
+import { views as Auth } from './Auth'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
@@ -32,7 +33,7 @@ class App extends Component {
 
     return (
       <div style={{height: '100vh'}}>
-        <NavBar />
+        <NavBar children={<Auth />} />
         <Grid container style={{paddingTop: 80}}>
           <Grid item xs={2} >
             <Sidebar viewPaths={viewPaths} />
