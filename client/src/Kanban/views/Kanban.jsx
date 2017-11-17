@@ -27,7 +27,7 @@ class Kanban extends Component {
 }
 
 const mapState = state => ({
-  goalEntries: Object.entries(goalMapper(state.goals))  // fitler here
+  goalEntries: Object.entries(goalMapper(state.cards))  // fitler here
 })
 
 const DragContext = DragDropContext(HTML5Backend)(Kanban)

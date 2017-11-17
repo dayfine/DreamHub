@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { views as GoalForm } from './Goals'
-import store, { getGoals } from './Store'
 import { Route, Switch } from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
 
+import { views as GoalForm } from './Goals'
 import { views as Kanban } from './Kanban'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
+
+import store, { getGoals } from './Store'
 
 const styles = {}
 
