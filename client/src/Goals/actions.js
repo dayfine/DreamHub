@@ -1,10 +1,10 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes';
-import axios from 'axios';
+import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes'
+import axios from 'axios'
 
-const addGoal = goal => ({ type: ADD_GOAL, goal });
-const updateGoal = goal => ({ type: UPDATE_GOAL, goal });
-const deleteGoal = id => ({ type: DELETE_GOAL, id });
-const fetchGoals = goals => ({ type: FETCH_GOALS, goals });
+const addGoal = goal => ({ type: ADD_GOAL, goal })
+const updateGoal = goal => ({ type: UPDATE_GOAL, goal })
+const deleteGoal = id => ({ type: DELETE_GOAL, id })
+const fetchGoals = goals => ({ type: FETCH_GOALS, goals })
 
 export const getGoals = () => dispatch => {
   axios.get('/api/goals')
