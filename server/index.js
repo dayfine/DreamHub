@@ -32,8 +32,8 @@ app.use((err, req, res, next) => {
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
-  const proxy = require('express-http-proxy')
-  app.use('/*', proxy('http://localhost:3000'))
+  // const proxy = require('express-http-proxy')
+  // app.use('/*', proxy('http://localhost:3000'))
 } else {
   // Only serve build directory in production
   app.use(express.static('client/build'))
