@@ -6,7 +6,7 @@ module.exports = (User, Goal, Task) => {
     User.create({ name: 'Burcu', password: 'burcu' }),
     User.create({ name: 'Di', password: 'di' }),
     User.create({ name: 'Jerry', password: 'jerry' }),
-    User.create({ name: 'test', password: 'test' })
+    User.create({ name: 'test', email: 'test@test.test', password: 'test' })
   ])
   .then(_users => {
     users = _users

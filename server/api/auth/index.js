@@ -2,13 +2,17 @@ const
   router = require('express').Router(),
   { User } = require('../../db').models,
   passport = require('passport'),
-  passportJWT = require("passport-jwt"),
+  passportJWT = require('passport-jwt'),
   ExtractJwt = passportJWT.ExtractJwt,
   JwtStrategy = passportJWT.Strategy,
   jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeader,
     secretOrKey: process.env.SECRET
-  }
+  },
+  strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
+    User.find({where: {id: jwt_payload.id}})
+    .then(user => next(null, user || false))
+  })
 
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) => {
@@ -38,6 +42,7 @@ router
   })
 
   .post('/login', (req, res, next) => {
+    console.log(req.body)
     User.login(req.body)
     .then(user => {
       req.session.userId = user.id
@@ -47,6 +52,7 @@ router
   })
 
   .post('/signup', (req, res, next) => {
+    console.log(req.body)
     User.signup(req.body)
     .then(user => {
       req.session.userId = user.id

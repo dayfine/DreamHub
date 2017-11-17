@@ -9,7 +9,7 @@ export const auth = (credentials, history, formName) => dispatch => {
     .then(result => result.data)
     .then(user => {
       dispatch(setCurrUser(user))
-      history.push('/account/')
+      history.push('/kanban')
     })
     .catch(err => dispatch(setCurrUser({err})))
 }
