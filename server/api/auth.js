@@ -1,5 +1,9 @@
-const router = require('express').Router();
-const jwt = require('jsonwebtoken');
+const router = require('express').Router(),
+      jwt = require('jsonwebtoken'),
+      passport = require('passport'),
+      passportJWT = require('passport-jwt'),
+      cors = require('cors'),
+      bcrypt = require('bcrypt');
 //const env = require('./env');
 
 const userData = {
