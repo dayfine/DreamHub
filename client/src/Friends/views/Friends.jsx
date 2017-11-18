@@ -11,6 +11,7 @@ class Form extends Component {
   render(){
     return (
       <div>
+      here
         <form>
           Add Friend:
           <input type="text" placeholder='Search friend by email'/>
