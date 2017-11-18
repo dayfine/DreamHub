@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGoal, removeGoal, editGoal } from '../actions';
+import { createTask, removeTask, editTask } from '../actions';
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', showForm: false, currentGoal: {} };
+    this.state = { value: '', showForm: false, currentTask: {} };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -20,54 +20,54 @@ class Form extends Component {
   // handles adding new goal
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.createGoal(this.props.userId, this.state.value);
+    this.props.createTask(this.props.goalId, this.state.value);
     this.setState({ value: '' });
   }
 
   handleDelete(id) {
-    this.props.removeGoal(id * 1);
+    this.props.removeTask(id * 1);
   }
 
   // handles editing goal
   handleEdit(ev) {
     const { name, value } = ev.target;
-    const currentGoal = Object.assign({}, this.state.currentGoal, { [ name ]: value });
-    this.setState({ currentGoal });
+    const currentTask = Object.assign({}, this.state.currentTask, { [ name ]: value });
+    this.setState({ currentTask });
   }
 
   // handles saving edited goal
   handleSave(ev) {
     ev.preventDefault();
-    this.props.editGoal(this.state.currentGoal, this.props.userId);
+    this.props.editTask(this.state.currentTask, this.props.goalId);
     this.setState({ showForm: false });
   }
 
   render() {
-    const { value, showForm, currentGoal } = this.state;
+    const { value, showForm, currentTask } = this.state;
     const { handleSubmit, handleChange, handleDelete, handleEdit, handleSave } = this;
-    const { goals } = this.props;
+    const { tasks } = this.props;
 
     return (
       <div id="container">
         <form onSubmit={ handleSubmit }>
-          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." className="goal-input" />
+          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new task..." className="goal-input" />
           <button type="submit" className="btn btn-sm btn-primary">+</button>
         </form>
         <ul>
           {
-            goals.map(goal => {
+            tasks.map(task => {
               return (
-                <li key={ goal.id } className="goal-item">
+                <li key={ task.id } className="goal-item">
                   {
-                    showForm && currentGoal.id === goal.id ? (
+                    showForm && currentTask.id === task.id ? (
                     <form onSubmit={ handleSave } className="goal-edit">
-                      <input type="text" onChange={ handleEdit } name="title" value={ currentGoal.title } autoFocus className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
-                      <textarea onChange={ handleEdit } name="description" value={ currentGoal.description || '' } className="goal-input-sm goal-textinput" />
+                      <input type="text" onChange={ handleEdit } name="title" value={ currentTask.title } autoFocus className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
+                      <textarea onChange={ handleEdit } name="description" value={ currentTask.description || '' } className="goal-input-sm goal-textinput" />
                     </form>
                     ) : (
                     <div>
-                      <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
-                      <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
+                      <p><span onClick={() =>  this.setState({ showForm: true, currentTask: task })} className="goal-title">{ task.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ task.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
+                      <p onClick={() =>  this.setState({ showForm: true, currentTask: task })}>{ task.description }</p>
                     </div>
                     )
                   }
@@ -82,10 +82,10 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = ({ goals }) => {
-  return { goals };
+const mapStateToProps = ({ tasks }) => {
+  return { tasks };
 };
 
-const mapDispatch = { createGoal, removeGoal, editGoal };
+const mapDispatch = { createTask, removeTask, editTask };
 
 export default connect(mapStateToProps, mapDispatch)(Form);

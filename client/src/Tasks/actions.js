@@ -1,32 +1,36 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes'
+import { ADD_TASK, UPDATE_TASK, DELETE_TASK, FETCH_TASKS } from './actionTypes'
 import axios from 'axios'
 
-const addGoal = goal => ({ type: ADD_GOAL, goal })
-const updateGoal = goal => ({ type: UPDATE_GOAL, goal })
-const deleteGoal = id => ({ type: DELETE_GOAL, id })
-const fetchGoals = goals => ({ type: FETCH_GOALS, goals })
+const addTask = task => ({ type: ADD_TASK, task })
+const updateTask = task => ({ type: UPDATE_TASK, task })
+const deleteTask = id => ({ type: DELETE_TASK, id })
+const fetchTasks = tasks => ({ type: FETCH_TASKS, tasks })
 
-export const getGoals = () => dispatch => {
-  axios.get('/api/goals')
+// TO DO:
+// goalId hardcoded for now
+const goalId = 1;
+
+export const getTasks = () => dispatch => {
+  axios.get(`/api/goals/${goalId}/tasks`)
     .then(res => res.data)
-    .then(goals => dispatch(fetchGoals(goals)))
+    .then(tasks => dispatch(fetchTasks(tasks)))
 }
 
-export const createGoal = (userId, title) => dispatch => {
-  axios.post('/api/goals', { userId, title })
+export const createTask = (goalid, title) => dispatch => {
+  axios.post(`/api/goals/${goalId}/tasks`, { goalId: goalid, title })
     .then(res => res.data)
-    .then(goal => dispatch(addGoal(goal)))
+    .then(task => dispatch(addTask(task)))
 }
 
-export const removeGoal = (id) => dispatch => {
-  axios.delete(`/api/goals/${id}`)
+export const removeTask = (id) => dispatch => {
+  axios.delete(`/api/goals/${goalId}/tasks/${id}`)
     .then(res => res.data)
-    .then(() => dispatch(deleteGoal(id)))
+    .then(() => dispatch(deleteTask(id)))
 }
 
-export const editGoal = (goal) => dispatch => {
-  console.log(goal.id)
-  axios.put(`/api/goals/${goal.id}`, goal)
+export const editTask = (task) => dispatch => {
+  console.log(task.id)
+  axios.put(`/api/goals/${goalId}/tasks/${task.id}`, task)
     .then(res => res.data)
-    .then(goal => dispatch(updateGoal(goal)))
+    .then(task => dispatch(updateTask(task)))
 }

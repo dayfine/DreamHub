@@ -15,6 +15,12 @@ Goal.getGoals = function(userId) {
   return Goal.findAll({/*{ where: { userId }}*/});
 };
 
+// TO DO:
+// this one doesn't work
+Goal.getGoalById = function(id) {
+  return Goal.findById(id);
+};
+
 Goal.addGoal = function(reqBody) {
   return Goal.create(Object.assign({}, reqBody));
 };

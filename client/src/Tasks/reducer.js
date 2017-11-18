@@ -1,22 +1,22 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes';
+import { ADD_TASK, UPDATE_TASK, DELETE_TASK, FETCH_TASKS } from './actionTypes';
 
 export default (state = [], action) => {
   switch (action.type) {
-    case ADD_GOAL:
-      return [ ...state, action.goal ]
+    case ADD_TASK:
+      return [ ...state, action.task ]
 
-    case UPDATE_GOAL:
-      const lnIdx = state.findIndex(elem => elem.id === action.goal.id)
+    case UPDATE_TASK:
+      const lnIdx = state.findIndex(elem => elem.id === action.task.id)
       const nextState = state.slice()
 
-      nextState.splice(lnIdx, 1, action.goal)
+      nextState.splice(lnIdx, 1, action.task)
       return nextState
 
-    case DELETE_GOAL:
+    case DELETE_TASK:
       return state.filter(elem => elem.id !== action.id)
 
-    case FETCH_GOALS:
-      return action.goals
+    case FETCH_TASKS:
+      return action.tasks
 
     default:
       return state

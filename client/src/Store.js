@@ -4,11 +4,13 @@ import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { reducer as GoalsReducer } from './Goals'
+import { reducer as TasksReducer } from './Tasks'
 import { reducer as kanbanReducer } from './Kanban'
 
 const rootReducer = combineReducers({
   cards: kanbanReducer,
-  goals: GoalsReducer
+  goals: GoalsReducer,
+  tasks: TasksReducer
 })
 
 const initialState = {}
@@ -24,3 +26,4 @@ const
 
 export default createStore(rootReducer, initialState, enhancers)
 export * from './Goals'
+export * from './Tasks'

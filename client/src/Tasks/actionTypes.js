@@ -1,4 +1,4 @@
-export const ADD_GOAL = 'GOALS/ADD'
-export const UPDATE_GOAL = 'GOALS/UPDATE'
-export const DELETE_GOAL = 'GOALS/DELETE'
-export const FETCH_GOALS = 'GOALS/FETCH'
+export const ADD_TASK = 'TASKS/ADD'
+export const UPDATE_TASK = 'TASKS/UPDATE'
+export const DELETE_TASK = 'TASKS/DELETE'
+export const FETCH_TASKS = 'TASKS/FETCH'

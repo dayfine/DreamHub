@@ -21,24 +21,25 @@ const Task = conn.define('task', {
   }
 });
 
-Task.getTasks = function(goalId) {
-  return Task.findAll({ where: { goalId } });
+Task.getTasks = function() {
+  return Task.findAll();
 };
 
-Task.addTask = function(goalId, reqBody) {
-  return Task.create(Object.assign({}, { goalId }, req.body));
+Task.addTask = function(reqBody) {
+  console.log(reqBody)
+  return Task.create(Object.assign({}, reqBody));
 };
 
-Task.editTask = function(id, goalId, reqBody) {
-  return Task.findOne({ where: { id, goalId } })
+Task.editTask = function(id, reqBody) {
+  return Task.findOne({ where: { id } })
     .then(task => {
       Object.assign(task, reqBody);
       return task.save();
     });
 };
 
-Task.deleteTask = function(id, goalId) {
-  return Task.findOne({ where: { id, goalId } })
+Task.deleteTask = function(id) {
+  return Task.findOne({ where: { id } })
     .then(task => task.destroy());
 };
 
