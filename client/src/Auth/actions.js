@@ -7,14 +7,18 @@ export const removeCurrUser = () => ({ type: REMOVE_USER })
 export const auth = (credentials, history, formName) => dispatch => {
   return axios.post(`/api/auth/${formName}`, credentials)
     .then(result => result.data)
-    .then(user => {
-      history.push('/me')
-      // dispatch(setCurrUser(user))
+    .then(token => {
+      dispatch(loadUserData(token))
+      history.push('/kanban')
     })
     .catch(err => dispatch(setCurrUser({err})))
 }
 
-export const fetchUserSession = () => (dispatch, getState) => {
+export const loadUserData = token => dispatch => {
+  token
+    ? axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    : (delete axios.defaults.headers.common['Authorization'])
+
   return axios.get('/api/auth/me')
     .then(result => result.data)
     .then(user => dispatch(setCurrUser(user)))

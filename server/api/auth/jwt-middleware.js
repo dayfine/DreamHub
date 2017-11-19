@@ -8,10 +8,11 @@ const
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRET
   },
-  strategy = new JwtStrategy(jwtOptions, (jwt_payload, done) => {
-    User.findbyId(jwt_payload.id)
+  strategy = new JwtStrategy(jwtOptions, (payload, done) => {
+    const { id } = payload
+    User.findById(id)
       .then(user => done(null, user || false))
-      .catch(err => done(err, false))
+      .catch(done)
   })
 
 module.exports = () => {

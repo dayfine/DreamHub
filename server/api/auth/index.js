@@ -8,21 +8,23 @@ const
 router
   .use(jwtAuth.initialize())
 
-  .get('/me', jwtAuth.authenticate('jwt', { session: false }))
+  .get('/me', jwtAuth.authenticate(), (req, res, next) => {
+    res.send(req.user)
+  })
 
   .post('/login', (req, res, next) => {
     const credentials = req.body
     User.login(credentials)
-      .then(user => {
-        if (user) {
-          const token = jwt.sign(user.id, secret)
-          console.log('token', token)
-          res.send({token})
-        } else {
-          res.sendStatus(401)
-        }
-      })
-      .catch(next)
+    .then(user => {
+      if (user) {
+        const paylod = {id: user.id}
+        const token = jwt.sign(paylod, secret)
+        res.send(token)
+      } else {
+        res.sendStatus(401)
+      }
+    })
+    .catch(next)
   })
 
   // .get('/me', (req, res, next) => {
