@@ -4,7 +4,7 @@ import { Motion, spring } from 'react-motion'
 
 import Grid from 'material-ui/Grid'
 import Column from './Column'
-import { goalMapper } from '../util/mappers'
+import { taskMapper } from '../util/mappers'
 import AddCard from '../../common/AddCard'
 import { views as GoalForm } from '../../Goals'
 import { views as TaskForm, createTask } from '../../Tasks'
@@ -32,15 +32,16 @@ class Kanban extends Component {
   }
 
   render () {
-    const { goalEntries } = this.props
+    const { tasks } = this.props
     return (
       <div>
+        <h2>Goal: Travel</h2> {/*TODO: goal is hardcoded*/}
         <AddCard { ...this.state } { ...this } />
         <Grid container style={{height: 'calc(100vh - 80px)'}}>
-          {goalEntries.map(([status, goals]) => {
+          {tasks.map(([status, task]) => {
             return (
               <Grid item xs={3} key={status}>
-                <Column header={status} goals={goals} />
+                <Column header={status} goals={task} />
               </Grid>
             )
           })}
@@ -51,7 +52,7 @@ class Kanban extends Component {
 }
 
 const mapState = state => ({
-  goalEntries: Object.entries(goalMapper(state.cards)) // filter here
+  tasks: Object.entries(taskMapper(state.tasks)) // filter here
 })
 
 const mapDispatch = { createTask };

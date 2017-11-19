@@ -32,7 +32,7 @@ const Column = props => {
       <Paper style={{backgroundColor: '#eee', height: '100%'}}>
         <div style={{padding: 10}}>
           <Typography type='headline' >
-            {goals.length} goals
+            {goals.length} Tasks
           </Typography>
           <Typography type='display1' >
             <div>{header}</div>

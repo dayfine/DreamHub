@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createTask, removeTask, editTask } from '../actions';
+import { removeTask, editTask } from '../actions';
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', showForm: false, currentTask: {} };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.state = { showForm: false, currentTask: {} };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleSave = this.handleSave.bind(this);
-  }
-
-  handleChange(ev) {
-    this.setState({ value: ev.target.value });
-  }
-
-  // handles adding new goal
-  handleSubmit(ev) {
-    ev.preventDefault();
-    this.props.createTask(this.props.goalId, this.state.value);
-    this.setState({ value: '' });
   }
 
   handleDelete(id) {
@@ -64,7 +51,7 @@ class Form extends Component {
                       <div><label>Status</label>
                         <select name="status" value={ currentTask.status } onChange={ handleEdit }>
                           <option value="Created">Created</option>
-                          <option value="To Do">To Do</option>
+                          <option value="In Progress">In Progress</option>
                           <option value="Completed">Completed</option>
                         </select>
                       </div>
@@ -101,6 +88,6 @@ const mapStateToProps = ({ tasks }) => {
   return { tasks };
 };
 
-const mapDispatch = { createTask, removeTask, editTask };
+const mapDispatch = { removeTask, editTask };
 
 export default connect(mapStateToProps, mapDispatch)(Form);

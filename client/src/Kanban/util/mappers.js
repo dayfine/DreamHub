@@ -1,10 +1,11 @@
 import { STATUS } from '../../constants'
 
-export const goalMapper = goals => {
+
+export const taskMapper = tasks => {
   const ret = {}
 
   Object.values(STATUS).forEach(status => {
-    ret[status] = goals.filter(g => g.status === status)
+    ret[status] = tasks.filter(task => task.status === status)
   })
 
   return ret
