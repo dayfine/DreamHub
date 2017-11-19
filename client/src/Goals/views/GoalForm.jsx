@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createGoal, removeGoal, editGoal } from '../actions';
 import AddCard from '../../common/AddCard';
 
@@ -66,6 +67,7 @@ class Form extends Component {
                     <div>
                       <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
                       <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
+                      <Link to="/kanban">See Progress on Kanban board</Link>
                     </div>
                     )
                   }
