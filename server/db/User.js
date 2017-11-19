@@ -1,5 +1,6 @@
 const conn = require('./conn');
 const Sequelize = conn.Sequelize;
+const bcrypt = require('bcrypt');
 const Goal = require('./Goal');
 const Task = require('./Task');
 
@@ -19,6 +20,24 @@ const User = conn.define('user', {
   points: {
     type: Sequelize.INTEGER
   }
+}, {
+  hooks: {
+    beforeCreate(user, options) {
+      if(user){ //is this necessary?
+        return bcrypt.genSalt(12)
+          .then(salt => bcrypt.hash(user.password, salt))
+          .then(hashedPW => user.password=hashedPW)
+          .then(hashedPW => this.password=hashedPW)//is this necessary?
+          .catch(err => console.log(`beforeCreate error message: ${err.message}`));
+      }
+    }
+  }
+});
+
+User.isValidPassword = function(passwordEntered){
+  return bcrypt.compare(passwordEntered, this.password)//will return true or false
+  .then(isCorrectPW => {console.log('Is the password correct?', isCorrectPW); return isCorrectPW})
+  .catch(err => console.log('VALIDATION ERROR', err.message))
 });
 
 const generateError = message => {
