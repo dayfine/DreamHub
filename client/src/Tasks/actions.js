@@ -16,8 +16,8 @@ export const getTasks = () => dispatch => {
     .then(tasks => dispatch(fetchTasks(tasks)))
 }
 
-export const createTask = (goalid, title) => dispatch => {
-  axios.post(`/api/goals/${goalId}/tasks`, { goalId: goalid, title })
+export const createTask = (goalId, title) => dispatch => {
+  axios.post(`/api/goals/${goalId}/tasks`, { goalId, title })
     .then(res => res.data)
     .then(task => dispatch(addTask(task)))
 }

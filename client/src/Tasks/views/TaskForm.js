@@ -32,14 +32,10 @@ class Form extends Component {
   render() {
     const { value, showForm, currentTask } = this.state;
     const { handleSubmit, handleChange, handleDelete, handleEdit, handleSave } = this;
-    const { tasks } = this.props;
+    const { task } = this.props;
 
     return (
       <div id="task-container">
-        <ul>
-          {
-            tasks.map(task => {
-              return (
                 <li key={ task.id } className="task-item">
                   {
                     showForm && currentTask.id === task.id ? (
@@ -75,10 +71,6 @@ class Form extends Component {
                   }
 
                 </li>
-              )
-            })
-          }
-        </ul>
       </div>
     )
   }

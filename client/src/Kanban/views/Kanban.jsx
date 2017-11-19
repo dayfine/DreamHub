@@ -6,7 +6,6 @@ import Grid from 'material-ui/Grid'
 import Column from './Column'
 import { taskMapper } from '../util/mappers'
 import AddCard from '../../common/AddCard'
-import { views as GoalForm } from '../../Goals'
 import { views as TaskForm, createTask } from '../../Tasks'
 
 import { DragDropContext } from 'react-dnd'
@@ -38,10 +37,10 @@ class Kanban extends Component {
         <h2>Goal: Travel</h2> {/*TODO: goal is hardcoded*/}
         <AddCard { ...this.state } { ...this } />
         <Grid container style={{height: 'calc(100vh - 80px)'}}>
-          {tasks.map(([status, task]) => {
+          {tasks.map(([status, tasks]) => {
             return (
               <Grid item xs={3} key={status}>
-                <Column header={status} goals={task} />
+                <Column header={status} tasks={tasks} />
               </Grid>
             )
           })}

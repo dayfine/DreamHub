@@ -1,6 +1,5 @@
 import { STATUS } from '../../constants'
 
-
 export const taskMapper = tasks => {
   const ret = {}
 
