@@ -54,6 +54,19 @@ footer {
   max-width: 500px;
 }
 
+#task-container {
+  margin: 1em auto;
+  max-width: 300px;
+}
+
+#task-container {
+  font-size: 14px;
+}
+
+#task-container button {
+  font-size: 12px;
+}
+
 .goal-input {
   height: 50px;
   border: none;
@@ -74,9 +87,26 @@ footer {
   width: 60%;
 }
 
+.task-input-sm {
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  font-size: 1em;
+  height: 1.2em;
+  padding: 5px;
+  margin: 0 10px 10px 0;
+}
+
 .goal-textinput {
   display: block;
   font-size: 17px;
+  height: 50px;
+  margin-top: 1em;
+  width: 100%;
+}
+
+.task-textinput {
+  display: block;
+  font-size: 14px;
   height: 100px;
   width: 100%;
 }
@@ -89,9 +119,22 @@ footer {
   width: 400px;
 }
 
+.task-item {
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 1rem;
+  padding: 10px;
+  margin: auto 1em;
+}
+
 .goal-title {
   font-size: 1.4em;
   padding-right: 10px;
+}
+
+.task-title {
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .goal-edit {
