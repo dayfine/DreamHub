@@ -15,7 +15,7 @@ User.hasMany(User, { as: 'friends', foreignKey: 'friendId' });
 const sync = () => conn.sync({ force: true })
 const seed = () => {
   Promise.all([
-    User.create({ name: 'Anthony' }),
+    User.create({ name: 'Anthony', email: 'anthony@gmail.com' }),
     User.create({ name: 'Burcu' }),
     User.create({ name: 'Di' }),
     User.create({ name: 'Jerry' }),
