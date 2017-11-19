@@ -44,10 +44,10 @@ class Friend extends Component {
         </div>
        
         <ul>
-          <li className="friend-item">
-            
-
-          </li>
+                <li className="friend-item">
+                name 
+                </li>
+                  
         </ul>
       </div>
     )
