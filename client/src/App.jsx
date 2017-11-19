@@ -9,6 +9,7 @@ import { views as Kanban } from './Kanban'
 
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
+import { views as UserPanel } from './User'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
@@ -31,7 +32,8 @@ class App extends Component {
       // {view: TaskForm, path: '/tasks', name: 'Tasks'}
       {view: Friends, path: '/friends', name: 'Friends'}
       {view: Login, path: '/login', name: 'Login'},
-      {view: Signup, path: '/signup', name: 'Sign Up'}
+      {view: Signup, path: '/signup', name: 'Sign Up'},
+      {view: UserPanel, path: '/me', name: 'User'}
     ]
 
     return (

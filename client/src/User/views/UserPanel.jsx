@@ -1,49 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { withStyles } from 'material-ui/styles'
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
-import { DragSource } from 'react-dnd'
-import { DragItemTypes } from '../../constants'
-
-const styles = {
-  agileCard: {
-    margin: 5
-  }
-}
-
-const cardSource = {
-  beginDrag (props) {
-    console.log('source Prop', props)
-    return { id: props.goal.id }
-  }
-}
-
-const collect = (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
-})
-
-const AgileCard = props => {
-  const { classes, goal, connectDragSource, isDragging } = props
-  return connectDragSource(
-    <div>
-      <Card className={classes.agileCard}>
-        <CardHeader title={goal.title} />
-        <CardContent>
-          {JSON.stringify(goal.tasks)}
-        </CardContent>
-      </Card>
-    </div>
+const UserPanel = props => {
+  const { user, goals } = props
+  return (
+    <Card>
+      <CardHeader title={user.name} />
+      <CardContent>
+        Email: {user.email}
+        <br />
+        {goals.length} Goals
+        <br />
+        The goals above should be a link
+      </CardContent>
+    </Card>
   )
 }
 
 const mapState = state => ({
-  timer: state.timer
+  user: state.currentUser,
+  goals: state.goals
 })
 
-const StyledComponent = withStyles(styles)(AgileCard)
-const DragComponent = DragSource(DragItemTypes.CARD, cardSource, collect)(StyledComponent)
-
-export default connect(mapState)(DragComponent)
+export default connect(mapState)(UserPanel)
