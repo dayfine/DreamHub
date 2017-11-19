@@ -8,8 +8,8 @@ export const auth = (credentials, history, formName) => dispatch => {
   return axios.post(`/api/auth/${formName}`, credentials)
     .then(result => result.data)
     .then(user => {
-      dispatch(setCurrUser(user))
-      history.push('/kanban')
+      history.push('/me')
+      // dispatch(setCurrUser(user))
     })
     .catch(err => dispatch(setCurrUser({err})))
 }

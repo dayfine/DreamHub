@@ -1,55 +1,56 @@
 const
   router = require('express').Router(),
   { User } = require('../../db').models,
-  passport = require('passport'),
-  passportJWT = require('passport-jwt'),
-  ExtractJwt = passportJWT.ExtractJwt,
-  JwtStrategy = passportJWT.Strategy,
-  jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeader,
-    secretOrKey: process.env.SECRET
-  },
-  strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-    User.find({where: {id: jwt_payload.id}})
-    .then(user => next(null, user || false))
-  })
-
-passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done)
-})
+  jwt = require('jsonwebtoken'),
+  jwtAuth = require('./jwt-middleware')(),
+  secret = process.env.SECRET
 
 router
-  .use(passport.initialize())
+  .use(jwtAuth.initialize())
 
-  .get('/me', (req, res, next) => {
-    const token = req.headers.auth
-    try {
-      const id = jwt.decode(token, SECRET).id
-      User.findById(id)
-      .then(user => res.send(user))
+  .get('/me', jwtAuth.authenticate('jwt', { session: false }))
+
+  .post('/login', (req, res, next) => {
+    const credentials = req.body
+    User.login(credentials)
+      .then(user => {
+        if (user) {
+          const token = jwt.sign(user.id, secret)
+          console.log('token', token)
+          res.send({token})
+        } else {
+          res.sendStatus(401)
+        }
+      })
       .catch(next)
-    } catch (e) {
-      res.sendStatus(401)
-    }
   })
+
+  // .get('/me', (req, res, next) => {
+  //   const token = req.headers.auth
+  //   try {
+  //     const id = jwt.decode(token, SECRET).id
+  //     User.findById(id)
+  //     .then(user => res.send(user))
+  //     .catch(next)
+  //   } catch (e) {
+  //     res.sendStatus(401)
+  //   }
+  // })
 
   .delete('/', (req, res, next) => {
     req.session.destroy()
     res.sendStatus(204)
   })
 
-  .post('/login', (req, res, next) => {
-    console.log(req.body)
-    User.login(req.body)
-    .then(user => {
-      req.session.userId = user.id
-      res.send(user)
-    })
-    .catch(next)
-  })
+  // .post('/login', (req, res, next) => {
+  //   console.log(req.body)
+  //   User.login(req.body)
+  //   .then(user => {
+  //     req.session.userId = user.id
+  //     res.send(user)
+  //   })
+  //   .catch(next)
+  // })
 
   .post('/signup', (req, res, next) => {
     console.log(req.body)
@@ -61,15 +62,7 @@ router
     .catch(next)
   })
 
-  .post('/tokens', (req, res, next) => {
-    const credentials = req.body;
-    const { username, password } = credentials;
-    const user = users.find( user => user.username === username && user.password === password);
-    if(user){
-      return res.send({ token: jwt.encode({ id: user.id }, SECRET) });
-    }
-    return res.sendStatus(401);
-  })
+
 
   .use('/google', require('./oauth-google'))
 
