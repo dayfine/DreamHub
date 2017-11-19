@@ -6,6 +6,7 @@ import Grid from 'material-ui/Grid'
 import { views as GoalForm } from './Goals'
 // import { views as TaskForm } from './Tasks'
 import { views as Kanban } from './Kanban'
+import { views as Friends } from './Friends'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
@@ -26,6 +27,7 @@ class App extends Component {
       {view: GoalForm, path: '/goals', name: 'Goals'},
       {view: Kanban, path: '/kanban', name: 'Kanban'},
       // {view: TaskForm, path: '/tasks', name: 'Tasks'}
+      {view: Friends, path: '/friends', name: 'Friends'}
     ]
 
     return (

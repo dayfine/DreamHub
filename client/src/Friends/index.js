@@ -3,3 +3,4 @@ import reducer from './reducer'
 import views from './views/Friends'
 
 export { actions, reducer, views }
+export * from './actions';
