@@ -29,7 +29,6 @@ export const removeTask = (id) => dispatch => {
 }
 
 export const editTask = (task) => dispatch => {
-  console.log(task.id)
   axios.put(`/api/goals/${goalId}/tasks/${task.id}`, task)
     .then(res => res.data)
     .then(task => dispatch(updateTask(task)))
