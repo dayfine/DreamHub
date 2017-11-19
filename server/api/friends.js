@@ -6,7 +6,7 @@ const { User } = require('../db').models;
 // get all friends
 router.get('/', (req, res, next) => {
 	console.log('im in /friends')
-	User.getFriends() //where friendId = logged in id
+	return User.getFriends() //where friendId = logged in id
 		.then(users => {
 			res.send(users)
 		})
@@ -36,7 +36,7 @@ router.get('/', (req, res, next) => {
 
 // add new friend
 router.post('/:id', (req, res, next) => {
-	User.findById(req.params.id)
+	return User.findById(req.params.id)
 	.then(newFriend => {
 		User.addFriends(newFriend)//where friendId = logged in id
 		res.send(newFriend)
@@ -44,18 +44,19 @@ router.post('/:id', (req, res, next) => {
 	.catch(next)
 });
 
+// search user by email
 router.get('/email/:email', (req, res, next) => {
 	console.log('route found')
-	User.findOne({
+	return User.findOne({
 		where: { email: req.params.email}
 	})
 	.then(friend => {
 		if( friend ){
-			User.addFriends(friend)
-			.then(()=> res.redirect('/'));			
+			return User.addFriends(friend)
+			// .then(()=> res.redirect('/'));			
 		}
 		else{
-			res.send('user not found')
+			return res.send('user not found')
 		}		
 	})
 	.catch(next)
