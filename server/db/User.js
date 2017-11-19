@@ -24,14 +24,12 @@ const generateError = message => {
 }
 
 User.login = function (credentials) {
-  console.log(credentials)
   if (!credentials.email || !credentials.password) {
     throw generateError('no credentials')
   }
 
   return this.findOne({ where: credentials, attributes: { exclude: ['password'] } })
     .then(user => {
-      // console.log(user)
       if (!user) throw generateError('bad credentials')
       return user
     })
