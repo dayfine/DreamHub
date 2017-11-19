@@ -1,4 +1,4 @@
-import { ADD_CARD, UPDATE_CARD, DELETE_CARD, FETCH_CARDS } from './actionTypes.js'
+import { ADD_CARD, UPDATE_CARD, DELETE_CARD, FETCH_CARDS, GET_BOARD } from './actionTypes.js'
 
 const initialState = [
   {
@@ -33,6 +33,9 @@ export default (state = initialState, action) => {
 
     case FETCH_CARDS:
       return action.goals
+
+    case GET_BOARD:
+      return action.board
 
     default:
       return state

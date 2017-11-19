@@ -67,7 +67,9 @@ class Form extends Component {
                     <div>
                       <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
                       <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
-                      <Link to="/kanban">See Progress on Kanban board</Link>
+
+                      {/* TODO: fetch the Kanban board for this goal id */}
+                      <Link to={ `/kanban/${ goal.id * 1 }`}>See progress on Kanban board</Link>
                     </div>
                     )
                   }
