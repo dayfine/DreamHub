@@ -49,10 +49,6 @@ class Form extends Component {
 
     return (
       <div id="container">
-        <form onSubmit={ handleSubmit }>
-          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new task..." className="goal-input" />
-          <button type="submit" className="btn btn-sm btn-primary">+</button>
-        </form>
         <ul>
           {
             tasks.map(task => {

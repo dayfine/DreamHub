@@ -5,31 +5,57 @@ import { Motion, spring } from 'react-motion'
 import Grid from 'material-ui/Grid'
 import Column from './Column'
 import { goalMapper } from '../util/mappers'
+import AddCard from '../../common/AddCard'
+import { views as GoalForm } from '../../Goals'
+import { views as TaskForm, createTask } from '../../Tasks'
 
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 class Kanban extends Component {
+  constructor() {
+    super();
+    this.state = { type: 'task', value: '' };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(ev) {
+    this.setState({ value: ev.target.value });
+  }
+
+  // handles adding new goal
+  handleSubmit(ev) {
+    ev.preventDefault();
+    this.props.createTask(1, this.state.value); // TODO: goalId is hardcoded
+    this.setState({ value: '' });
+  }
+
   render () {
     const { goalEntries } = this.props
     return (
-      <Grid container style={{height: 'calc(100vh - 80px)'}}>
-        {goalEntries.map(([status, goals]) => {
-          return (
-            <Grid item xs={3} key={status}>
-              <Column header={status} goals={goals} />
-            </Grid>
-          )
-        })}
-      </Grid>
+      <div>
+        <AddCard { ...this.state } { ...this } />
+        <Grid container style={{height: 'calc(100vh - 80px)'}}>
+          {goalEntries.map(([status, goals]) => {
+            return (
+              <Grid item xs={3} key={status}>
+                <Column header={status} goals={goals} />
+              </Grid>
+            )
+          })}
+        </Grid>
+      </div>
     )
   }
 }
 
 const mapState = state => ({
-  goalEntries: Object.entries(goalMapper(state.cards))  // fitler here
+  goalEntries: Object.entries(goalMapper(state.cards)) // filter here
 })
+
+const mapDispatch = { createTask };
 
 const DragContext = DragDropContext(HTML5Backend)(Kanban)
 
-export default connect(mapState)(DragContext)
+export default connect(mapState, mapDispatch)(DragContext)
