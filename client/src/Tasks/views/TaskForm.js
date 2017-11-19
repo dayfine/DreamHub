@@ -69,7 +69,7 @@ class Form extends Component {
                       <p><span onClick={() =>  this.setState({ showForm: true, currentTask: task })} className="task-title">{ task.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ task.id }`)} className="btn btn-sm btn-danger">Delete Task</button></p>
                       <p onClick={() =>  this.setState({ showForm: true, currentTask: task })}>{ task.description }</p>
                       <p>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</p>
-                      <p><span className="badge badge-dark">Priority: { task.priority }</span> <span className="badge badge-success">Status: { task.status }</span></p>
+                      <p className="badge badge-dark">Priority: { task.priority }</p>
                     </div>
                     )
                   }
