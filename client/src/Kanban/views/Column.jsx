@@ -10,13 +10,18 @@ import Typography from 'material-ui/Typography'
 import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
 import { updateCard } from '../actions'
+import { actions } from'../../Tasks'
+
+const { editTask } = actions
+console.log(editTask)
 
 const columnTarget = {
   drop (props, monitor) {
     // console.log(props)
-    const { id } = monitor.getItem()
+    const oldTask = monitor.getItem()
     const status = props.header
-    props.updateCard(id, { status })
+    const updatedTask = Object.assign({}, oldTask, {status})
+    props.editTask(updatedTask)
   }
 }
 
@@ -26,28 +31,28 @@ const collect = (connect, monitor) => ({
 })
 
 const Column = props => {
-  const { header, goals, connectDropTarget, isOver } = props
+  const { header, tasks, connectDropTarget, isOver } = props
   return connectDropTarget(
     <div style={{height: '100%'}}>
       <Paper style={{backgroundColor: '#eee', height: '100%'}}>
         <div style={{padding: 10}}>
           <Typography type='headline' >
-            {goals.length} Tasks
+            {tasks.length} Tasks
           </Typography>
           <Typography type='display1' >
             <div>{header}</div>
           </Typography>
         </div>
         <Divider light />
-        {goals.map(goal => {
-          return (<Card key={goal.title} goal={goal} />)
+        {tasks.map(task => {
+          return (<Card key={task.title} task={task} />)
         })}
       </Paper>
     </div>
   )
 }
 
-const mapDispatch = ({ updateCard })
+const mapDispatch = ({ editTask })
 
 const DropTargetComp = DropTarget(DragItemTypes.CARD, columnTarget, collect)(Column)
 

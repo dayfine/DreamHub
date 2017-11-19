@@ -17,7 +17,7 @@ const styles = {
 const cardSource = {
   beginDrag (props) {
     console.log('source Prop', props)
-    return { id: props.goal.id }
+    return props.task
   }
 }
 
@@ -27,10 +27,10 @@ const collect = (connect, monitor) => ({
 })
 
 const AgileCard = props => {
-  const { classes, goal, connectDragSource, isDragging } = props
+  const { classes, task, connectDragSource, isDragging } = props
   return connectDragSource(
     <div>
-      <TaskForm />
+      <TaskForm task={task} />
       {/*<Card className={classes.agileCard}>
         <CardHeader title={goal.title} />
         <CardContent>
