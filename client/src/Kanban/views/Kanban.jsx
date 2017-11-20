@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid'
 import Column from './Column'
 import { goalTaskMapper } from '../util/mappers'
 import AddCard from '../../common/AddCard'
-import { views as TaskForm, createTask } from '../../Tasks'
+import { createTask } from '../../Tasks'
 
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
