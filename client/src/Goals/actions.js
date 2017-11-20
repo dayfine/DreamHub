@@ -4,7 +4,7 @@ import axios from 'axios'
 const addGoal = goal => ({ type: ADD_GOAL, goal })
 const updateGoal = goal => ({ type: UPDATE_GOAL, goal })
 const deleteGoal = id => ({ type: DELETE_GOAL, id })
-const fetchGoals = goals => ({ type: FETCH_GOALS, goals })
+export const fetchGoals = goals => ({ type: FETCH_GOALS, goals })
 
 export const getGoals = () => dispatch => {
   axios.get('/api/goals')

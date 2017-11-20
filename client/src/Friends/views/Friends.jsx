@@ -12,7 +12,7 @@ class Friend extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  
+
   // handles search friend email
   handleSubmit(ev) {
     ev.preventDefault();
@@ -42,12 +42,12 @@ class Friend extends Component {
         <div>
           My Friends
         </div>
-       
+
         <ul>
                 <li className="friend-item">
-                name 
+                name
                 </li>
-                  
+
         </ul>
       </div>
     )

@@ -37,7 +37,9 @@ User.getUserDataById = function (id) {
         { model: Goal,
           include: [{ model: Task }]
          },
-        { model: User, as: 'friend' }
+        { model: User, as: 'Friend',
+          include: [{ model: Goal }]
+         }
        ]
     })
 }

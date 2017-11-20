@@ -14,16 +14,9 @@ import { views as UserPanel } from './User'
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
 
-import store, { getGoals, getTasks } from './Store'
-
 const styles = {}
 
 class App extends Component {
-  componentDidMount () {
-    // fetch from store here
-    store.dispatch(getGoals())
-    store.dispatch(getTasks())
-  }
 
   render () {
     const viewPaths = [

@@ -9,15 +9,10 @@ import Typography from 'material-ui/Typography'
 
 import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
-import { updateCard } from '../actions'
-import { actions } from'../../Tasks'
-
-const { editTask } = actions
-console.log(editTask)
+import { editTask } from '../../Tasks/actions'
 
 const columnTarget = {
   drop (props, monitor) {
-    // console.log(props)
     const oldTask = monitor.getItem()
     const status = props.header
     const updatedTask = Object.assign({}, oldTask, {status})
@@ -31,7 +26,7 @@ const collect = (connect, monitor) => ({
 })
 
 const Column = props => {
-  const { header, tasks, connectDropTarget, isOver } = props
+  const { header, tasks, connectDropTarget } = props
   return connectDropTarget(
     <div style={{height: '100%'}}>
       <Paper style={{backgroundColor: '#eee', height: '100%', maxHeight: '100%', overflow: 'auto'}}>

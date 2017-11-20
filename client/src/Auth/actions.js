@@ -1,6 +1,8 @@
 import { SET_USER, REMOVE_USER } from './actionTypes.js'
 import axios from 'axios'
 
+import { fetchGoals } from '../Goals/actions'
+
 export const setCurrUser = user => ({ type: SET_USER, user })
 export const removeCurrUser = () => ({ type: REMOVE_USER })
 
@@ -21,15 +23,19 @@ export const loadUserData = token => dispatch => {
 
   return axios.get('/api/auth/me')
     .then(result => result.data)
-    .then(user => dispatch(setCurrUser(user)))
+    .then(user => {
+      dispatch(setCurrUser(user))
+      dispatch(fetchGoals(user.goals))
+    })
     .catch(() => console.log('not logged in'))
 }
 
 export const logout = history => dispatch => {
+  delete axios.defaults.headers.common['Authorization']
   return axios.delete('/api/auth')
     .then(() => {
       dispatch(removeCurrUser())
       history.push('/')
     })
-    // .catch(() => console.log('problem during logout'))
+    .catch(() => console.log('problem during logout'))
 }

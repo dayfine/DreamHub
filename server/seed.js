@@ -2,19 +2,20 @@ module.exports = (User, Goal, Task, Category) => {
   let users
   // let goals, tasks
   return Promise.all([
-    User.create({ name: 'Anthony', password: 'anthony' }),
-    User.create({ name: 'Burcu', password: 'burcu' }),
-    User.create({ name: 'Di', password: 'di' }),
-    User.create({ name: 'Jerry', password: 'jerry' }),
-    User.create({ name: 'test', email: 'test@test.test', password: 'test' }),
-    User.create({ name: 'nofriend', password: 'nofriend' })
+    User.create({ name: 'Anthony', password: 'anthony' }, { include: [{ model: User, as: 'Friend' }] }),
+    User.create({ name: 'Burcu', password: 'burcu' }, { include: [{ model: User, as: 'Friend' }] }),
+    User.create({ name: 'Di', password: 'di' }, { include: [{ model: User, as: 'Friend' }] }),
+    User.create({ name: 'Jerry', password: 'jerry' }, { include: [{ model: User, as: 'Friend' }] }),
+    User.create({ name: 'test', email: 'test@test.test', password: 'test' }, { include: [{ model: User, as: 'Friend' }] }),
+    User.create({ name: 'nofriend', password: 'nofriend' }, { include: [{ model: User, as: 'Friend' }] })
   ])
   .then(_users => {
+    console.log(_users[0].setFriend)
     users = _users
     return Promise.all([
-      users[0].addFriends(users[2], users[3]),
-      users[1].addFriends(users[2]),
-      users[4].addFriends(users[0], users[1], users[2], users[3])
+      users[0].setFriend([users[2], users[3]]),
+      users[1].setFriend(users[2]),
+      users[4].setFriend([users[0], users[1], users[2], users[3]])
     ])
   })
   .then(() => {
