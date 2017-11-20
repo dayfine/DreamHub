@@ -3,13 +3,17 @@ import Quiz from './Quiz';
 
 //get user name from props
 const Welcome = ()=> {
-  const questionStyle = {
-    backgroundColor: 'piunk'
+  const quizStyle = {
+    margin: `10vh`
   }
+  
+  
   return (
-    <div style={questionStyle} >
+    <div >
       <h1>Welcome,</h1>
-      <Quiz />
+      <div style={quizStyle}>
+        <Quiz />
+      </div>
     </div>
   )
 }
