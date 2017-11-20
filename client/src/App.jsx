@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
 
@@ -15,7 +15,6 @@ class App extends Component {
   componentDidMount () {
     // fetch from store here
     store.dispatch(getGoals())
-    store.dispatch(getTasks())
   }
 
   render () {

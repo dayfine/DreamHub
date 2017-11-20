@@ -6,12 +6,10 @@ const updateTask = task => ({ type: UPDATE_TASK, task })
 const deleteTask = id => ({ type: DELETE_TASK, id })
 const fetchTasks = tasks => ({ type: FETCH_TASKS, tasks })
 
-// TO DO:
-// goalId hardcoded for now
-const goalId = 1;
-
-export const getTasks = () => dispatch => {
-  axios.get(`/api/goals/${goalId}/tasks`)
+export const getTasks = (goalId) => dispatch => {
+  console.log(goalId)
+  const id = goalId || 1;
+  axios.get(`/api/goals/${id}/tasks`)
     .then(res => res.data)
     .then(tasks => dispatch(fetchTasks(tasks)))
 }
@@ -22,13 +20,13 @@ export const createTask = (goalId, title) => dispatch => {
     .then(task => dispatch(addTask(task)))
 }
 
-export const removeTask = (id) => dispatch => {
+export const removeTask = (goalId, id) => dispatch => {
   axios.delete(`/api/goals/${goalId}/tasks/${id}`)
     .then(res => res.data)
     .then(() => dispatch(deleteTask(id)))
 }
 
-export const editTask = (task) => dispatch => {
+export const editTask = (goalId, task) => dispatch => {
   axios.put(`/api/goals/${goalId}/tasks/${task.id}`, task)
     .then(res => res.data)
     .then(task => dispatch(updateTask(task)))
