@@ -1,4 +1,4 @@
-module.exports = (User, Goal, Task) => {
+module.exports = (User, Goal, Task, Category) => {
   let users
   // let goals, tasks
   return Promise.all([

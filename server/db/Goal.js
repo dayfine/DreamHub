@@ -8,6 +8,14 @@ const Goal = conn.define('goal', {
   },
   description: {
     type: Sequelize.TEXT
+  },
+  progress: {
+    // 'Current', 'Accomplished', 'Stalled' 'Abandoned'
+    type: Sequelize.STRING,
+    defaultValue: 'Current'
+  },
+  cost: {
+    type: Sequelize.INTEGER
   }
 });
 

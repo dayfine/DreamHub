@@ -2,6 +2,10 @@ const conn = require('./conn')
 const User = require('./User')
 const Goal = require('./Goal')
 const Task = require('./Task')
+const Category = require('./Category')
+
+Goal.belongsTo(Category)
+Category.hasMany(Task)
 
 Goal.belongsTo(User)
 User.hasMany(Goal)
@@ -13,7 +17,7 @@ User.belongsToMany(User, { as: 'friend', through: 'UserFriend' })
 User.hasMany(User, { as: 'friends', foreignKey: 'friendId' })
 
 const sync = () => conn.sync({ force: true })
-const seed = () => require('../seed')(User, Goal, Task)
+const seed = () => require('../seed')(User, Goal, Task, Category)
 
 module.exports = {
   sync,
