@@ -140,3 +140,17 @@ footer {
 .goal-edit {
   display: inline-block;
 }
+
+.swimlane-container {
+  height: 100%;
+}
+
+.swimlane {
+  background-color: #eee;
+  min-height: 100%;
+  padding: 5px;
+}
+
+.swimlane-hed {
+  padding: 10px;
+}
