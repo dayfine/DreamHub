@@ -20,14 +20,17 @@ const seed = () => {
     User.create({ name: 'Di' }),
     User.create({ name: 'Jerry' }),
     Goal.create({ title: 'Travel', description: 'Want to go to Burundi' }),
-    Task.create({ title: 'Book flight to Burundi' })
+    Goal.create({ title: 'Capstone', description: 'Finish capstone' }),
+    Task.create({ title: 'Book flight to Burundi' }),
+    Task.create({ title: 'Get MVP ready' })
   ])
-  .then(([ u1, u2, u3, u4, g1, t1 ]) => {
+  .then(([ u1, u2, u3, u4, g1, g2, t1, t2 ]) => {
     u1.addGoal(g1);
     u1.addFriends(u3);
     u2.addFriends(u3);
     u1.addFriends(u4);
     g1.addTask(t1);
+    g2.addTask(t2);
   })
 }
 
