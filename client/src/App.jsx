@@ -30,7 +30,7 @@ class App extends Component {
       {view: GoalForm, path: '/goals', name: 'Goals'},
       {view: Kanban, path: '/kanban', name: 'Kanban'},
       // {view: TaskForm, path: '/tasks', name: 'Tasks'}
-      {view: Friends, path: '/friends', name: 'Friends'}
+      {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
       {view: Signup, path: '/signup', name: 'Sign Up'},
       {view: UserPanel, path: '/me', name: 'User'}

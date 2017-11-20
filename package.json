@@ -32,14 +32,6 @@
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
     "popper": "^1.0.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "react-scripts": "^1.0.17",
-    "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
     "sequelize": "^4.22.5"
   },
   "devDependencies": {

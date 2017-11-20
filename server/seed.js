@@ -29,18 +29,18 @@ module.exports = (User, Goal, Task, Category) => {
   })
   .then(_goals => {
     return Promise.all([
-      Task.create({ title: 'T1', description: 'Want to go to Burundi', goalId: 1 }),
+      Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 1 }),
       Task.create({ title: 'T2', description: 'Want to go to Burundi', goalId: 2 }),
-      Task.create({ title: 'T3', description: 'Want to go to Burundi', goalId: 3 }),
-      Task.create({ title: 'T4', description: 'Want to go to Burundi', goalId: 4 }),
-      Task.create({ title: 'T5', description: 'Want to go to Burundi', goalId: 5 }),
-      Task.create({ title: 'T6', description: 'Want to go to Burundi', goalId: 6 }),
-      Task.create({ title: 'T1', description: 'Want to go to Burundi', goalId: 1 }),
-      Task.create({ title: 'T2', description: 'Want to go to Burundi', goalId: 2 }),
-      Task.create({ title: 'T3', description: 'Want to go to Burundi', goalId: 3 }),
-      Task.create({ title: 'T4', description: 'Want to go to Burundi', goalId: 4 }),
-      Task.create({ title: 'T5', description: 'Want to go to Burundi', goalId: 5 }),
-      Task.create({ title: 'T6', description: 'Want to go to Burundi', goalId: 6 })
+      Task.create({ title: 'T3', description: 'Spanish alphabet...', goalId: 3 }),
+      Task.create({ title: 'T4', description: 'Save some money', goalId: 4, status: 'Completed' }),
+      Task.create({ title: 'T5', description: 'Test for goal5', goalId: 5 }),
+      Task.create({ title: 'T6', description: 'Test for goal six', goalId: 6, status: 'Completed' }),
+      Task.create({ title: 'T1', description: 'another five five', goalId: 5, status: 'Completed' }),
+      Task.create({ title: 'T2', description: 'Five has five', goalId: 5 }),
+      Task.create({ title: 'T3', description: 'Sixxxxxx', goalId: 6 }),
+      Task.create({ title: 'T4', description: 'Liu - Test', goalId: 6, status: 'Completed' }),
+      Task.create({ title: 'T5', description: 'Fiv, aseomw', goalId: 5 }),
+      Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' })
     ])
   })
 }

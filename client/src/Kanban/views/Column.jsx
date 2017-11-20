@@ -34,7 +34,7 @@ const Column = props => {
   const { header, tasks, connectDropTarget, isOver } = props
   return connectDropTarget(
     <div style={{height: '100%'}}>
-      <Paper style={{backgroundColor: '#eee', height: '100%'}}>
+      <Paper style={{backgroundColor: '#eee', height: '100%', maxHeight: '100%', overflow: 'auto'}}>
         <div style={{padding: 10}}>
           <Typography type='headline' >
             {tasks.length} Tasks
@@ -45,7 +45,7 @@ const Column = props => {
         </div>
         <Divider light />
         {tasks.map(task => {
-          return (<Card key={task.title} task={task} />)
+          return (<Card key={task.id} task={task} />)
         })}
       </Paper>
     </div>

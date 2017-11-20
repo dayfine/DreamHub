@@ -11,7 +11,7 @@ import { reducer as AuthReducer } from './Auth'
 const rootReducer = combineReducers({
   cards: kanbanReducer,
   goals: GoalsReducer,
-  tasks: TasksReducer
+  tasks: TasksReducer,
   currentUser: AuthReducer
 })
 

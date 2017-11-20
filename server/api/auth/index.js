@@ -5,10 +5,6 @@ const
   jwtAuth = require('./jwt-middleware')(),
   secret = process.env.SECRET
 
-
-router.use('/oauth', require('./oauth'));
-router.use('/', require('./auth'));
-
 router
   .use(jwtAuth.initialize())
 
