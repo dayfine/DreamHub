@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 
 import { views as GoalForm } from './Goals'
+
 import GoalPanel from './Goals/views/GoalPanel'
 import { views as Kanban } from './Kanban'
 
@@ -17,7 +18,10 @@ import Sidebar from './common/Sidebar'
 import store from './Store'
 import { fetchCategories } from './Category/actions'
 
+
+
 const styles = {}
+
 
 class App extends Component {
   componentDidMount () {
