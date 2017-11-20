@@ -1,5 +1,7 @@
 const conn = require('./conn');
 const Sequelize = conn.Sequelize;
+const Goal = require('./Goal');
+const Task = require('./Task');
 
 const User = conn.define('user', {
   name: {
@@ -13,6 +15,9 @@ const User = conn.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  points: {
+    type: Sequelize.INTEGER
   }
 });
 
@@ -21,6 +26,19 @@ const generateError = message => {
   error.status = 401
   error.json = true
   return error
+}
+
+// Only fetch from server
+User.getUserDataById = function (id) {
+  return this.findById(id, {
+      attributes: { exclude: ['password'] },
+      include: [
+        { model: Goal,
+          include: [{ model: Task }]
+         },
+        { model: User, as: 'friend' }
+       ]
+    })
 }
 
 User.login = function (credentials) {

@@ -10,7 +10,7 @@ const
   },
   strategy = new JwtStrategy(jwtOptions, (payload, done) => {
     const { id } = payload
-    User.findById(id, { attributes: { exclude: ['password'] } })
+    User.getUserDataById(id)
       .then(user => done(null, user || false))
       .catch(done)
   })
