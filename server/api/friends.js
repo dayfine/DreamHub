@@ -46,12 +46,12 @@ router.post('/:id', (req, res, next) => {
 
 // search user by email
 router.get('/email/:email', (req, res, next) => {
-	console.log('route found')
 	return User.findOne({
 		where: { email: req.params.email}
 	})
 	.then(friend => {
 		if( friend ){
+			// console.log('routeeeeee ' + friend)
 			return User.addFriends(friend)
 			// .then(()=> res.redirect('/'));			
 		}

@@ -19,7 +19,7 @@ class Friend extends Component {
     console.log('searchfor '+this.state.search)
     console.log('THESE ARE THE PROPS:', this.props);
     this.props.findFriend(this.state.search)
-    .then(res => console.log(res))
+    // .then(res => console.log(res))
     // this.setState({ newFriend: {} });
   }
   handleChange(ev) {
