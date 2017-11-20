@@ -26,7 +26,7 @@ class Friend extends Component {
     console.log(ev.target.value)
     this.setState({ search: ev.target.value });
   }
-  render(){
+  render() {
     const { newFriend, search } = this.state;
     const { friends } = this.props;
     const { handleSubmit, handleChange } = this;

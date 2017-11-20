@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Motion, spring } from 'react-motion'
 
 import Grid from 'material-ui/Grid'
 import Column from './Column'
-import { taskMapper } from '../util/mappers'
+import { goalTaskMapper } from '../util/mappers'
 import AddCard from '../../common/AddCard'
 import { views as TaskForm, createTask } from '../../Tasks'
 
@@ -51,7 +50,7 @@ class Kanban extends Component {
 }
 
 const mapState = state => ({
-  tasks: Object.entries(taskMapper(state.tasks)) // filter here
+  tasks: Object.entries(goalTaskMapper(state.goals)) // filter here
 })
 
 const mapDispatch = { createTask };
