@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 
 import { views as GoalForm } from './Goals'
+import GoalPanel from './Goals/views/GoalPanel'
 import { views as Kanban } from './Kanban'
 
 import { views as Friends } from './Friends'
@@ -26,6 +27,7 @@ class App extends Component {
   render () {
     const viewPaths = [
       {view: GoalForm, path: '/goals', name: 'Goals'},
+      {view: GoalPanel, path: '/goal', name: 'Goal Panel'},
       {view: Kanban, path: '/kanban', name: 'Kanban'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
