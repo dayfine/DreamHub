@@ -7,6 +7,7 @@ import Grid from 'material-ui/Grid'
 import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
 import { views as Kanban } from './Tasks'
+import { views as Welcome } from './Welcome'
 
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
@@ -43,7 +44,7 @@ class App extends Component {
     let isAuthenticated = true
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
-
+      {view: Welcome, path: '/welcome', name: 'Welcome'},
       {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},

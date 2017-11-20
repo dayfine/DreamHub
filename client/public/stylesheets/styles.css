@@ -75,6 +75,7 @@ footer {
   font-weight: 300;
   margin: .25em 0;
   padding: 5px;
+  outline: none;
 }
 
 .goal-input-sm {
