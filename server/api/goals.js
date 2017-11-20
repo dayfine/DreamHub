@@ -7,6 +7,12 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:id', (req, res, next) => {
+  Goal.getGoalById(req.params.id * 1)
+    .then(goal => res.send(goal))
+    .catch(next);
+});
+
 router.post('/', (req, res, next) => {
   Goal.addGoal(req.body)
     .then(goal => res.send(goal))

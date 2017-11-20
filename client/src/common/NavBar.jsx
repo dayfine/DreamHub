@@ -4,11 +4,8 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
-
-import { views as Auth } from '../Auth'
 
 const style = theme => ({
   root: {
@@ -34,9 +31,8 @@ const NavBar = props => {
         </IconButton>
         <Typography type='display1' color='inherit' className={classes.flex}>
           Welcome to Capstone
-
         </Typography>
-        <Auth />
+        {props.children}
       </Toolbar>
     </AppBar>
   )

@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const { User } = require('../db').models;
 
-// /api/users
+// /api/friends
 
 // get all friends
 router.get('/', (req, res, next) => {
-	User.getFriends() //where friendId = logged in id
+	console.log('im in /friends')
+	return User.getFriends() //where friendId = logged in id
 		.then(users => {
 			res.send(users)
 		})
@@ -35,10 +36,28 @@ router.get('/', (req, res, next) => {
 
 // add new friend
 router.post('/:id', (req, res, next) => {
-	User.findById(req.params.id)
+	return User.findById(req.params.id)
 	.then(newFriend => {
 		User.addFriends(newFriend)//where friendId = logged in id
 		res.send(newFriend)
+	})
+	.catch(next)
+});
+
+// search user by email
+router.get('/email/:email', (req, res, next) => {
+	return User.findOne({
+		where: { email: req.params.email}
+	})
+	.then(friend => {
+		if( friend ){
+			// console.log('routeeeeee ' + friend)
+			return User.addFriends(friend)
+			// .then(()=> res.redirect('/'));			
+		}
+		else{
+			return res.send('user not found')
+		}		
 	})
 	.catch(next)
 });

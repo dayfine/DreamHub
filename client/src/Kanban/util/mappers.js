@@ -1,10 +1,11 @@
-import { STATUS } from '../../constants'
+import { TASK_STATUS } from '../../constants'
 
-export const goalMapper = goals => {
+export const goalTaskMapper = goals => {
   const ret = {}
+  const tasks = [].concat(...goals.map(g => g.tasks))
 
-  Object.values(STATUS).forEach(status => {
-    ret[status] = goals.filter(g => g.status === status)
+  Object.values(TASK_STATUS).forEach(status => {
+    ret[status] = tasks.filter(task => task.status === status)
   })
 
   return ret

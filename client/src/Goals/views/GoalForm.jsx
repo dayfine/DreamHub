@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createGoal, removeGoal, editGoal } from '../actions';
+import AddCard from '../../common/AddCard';
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', showForm: false, currentGoal: {} };
+    this.state = { type: 'goal', value: '', showForm: false, currentGoal: {} };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -45,14 +47,11 @@ class Form extends Component {
   render() {
     const { value, showForm, currentGoal } = this.state;
     const { handleSubmit, handleChange, handleDelete, handleEdit, handleSave } = this;
-    const { goals } = this.props;
+    const { goals, createGoal } = this.props;
 
     return (
       <div id="container">
-        <form onSubmit={ handleSubmit }>
-          <input type="text" value={ value } onChange={ handleChange } placeholder="Add new goal..." className="goal-input" />
-          <button type="submit" className="btn btn-sm btn-primary">+</button>
-        </form>
+        <AddCard { ...this.state } { ...this } />
         <ul>
           {
             goals.map(goal => {
@@ -68,6 +67,9 @@ class Form extends Component {
                     <div>
                       <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
                       <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
+
+                      {/* TODO: fetch the Kanban board for this goal id */}
+                      <Link to={ `/kanban/${ goal.id * 1 }`}>See progress on Kanban board</Link>
                     </div>
                     )
                   }

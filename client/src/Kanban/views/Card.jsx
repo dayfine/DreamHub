@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
+import { views as TaskForm } from '../../Tasks'
 
 import { DragSource } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
@@ -16,7 +17,7 @@ const styles = {
 const cardSource = {
   beginDrag (props) {
     console.log('source Prop', props)
-    return { id: props.goal.id }
+    return props.task
   }
 }
 
@@ -26,15 +27,16 @@ const collect = (connect, monitor) => ({
 })
 
 const AgileCard = props => {
-  const { classes, goal, connectDragSource, isDragging } = props
+  const { classes, task, connectDragSource, isDragging } = props
   return connectDragSource(
     <div>
-      <Card className={classes.agileCard}>
+      <TaskForm task={task} />
+      {/*<Card className={classes.agileCard}>
         <CardHeader title={goal.title} />
         <CardContent>
           {JSON.stringify(goal.tasks)}
         </CardContent>
-      </Card>
+      </Card>*/}
     </div>
   )
 }
