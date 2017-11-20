@@ -7,7 +7,9 @@ const deleteTask = id => ({ type: DELETE_TASK, id })
 const fetchTasks = tasks => ({ type: FETCH_TASKS, tasks })
 
 export const getTasks = (goalId) => dispatch => {
-  axios.get(`/api/goals/${goalId}/tasks`)
+  console.log(goalId)
+  const id = goalId || 1;
+  axios.get(`/api/goals/${id}/tasks`)
     .then(res => res.data)
     .then(tasks => dispatch(fetchTasks(tasks)))
 }
@@ -24,8 +26,8 @@ export const removeTask = (goalId, id) => dispatch => {
     .then(() => dispatch(deleteTask(id)))
 }
 
-export const editTask = (task) => dispatch => {
-  axios.put(`/api/goals/${task.goalId}/tasks/${task.id}`, task)
+export const editTask = (goalId, task) => dispatch => {
+  axios.put(`/api/goals/${goalId}/tasks/${task.id}`, task)
     .then(res => res.data)
     .then(task => dispatch(updateTask(task)))
 }

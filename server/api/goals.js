@@ -13,13 +13,6 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:id/tasks', (req, res, next) => {
-  Goal.findById(req.params.id, { include: [ Task ] })
-    .then(goal => goal.getTasks())
-    .then(tasks => res.send(tasks))
-    .catch(next)
-});
-
 router.post('/', (req, res, next) => {
   Goal.addGoal(req.body)
     .then(goal => res.send(goal))
@@ -35,6 +28,21 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   Goal.deleteGoal(req.params.id, 1) // userId hardcoded
     .then(() => res.sendStatus(202))
+    .catch(next);
+});
+
+// Tasks
+
+router.get('/:id/tasks', (req, res, next) => {
+  Goal.findById(req.params.id, { include: [ Task ] })
+    .then(goal => goal.getTasks())
+    .then(tasks => res.send(tasks))
+    .catch(next)
+});
+
+router.post('/:id/tasks', (req, res, next) => {
+  Goal.createTask(req.params.id, req.body)
+    .then(goal => res.send(goal))
     .catch(next);
 });
 
