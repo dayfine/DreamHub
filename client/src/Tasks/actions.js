@@ -14,6 +14,7 @@ export const getTasks = (goalId) => dispatch => {
 }
 
 export const createTask = (goalId, title) => dispatch => {
+  goalId = goalId || 1; // if no goal is selected, add task to the first one
   axios.post(`/api/goals/${goalId}/tasks`, { goalId, title })
     .then(res => res.data)
     .then(task => dispatch(addTask(task)))
