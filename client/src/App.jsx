@@ -4,15 +4,12 @@ import { Route, Switch } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 
 import { views as GoalForm } from './Goals'
-// import { views as TaskForm } from './Tasks'
 import { views as Kanban } from './Kanban'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
 
 import store, { getGoals, getTasks } from './Store'
-
-const styles = {}
 
 class App extends Component {
   componentDidMount () {
@@ -24,8 +21,7 @@ class App extends Component {
   render () {
     const viewPaths = [
       {view: GoalForm, path: '/goals', name: 'Goals'},
-      {view: Kanban, path: '/kanban', name: 'Kanban'},
-      // {view: TaskForm, path: '/tasks', name: 'Tasks'}
+      {view: Kanban, path: '/kanban', name: 'Kanban'}
     ]
 
     return (
