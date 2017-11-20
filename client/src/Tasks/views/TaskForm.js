@@ -27,7 +27,7 @@ class Form extends Component {
   // handles saving edited goal
   handleSave(ev) {
     ev.preventDefault();
-    this.props.editTask(this.props.goalId * 1, this.state.currentTask);
+    this.props.editTask(this.state.currentTask);
     this.setState({ showForm: false });
   }
 

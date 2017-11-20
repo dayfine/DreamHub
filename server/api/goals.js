@@ -46,8 +46,8 @@ router.post('/:id/tasks', (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:id', (req, res, next) => {
-  Task.editTask(req.params.id, req.body)
+router.put('/:goalId/tasks/:id', (req, res, next) => {
+  Task.editTask(req.params.goalId, req.params.id, req.body)
     .then(task => res.send(task))
     .catch(next);
 });

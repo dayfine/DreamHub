@@ -31,8 +31,8 @@ Task.addTask = function(reqBody) {
   return Task.create(Object.assign({}, reqBody));
 };
 
-Task.editTask = function(id, reqBody) {
-  return Task.findOne({ where: { id } })
+Task.editTask = function(goalId, id, reqBody) {
+  return Task.findOne({ where: { goalId, id } })
     .then(task => {
       Object.assign(task, reqBody);
       return task.save();
