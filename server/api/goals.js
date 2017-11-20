@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Goal } = require('../db').models;
+const { Goal, Task } = require('../db').models;
 
 router.get('/', (req, res, next) => {
   Goal.getGoals(req.body.userId)
@@ -8,9 +8,16 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  Goal.getGoalById(req.params.id * 1)
+  Goal.findById(req.params.id, { include: [ Task ] })
     .then(goal => res.send(goal))
     .catch(next);
+});
+
+router.get('/:id/tasks', (req, res, next) => {
+  Goal.findById(req.params.id, { include: [ Task ] })
+    .then(goal => goal.getTasks())
+    .then(tasks => res.send(tasks))
+    .catch(next)
 });
 
 router.post('/', (req, res, next) => {
