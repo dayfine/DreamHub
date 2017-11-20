@@ -25,6 +25,7 @@ module.exports = {
   models: {
     User,
     Goal,
-    Task
+    Task,
+    Category
   }
 }

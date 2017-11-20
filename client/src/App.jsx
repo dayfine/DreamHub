@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
 
 import { views as GoalForm } from './Goals'
-// import { views as TaskForm } from './Tasks'
 import { views as Kanban } from './Kanban'
 
 import { views as Friends } from './Friends'
@@ -14,15 +13,20 @@ import { views as UserPanel } from './User'
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
 
+import store from './Store'
+import { fetchCategories } from './Category/actions'
+
 const styles = {}
 
 class App extends Component {
+  componentDidMount () {
+    store.dispatch(fetchCategories())
+  }
 
   render () {
     const viewPaths = [
       {view: GoalForm, path: '/goals', name: 'Goals'},
       {view: Kanban, path: '/kanban', name: 'Kanban'},
-      // {view: TaskForm, path: '/tasks', name: 'Tasks'}
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
       {view: Signup, path: '/signup', name: 'Sign Up'},

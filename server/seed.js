@@ -44,4 +44,15 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' })
     ])
   })
+  .then(() => {
+    return Promise.all([
+      Category.create({ name: 'Traveling' }),
+      Category.create({ name: 'Learning' }),
+      Category.create({ name: 'Exercises' }),
+      Category.create({ name: 'Social & Families' }),
+      Category.create({ name: 'Meditation' }),
+      Category.create({ name: 'Cooking' }),
+      Category.create({ name: 'Reading & Writing' })
+    ])
+  })
 }
