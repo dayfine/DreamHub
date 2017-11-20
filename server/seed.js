@@ -34,6 +34,12 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T3', description: 'Want to go to Burundi', goalId: 3 }),
       Task.create({ title: 'T4', description: 'Want to go to Burundi', goalId: 4 }),
       Task.create({ title: 'T5', description: 'Want to go to Burundi', goalId: 5 }),
+      Task.create({ title: 'T6', description: 'Want to go to Burundi', goalId: 6 }),
+      Task.create({ title: 'T1', description: 'Want to go to Burundi', goalId: 1 }),
+      Task.create({ title: 'T2', description: 'Want to go to Burundi', goalId: 2 }),
+      Task.create({ title: 'T3', description: 'Want to go to Burundi', goalId: 3 }),
+      Task.create({ title: 'T4', description: 'Want to go to Burundi', goalId: 4 }),
+      Task.create({ title: 'T5', description: 'Want to go to Burundi', goalId: 5 }),
       Task.create({ title: 'T6', description: 'Want to go to Burundi', goalId: 6 })
     ])
   })
