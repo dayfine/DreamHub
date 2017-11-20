@@ -41,8 +41,20 @@ router.get('/:id/tasks', (req, res, next) => {
 });
 
 router.post('/:id/tasks', (req, res, next) => {
-  Goal.createTask(req.params.id, req.body)
-    .then(goal => res.send(goal))
+  Task.addTask(req.body)
+    .then(task => res.send(task))
+    .catch(next);
+});
+
+router.put('/:id', (req, res, next) => {
+  Task.editTask(req.params.id, req.body)
+    .then(task => res.send(task))
+    .catch(next);
+});
+
+router.delete('/:goalId/tasks/:id', (req, res, next) => {
+  Task.deleteTask(req.params.goalId, req.params.id)
+    .then(() => res.sendStatus(201))
     .catch(next);
 });
 

@@ -21,6 +21,7 @@ export const createTask = (goalId, title) => dispatch => {
 }
 
 export const removeTask = (goalId, id) => dispatch => {
+  console.log(goalId, id)
   axios.delete(`/api/goals/${goalId}/tasks/${id}`)
     .then(res => res.data)
     .then(() => dispatch(deleteTask(id)))

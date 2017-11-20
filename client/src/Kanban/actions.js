@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getBoard = board => ({ type: GET_BOARD, board });
 
 export const fetchBoard = goalId => dispatch => {
-  axios.get(`/goals/${goalId}`)
+  axios.get(`/api/goals/${goalId}`)
     .then(res => res.data)
-    .then(board => getBoard(board))
+    .then(board => dispatch(getBoard(board)))
 };

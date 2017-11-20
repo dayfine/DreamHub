@@ -29,7 +29,7 @@ Goal.editGoal = function(id, userId, reqBody) {
 };
 
 Goal.deleteGoal = function(id, userId) {
-  return Goal.findOne({ where: { id, userId }})
+  return Goal.findOne({ where: { id }}) // add userId to where
     .then(goal => goal.destroy());
 };
 
@@ -37,17 +37,6 @@ Goal.findGoal = function(id) {
   return Goal.findById(id)
     .then(goal => res.send(goal))
     .catch(next);
-};
-
-Goal.prototype.createTask = function(id, taskBody) {
-  return Task.create(Object.assign({}, taskBody))
-    .then(task => {
-      Goal.findGoal(id)
-        .then(goal => {
-          goal.addTask(task);
-          return goal.save();
-        })
-    })
 };
 
 module.exports = Goal;

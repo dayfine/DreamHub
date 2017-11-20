@@ -39,8 +39,8 @@ Task.editTask = function(id, reqBody) {
     });
 };
 
-Task.deleteTask = function(id) {
-  return Task.findOne({ where: { id } })
+Task.deleteTask = function(goalId, id) {
+  return Task.findOne({ where: { goalId, id } })
     .then(task => task.destroy());
 };
 

@@ -11,8 +11,10 @@ class Form extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleDelete(id) {
-    this.props.removeTask(id * 1);
+  handleDelete(ev) {
+    ev.preventDefault();
+    const { goalId, id } = this.props.task;
+    this.props.removeTask(goalId, id);
   }
 
   // handles editing goal
@@ -25,7 +27,7 @@ class Form extends Component {
   // handles saving edited goal
   handleSave(ev) {
     ev.preventDefault();
-    this.props.editTask(this.state.currentTask, this.props.goalId);
+    this.props.editTask(this.props.goalId * 1, this.state.currentTask);
     this.setState({ showForm: false });
   }
 
@@ -62,7 +64,7 @@ class Form extends Component {
             </form>
             ) : (
             <div>
-              <p><span onClick={() =>  this.setState({ showForm: true, currentTask: task })} className="task-title">{ task.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ task.id }`)} className="btn btn-sm btn-danger">Delete Task</button></p>
+              <p><span onClick={() =>  this.setState({ showForm: true, currentTask: task })} className="task-title">{ task.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={ handleDelete } className="btn btn-sm btn-danger">Delete Task</button></p>
               <p onClick={() =>  this.setState({ showForm: true, currentTask: task })}>{ task.description }</p>
               <p>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</p>
               <p className="badge badge-dark">Priority: { task.priority }</p>
