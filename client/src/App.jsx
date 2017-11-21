@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Route, Switch} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
 
-import { views as GoalForm } from './Goals'
-
 import GoalPanel from './Goals/views/GoalPanel'
+import { views as Goals } from './Goals'
 import { Kanban } from './Tasks'
 
 import { views as Friends } from './Friends'
@@ -21,23 +21,38 @@ import { fetchCategories } from './Category/actions'
 
 const styles = {}
 
-class App extends Component {
+const Home = props => {
+  return (
+    <Grid container>
+      <Grid item xs={8} >
+        <Goals />
+      </Grid>
+      <Grid item xs={4} >
+        <UserPanel />
+      </Grid>
+    </Grid>
+  )
+}
 
+class App extends Component {
   componentDidMount () {
     store.dispatch(fetchCategories())
   }
 
-
   render () {
-    const viewPaths = [
-      {view: GoalForm, path: '/goals', name: 'Goals'},
+    const { isAuthenticated } = this.props
+    let viewPaths = [
+      {view: Home, path: '/home', name: 'Home'},
+      {view: Goals, path: '/goals', name: 'Goals'},
       {view: GoalPanel, path: '/goal', name: 'Goal Panel'},
-      {view: Kanban, path: '/kanban', name: 'Kanban'},
+      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
-      {view: Signup, path: '/signup', name: 'Sign Up'},
+      // {view: Signup, path: '/signup', name: 'Sign Up'},
       {view: UserPanel, path: '/me', name: 'User'}
     ]
+
+    if (!isAuthenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
 
     return (
       <div style={{height: '100vh'}}>
@@ -48,7 +63,7 @@ class App extends Component {
           </Grid>
           <Grid item xs={10}>
             <Switch>
-              <Route path='/' exact component={Kanban} />
+              <Route path='/' exact component={Home} />
               {viewPaths.map((_, idx) => {
                 return (
                   <Route key={idx} path={_.path} component={_.view} />
@@ -62,4 +77,8 @@ class App extends Component {
   }
 }
 
-export default App
+const mapState = state => ({
+  isAuthenticated: !!state.currentUser.id
+})
+
+export default withRouter(connect(mapState)(App))

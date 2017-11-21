@@ -13,7 +13,7 @@ export const auth = (credentials, history, formName) => dispatch => {
     .then(result => result.data)
     .then(token => {
       dispatch(loadUserData(token))
-      history.push('/goals')
+      history.push('/home')
     })
     .catch(err => dispatch(setCurrUser({err})))
 }
