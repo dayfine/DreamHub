@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
 import Column from './Column'
-import { goalTaskMapper } from '../util/mappers'
+
+import { GoalTaskMapper } from '../util/mappers'
 import AddCard from '../../common/AddCard'
-import { getTasks, createTask } from '../../Tasks'
+import { getGoalTasks, createTask } from '../actions'
 
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -18,10 +19,10 @@ class Kanban extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    const goalId = this.props.location.pathname.slice(-1);
-    this.props.getTasks(goalId);
-  }
+  // componentDidMount() {
+  //   const goalId = this.props.location.pathname.slice(-1);
+  //   this.props.getGoalTasks(goalId);
+  // }
 
   handleChange(ev) {
     this.setState({ value: ev.target.value });
@@ -54,11 +55,14 @@ class Kanban extends Component {
   }
 }
 
-const mapState = state => ({
-  tasks: Object.entries(goalTaskMapper(state.goals)) // filter here
-})
+const mapState = (state, ownProps) => {
+  const { goalId } = ownProps.match.params
+  return {
+    tasks: Object.entries(GoalTaskMapper(state.tasks, +goalId)) // filter here
+  }
+}
 
-const mapDispatch = { getTasks, createTask };
+const mapDispatch = { getGoalTasks, createTask };
 
 const DragContext = DragDropContext(HTML5Backend)(Kanban)
 

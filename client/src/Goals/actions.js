@@ -1,15 +1,15 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes'
+import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, SET_GOALS } from './actionTypes'
 import axios from 'axios'
 
 const addGoal = goal => ({ type: ADD_GOAL, goal })
 const updateGoal = goal => ({ type: UPDATE_GOAL, goal })
 const deleteGoal = id => ({ type: DELETE_GOAL, id })
-export const fetchGoals = goals => ({ type: FETCH_GOALS, goals })
+export const setGoals = goals => ({ type: SET_GOALS, goals })
 
-export const getGoals = () => dispatch => {
+export const fetchGoals = () => dispatch => {
   axios.get('/api/goals')
     .then(res => res.data)
-    .then(goals => dispatch(fetchGoals(goals)))
+    .then(goals => dispatch(setGoals(goals)))
 }
 
 export const createGoal = (userId, title) => dispatch => {

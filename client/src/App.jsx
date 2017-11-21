@@ -6,7 +6,7 @@ import Grid from 'material-ui/Grid'
 import { views as GoalForm } from './Goals'
 
 import GoalPanel from './Goals/views/GoalPanel'
-import { views as Kanban } from './Kanban'
+import { Kanban } from './Tasks'
 
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
@@ -19,14 +19,14 @@ import store from './Store'
 import { fetchCategories } from './Category/actions'
 
 
-
 const styles = {}
 
-
 class App extends Component {
+
   componentDidMount () {
     store.dispatch(fetchCategories())
   }
+
 
   render () {
     const viewPaths = [

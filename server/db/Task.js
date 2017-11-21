@@ -32,7 +32,7 @@ Task.addTask = function(reqBody) {
 };
 
 Task.editTask = function(id, reqBody) {
-  return Task.findOne({ where: { id } })
+  return Task.findById(id)
     .then(task => {
       Object.assign(task, reqBody);
       return task.save();
@@ -40,7 +40,7 @@ Task.editTask = function(id, reqBody) {
 };
 
 Task.deleteTask = function(id) {
-  return Task.findOne({ where: { id } })
+  return Task.findById(id)
     .then(task => task.destroy());
 };
 

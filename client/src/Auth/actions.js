@@ -1,7 +1,9 @@
 import { SET_USER, REMOVE_USER } from './actionTypes.js'
 import axios from 'axios'
 
-import { fetchGoals } from '../Goals/actions'
+import { setGoals } from '../Goals/actions'
+import { setTasks } from '../Tasks/actions'
+import { MapGoalToTasks } from '../Tasks/util/mappers'
 
 export const setCurrUser = user => ({ type: SET_USER, user })
 export const removeCurrUser = () => ({ type: REMOVE_USER })
@@ -11,7 +13,7 @@ export const auth = (credentials, history, formName) => dispatch => {
     .then(result => result.data)
     .then(token => {
       dispatch(loadUserData(token))
-      history.push('/kanban')
+      history.push('/goals')
     })
     .catch(err => dispatch(setCurrUser({err})))
 }
@@ -25,7 +27,8 @@ export const loadUserData = token => dispatch => {
     .then(result => result.data)
     .then(user => {
       dispatch(setCurrUser(user))
-      dispatch(fetchGoals(user.goals))
+      dispatch(setGoals(user.goals))
+      dispatch(setTasks(MapGoalToTasks(user.goals)))
     })
     .catch(() => console.log('not logged in'))
 }

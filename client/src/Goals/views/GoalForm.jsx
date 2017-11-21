@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
 import { createGoal, removeGoal, editGoal } from '../actions';
 import AddCard from '../../common/AddCard';
-import { views as Kanban } from '../../Kanban';
 
 class Form extends Component {
   constructor(props) {
@@ -59,14 +58,40 @@ class Form extends Component {
               return (
                 <li key={ goal.id } className="goal-item">
                   {
-                    showForm && currentGoal.id === goal.id ? (
+                    showForm && currentGoal.id === goal.id
+                    ? (
                     <form onSubmit={ handleSave } className="goal-edit">
-                      <input type="text" onChange={ handleEdit } name="title" value={ currentGoal.title } autoFocus className="goal-input-sm" /> <button className="btn btn-sm btn-success">Save</button> <button onClick={() => this.setState({ showForm: false }) } className="btn btn-sm btn-secondary">Cancel</button>
-                      <textarea onChange={ handleEdit } name="description" value={ currentGoal.description || '' } className="goal-input-sm goal-textinput" />
+                      <input
+                        type="text"
+                        onChange={ handleEdit }
+                        name="title"
+                        value={ currentGoal.title }
+                        autoFocus
+                        className="goal-input-sm" />
+                      <button className="btn btn-sm btn-success">Save</button>
+                      <button
+                        onClick={() => this.setState({ showForm: false }) }
+                        className="btn btn-sm btn-secondary">Cancel</button>
+                      <textarea
+                        onChange={ handleEdit }
+                        name="description"
+                        value={ currentGoal.description || '' }
+                        className="goal-input-sm goal-textinput" />
                     </form>
-                    ) : (
+                    )
+                    : (
                     <div>
-                      <p><span onClick={() =>  this.setState({ showForm: true, currentGoal: goal })} className="goal-title">{ goal.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ goal.id }`)} className="btn btn-sm btn-danger">Delete Goal</button></p>
+                      <p>
+                      <span
+                        onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}
+                        className="goal-title">
+                        { goal.title }
+                        <button className="btn btn-sm btn-warning">Edit</button>
+                      </span>
+                      <button
+                        onClick={handleDelete.bind(goal.id)}
+                        className="btn btn-sm btn-danger">Delete Goal</button>
+                      </p>
                       <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
                       {/* TODO: fetch the Kanban board for this goal id */}
                       <Link to={ `/kanban/${goal.id}`}>See progress on Kanban board</Link>
@@ -83,10 +108,10 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = ({ goals }) => {
-  return { goals };
-};
+const mapState = state => ({
+  goals: state.goals
+})
 
 const mapDispatch = { createGoal, removeGoal, editGoal };
 
-export default connect(mapStateToProps, mapDispatch)(Form);
+export default connect(mapState, mapDispatch)(Form);
