@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
 const GoalPanel = props => {
+  console.log(props)
   const id = 6
   const goal = props.goals.find(g => g.id === id)
   console.log(goal)

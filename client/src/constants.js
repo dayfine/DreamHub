@@ -1,5 +1,6 @@
 export const TASK_STATUS = {
-  Created: 'Created',
+  CREATED: 'Created',
+  LATER: 'Later',
   IN_PROGRESS: 'In Progress',
   COMPLETED: 'Completed'
 }

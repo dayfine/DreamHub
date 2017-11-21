@@ -14,7 +14,7 @@ const Goal = conn.define('goal', {
     type: Sequelize.STRING,
     defaultValue: 'Current'
   },
-  cost: {
+  budget: {
     type: Sequelize.INTEGER
   }
 });
@@ -26,7 +26,7 @@ Goal.getGoals = function(userId) {
 // TO DO:
 // this one doesn't work
 Goal.getGoalById = function(id) {
-  return Goal.findById(id);
+  return Goal.findById(+id);
 };
 
 Goal.addGoal = function(reqBody) {
