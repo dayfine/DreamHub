@@ -38,31 +38,36 @@ router.delete('/:id', (req, res, next) => {
 });
 
 // Tasks
-router.get('/:id/tasks', (req, res, next) => {
-  Goal.findById(req.params.id, { include: [ Task ] })
-    .then(goal => goal.getTasks())
-    .then(tasks => res.send(tasks))
-    .catch(next)
-});
+// Not using at the moment
+// router.get('/:id/tasks', (req, res, next) => {
+//   Goal.findById(req.params.id, { include: [ Task ] })
+//     .then(goal => goal.getTasks())
+//     .then(tasks => res.send(tasks))
+//     .catch(next)
+// });
 
+// Works
 router.post('/:id/tasks', (req, res, next) => {
-  Goal.createTask(req.params.id, req.body)
-    .then(goal => res.send(goal))
-    .catch(next);
-});
-
-router.put('/:id/tasks/:taskId', (req, res, next) => {
-  console.log(req.body)
-  Task.editTask(req.params.taskId, req.body)
+  Task.create(req.body)
     .then(task => res.send(task))
     .catch(next);
 });
 
+// Works
+router.put('/:id/tasks/:taskId', (req, res, next) => {
+  console.log(req.body)
+  Task.findById(req.params.taskId)
+    .then(task => task.update(req.body))
+    .then(_task => res.send(_task))
+    .catch(next);
+});
+
+// Works
 router.delete('/:id/tasks/:taskId', (req, res, next) => {
-  Task.deleteTask(req.params.taskId)
+  return Task.findById(req.params.taskId)
+    .then(task => task.destroy())
     .then(() => res.sendStatus(201))
     .catch(next);
 });
 
 module.exports = router;
-

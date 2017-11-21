@@ -8,7 +8,7 @@ export const TASK_STATUS = {
 export const TASK_PRIORITY = {
   URGENT: 'Urgent',
   HIGH: 'High',
-  MEDIUM: 'Low',
+  MEDIUM: 'Medium',
   LOW: 'Low'
 }
 

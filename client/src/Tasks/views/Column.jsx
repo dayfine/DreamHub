@@ -15,8 +15,7 @@ const columnTarget = {
   drop (props, monitor) {
     const oldTask = monitor.getItem()
     const status = props.header
-    const updatedTask = Object.assign({}, oldTask, {status})
-    props.editTask(updatedTask)
+    props.editTask({...oldTask, status})
   }
 };
 
@@ -49,6 +48,7 @@ const Column = props => {
 
 const mapDispatch = ({ editTask });
 
-const DropTargetComp = DropTarget(DragItemTypes.CARD, columnTarget, collect)(Column);
-
-export default connect(null, mapDispatch)(DropTargetComp);
+export default  connect(null, mapDispatch)(
+                DropTarget(DragItemTypes.CARD, columnTarget, collect)(
+                  Column
+                ))
