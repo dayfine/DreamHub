@@ -6,12 +6,10 @@ import Divider from 'material-ui/Divider'
 import Typography from 'material-ui/Typography'
 
 const GoalPanel = props => {
-  console.log(props)
-  const id = 6
-  const goal = props.goals.find(g => g.id === id)
+  const { goal } = props
   console.log(goal)
 
-  return !goal ? null : (
+  return (
     <Paper>
       <Typography type='headline' >
         {goal.title}
@@ -42,9 +40,14 @@ const GoalPanel = props => {
   )
 }
 
-const mapState = state => ({
-  goals: state.goals
-})
+const mapState = (state, ownProps) => {
+  const { goalId } = ownProps.match.params
+  console.log(goalId)
+  return {
+    goal: state.goals.find(g => g.id === +goalId)
+  }
+}
+
 const mapDispatch = ({ })
 
 export default connect(mapState, mapDispatch)(GoalPanel)

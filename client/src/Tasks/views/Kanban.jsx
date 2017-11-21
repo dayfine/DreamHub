@@ -33,7 +33,7 @@ const mapState = (state, ownProps) => {
   const { goalId } = ownProps.match.params
   return {
     goalId: goalId,
-    tasks: Object.entries(GoalTaskMapper(state.tasks, +goalId)) // filter here
+    tasks: Object.entries(GoalTaskMapper(state.tasks, +goalId))
   }
 }
 

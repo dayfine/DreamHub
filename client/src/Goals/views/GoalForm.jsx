@@ -80,9 +80,10 @@ class Form extends Component {
                 <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
                 {/* TODO: fetch the Kanban board for this goal id */}
                 <Link to={ `/kanban/${goal.id}`}>See progress on Kanban board</Link>
+                <br />
+                <Link to={ `/goals/${goal.id}`}>See Details</Link>
               </div>
-              )
-              }
+              )}
             </li>
           )})}
         </ul>

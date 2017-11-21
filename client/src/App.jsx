@@ -44,7 +44,7 @@ class App extends Component {
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
 
-      {view: GoalPanel, path: '/goal', name: 'Goal Panel'},
+      {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
       {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true},
