@@ -20,15 +20,4 @@ const Goal = conn.define('goal', {
   }
 });
 
-Goal.prototype.createTask = function(id, taskBody) {
-  return Task.create(Object.assign({}, taskBody))
-    .then(task => {
-      Goal.findGoal(id)
-        .then(goal => {
-          goal.addTask(task);
-          return goal.save();
-        })
-    })
-};
-
 module.exports = Goal;

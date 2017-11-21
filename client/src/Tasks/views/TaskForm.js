@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeTask, editTask } from '../actions';
 
+import Dialog from 'material-ui/Dialog'
+import Slide from 'material-ui/transitions/Slide'
+import Icon from 'material-ui/Icon'
+import IconButton from 'material-ui/IconButton'
+
+
 import { TASK_STATUS, TASK_PRIORITY } from '../../constants'
 
 class Form extends Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
-      showForm: false,
-      currentTask: {}
+      currentTask: props.task
     }
   }
 
@@ -22,87 +27,77 @@ class Form extends Component {
   }
 
   handleSave = ev => {
-    ev.preventDefault();
-    this.props.editTask(this.state.currentTask, this.props.goalId);
-    this.setState({ showForm: false });
+    const { editTask, onClose } = this.props
+    editTask(this.state.currentTask);
+    onClose()
   }
 
   render() {
     const { value, showForm, currentTask } = this.state;
     const { handleEdit, handleSave } = this;
-    const { task, removeTask } = this.props;
+    const { removeTask, open, onClose } = this.props;
 
     return (
-      <div key={ task.id } className="task-item">
-        {showForm && currentTask.id === task.id ? (
-          <form onSubmit={ handleSave }>
-            <input
-              type="text"
-              onChange={ handleEdit }
-              name="title"
-              value={ currentTask.title }
-              autoFocus
-              className="task-input-sm" />
-            <button className="btn btn-sm btn-success">Save</button>
-            <button
-              onClick={() => this.setState({ showForm: false }) }
-              className="btn btn-sm btn-secondary">Cancel</button>
-            <textarea
-              onChange={ handleEdit }
-              name="description"
-              value={ currentTask.description || '' }
-              className="task-input-sm task-textinput" />
+      <Dialog
+        open={open}
+        onRequestClose={onClose}
+      >
+        <div key={ currentTask.id } className="task-item">
+          <input
+            type="text"
+            onChange={ handleEdit }
+            name="title"
+            value={ currentTask.title }
+            autoFocus
+            className="task-input-sm" />
+
+          <IconButton
+            onClick={ handleSave }
+            aria-label='Save'>
+            <Icon>done</Icon>
+          </IconButton>
+
+          <IconButton
+            onClick={ onClose }
+            aria-label='Save'>
+            <Icon>block</Icon>
+          </IconButton>
+
+          <textarea
+            onChange={ handleEdit }
+            name="description"
+            value={ currentTask.description || '' }
+            className="task-input-sm task-textinput" />
+
+          <div>Due date:
             {/* TO DO: Need to be able to clear date */}
-            <p>Due date:
-              <input
-                type="date"
-                onChange={ handleEdit }
-                name="dueDate"
-                value={ currentTask.dueDate || '' } />
-            </p>
-            <div>
-              <label>Status</label>
-              <select name="status" value={ currentTask.status } onChange={ handleEdit }>
-              {Object.values(TASK_STATUS).map(status => {
-                return (<option value={status} key={status}>{status}</option>)
-              })}
-              </select>
-            </div>
-            <div>
-              <label>Priority</label>
-              <select name="priority" value={ currentTask.priority } onChange={ handleEdit }>
-              {Object.values(TASK_PRIORITY).map(status => {
-                return (<option value={status} key={status}>{status}</option>)
-              })}
-              </select>
-            </div>
-          </form>
-          ) : (
-          <div>
-            <div>
-              <span
-                onClick={() => this.setState({ showForm: true, currentTask: task })}
-                className="task-title">
-                { task.title }
-                <button className="btn btn-sm btn-warning">Edit
-                </button>
-              </span>
-              <button
-                onClick={removeTask.bind(this, task.goalId, task.id)}
-                className="btn btn-sm btn-danger">
-                Delete Task
-              </button>
-              </div>
-            <div
-              onClick={() => this.setState({ showForm: true, currentTask: task })}>
-              { task.description }
-            </div>
-            <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
-            <div className="badge badge-dark">Priority: { task.priority }</div>
+            <input
+              type="date"
+              onChange={ handleEdit }
+              name="dueDate"
+              value={ currentTask.dueDate || '' } />
           </div>
-          )
-        }
-      </div>
+
+          <div>
+            <label>Status</label>
+            <select name="status" value={ currentTask.status } onChange={ handleEdit }>
+            {Object.values(TASK_STATUS).map(status => {
+              return (<option value={status} key={status}>{status}</option>)
+            })}
+            </select>
+          </div>
+
+          <div>
+            <label>Priority</label>
+            <select name="priority" value={ currentTask.priority } onChange={ handleEdit }>
+            {Object.values(TASK_PRIORITY).map(status => {
+              return (<option value={status} key={status}>{status}</option>)
+            })}
+            </select>
+          </div>
+
+        </div>
+      </Dialog>
     )
   }
 }
