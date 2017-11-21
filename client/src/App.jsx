@@ -6,7 +6,7 @@ import Grid from 'material-ui/Grid'
 
 import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
-import { Kanban } from './Tasks'
+import { views as Kanban } from './Tasks'
 
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
@@ -17,7 +17,6 @@ import Sidebar from './common/Sidebar'
 
 import store from './Store'
 import { fetchCategories } from './Category/actions'
-
 
 const styles = {}
 
@@ -43,13 +42,14 @@ class App extends Component {
     const { isAuthenticated } = this.props
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
-      {view: Goals, path: '/goals', name: 'Goals'},
+
       {view: GoalPanel, path: '/goal', name: 'Goal Panel'},
-      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
+      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true},
+      // {view: Goals, path: '/goals', name: 'Goals'},
       // {view: Signup, path: '/signup', name: 'Sign Up'},
-      {view: UserPanel, path: '/me', name: 'User'}
+      // {view: UserPanel, path: '/me', name: 'User'}
     ]
 
     if (!isAuthenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')

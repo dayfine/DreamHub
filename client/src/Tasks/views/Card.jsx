@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
-import { views as TaskForm } from '../../Tasks'
+import TaskForm from './TaskForm'
 
 import { DragSource } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
@@ -26,26 +25,22 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging()
 })
 
+// Drag Container for Single TaskForm Component
 const AgileCard = props => {
-  const { classes, task, connectDragSource, isDragging } = props
+  const { classes, task, connectDragSource } = props
   return connectDragSource(
     <div>
-      <TaskForm task={task} />
-      {/*<Card className={classes.agileCard}>
-        <CardHeader title={goal.title} />
+      <Card className={classes.agileCard}>
+        <CardHeader title={task.title} />
         <CardContent>
-          {JSON.stringify(goal.tasks)}
+          <TaskForm task={task} />
         </CardContent>
-      </Card>*/}
+      </Card>
     </div>
   )
 }
 
-const mapState = state => ({
-  timer: state.timer
-})
-
-const StyledComponent = withStyles(styles)(AgileCard)
-const DragComponent = DragSource(DragItemTypes.CARD, cardSource, collect)(StyledComponent)
-
-export default connect(mapState)(DragComponent)
+export default  withStyles(styles)(
+                DragSource(DragItemTypes.CARD, cardSource, collect)(
+                  AgileCard
+                ))
