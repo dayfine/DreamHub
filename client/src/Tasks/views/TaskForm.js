@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeTask, editTask } from '../actions';
 
+import { TASK_PRIORITY } from '../../constants'
+
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -55,17 +57,33 @@ class Form extends Component {
                 <select name="priority" value={ currentTask.priority } onChange={ handleEdit }>
                   <option value="Urgent">Urgent</option>
                   <option value="High">High</option>
-                  <option value="Medium">Medium</option>
+                  <option value="Medium">Low</option>
                   <option value="Low">Low</option>
                 </select>
               </div>
             </form>
             ) : (
             <div>
-              <p><span onClick={() =>  this.setState({ showForm: true, currentTask: task })} className="task-title">{ task.title } <button className="btn btn-sm btn-warning">Edit</button></span> <button onClick={() => handleDelete(`${ task.id }`)} className="btn btn-sm btn-danger">Delete Task</button></p>
-              <p onClick={() =>  this.setState({ showForm: true, currentTask: task })}>{ task.description }</p>
-              <p>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</p>
-              <p className="badge badge-dark">Priority: { task.priority }</p>
+              <div>
+                <span
+                  onClick={() =>  this.setState({ showForm: true, currentTask: task })}
+                  className="task-title">
+                  { task.title }
+                  <button className="btn btn-sm btn-warning">Edit
+                  </button>
+                </span>
+                <button
+                  onClick={handleDelete.bind(this, task.id)}
+                    className="btn btn-sm btn-danger">
+                    Delete Task
+                    </button>
+                </div>
+              <div
+                onClick={() =>  this.setState({ showForm: true, currentTask: task })}>
+                { task.description }
+              </div>
+              <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
+              <div className="badge badge-dark">Priority: { task.priority }</div>
             </div>
             )
           }

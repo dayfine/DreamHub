@@ -27,7 +27,8 @@ class Form extends Component {
   }
 
   handleDelete(id) {
-    this.props.removeGoal(id * 1);
+    console.log(id)
+    this.props.removeGoal(id);
   }
 
   // handles editing goal
@@ -89,7 +90,7 @@ class Form extends Component {
                         <button className="btn btn-sm btn-warning">Edit</button>
                       </span>
                       <button
-                        onClick={handleDelete.bind(goal.id)}
+                        onClick={handleDelete.bind(this, goal.id)}
                         className="btn btn-sm btn-danger">Delete Goal</button>
                       </p>
                       <p onClick={() =>  this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
