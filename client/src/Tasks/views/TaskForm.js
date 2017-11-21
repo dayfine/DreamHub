@@ -42,7 +42,7 @@ class Form extends Component {
         open={open}
         onRequestClose={onClose}
       >
-        <div key={ currentTask.id } className="task-item">
+        <div className="task-item">
           <input
             type="text"
             onChange={ handleEdit }
@@ -95,7 +95,6 @@ class Form extends Component {
             })}
             </select>
           </div>
-
         </div>
       </Dialog>
     )

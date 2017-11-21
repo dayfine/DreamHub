@@ -4,38 +4,40 @@ import { connect } from 'react-redux'
 import { createTask } from '../Tasks/actions'
 import { createGoal } from '../Goals/actions'
 
-class QuickAddForm extends Component {
-  handleSubmit = ev => {
-    console.log('wat?', this.props)
+const QuickAddForm = props => {
+  const { type, createTask, createGoal, goalId, userId } = props
+
+  const handleSubmit = ev => {
     ev.preventDefault();
-    const { type, createTask, goalId } = this.props
     const title = ev.target.title.value
 
-    if (type === 'task' ) {
-      console.log('are we dispatching?', title)
+    if ( type === 'task' ) {
       createTask({ goalId, title })
+    } else if ( type === 'goal' ) {
+      createGoal(userId, title)
     }
   }
 
-  render () {
-    const { type, createTask, goalId } = this.props
-    return (
-      <form onSubmit={ this.handleSubmit }>
-        <input
-          type="text"
-          name='title'
-          placeholder={ `Add new ${ type }...` }
-          className="goal-input" />
-        <button
-          type="submit"
-          className="btn btn-sm btn-primary">
-          +
-        </button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name='title'
+        placeholder={ `Add new ${ type }...` }
+        className="goal-input" />
+      <button
+        type="submit"
+        className="btn btn-sm btn-primary">
+        +
+      </button>
+    </form>
+  )
 }
 
-const mapDispatch = { createTask };
+const mapState = state => ({
+  userId: state.currentUser.id
+})
+
+const mapDispatch = { createTask, createGoal };
 
 export default connect(null, mapDispatch)(QuickAddForm);

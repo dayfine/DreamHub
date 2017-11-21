@@ -39,7 +39,8 @@ class App extends Component {
   }
 
   render () {
-    const { isAuthenticated } = this.props
+    // const { isAuthenticated } = this.props
+    let isAuthenticated = true
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
 
