@@ -13,8 +13,7 @@ User.hasMany(Goal)
 Task.belongsTo(Goal)
 Goal.hasMany(Task)
 
-User.belongsToMany(User, { as: 'Friend', through: 'UserFriend' })
-// User.hasMany(User, { as: 'friends', foreignKey: 'friendId' })
+User.belongsToMany(User, { as: 'friends', through: 'UserFriend' })
 
 const sync = () => conn.sync({ force: true })
 const seed = () => require('../seed')(User, Goal, Task, Category)

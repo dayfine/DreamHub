@@ -1,4 +1,4 @@
-import { ADD_FRIEND, UPDATE_FRIEND, DELETE_FRIEND, FETCH_FRIENDS } from './actionTypes.js'
+import { ADD_FRIEND, UPDATE_FRIEND, DELETE_FRIEND, SET_FRIENDS } from './actionTypes.js'
 
 const initialState = [
 
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
     case DELETE_FRIEND:
       return state.filter(elem => elem.id !== action.friendId)
 
-    case FETCH_FRIENDS:
+    case SET_FRIENDS:
       return action.friends
 
     default:

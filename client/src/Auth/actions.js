@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import { setGoals } from '../Goals/actions'
 import { setTasks } from '../Tasks/actions'
+import { setFriends } from '../Friends/actions'
 import { MapGoalToTasks } from '../Tasks/util/mappers'
 
 export const setCurrUser = user => ({ type: SET_USER, user })
@@ -29,6 +30,7 @@ export const loadUserData = token => dispatch => {
       dispatch(setCurrUser(user))
       dispatch(setGoals(user.goals))
       dispatch(setTasks(MapGoalToTasks(user.goals)))
+      dispatch(setFriends(user.friends))
     })
     .catch(() => console.log('not logged in'))
 }

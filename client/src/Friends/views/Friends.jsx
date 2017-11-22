@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend} from '../actions';
+import { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend } from '../actions';
+
+import Divider from 'material-ui/Divider';
 
 class Friend extends Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super (props);
     this.state = {
       newFriend: {},
       search: ''
@@ -44,19 +46,32 @@ class Friend extends Component {
         </div>
 
         <ul>
-                <li className="friend-item">
-                name
-                </li>
-
+        {friends.map(friend => {
+          return (
+            <li key={friend.id}>
+              <h2>{friend.name}</h2>
+              <h3>{friend.email}</h3>
+              {friend.goals.map(goal => {
+                return (
+                  <div key={goal.id}>
+                    <h4>{goal.title}</h4>
+                    <h5>>>> {goal.description}</h5>
+                  </div>
+                )
+              })}
+              <Divider light />
+            </li>
+          )
+        })}
         </ul>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ newFriends }) => {
-  return { newFriends };
-};
+const mapStateToProps = state => ({
+  friends: state.friends
+})
 const mapDispatch = { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend };
 
 export default connect(mapStateToProps, mapDispatch)(Friend);
