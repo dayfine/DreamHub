@@ -32,6 +32,11 @@ const NavBar = props => {
         <Typography type='display1' color='inherit' className={classes.flex}>
           Welcome to Capstone
         </Typography>
+        <a href='//material-ui-next.com/demos/app-bar/'>
+          <Typography type='display1' color='accent' className={classes.flex}>
+            Mateterial UI Docs
+          </Typography>
+        </a>
         {props.children}
       </Toolbar>
     </AppBar>
