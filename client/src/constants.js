@@ -1,7 +1,15 @@
 export const TASK_STATUS = {
-  Created: 'Created',
+  CREATED: 'Created',
+  LATER: 'Later',
   IN_PROGRESS: 'In Progress',
   COMPLETED: 'Completed'
+}
+
+export const TASK_PRIORITY = {
+  URGENT: 'Urgent',
+  HIGH: 'High',
+  MEDIUM: 'Medium',
+  LOW: 'Low'
 }
 
 export const GOAL_STATUS = {

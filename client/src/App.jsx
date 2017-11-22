@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
 
-import { views as GoalForm } from './Goals'
-// import { views as TaskForm } from './Tasks'
-import { views as Kanban } from './Kanban'
+import GoalPanel from './Goals/views/GoalPanel'
+import { views as Goals } from './Goals'
+import { views as Kanban } from './Tasks'
 
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
@@ -14,20 +15,45 @@ import { views as UserPanel } from './User'
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
 
+import store from './Store'
+import { fetchCategories } from './Category/actions'
+
 const styles = {}
 
+const Home = props => {
+  return (
+    <Grid container>
+      <Grid item xs={8} >
+        <Goals />
+      </Grid>
+      <Grid item xs={4} >
+        <UserPanel />
+      </Grid>
+    </Grid>
+  )
+}
+
 class App extends Component {
+  componentDidMount () {
+    store.dispatch(fetchCategories())
+  }
 
   render () {
-    const viewPaths = [
-      {view: GoalForm, path: '/goals', name: 'Goals'},
-      {view: Kanban, path: '/kanban', name: 'Kanban'},
-      // {view: TaskForm, path: '/tasks', name: 'Tasks'}
+    // const { isAuthenticated } = this.props
+    let isAuthenticated = true
+    let viewPaths = [
+      {view: Home, path: '/home', name: 'Home'},
+
+      {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
-      {view: Signup, path: '/signup', name: 'Sign Up'},
-      {view: UserPanel, path: '/me', name: 'User'}
+      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true},
+      // {view: Goals, path: '/goals', name: 'Goals'},
+      // {view: Signup, path: '/signup', name: 'Sign Up'},
+      // {view: UserPanel, path: '/me', name: 'User'}
     ]
+
+    if (!isAuthenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
 
     return (
       <div style={{height: '100vh'}}>
@@ -38,7 +64,7 @@ class App extends Component {
           </Grid>
           <Grid item xs={10}>
             <Switch>
-              <Route path='/' exact component={Kanban} />
+              <Route path='/' exact component={Home} />
               {viewPaths.map((_, idx) => {
                 return (
                   <Route key={idx} path={_.path} component={_.view} />
@@ -52,4 +78,8 @@ class App extends Component {
   }
 }
 
-export default App
+const mapState = state => ({
+  isAuthenticated: !!state.currentUser.id
+})
+
+export default withRouter(connect(mapState)(App))

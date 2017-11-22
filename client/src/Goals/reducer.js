@@ -1,4 +1,4 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, FETCH_GOALS } from './actionTypes';
+import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, SET_GOALS } from './actionTypes';
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -15,7 +15,7 @@ export default (state = [], action) => {
     case DELETE_GOAL:
       return state.filter(elem => elem.id !== action.id)
 
-    case FETCH_GOALS:
+    case SET_GOALS:
       return action.goals
 
     default:

@@ -32,16 +32,18 @@ const generateError = message => {
 // Only fetch from server
 User.getUserDataById = function (id) {
   return this.findById(id, {
-      attributes: { exclude: ['password'] },
-      include: [
-        { model: Goal,
-          include: [{ model: Task }]
-         },
-        { model: User, as: 'Friend',
-          include: [{ model: Goal }]
-         }
-       ]
-    })
+    attributes: { exclude: ['password'] },
+    include: [
+      { model: Goal,
+        include: [{ model: Task }]
+      },
+      { model: User,
+        as: 'friends',
+        attributes: { exclude: ['password'] },
+        include: [{ model: Goal }]
+      }
+    ]
+  })
 }
 
 User.login = function (credentials) {

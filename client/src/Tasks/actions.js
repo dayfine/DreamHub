@@ -1,19 +1,20 @@
-import { ADD_TASK, UPDATE_TASK, DELETE_TASK, FETCH_TASKS } from './actionTypes'
+import { ADD_TASK, UPDATE_TASK, DELETE_TASK, SET_TASKS } from './actionTypes'
 import axios from 'axios'
 
 const addTask = task => ({ type: ADD_TASK, task })
 const updateTask = task => ({ type: UPDATE_TASK, task })
 const deleteTask = id => ({ type: DELETE_TASK, id })
-const fetchTasks = tasks => ({ type: FETCH_TASKS, tasks })
+export const setTasks = tasks => ({ type: SET_TASKS, tasks })
 
-export const getTasks = (goalId) => dispatch => {
-  axios.get(`/api/goals/${goalId}/tasks`)
+export const getGoalTasks = (goalId) => dispatch => {
+  const id = goalId || 1;
+  axios.get(`/api/goals/${id}/tasks`)
     .then(res => res.data)
-    .then(tasks => dispatch(fetchTasks(tasks)))
+    .then(tasks => dispatch(setTasks(tasks)))
 }
 
-export const createTask = (goalId, title) => dispatch => {
-  axios.post(`/api/goals/${goalId}/tasks`, { goalId, title })
+export const createTask = newTask => dispatch => {
+  axios.post(`/api/goals/${newTask.goalId}/tasks`, newTask)
     .then(res => res.data)
     .then(task => dispatch(addTask(task)))
 }

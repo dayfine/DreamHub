@@ -2,22 +2,14 @@ const conn = require('./conn');
 const Sequelize = conn.Sequelize;
 
 const Category = conn.define('category', {
-  title: {
+  name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
+    set (val) {
+      this.setDataValue('name', `${val[0].toUpperCase()}${val.slice(1)}`);
+    }
   }
 });
-
-/**
- *
-    Traveling
-    Learning
-
-    Exercises
-    Social & Families
-    Meditation
-    Cooking
-    Reading & Writing
-*/
 
 module.exports = Category

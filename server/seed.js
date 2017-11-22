@@ -2,20 +2,31 @@ module.exports = (User, Goal, Task, Category) => {
   let users
   // let goals, tasks
   return Promise.all([
-    User.create({ name: 'Anthony', password: 'anthony' }, { include: [{ model: User, as: 'Friend' }] }),
-    User.create({ name: 'Burcu', password: 'burcu' }, { include: [{ model: User, as: 'Friend' }] }),
-    User.create({ name: 'Di', password: 'di' }, { include: [{ model: User, as: 'Friend' }] }),
-    User.create({ name: 'Jerry', password: 'jerry' }, { include: [{ model: User, as: 'Friend' }] }),
-    User.create({ name: 'test', email: 'test@test.test', password: 'test' }, { include: [{ model: User, as: 'Friend' }] }),
-    User.create({ name: 'nofriend', password: 'nofriend' }, { include: [{ model: User, as: 'Friend' }] })
+    User.create({ name: 'Anthony', password: 'anthony', email: 'anthony@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'Burcu', password: 'burcu', email: 'burcu@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'Di', password: 'di', email: 'di@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'Jerry', password: 'jerry', email: 'jerry@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'test', email: 'test@test.test', password: 'test' }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'nofriend', password: 'nofriend', email: 'nofriend@cap.com'  }, { include: [{ model: User, as: 'friends' }] })
   ])
   .then(_users => {
     console.log(_users[0].setFriend)
     users = _users
     return Promise.all([
-      users[0].setFriend([users[2], users[3]]),
-      users[1].setFriend(users[2]),
-      users[4].setFriend([users[0], users[1], users[2], users[3]])
+      users[0].setFriends([users[2], users[3]]),
+      users[1].setFriends(users[2]),
+      users[4].setFriends([users[0], users[1], users[2], users[3]])
+    ])
+  })
+  .then(() => {
+    return Promise.all([
+      Category.create({ name: 'Traveling' }),
+      Category.create({ name: 'Learning' }),
+      Category.create({ name: 'Exercises' }),
+      Category.create({ name: 'Social & Families' }),
+      Category.create({ name: 'Meditation' }),
+      Category.create({ name: 'Cooking' }),
+      Category.create({ name: 'Reading & Writing' })
     ])
   })
   .then(() => {
@@ -44,4 +55,5 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' })
     ])
   })
+
 }
