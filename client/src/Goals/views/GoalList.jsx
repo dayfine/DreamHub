@@ -1,6 +1,11 @@
 import React, { Component }  from 'react'
 import { connect } from 'react-redux'
 
+import Icon from 'material-ui/Icon'
+import IconButton from 'material-ui/IconButton'
+import Card, { CardContent, CardActions } from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+
 import AddCard from '../../common/AddCard'
 import GoalForm from './GoalForm'
 
@@ -32,11 +37,26 @@ class GoalList extends Component {
         />
         <AddCard type='goal' />
         <ul>
-          {goals.map(goal => {
-            return (
-              <span key={goal.id}>{goal.title}</span>
-            )
-          })}
+        {goals.map(goal => {
+          return (
+            <Card>
+              <CardActions>
+                <IconButton
+                  onClick={this.openModal.bind(this, goal.id)}
+                  aria-label='Edit'>
+                  <Icon>mode_edit</Icon>
+                </IconButton>
+              </CardActions>
+
+              <CardContent>
+                <Typography type='display1'>
+                  {goal.title}
+                </Typography>
+                {goal.description}
+              </CardContent>
+            </Card>
+          )
+        })}
         </ul>
       </div>
     )
