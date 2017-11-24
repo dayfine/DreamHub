@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, Link } from 'react-router-dom'
 
 import Dialog from 'material-ui/Dialog'
 import Icon from 'material-ui/Icon'
@@ -10,95 +9,91 @@ import { removeGoal, editGoal } from '../actions'
 
 class GoalForm extends Component {
   constructor (props) {
-    super(props)
+    super()
     this.state = {
-      showForm: false,
-      currentGoal: props.goal
+      goal: null
     }
   }
 
-  handleDelete = id => {
-    this.props.removeGoal(id)
+  componentWillReceiveProps (nextProps) {
+    this.setState({ goal: nextProps.goal })
   }
 
   handleEdit = ev => {
+    const update = {}
     const { name, value } = ev.target
-    const currentGoal = Object.assign({}, this.state.currentGoal, { [ name ]: value })
-    this.setState({ currentGoal })
+    update[name] = name === 'categoryId' ? (+value) : value
+
+    this.setState({
+      goal: { ...this.state.goal, ...update }
+    })
   }
 
   handleSave = ev => {
-    ev.preventDefault()
-    this.props.editGoal(this.state.currentGoal, this.props.userId)
-    this.setState({ showForm: false })
+    const { editGoal, userId, onClose } = this.props
+    editGoal(this.state.goal, userId)
+    onClose()
   }
 
   render () {
-    const { goal, removeGoal, editGoal, open, onClose } = this.props
-    const { currentGoal } = this.state
+    const { categories, removeGoal, editGoal, open, onClose } = this.props
+    const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
-    console.log(goal, currentGoal)
+    console.log(categories)
 
     return (
       <Dialog
-        open={open}
-        onRequestClose={onClose}
+        open={ open }
+        onRequestClose={ onClose }
       >
-      <div className='goal-item'>
-       {
-        // <form onSubmit={handleSave} className='goal-edit'>
-        //   <input
-        //     type='text'
-        //     onChange={handleEdit}
-        //     name='title'
-        //     value={currentGoal.title}
-        //     autoFocus
-        //     className='goal-input-sm' />
-        //   <button className='btn btn-sm btn-success'>Save</button>
-        //   <button
-        //     onClick={() => this.setState({ showForm: false })}
-        //     className='btn btn-sm btn-secondary'>Cancel</button>
-        //   <textarea
-        //     onChange={handleEdit}
-        //     name='description'
-        //     value={currentGoal.description || ''}
-        //     className='goal-input-sm goal-textinput' />
-        // </form>
+      { goal &&
+        <div className='goal-item goal-edit'>
+          <input
+            type='text'
+            onChange={ handleEdit }
+            name='title'
+            value={goal.title}
+            autoFocus
+            className='goal-input-sm' />
 
-        // <div>
-        //   <p>
-        //     <span
-        //       onClick={() => this.setState({ showForm: true, currentGoal: goal })}
-        //       className='goal-title'>
-        //       { goal.title }
-        //       <button className='btn btn-sm btn-warning'>Edit</button>
-        //     </span>
-        //     <button
-        //       onClick={handleDelete.bind(this, goal.id)}
-        //       className='btn btn-sm btn-danger'>Delete Goal</button>
-        //   </p>
-        //   <p onClick={() => this.setState({ showForm: true, currentGoal: goal })}>{ goal.description }</p>
-        //   {/* TODO: fetch the Kanban board for this goal id */}
-        //   <Link to={`/kanban/${goal.id}`}>See progress on Kanban board</Link>
-        //   <br />
-        //   <Link to={`/goals/${goal.id}`}>See Details</Link>
-        // </div>
+          <button
+            onClick={ handleSave }
+            className='btn btn-sm btn-success'>
+            Save
+          </button>
+
+          <button
+            onClick={ onClose }
+            className='btn btn-sm btn-secondary'>
+            Cancel
+          </button>
+
+          <div>
+            <label>Category</label>
+            <select name="categoryId" value={ goal.categoryId } onChange={ handleEdit }>
+              <option value={undefined}>Choose a category...</option>
+              {categories.map(category => {
+                return (
+                  <option value={category.id} key={category.id}>
+                    {category.name}
+                  </option>)
+              })}
+            </select>
+          </div>
+
+          <textarea
+            onChange={ handleEdit }
+            name='description'
+            value={goal.description || ''}
+            className='goal-input-sm goal-textinput' />
+        </div>
       }
-      </div>
     </Dialog>
     )
   }
 }
 
-const mapState = (state, ownProps) => {
-  const { goalId } = ownProps
-  console.log(goalId)
-  return {
-    goal: state.goals.find(g => g.id === +goalId),
-    goalTasks: state.tasks.filter(t => t.goalId === +goalId)
-  }
-}
-
+const mapState = state => ({ categories: state.categories })
 const mapDispatch = { removeGoal, editGoal }
 
-export default connect(null, mapDispatch)(GoalForm)
+export default connect(mapState, mapDispatch)(GoalForm)

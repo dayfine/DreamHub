@@ -65,7 +65,6 @@ const GoalPanel = props => {
 
 const mapState = (state, ownProps) => {
   const { goalId } = ownProps.match.params
-  console.log(goalId)
   return {
     goal: state.goals.find(g => g.id === +goalId),
     goalTasks: state.tasks.filter(t => t.goalId === +goalId)

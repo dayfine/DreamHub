@@ -1,5 +1,6 @@
 import React, { Component }  from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
@@ -8,6 +9,8 @@ import Typography from 'material-ui/Typography'
 
 import AddCard from '../../common/AddCard'
 import GoalForm from './GoalForm'
+
+import { mapCategoryToGoal } from '../util/mappers'
 
 class GoalList extends Component {
   constructor () {
@@ -26,13 +29,15 @@ class GoalList extends Component {
   }
 
   render () {
-    const { goals } = this.props
+    const { goals, categories } = this.props
     const { modalId } = this.state
+
+    const goal = goals.find(g => g.id === modalId)
     return (
       <div id='container'>
         <GoalForm
           open={!!modalId}
-          goalId={modalId}
+          goal={goal}
           onClose={this.closeModal}
         />
         <AddCard type='goal' />
@@ -52,7 +57,13 @@ class GoalList extends Component {
                 <Typography type='display1'>
                   {goal.title}
                 </Typography>
+                {goal.category}
+                <br />
                 {goal.description}
+                <br />
+                <Link to={ `/kanban/${goal.id}`}>See progress on Kanban board</Link>
+                <br />
+                <Link to={ `/goals/${goal.id}`}>See Details</Link>
               </CardContent>
             </Card>
           )
@@ -64,7 +75,7 @@ class GoalList extends Component {
 }
 
 const mapState = state => ({
-  goals: state.goals
+  goals: mapCategoryToGoal(state.categories, state.goals)
 })
 
 export default connect(mapState)(GoalList)

@@ -32,7 +32,7 @@ class Form extends Component {
   }
 
   render() {
-    const { value, showForm, currentTask } = this.state;
+    const { currentTask } = this.state;
     const { handleEdit, handleSave } = this;
     const { removeTask, open, onClose } = this.props;
 
