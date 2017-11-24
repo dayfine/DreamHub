@@ -7,6 +7,8 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
+// Use a list of tasks here
+
 class AlertDialog extends React.Component {
   state = {
     open: false,

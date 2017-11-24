@@ -39,7 +39,6 @@ class GoalForm extends Component {
     const { categories, removeGoal, editGoal, open, onClose } = this.props
     const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
-    console.log(categories)
 
     return (
       <Dialog

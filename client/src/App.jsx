@@ -18,8 +18,10 @@ import Sidebar from './common/Sidebar'
 
 import store from './Store'
 import { fetchCategories } from './Category/actions'
+import { loadUserData } from './Auth/actions'
 
 const styles = {}
+const storage = window.localStorage
 
 const Home = props => {
   return (
@@ -37,6 +39,10 @@ const Home = props => {
 class App extends Component {
   componentDidMount () {
     store.dispatch(fetchCategories())
+
+    if (storage.authToken) {
+      store.dispatch(loadUserData(storage.authToken))
+    }
   }
 
   render () {
@@ -48,7 +54,7 @@ class App extends Component {
       {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
-      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true},
+      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true}
       // {view: Goals, path: '/goals', name: 'Goals'},
       // {view: Signup, path: '/signup', name: 'Sign Up'},
       // {view: UserPanel, path: '/me', name: 'User'}

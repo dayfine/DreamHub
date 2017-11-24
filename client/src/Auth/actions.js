@@ -6,6 +6,8 @@ import { setTasks } from '../Tasks/actions'
 import { setFriends } from '../Friends/actions'
 import { MapGoalToTasks } from '../Tasks/util/mappers'
 
+const storage = window.localStorage
+
 export const setCurrUser = user => ({ type: SET_USER, user })
 export const removeCurrUser = () => ({ type: REMOVE_USER })
 
@@ -13,6 +15,7 @@ export const auth = (credentials, history, formName) => dispatch => {
   return axios.post(`/api/auth/${formName}`, credentials)
     .then(result => result.data)
     .then(token => {
+      storage['authToken'] = token
       dispatch(loadUserData(token))
       history.push('/home')
     })

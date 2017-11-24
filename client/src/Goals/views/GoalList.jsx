@@ -44,7 +44,7 @@ class GoalList extends Component {
         <ul>
         {goals.map(goal => {
           return (
-            <Card>
+            <Card key={goal.id}>
               <CardActions>
                 <IconButton
                   onClick={this.openModal.bind(this, goal.id)}
