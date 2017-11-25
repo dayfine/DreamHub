@@ -8,7 +8,7 @@ import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
 import { views as Kanban } from './Tasks'
 import { views as Welcome } from './Welcome'
-
+import { views as TravelForm } from './Travel'
 import { views as Friends } from './Friends'
 import { views as Auth, Login, Signup } from './Auth'
 import { views as UserPanel } from './User'
@@ -29,6 +29,7 @@ const Home = props => {
     <Grid container>
       <Grid item xs={8} >
         <Goals />
+        <TravelForm />
       </Grid>
       <Grid item xs={4} >
         <Checkup />
