@@ -1,15 +1,16 @@
-import { SET_USER, REMOVE_USER } from './actionTypes.js'
+import { SET_AUTH, REMOVE_AUTH } from './actionTypes.js'
 import axios from 'axios'
 
 import { setGoals } from '../Goals/actions'
 import { setTasks } from '../Tasks/actions'
+import { setUser, removeUser } from '../User/actions'
 import { setFriends } from '../Friends/actions'
 import { MapGoalToTasks } from '../Tasks/util/mappers'
 
 const storage = window.localStorage
 
-export const setCurrUser = user => ({ type: SET_USER, user })
-export const removeCurrUser = () => ({ type: REMOVE_USER })
+export const setAuth = val => ({ type: SET_AUTH, authenticated: val })
+export const removeAuth = () => ({ type: REMOVE_AUTH })
 
 export const auth = (credentials, history, formName) => dispatch => {
   return axios.post(`/api/auth/${formName}`, credentials)
@@ -19,7 +20,7 @@ export const auth = (credentials, history, formName) => dispatch => {
       dispatch(loadUserData(token))
       history.push('/home')
     })
-    .catch(err => dispatch(setCurrUser({err})))
+    .catch(err => dispatch(setAuth({err})))
 }
 
 export const loadUserData = token => dispatch => {
@@ -30,7 +31,8 @@ export const loadUserData = token => dispatch => {
   return axios.get('/api/auth/me')
     .then(result => result.data)
     .then(user => {
-      dispatch(setCurrUser(user))
+      dispatch(setAuth(true))
+      dispatch(setUser(user))
       dispatch(setGoals(user.goals))
       dispatch(setTasks(MapGoalToTasks(user.goals)))
       dispatch(setFriends(user.friends))
@@ -42,7 +44,8 @@ export const logout = history => dispatch => {
   delete axios.defaults.headers.common['Authorization']
   return axios.delete('/api/auth')
     .then(() => {
-      dispatch(removeCurrUser())
+      dispatch(removeAuth())
+      dispatch(removeUser())
       history.push('/')
     })
     .catch(() => console.log('problem during logout'))

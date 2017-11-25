@@ -86,7 +86,7 @@ class App extends Component {
 }
 
 const mapState = state => ({
-  isAuthenticated: !!state.currentUser.id
+  isAuthenticated: state.authenticated
 })
 
 export default withRouter(connect(mapState)(App))
