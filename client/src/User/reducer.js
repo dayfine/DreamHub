@@ -6,7 +6,7 @@ export default (state = {}, action) => {
       return action.user
 
     case UPDATE_USER:
-      return Object.assign({}, state, action.changes)
+      return { ...state, ...action.changes }
 
     case REMOVE_USER:
       return {}

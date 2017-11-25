@@ -5,6 +5,7 @@ import { auth } from '../actions'
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
+
   return (
     <div className='col-md-4 col-md-offset-4'>
       <div className='panel panel-default'>
@@ -28,7 +29,7 @@ const AuthForm = props => {
                 </a>
               </div>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
+            {error && error.response && <div> {error.response.message} </div>}
           </form>
 
         </div>
@@ -41,7 +42,7 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.authenticated.error
+    error: state.authenticated.err
   }
 }
 
@@ -49,7 +50,7 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.authenticated.error
+    error: state.authenticated.err
   }
 }
 

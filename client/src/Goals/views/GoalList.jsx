@@ -33,6 +33,7 @@ class GoalList extends Component {
     const { modalId } = this.state
 
     const goal = goals.find(g => g.id === modalId)
+
     return (
       <div id='container'>
         <GoalForm

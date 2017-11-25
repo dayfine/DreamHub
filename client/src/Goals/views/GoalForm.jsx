@@ -70,7 +70,7 @@ class GoalForm extends Component {
           <div>
             <label>Category</label>
             <select name="categoryId" value={ goal.categoryId } onChange={ handleEdit }>
-              <option value={undefined}>Choose a category...</option>
+              <option value={''}>Choose a category...</option>
               {categories.map(category => {
                 return (
                   <option value={category.id} key={category.id}>

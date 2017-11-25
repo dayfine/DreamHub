@@ -46,8 +46,8 @@ class App extends Component {
   }
 
   render () {
-    // const { isAuthenticated } = this.props
-    let isAuthenticated = true
+    // const { authenticated } = this.props
+    let authenticated = true
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
       {view: Welcome, path: '/welcome', name: 'Welcome'},
@@ -60,7 +60,7 @@ class App extends Component {
       // {view: UserPanel, path: '/me', name: 'User'}
     ]
 
-    if (!isAuthenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
+    if (!authenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
 
     return (
       <div style={{height: '100vh'}}>
@@ -86,7 +86,7 @@ class App extends Component {
 }
 
 const mapState = state => ({
-  isAuthenticated: state.authenticated
+  authenticated: state.authenticated
 })
 
 export default withRouter(connect(mapState)(App))
