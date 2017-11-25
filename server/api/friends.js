@@ -62,4 +62,11 @@ router.get('/email/:email', (req, res, next) => {
 	.catch(next)
 });
 
+router.delete('/:id', (req, res, next) => {
+  Goal.findById(req.params.id)
+    .then(friend => User.deleteFriends(friend))
+    .then(() => res.sendStatus(202))
+    .catch(next);
+});
+
 module.exports = router;
