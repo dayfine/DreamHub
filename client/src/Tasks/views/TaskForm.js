@@ -58,7 +58,7 @@ class Form extends Component {
 
           <IconButton
             onClick={ onClose }
-            aria-label='Save'>
+            aria-label='Cancel'>
             <Icon>block</Icon>
           </IconButton>
 
