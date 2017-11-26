@@ -9,6 +9,7 @@ import { reducer as AuthReducer } from './Auth'
 import { reducer as UserReducer } from './User'
 import { reducer as FriendsReducer } from './Friends'
 import { reducer as CategoryReducer } from './Category'
+import { reducer as TravelReducer } from './Travel'
 
 const rootReducer = combineReducers({
   goals: GoalsReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   authenticated: AuthReducer,
   currentUser: UserReducer,
   friends: FriendsReducer,
-  categories: CategoryReducer
+  categories: CategoryReducer,
+  location: TravelReducer
 })
 
 const
