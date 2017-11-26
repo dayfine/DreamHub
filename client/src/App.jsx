@@ -15,6 +15,7 @@ import { views as UserPanel } from './User'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
+import Checkup from './common/Checkup'
 
 import store from './Store'
 import { fetchCategories } from './Category/actions'
@@ -30,6 +31,7 @@ const Home = props => {
         <Goals />
       </Grid>
       <Grid item xs={4} >
+        <Checkup />
         <UserPanel />
       </Grid>
     </Grid>
