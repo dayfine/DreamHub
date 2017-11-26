@@ -63,8 +63,9 @@ router.get('/email/:email', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  Goal.findById(req.params.id)
-    .then(friend => User.deleteFriends(friend))
+	console.log('im in the delete route')
+  return User.findById(req.params.id)
+    .then(friend => User.removeFriend(friend.id))
     .then(() => res.sendStatus(202))
     .catch(next);
 });
