@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { removeTask, editTask } from '../actions';
 
 import Dialog from 'material-ui/Dialog'
-import Slide from 'material-ui/transitions/Slide'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 
@@ -33,7 +32,7 @@ class Form extends Component {
   }
 
   render() {
-    const { value, showForm, currentTask } = this.state;
+    const { currentTask } = this.state;
     const { handleEdit, handleSave } = this;
     const { removeTask, open, onClose } = this.props;
 
@@ -59,7 +58,7 @@ class Form extends Component {
 
           <IconButton
             onClick={ onClose }
-            aria-label='Save'>
+            aria-label='Cancel'>
             <Icon>block</Icon>
           </IconButton>
 

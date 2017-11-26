@@ -5,7 +5,7 @@ const Task = require('./Task')
 const Category = require('./Category')
 
 Goal.belongsTo(Category)
-Category.hasMany(Task)
+Category.hasMany(Goal)
 
 Goal.belongsTo(User)
 User.hasMany(Goal)

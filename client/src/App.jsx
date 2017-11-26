@@ -15,11 +15,14 @@ import { views as UserPanel } from './User'
 
 import NavBar from './common/NavBar'
 import Sidebar from './common/Sidebar'
+import Checkup from './common/Checkup'
 
 import store from './Store'
 import { fetchCategories } from './Category/actions'
+import { loadUserData } from './Auth/actions'
 
 const styles = {}
+const storage = window.localStorage
 
 const Home = props => {
   return (
@@ -28,6 +31,7 @@ const Home = props => {
         <Goals />
       </Grid>
       <Grid item xs={4} >
+        <Checkup />
         <UserPanel />
       </Grid>
     </Grid>
@@ -37,24 +41,28 @@ const Home = props => {
 class App extends Component {
   componentDidMount () {
     store.dispatch(fetchCategories())
+
+    if (storage.authToken) {
+      store.dispatch(loadUserData(storage.authToken))
+    }
   }
 
   render () {
-    // const { isAuthenticated } = this.props
-    let isAuthenticated = true
+    // const { authenticated } = this.props
+    let authenticated = true
     let viewPaths = [
       {view: Home, path: '/home', name: 'Home'},
       {view: Welcome, path: '/welcome', name: 'Welcome'},
       {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
       {view: Friends, path: '/friends', name: 'Friends'},
       {view: Login, path: '/login', name: 'Login'},
-      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true},
+      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true}
       // {view: Goals, path: '/goals', name: 'Goals'},
       // {view: Signup, path: '/signup', name: 'Sign Up'},
       // {view: UserPanel, path: '/me', name: 'User'}
     ]
 
-    if (!isAuthenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
+    if (!authenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
 
     return (
       <div style={{height: '100vh'}}>
@@ -80,7 +88,7 @@ class App extends Component {
 }
 
 const mapState = state => ({
-  isAuthenticated: !!state.currentUser.id
+  authenticated: state.authenticated
 })
 
 export default withRouter(connect(mapState)(App))

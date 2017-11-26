@@ -3,14 +3,13 @@ module.exports = (User, Goal, Task, Category) => {
   // let goals, tasks
   return Promise.all([
     User.create({ name: 'Anthony', password: 'anthony', email: 'anthony@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
-    User.create({ name: 'Burcu', password: 'burcu', email: 'burcu@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
-    User.create({ name: 'Di', password: 'di', email: 'di@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
-    User.create({ name: 'Jerry', password: 'jerry', email: 'jerry@cap.com'  }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'Burcu', password: 'burcu', email: 'burcu@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'dayfine', password: 'di', email: 'di@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
+    User.create({ name: 'Jerry', password: 'jerry', email: 'jerry@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
     User.create({ name: 'test', email: 'test@test.test', password: 'test' }, { include: [{ model: User, as: 'friends' }] }),
-    User.create({ name: 'nofriend', password: 'nofriend', email: 'nofriend@cap.com'  }, { include: [{ model: User, as: 'friends' }] })
+    User.create({ name: 'nofriend', password: 'nofriend', email: 'nofriend@cap.com' }, { include: [{ model: User, as: 'friends' }] })
   ])
   .then(_users => {
-    console.log(_users[0].setFriend)
     users = _users
     return Promise.all([
       users[0].setFriends([users[2], users[3]]),
@@ -55,5 +54,4 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' })
     ])
   })
-
 }

@@ -8,7 +8,6 @@ const
 router
   .use(jwtAuth.initialize())
 
-
   .get('/me', jwtAuth.authenticate(), (req, res, next) => {
     res.send(req.user)
   })
@@ -40,11 +39,6 @@ router
   //   }
   // })
 
-  .delete('/', (req, res, next) => {
-    req.session.destroy()
-    res.sendStatus(204)
-  })
-
   // .post('/login', (req, res, next) => {
   //   console.log(req.body)
   //   User.login(req.body)
@@ -64,8 +58,6 @@ router
     })
     .catch(next)
   })
-
-
 
   .use('/google', require('./oauth-google'))
 

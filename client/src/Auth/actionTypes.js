@@ -1,2 +1,1 @@
-export const SET_USER = 'CURRENT_USER/SET'
-export const REMOVE_USER = 'CURRENT_USER/SET'
+export const SET_AUTH = 'AUTH/SET'

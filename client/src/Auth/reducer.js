@@ -1,12 +1,10 @@
-import { SET_USER, REMOVE_USER } from './actionTypes.js'
+import { SET_AUTH } from './actionTypes.js'
 
-export default (currentUser = {}, action) => {
+export default (authenticated = false, action) => {
   switch (action.type) {
-    case SET_USER:
-      return action.user
-    case REMOVE_USER:
-      return {}
+    case SET_AUTH:
+      return action.authenticated
     default:
-      return currentUser
+      return authenticated
   }
 }
