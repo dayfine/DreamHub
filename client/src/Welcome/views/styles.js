@@ -34,9 +34,11 @@ const styles = {
     },
 
   buttonStyle: {
-      outline: 'none',
-      width: `50%`,
-    },
+    outline: 'none',
+    width: `50%`,
+    position: 'relative',
+    top: `20vh`
+  },
 
   textareaStyle: {
       marginLeft: 'auto',
