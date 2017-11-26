@@ -5,7 +5,6 @@ const
   morgan = require('morgan'),
   cors = require('cors'),
   path = require('path'),
-  ejs = require('ejs');
   db = require('./db'),
   port = process.env.PORT || 3001
 
@@ -20,13 +19,6 @@ app.use(cors())
 app.use('/public', express.static(path.join(__dirname, '../client/public')))
 
 app.use('/api', require('./api'))
-
-// set up ejs view engine
-app.set('view engine', 'html');
-app.engine('html', ejs.renderFile);
-app.set('views', path.join(__dirname, '..', 'public'));
-
-app.get('/', (req, res, next) => res.render('index', { MAPS_API_KEY: process.env.MAPS_API_KEY }));
 
 app.use((req, res, next) => {
   const error = new Error('page not found')
