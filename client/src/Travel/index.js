@@ -1,3 +1,6 @@
-import views from './views/TravelForm'
+import * as actions from './actions';
+import reducer from './reducer';
+import views from './views/TravelForm';
 
-export { views }
+export { actions, reducer, views }
+export * from './actions';
