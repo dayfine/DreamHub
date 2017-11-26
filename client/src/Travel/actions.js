@@ -1,7 +1,5 @@
-import { SET_LOCATION, GET_FLIGHT } from './actionTypes';
+import { GET_FLIGHT } from './actionTypes';
 import axios from 'axios';
-
-export const setLocation = (location) => ({ type: SET_LOCATION, location });
 
 export const getFlight = (flight) => ({ type: GET_FLIGHT, flight });
 

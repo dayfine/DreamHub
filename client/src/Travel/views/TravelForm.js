@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-// import { setLocation, fetchFlight } from '../actions';
+// import { fetchFlight } from '../actions';
 
 class TravelForm extends Component {
   constructor() {
@@ -64,7 +64,7 @@ class TravelForm extends Component {
   }
 }
 
-// const mapDispatch = { setLocation, fetchFlight };
+// const mapDispatch = { fetchFlight };
 
 // export default connect(null, mapDispatch)(TravelForm);
 
