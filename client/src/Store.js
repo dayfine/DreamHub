@@ -8,13 +8,15 @@ import { reducer as TasksReducer } from './Tasks'
 import { reducer as AuthReducer } from './Auth'
 import { reducer as FriendsReducer } from './Friends'
 import { reducer as CategoryReducer } from './Category'
+import { reducer as WelcomeGoalsReducer } from './Welcome'
 
 const rootReducer = combineReducers({
   goals: GoalsReducer,
   tasks: TasksReducer,
   currentUser: AuthReducer,
   friends: FriendsReducer,
-  categories: CategoryReducer
+  categories: CategoryReducer,
+  welcomeGoals: WelcomeGoalsReducer
 })
 
 const initialState = {}

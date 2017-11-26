@@ -1,9 +1,10 @@
 const styles = {
   questionStyle: {
       width: `45vw`,
-      height: `60vh`,
+      height: `50vh`,
       marginRight: 'auto',
       marginLeft: 'auto',
+      marginTop: `1em`,
       borderRadius: `10px`,
       boxShadow: `3px 4px 10px grey`,
     },
@@ -15,14 +16,15 @@ const styles = {
       textAlign: 'center',
       marginRight: 'auto',
       marginLeft: 'auto',
-      padding: `.3vw`
+      padding: `.3vw`,
+      paddingTop: `1vw`
     },
 
   bodyStyle: {
       padding: '1vw',
       textAlign: 'center',
       marginRight: 'auto',
-      marginLeft: 'auto'
+      marginLeft: 'auto',
     },
 
   inputStyle: {

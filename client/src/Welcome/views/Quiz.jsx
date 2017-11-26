@@ -8,6 +8,9 @@ import Input from 'material-ui/Input';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import styles from './styles';
+import { createGoal } from '../actions'
+import { connect } from 'react-redux'
+
 
 class Quiz extends React.Component{
   constructor(){
@@ -15,6 +18,7 @@ class Quiz extends React.Component{
     this.state ={
       sliderNum: 1,
       goal: [],
+      currentUser: 'Current User'
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,30 +31,50 @@ class Quiz extends React.Component{
   
   handleSubmit(event){
     event.preventDefault();
+    createGoal(event.target.myInput.value)
     event.target.myInput.value='';
   }
   
   render(){
-    const { sliderNum, goal } = this.state;
+    const { sliderNum, goal, currentUser } = this.state;
     const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
     const { handleSubmit, handleChange } = this;
+    
+    const tempQuestions = ['Welcome Message', 'Do you have a new goal?', 'Is your deadline realistic?' ];
+    //Welcome {currentUser}, do you have a new goal?
     return (
-        <Grid container style={questionStyle}>
-          <form onSubmit={handleSubmit}>
-            <h3 style={titleStyle}>If your name was a color, what color would it be?</h3>
-            <Divider />
-            <p style={bodyStyle}></p>
-            <Input style={inputStyle} onChange={handleChange} name="myInput" placeholder="Write a goal you have. Be specific."/>
-            <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
-            <p style={bodyStyle}>{sliderNum}</p>
-            <p style={bodyStyle}>Your loser goal: {goal}</p>
-            <Button size='small' color='accent' style={buttonStyle}>Skip</Button>
-            <Button size='small' color='primary' style={buttonStyle}>Next</Button>
-          </form>
+        <Grid container >
+          
+           {
+              tempQuestions.map(question => {
+               return ( 
+                 <form style={questionStyle} onSubmit={handleSubmit}>
+                    <h3 style={titleStyle}>{question}</h3>
+                    <Divider />
+                    <p style={bodyStyle}></p>
+                    <Input style={inputStyle} onChange={handleChange} name="myInput" placeholder="Be as specific as possible." autoFocus/>
+                    <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
+                    <p style={bodyStyle}>{sliderNum}</p>
+                    <footer>
+                      <Button size='small' color='accent' style={buttonStyle}>Skip</Button>
+                      <Button size='small' color='primary' style={buttonStyle}>Next</Button>
+                    </footer>
+                </form>
+               )
+              })
+            }
+            
+            
 
         </Grid>
     )
   }
 } 
 
-export default Quiz;
+const mapState = state => ({
+  userId: state.currentUser.id
+})
+
+const mapDispatch = { createGoal };
+
+export default connect(mapState, mapDispatch)(Quiz);

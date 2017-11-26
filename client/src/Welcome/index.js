@@ -1,6 +1,6 @@
-//import * as actions from './actions'
-//import reducer from './reducer'
-import views from './views/Welcome'
-//
-export { views }
-//export * from './actions';
+import * as actions from './actions';
+import reducer from './reducer';
+import views from './views/Welcome';
+
+export { actions, reducer, views };
+export * from './actions';
