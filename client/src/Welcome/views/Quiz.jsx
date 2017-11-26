@@ -18,7 +18,8 @@ class Quiz extends React.Component{
     this.state ={
       sliderNum: 1,
       goal: [],
-      currentUser: 'Current User'
+      currentUser: 'Current User',
+      counter: 0,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -47,20 +48,21 @@ class Quiz extends React.Component{
           
            {
               tempQuestions.map(question => {
-               return ( 
-                 <form style={questionStyle} onSubmit={handleSubmit}>
-                    <h3 style={titleStyle}>{question}</h3>
-                    <Divider />
-                    <p style={bodyStyle}></p>
-                    <Input style={inputStyle} onChange={handleChange} name="myInput" placeholder="Be as specific as possible." autoFocus/>
-                    <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
-                    <p style={bodyStyle}>{sliderNum}</p>
-                    <footer>
+                 return ( 
+                   <form style={questionStyle} onSubmit={handleSubmit}>
+                      <h3 style={titleStyle}>{question}</h3>
+                      <Divider />
+                      <p style={bodyStyle}></p>
+                      <Input style={inputStyle} onChange={handleChange} name="myInput" placeholder="Be as specific as possible." autoFocus/>
+                      <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
+                      <p style={bodyStyle}>{sliderNum}</p>
                       <Button size='small' color='accent' style={buttonStyle}>Skip</Button>
-                      <Button size='small' color='primary' style={buttonStyle}>Next</Button>
-                    </footer>
-                </form>
-               )
+                      <Button size='small' color='primary' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter+1})}>Next {this.state.counter}</Button>
+                  </form>
+                )
+              }).filter((question, i) => {
+                console.log('I IS THE FILTER', question, i)
+                return this.state.counter === i
               })
             }
             
