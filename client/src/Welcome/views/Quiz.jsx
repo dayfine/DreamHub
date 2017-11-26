@@ -24,6 +24,11 @@ class Quiz extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(event){
+    this.setState({sliderNum: event.target.value })
   }
 
   handleSubmit(event){
@@ -44,7 +49,7 @@ class Quiz extends React.Component {
               goalWizard.map(question => {
                  return (
                    <form style={questionStyle} onSubmit={handleSubmit} key={question.id}>
-                     {formDisplay(question)}
+                     {formDisplay(question, this.state, handleChange)}
                      <Button size='small' color='accent' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter-1})}>Skip</Button>
                      <Button size='small' color='primary' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter+1})}>Next ( {this.state.counter} )</Button>
                    </form>

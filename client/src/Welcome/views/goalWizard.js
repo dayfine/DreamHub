@@ -16,7 +16,9 @@ const goalWizard = [
     inputName: 'myInput',
     placeholderMessage: 'Be as specific as possible.',
     hasBoolean: false,
-    booleanName: null
+    booleanName: null,
+    hasSlider: false,
+    sliderName: null
   },
   {
     id: 1,
@@ -26,7 +28,9 @@ const goalWizard = [
     inputName: null,
     placeholderMessage: null,
     hasBoolean: true,
-    booleanName: 'measurement'
+    booleanName: 'measurement',
+    hasSlider: false,
+    sliderName: null
   },
   {
     id: 2,
@@ -36,12 +40,14 @@ const goalWizard = [
     inputName: null,
     placeholderMessage: null,
     hasBoolean: true,
-    booleanName: 'bigGoal'
+    booleanName: 'bigGoal',
+    hasSlider: true,
+    sliderName: 'howImportant'
   }
                 
 ]
 
-export const formDisplay = object =>{
+export const formDisplay = (object, state, onChange) =>{
   return ( 
     <div>
       <h3 style={titleStyle}>{object.title}</h3>
@@ -49,19 +55,21 @@ export const formDisplay = object =>{
       <p style={bodyStyle}><em>{object.description}</em></p>
       {object.hasInput ? <Input style={inputStyle} name={object.inputName} placeholder={object.placeholderMessage} autoFocus/> : null}
       {object.hasBoolean ? 
-        <div>
+        <div style={bodyStyle}>
           <input type='radio' name={object.booleanName} value='Yes'/> Yes
           <input type='radio' name={object.booleanName} value='No'/> No
         </div>
-        : null}
+        : null
+      }
+      {object.hasSlider ? 
+        <div>
+          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={sliderStyle} /> 
+          <p style={bodyStyle}>{state.sliderNum}</p>
+        </div>
+          : null}
     </div>
   )
   
 }
 
-
-//    <Divider />
-//   {return {question.hasInput} ?  : <h1>Nothing</h1>}
-//    <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
-//    <p style={bodyStyle}>{sliderNum}</p>
 export default goalWizard;
