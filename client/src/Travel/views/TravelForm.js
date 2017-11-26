@@ -35,6 +35,7 @@ class TravelForm extends Component {
       <form onSubmit={ onSubmit }>
         <h2>Quick Search for Travel</h2>
         <p>Enter city or airport name below.</p>
+        {/* TO DO: find by city or airport name, not just airport code */}
 
         <input value={ from }
           type="text"
