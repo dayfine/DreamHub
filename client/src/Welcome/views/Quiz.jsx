@@ -10,7 +10,7 @@ import Input from 'material-ui/Input';
 import styles from './styles';
 import { createGoal } from '../actions';
 import { connect } from 'react-redux';
-import goalWizard from './goalWizard';
+import goalWizard, { formDisplay } from './goalWizard';
 
 
 class Quiz extends React.Component {
@@ -22,12 +22,8 @@ class Quiz extends React.Component {
       currentUser: 'Current User',
       counter: 0,
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
 
-  handleChange (event) {
-    // to be removed
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event){
@@ -37,7 +33,7 @@ class Quiz extends React.Component {
   }
 
   render(){
-    const { sliderNum, goal, currentUser } = this.state;
+    const { sliderNum, goal, currentUser, counter } = this.state;
     const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
     const { handleSubmit, handleChange } = this;
     return (
@@ -48,15 +44,10 @@ class Quiz extends React.Component {
               goalWizard.map(question => {
                  return (
                    <form style={questionStyle} onSubmit={handleSubmit} key={question.id}>
-                      <h3 style={titleStyle}>{question.title}</h3>
-                      <Divider />
-                      <p style={bodyStyle}></p>
-                      <Input style={inputStyle} onChange={handleChange} name="myInput" placeholder="Be as specific as possible." autoFocus/>
-                      <input label="How important is this?" onChange={(event)=> this.setState({sliderNum: event.target.value })} type="range" min="1" max="10" value={sliderNum} style={sliderStyle} />
-                      <p style={bodyStyle}>{sliderNum}</p>
-                      <Button size='small' color='accent' style={buttonStyle}>Skip</Button>
-                      <Button size='small' color='primary' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter+1})}>Next ( {this.state.counter} )</Button>
-                  </form>
+                     {formDisplay(question)}
+                     <Button size='small' color='accent' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter-1})}>Skip</Button>
+                     <Button size='small' color='primary' style={buttonStyle} onClick={()=> this.setState({counter: this.state.counter+1})}>Next ( {this.state.counter} )</Button>
+                   </form>
                 )
               }).filter((question, i) => this.state.counter === i)
             }
