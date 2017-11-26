@@ -23,6 +23,7 @@ export const findFriend = (email) => dispatch => {
 }
 
 export const removeFriend = (id) => dispatch => {
+  // console.log('im in the axios delete route' + id)
   axios.delete(`/api/friends/${id}`)
     .then(res => res.data)
     .then(() => dispatch(deleteFriend(id)))
