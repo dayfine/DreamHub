@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+
+import { withStyles } from 'material-ui/styles';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
+import List, { ListItem, ListItemText } from 'material-ui/List'
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -10,19 +15,49 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
+import { TASK_STATUS } from '../constants'
+
+const styles = {
+  card: {
+    display: 'flex',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  }
+}
 
 // Use a list of tasks here
 
-
+const TaskStatusMapper = {
+  [TASK_STATUS.CREATED]: [
+    { text: 'Started working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'Finished it, yeh!', status: TASK_STATUS.COMPLETED },
+    { text: 'Maybe later', status: TASK_STATUS.LATER },
+  ],
+  [TASK_STATUS.LATER]: [
+    { text: 'I am working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'I got it done', status: TASK_STATUS.COMPLETED },
+  ],
+  [TASK_STATUS.IN_PROGRESS]: [
+    { text: 'Still working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'Done, yeeeeh!', status: TASK_STATUS.COMPLETED },
+    { text: 'Taking a break from it', status: TASK_STATUS.LATER },
+  ]
+}
 
 // New tasks
-
 // I am working on it
 // I finished it, yehhh
 // maybe later
+
 // Later
-// I am working on it
+//
 // I got it done
+
 // In progress
 // still working
 // taking a break
@@ -43,8 +78,8 @@ class Checkup extends Component {
 
   render() {
     const { onOpen, onClose } = this
-    const { tasks } = this.props
-    console.log(tasks)
+    const { tasks, classes } = this.props
+    console.log(TaskStatusMapper)
 
     return (
       <div>
@@ -58,6 +93,33 @@ class Checkup extends Component {
             <DialogContentText>
               You have not worked on any of your goal since
             </DialogContentText>
+            {tasks.map(task => {
+              return (
+                <Card key={task.id} className={classes.card}>
+                  <div className={classes.details}>
+                    <CardContent className={classes.content}>
+                      <Typography type="headline">{task.title}</Typography>
+                      <Typography type="subheading" color="secondary">
+                        {task.description}
+                      </Typography>
+                    </CardContent>
+                  </div>
+                  <List>
+                  {TaskStatusMapper[task.status].map(_ => {
+                    return (
+                      <ListItem
+                        key={_.status}
+                        dense
+                        button
+                      >
+                        <ListItemText primary={_.text} />
+                      </ListItem>
+                    )
+                  })}
+                  </List>
+                </Card>
+              )
+            })}
           </DialogContent>
           <DialogActions>
             <IconButton
@@ -76,7 +138,10 @@ class Checkup extends Component {
 }
 
 const mapState = state => ({
-  tasks: state.tasks
+  tasks: state.tasks.filter(t => t.status !== TASK_STATUS.COMPLETED)
 })
 
-export default connect(mapState)(Checkup);
+export default  connect(mapState)(
+                withStyles(styles)(
+                  Checkup
+                ));
