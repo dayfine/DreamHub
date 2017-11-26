@@ -1,8 +1,7 @@
-/* global google */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { setLocation, fetchFlight } from '../actions';
+import { Link, withRouter } from 'react-router-dom';
+// import { setLocation, fetchFlight } from '../actions';
 
 class TravelForm extends Component {
   constructor() {
@@ -25,23 +24,23 @@ class TravelForm extends Component {
     ev.preventDefault();
     const { from, to } = this.state;
     console.log(this.state);
-    this.props.fetchFlight(from, to);
+    // this.props.fetchFlight(from, to);
   }
 
   render() {
     const { onChange, onSubmit } = this;
     const { from, to } = this.state;
 
-    // Note: Can place this module on Kanban board with category or goal Travel.
-
     return (
       <form onSubmit={ onSubmit }>
         <h2>Quick Search for Travel</h2>
+        <p>Enter city or airport name below.</p>
 
         <input value={ from }
           type="text"
           name="from"
           onChange={ onChange }
+          placeholder="From"
           autoFocus
           className="goal-input-sm"
         />
@@ -50,15 +49,23 @@ class TravelForm extends Component {
           type="text"
           name="to"
           onChange={ onChange }
+          placeholder="To"
           className="goal-input-sm"
         />
 
-        <button className="btn btn-sm btn-light"><Link to={ `https://www.google.com/flights/#search;f=${from};t=${to};mc=m` } target="_blank">Go!</Link></button>
+        <button className="btn btn-sm btn-light">
+          <Link
+            to={ `https://www.google.com/flights/#search;f=${from};t=${to};mc=m` }
+            target="_blank">Go!
+          </Link>
+        </button>
       </form>
     )
   }
 }
 
-const mapDispatch = { setLocation, fetchFlight };
+// const mapDispatch = { setLocation, fetchFlight };
 
-export default connect(null, mapDispatch)(TravelForm);
+// export default connect(null, mapDispatch)(TravelForm);
+
+export default TravelForm;
