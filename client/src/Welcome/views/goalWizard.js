@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './styles';
 import Divider from 'material-ui/Divider';
 import Input from 'material-ui/Input';
+import Button from 'material-ui/Button';
 
-
-const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
+const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle, formStyle } = styles;
 
 //Make human a variable for the current user
 const goalWizard = [
@@ -43,13 +43,25 @@ const goalWizard = [
     booleanName: 'bigGoal',
     hasSlider: true,
     sliderName: 'howImportant'
+  },
+  {
+    id: 3,
+    title: 'What\'s a realistic deadline for this goal?',
+    description: 'Don’t be afraid to set big goals, but always set realistic time frames for achieving them. There are no unrealistic goals, only unrealistic deadlines. Be patient.',
+    hasInput: true,
+    inputName: 'deadline',
+    placeholderMessage: 'Set a realistic deadline',
+    hasBoolean: false,
+    booleanName: null,
+    hasSlider: false,
+    sliderName: null
   }
                 
 ]
 
-export const formDisplay = (object, state, onChange) =>{
+export const formDisplay = (object, state, onChange, handleSubmit, nextClick, skipClick) =>{
   return ( 
-    <div>
+    <form style={formStyle} onSubmit={handleSubmit} key={object.id}>
       <h3 style={titleStyle}>{object.title}</h3>
       <Divider />
       <p style={bodyStyle}><em>{object.description}</em></p>
@@ -67,7 +79,10 @@ export const formDisplay = (object, state, onChange) =>{
           <p style={bodyStyle}>{state.sliderNum}</p>
         </div>
           : null}
-    </div>
+       
+       <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
+       <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter} )</Button>
+    </form>
   )
   
 }
