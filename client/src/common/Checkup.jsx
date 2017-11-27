@@ -30,8 +30,7 @@ const styles = {
   }
 }
 
-// Use a list of tasks here
-
+// Options for updating task status
 const TaskStatusMapper = {
   [TASK_STATUS.CREATED]: [
     { text: 'Started working on it', status: TASK_STATUS.IN_PROGRESS },
@@ -48,20 +47,6 @@ const TaskStatusMapper = {
     { text: 'Taking a break from it', status: TASK_STATUS.LATER },
   ]
 }
-
-// New tasks
-// I am working on it
-// I finished it, yehhh
-// maybe later
-
-// Later
-//
-// I got it done
-
-// In progress
-// still working
-// taking a break
-// done, yeeaaah
 
 class Checkup extends Component {
   state = {

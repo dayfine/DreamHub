@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 
 import Grid from 'material-ui/Grid'
 
+import AutoCompleteGoal from './Goals/views/AutoCompleteGoal'
 import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
 import { views as Kanban } from './Tasks'
@@ -56,6 +57,7 @@ class App extends Component {
     // const { authenticated } = this.props
     let authenticated = true
     let viewPaths = [
+      {view: AutoCompleteGoal, path: '/test', name: 'Test'},
       {view: Home, path: '/home', name: 'Home'},
       {view: Welcome, path: '/welcome', name: 'Welcome'},
       {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
