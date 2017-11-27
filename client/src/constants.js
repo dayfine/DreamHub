@@ -12,7 +12,7 @@ export const TASK_PRIORITY = {
   LOW: 'Low'
 }
 
-export const GOAL_STATUS = {
+export const GOAL_PROGRESS = {
   CURRENT: 'Current',
   ACCOMPLISHED: 'Accomplished',
   STALLED: 'Stalled',

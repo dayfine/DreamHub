@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import Autosuggest from 'react-autosuggest'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
@@ -7,12 +9,7 @@ import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 import { withStyles } from 'material-ui/styles'
 
-// Pull in completed goals from all users
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-];
+import { GOAL_PROGRESS } from '../../constants'
 
 const renderInput = inputProps => {
   const { classes, autoFocus, value, ref, ...other } = inputProps;
@@ -30,12 +27,12 @@ const renderInput = inputProps => {
         ...other,
       }}
     />
-  );
+  )
 }
 
-const renderSuggestion = (suggestion, { query, isHighlighted }) => {
-  const matches = match(suggestion.label, query);
-  const parts = parse(suggestion.label, matches);
+const renderMatch = (goal, { query, isHighlighted }) => {
+  const matches = match(goal.title, query);
+  const parts = parse(goal.title, matches);
 
   return (
     <MenuItem selected={isHighlighted} component="div">
@@ -56,7 +53,7 @@ const renderSuggestion = (suggestion, { query, isHighlighted }) => {
   );
 }
 
-const renderSuggestionsContainer = options => {
+const renderMatchList = options => {
   const { containerProps, children } = options;
 
   return (
@@ -66,25 +63,23 @@ const renderSuggestionsContainer = options => {
   );
 }
 
-const getSuggestionValue = suggestion => suggestion.label
+const getGoalTitle = goal => goal.title
 
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+const getGoals = (value, goals) => {
+  const inputVal = value.trim()
+  if (inputVal.length === 0) return []
+
+  const inputRegex = new RegExp(inputVal, 'i')
   let count = 0;
 
-  return inputLength === 0
-    ? []
-    : suggestions.filter(suggestion => {
-        const keep =
-          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
+  return goals.filter(goal => {
+    console.log(goal.title, count)
+    const keep = count < 5 && inputRegex.test(goal.title)
 
-        if (keep) {
-          count += 1;
-        }
+    if (keep) count += 1
 
-        return keep;
-      });
+    return keep;
+  })
 }
 
 const styles = {
@@ -111,32 +106,28 @@ const styles = {
   },
 }
 
-class IntegrationAutosuggest extends Component {
+class GoalAutosuggest extends Component {
   state = {
     value: '',
     suggestions: [],
   };
 
-  handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value),
-    });
+  getMatches = ({ value }) => {
+    console.log(this.props, value)
+    const { goals } = this.props
+    this.setState({ suggestions: getGoals(value, goals) })
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
+  clearMatches = () => {
+    this.setState({ suggestions: [] })
   };
 
   handleChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue,
-    });
+    this.setState({ value: newValue })
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
 
     return (
       <Autosuggest
@@ -146,13 +137,13 @@ class IntegrationAutosuggest extends Component {
           suggestionsList: classes.suggestionsList,
           suggestion: classes.suggestion,
         }}
-        renderInputComponent={renderInput}
         suggestions={this.state.suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
+        getSuggestionValue={getGoalTitle}
+        onSuggestionsFetchRequested={this.getMatches}
+        onSuggestionsClearRequested={this.clearMatches}
+        renderInputComponent={renderInput}
+        renderSuggestionsContainer={renderMatchList}
+        renderSuggestion={renderMatch}
         inputProps={{
           autoFocus: true,
           classes,
@@ -165,4 +156,11 @@ class IntegrationAutosuggest extends Component {
   }
 }
 
-export default withStyles(styles)(IntegrationAutosuggest);
+const mapState = state => ({
+  goals: state.goals.filter(g => g.progress === GOAL_PROGRESS.ACCOMPLISHED)
+})
+
+export default  connect(mapState)(
+                withStyles(styles)(
+                  GoalAutosuggest
+                ))
