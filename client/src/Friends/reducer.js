@@ -1,8 +1,6 @@
 import { ADD_FRIEND, UPDATE_FRIEND, DELETE_FRIEND, SET_FRIENDS } from './actionTypes.js'
 
-const initialState = [
-
-]
+const initialState = []
 
 export default (state = initialState, action) => {
   switch (action.type) {

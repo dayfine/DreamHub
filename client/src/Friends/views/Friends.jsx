@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend } from '../actions';
+import { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend, removeFriend } from '../actions';
 
 import Divider from 'material-ui/Divider';
 
@@ -13,6 +13,7 @@ class Friend extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   // handles search friend email
@@ -28,10 +29,14 @@ class Friend extends Component {
     console.log(ev.target.value)
     this.setState({ search: ev.target.value });
   }
+  handleDelete(id) {
+    console.log('hereeeeee'+id)
+    this.props.removeFriend(id);
+  }
   render() {
     const { newFriend, search } = this.state;
     const { friends } = this.props;
-    const { handleSubmit, handleChange } = this;
+    const { handleSubmit, handleChange, handleDelete} = this;
 
     return (
       <div className="container">
@@ -59,6 +64,9 @@ class Friend extends Component {
                   </div>
                 )
               })}
+              <button
+                  onClick={handleDelete.bind(this, friend.id)}
+                  className="btn btn-sm btn-danger">Delete Friend</button>
               <Divider light />
             </li>
           )
@@ -72,6 +80,6 @@ class Friend extends Component {
 const mapStateToProps = state => ({
   friends: state.friends
 })
-const mapDispatch = { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend };
+const mapDispatch = { addFriend, updateFriend, deleteFriend, fetchFriends, findFriend, removeFriend };
 
 export default connect(mapStateToProps, mapDispatch)(Friend);
