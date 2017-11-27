@@ -35,12 +35,15 @@ class Quiz extends React.Component{
   
   handleSubmit(event){
     event.preventDefault();
-    createGoal(event.target.myInput.value)
+    console.log('This is the event target from handleSubmit', event.target)
+    this.props.createGoal(event.target.myInput.value)
+    
     event.target.myInput.value='';
   }
   
-  handleNextClick(){
+  handleNextClick(event){
     this.setState({counter: this.state.counter+1});
+  
   }
   
   handleSkipClick(){
@@ -62,7 +65,7 @@ class Quiz extends React.Component{
            {
               goalWizard.map(question => {
                  return ( 
-                   <div style={questionStyle}>
+                   <div style={questionStyle} key={question.id}>
                      {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
                   </div>
                 )
@@ -76,10 +79,11 @@ class Quiz extends React.Component{
   }
 } 
 
-const mapState = state => ({
-  userId: state.currentUser.id
-})
+const mapState = state => {
+  console.log('This is the state', state)
+  return {}
+}
 
-const mapDispatch = { createGoal };
+const mapDispatch = { createGoal }
 
 export default connect(mapState, mapDispatch)(Quiz);

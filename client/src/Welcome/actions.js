@@ -12,7 +12,7 @@ const addGoal = goal=>{
 //THUNK CREATORS
 export const createGoal = goal => {
   return dispatch => {
-    axios.post('/api/goals', {goal})
+    axios.post('/api/goals', goal)
       .then(res => res.data)
       .then(dispatch(addGoal(goal)))
   }
