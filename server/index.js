@@ -6,7 +6,6 @@ const
   cors = require('cors'),
   path = require('path'),
   db = require('./db'),
-  airportsDb = require('./airports-db'),
   port = process.env.PORT || 3001
 
 if (process.env.NODE_ENV !== 'production') {
@@ -45,7 +44,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 db.sync()
   .then(() => db.seed())
-  // .then(() => airportsDb.sync()) // uncomment to sync airports db
   .then(() => {
     console.log('db synced')
     app.listen(port, () => console.log(`listening on port ${port}`))
