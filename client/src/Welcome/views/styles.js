@@ -1,7 +1,6 @@
 const styles = {
   questionStyle: {
       width: `45vw`,
-      height: `50vh`,
       marginRight: 'auto',
       marginLeft: 'auto',
       marginTop: `1em`,
@@ -37,7 +36,7 @@ const styles = {
     outline: 'none',
     width: `50%`,
     position: 'relative',
-    top: `20vh`
+    bottom: `.04vh`
   },
 
   textareaStyle: {
@@ -50,7 +49,12 @@ const styles = {
       marginRight: '4vw',
       marginTop: '8vh',
       width: `60%`
-    }
+    },
+  
+  formStyle: {
+    borderRadius: `4px`,
+    
+  }
 }
 
 export default styles;
