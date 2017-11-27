@@ -17,7 +17,7 @@ export const findFriend = (email) => dispatch => {
   .then(res => res.data)
   .then(friend =>
     // dispatch(addFriend(friend))
-    console.log('axios ' + friend)
+    console.log(friend)
     )
   // console.log('im in the axios')
 }

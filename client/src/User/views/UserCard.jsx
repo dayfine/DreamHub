@@ -5,6 +5,7 @@ import Setting from './UserSetting'
 
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
+// Create a separate modal to open setting, and pull in only for current user
 class UserPanel extends Component {
   constructor () {
     super()
