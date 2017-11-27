@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import Fuse from 'fuse';
+import airports from '../db/airports';
 // import { fetchFlight } from '../actions';
 
 class TravelForm extends Component {
@@ -17,6 +19,7 @@ class TravelForm extends Component {
 
   onChange(ev) {
     const { name, value } = ev.target;
+    console.log(findAirport(value));
     this.setState({ [name]: value });
   }
 
@@ -64,6 +67,25 @@ class TravelForm extends Component {
     )
   }
 }
+
+const findAirport = (input) => {
+  var options = {
+    shouldSort: true,
+    threshold: 0.1,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "name",
+      "city",
+      "country",
+      "iata"
+    ]
+  };
+  var fuse = new Fuse(airports, options); // "list" is the item array
+  return fuse.search(input);
+};
 
 // const mapDispatch = { fetchFlight };
 
