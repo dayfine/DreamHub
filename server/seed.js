@@ -35,7 +35,8 @@ module.exports = (User, Goal, Task, Category) => {
       Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 3 }),
       Goal.create({ title: 'Own a house', description: 'American Dream', userId: 4 }),
       Goal.create({ title: 'Testie', description: 'American Drum', userId: 5 }),
-      Goal.create({ title: 'Tastie', description: 'American Drim', userId: 5 })
+      Goal.create({ title: 'Tastie', description: 'American Drim', userId: 5 }),
+      Goal.create({ title: 'I am completed', description: '100% done', userId: 5, categoryId: 2, progress: 'Accomplished' })
     ])
   })
   .then(_goals => {

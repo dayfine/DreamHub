@@ -1,6 +1,5 @@
-const conn = require('./conn');
-const Sequelize = conn.Sequelize;
-const { Task } = require('./Task');
+const conn = require('./conn')
+const Sequelize = conn.Sequelize
 
 const Goal = conn.define('goal', {
   title: {
@@ -18,6 +17,6 @@ const Goal = conn.define('goal', {
   budget: {
     type: Sequelize.INTEGER
   }
-});
+})
 
-module.exports = Goal;
+module.exports = Goal
