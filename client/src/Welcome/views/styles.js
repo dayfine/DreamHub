@@ -34,9 +34,10 @@ const styles = {
 
   buttonStyle: {
     outline: 'none',
-    width: `50%`,
+    width: `33.33%`,
     position: 'relative',
-    bottom: `.04vh`
+    bottom: `.04vh`,
+    marginTop: `3vh`
   },
 
   textareaStyle: {
@@ -47,7 +48,7 @@ const styles = {
   sliderStyle: {
       marginLeft: '10vw',
       marginRight: '4vw',
-      marginTop: '8vh',
+      marginTop: '2vh',
       width: `60%`
     },
   

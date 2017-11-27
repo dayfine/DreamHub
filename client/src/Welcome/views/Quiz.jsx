@@ -26,6 +26,7 @@ class Quiz extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
     this.handleSkipClick = this.handleSkipClick.bind(this);
   }
 
@@ -45,13 +46,17 @@ class Quiz extends React.Component {
   }
 
   handleSkipClick(){
+    this.setState({counter: this.state.counter+1});
+  }
+
+  handleBackClick(){
     this.setState({counter: this.state.counter-1});
   }
 
   render(){
     const { sliderNum, goal, currentUser, counter } = this.state;
     const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
-    const { handleSubmit, handleChange, handleNextClick, handleSkipClick } = this;
+    const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
 
     return (
         <Grid container >
@@ -61,7 +66,7 @@ class Quiz extends React.Component {
               goalWizard.map(question => {
                  return (
                    <div style={questionStyle}>
-                     {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleSkipClick)}
+                     {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
                   </div>
                 )
               }).filter((question, i) => this.state.counter === i)

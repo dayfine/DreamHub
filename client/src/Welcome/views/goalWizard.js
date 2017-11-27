@@ -39,8 +39,8 @@ const goalWizard = [
     hasInput: false,
     inputName: null,
     placeholderMessage: null,
-    hasBoolean: true,
-    booleanName: 'bigGoal',
+    hasBoolean: false,
+    booleanName: null,
     hasSlider: true,
     sliderName: 'howImportant'
   },
@@ -59,7 +59,7 @@ const goalWizard = [
                 
 ]
 
-export const formDisplay = (object, state, onChange, handleSubmit, nextClick, skipClick) =>{
+export const formDisplay = (object, state, onChange, handleSubmit, nextClick, backClick, skipClick) =>{
   return ( 
     <form style={formStyle} onSubmit={handleSubmit} key={object.id}>
       <h3 style={titleStyle}>{object.title}</h3>
@@ -68,8 +68,8 @@ export const formDisplay = (object, state, onChange, handleSubmit, nextClick, sk
       {object.hasInput ? <Input style={inputStyle} name={object.inputName} placeholder={object.placeholderMessage} autoFocus/> : null}
       {object.hasBoolean ? 
         <div style={bodyStyle}>
-          <input type='radio' name={object.booleanName} value='Yes'/> Yes
-          <input type='radio' name={object.booleanName} value='No'/> No
+          <input type='radio' name={object.booleanName} value=' Yes '/> Yes
+          <input type='radio' name={object.booleanName} value=' No '/> No
         </div>
         : null
       }
@@ -80,6 +80,7 @@ export const formDisplay = (object, state, onChange, handleSubmit, nextClick, sk
         </div>
           : null}
        
+       <Button size='small' color='primary' style={buttonStyle} onClick={backClick}>Back</Button>
        <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
        <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter} )</Button>
     </form>
