@@ -44,9 +44,9 @@ class UserCard extends Component {
   }
 }
 
-const mapState = state => ({
-  user: state.currentUser,
-  goals: state.goals
+const mapState = (state, ownProps) => ({
+  user: ownProps.user || state.currentUser,
+  goals: ownProps.goals || state.goals
 })
 
 export default connect(mapState)(UserCard)
