@@ -6,12 +6,9 @@ import Setting from './UserSetting'
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
 // Create a separate modal to open setting, and pull in only for current user
-class UserPanel extends Component {
-  constructor () {
-    super()
-    this.state = {
-      modalId: null
-    }
+class UserCard extends Component {
+  state = {
+    modalId: null
   }
 
   openModal = modalId => {
@@ -52,4 +49,4 @@ const mapState = state => ({
   goals: state.goals
 })
 
-export default connect(mapState)(UserPanel)
+export default connect(mapState)(UserCard)
