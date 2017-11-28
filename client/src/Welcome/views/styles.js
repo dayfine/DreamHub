@@ -37,7 +37,7 @@ const styles = {
     width: `33.33%`,
     position: 'relative',
     bottom: `.04vh`,
-    marginTop: `3vh`
+    marginTop: `3vh`,
   },
 
   textareaStyle: {

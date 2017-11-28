@@ -1,15 +1,17 @@
-import { ADD_GOAL } from './actionTypes'
+import { ADD_GOAL, GET_GOALS } from './actionTypes'
 
 //INITIAL STATE
-const initialState = {
-  goals: []
-}
+//const initialState = {
+//  goals: []
+//}
 
 //REDUCER
-const reducer = (state = initialState, action) => {
+const reducer = (state = [], action) => {
   switch(action.type){
     case ADD_GOAL:
-      return {...state, goals: [...state.goals, action.goal]};
+      return [...state, action.goal];
+    case GET_GOALS:
+      return action.goals
     default:
       return state;
   }

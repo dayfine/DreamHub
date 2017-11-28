@@ -8,7 +8,7 @@ import Input from 'material-ui/Input';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import styles from './styles';
-import { createGoal } from '../actions';
+import { createGoal, fetchGoals } from '../actions';
 import { connect } from 'react-redux';
 import goalWizard, { formDisplay } from './goalWizard';
 
@@ -35,10 +35,9 @@ class Quiz extends React.Component{
   
   handleSubmit(event){
     event.preventDefault();
-    console.log('This is the event target from handleSubmit', event.target)
-    this.props.createGoal(event.target.myInput.value)
-    
-    event.target.myInput.value='';
+    console.log('This is the event target from handleSubmit', event.target.name)
+//    this.props.createGoal(event.target.myInput.value)
+//    event.target.myInput.value='';
   }
   
   handleNextClick(event){
@@ -58,7 +57,7 @@ class Quiz extends React.Component{
     const { sliderNum, goal, currentUser, counter } = this.state;
     const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
     const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
-    
+    console.log('THEM Fetch GOAL PROPS', this.props.fetchGoals)
     return (
         <Grid container >
           
@@ -72,7 +71,7 @@ class Quiz extends React.Component{
               }).filter((question, i) => this.state.counter === i)
             }
             
-            <p>Hello{this.props.goals}</p>
+            <p>Goals go here: </p>
 
         </Grid>
     )
@@ -84,6 +83,6 @@ const mapState = state => {
   return state
 }
 
-const mapDispatch = { createGoal }
+const mapDispatch = { createGoal, fetchGoals }
 
 export default connect(mapState, mapDispatch)(Quiz);
