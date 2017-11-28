@@ -38,7 +38,6 @@ class FriendSearch extends Component {
     return axios.get(`/api/friends/email/${email}`)
       .then(res => res.data)
       .then(user => {
-        console.log(user, typeof user)
         return user ? this.setState({ matchedUser: user })
                     : this.setState({ error: notFound })
       })
@@ -58,7 +57,10 @@ class FriendSearch extends Component {
           <button>Submit</button>
         </form>
         {matchedUser && (
-          <UserCard user={matchedUser} goals={[]}/>
+          <div>
+          <button>Add</button>
+            <UserCard user={matchedUser} goals={[]}/>
+          </div>
         )}
         {error && (
           <div className={classes.warning}>

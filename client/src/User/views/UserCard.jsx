@@ -22,6 +22,9 @@ class UserCard extends Component {
   render () {
     const { user, goals } = this.props
     const { modalId } = this.state
+    console.log(user)
+    console.log(user.friendCount)
+    console.log(user.goalCount)
 
     return (
       <div>

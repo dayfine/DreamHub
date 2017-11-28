@@ -25,10 +25,7 @@ router
   })
 
   .get('/email/:email', (req, res, next) => {
-    return User.findOne({
-      where: { email: req.params.email },
-      attributes: { exclude: ['password'] }
-    })
+    return User.getFriendDataByEmail(req.params.email)
       .then(friend => res.send(friend))
       .catch(next)
   })
