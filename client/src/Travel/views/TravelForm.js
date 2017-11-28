@@ -34,6 +34,8 @@ class TravelForm extends Component {
     const { from, to, options } = this.state;
     const fromCode = from.split('-')[0].slice(-5, -2);
     const toCode = to.split('-')[0].slice(-5, -2);
+    const location = to.split('-')[1]
+    const city = location ? location.split(', ')[0].trim() : null;
 
     return (
       <form onSubmit={ onSubmit }>
@@ -74,9 +76,17 @@ class TravelForm extends Component {
         <button className="btn btn-sm btn-light">
           <Link
             to={ `https://www.google.com/flights/#search;f=${fromCode};t=${toCode};mc=m` }
-            target="_blank">Go!
+            target="_blank">Find Flights/Hotels
           </Link>
-        </button>
+        </button> {
+          !city ? null :
+          <button className="btn btn-sm btn-light">
+            <Link
+              to={ `https://www.airbnb.com/s/${city}/homes?refinement_path=%2Fhomes&allow_override%5B%5D=&s_tag=GOAhPqw_` }
+              target="_blank">Find Airbnb
+            </Link>
+          </button>
+        }
       </form>
     )
   }
