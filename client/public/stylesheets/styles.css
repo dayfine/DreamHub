@@ -67,6 +67,10 @@ footer {
   font-size: 12px;
 }
 
+.travel-btn {
+  margin-right: 1em;
+}
+
 .goal-input {
   height: 50px;
   border: none;
