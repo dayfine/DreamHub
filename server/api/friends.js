@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User } = require('../db').models
+const { User, Goal } = require('../db').models
 const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET
 
@@ -17,9 +17,8 @@ router
     })
   })
 
-  // When to use this one?
   .get('/', (req, res, next) => {
-    return req.user.getFriends()
+    return req.user.getFriends({ include: [ Goal ] })
       .then(friends => res.send(friends))
       .catch(next)
   })
@@ -31,7 +30,7 @@ router
   })
 
   .post('/:friendId', (req, res, next) => {
-    return User.findById(req.params.id)
+    return User.findById(req.params.friendId)
       .then(friend => req.user.addFriend(friend))
       .then(() => res.sendStatus(202))
       .catch(next)
