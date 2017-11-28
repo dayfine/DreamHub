@@ -72,7 +72,7 @@ class Quiz extends React.Component{
               }).filter((question, i) => this.state.counter === i)
             }
             
-            
+            <p>Hello{this.props.goals}</p>
 
         </Grid>
     )
@@ -81,7 +81,7 @@ class Quiz extends React.Component{
 
 const mapState = state => {
   console.log('This is the state', state)
-  return {}
+  return state
 }
 
 const mapDispatch = { createGoal }

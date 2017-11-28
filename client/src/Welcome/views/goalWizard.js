@@ -6,6 +6,19 @@ import Button from 'material-ui/Button';
 
 const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle, formStyle } = styles;
 
+/* wiazard template:
+    id: 0,
+    title: '',
+    description: '',
+    hasInput: boolean,
+    inputName: '',
+    placeholderMessage: '',
+    hasBoolean: boolean,
+    booleanName: '' || null,
+    hasSlider: boolean,
+    sliderName: '' || null
+*/
+
 //Make human a variable for the current user
 const goalWizard = [
   {
@@ -15,32 +28,18 @@ const goalWizard = [
     hasInput: true,
     inputName: 'myInput',
     placeholderMessage: 'Be as specific as possible.',
-    hasBoolean: false,
-    booleanName: null,
-    hasSlider: false,
-    sliderName: null
   },
   {
     id: 1,
     title: 'How will you keep track of your progress?',
     description: 'Having a way to measure your goals is the only way you\'ll know if you\'re heading in the right direction.',
-    hasInput: false,
-    inputName: null,
-    placeholderMessage: null,
     hasBoolean: true,
     booleanName: 'measurement',
-    hasSlider: false,
-    sliderName: null
   },
   {
     id: 2,
     title: 'How excited are you by this goal? Is it big? Does it scare you a little?',
     description: 'Don’t ask yourself, “Is it possible to reach this goal?” That’s the wrong question. The right questions are, “How can I achieve this goal?” and, “Am I willing to pay the price necessary to achieve this goal?” You can accomplish virtually anything if you’re willing to pay the price.',
-    hasInput: false,
-    inputName: null,
-    placeholderMessage: null,
-    hasBoolean: false,
-    booleanName: null,
     hasSlider: true,
     sliderName: 'howImportant'
   },
@@ -51,10 +50,25 @@ const goalWizard = [
     hasInput: true,
     inputName: 'deadline',
     placeholderMessage: 'Set a realistic deadline',
-    hasBoolean: false,
-    booleanName: null,
-    hasSlider: false,
-    sliderName: null
+  },
+  {
+    id: 4,
+    title: 'Let\'s break down your goal into long-term and short-term goals'
+  },
+  {
+    id: 5,
+    title: 'Is there an emotional reason why you want to achieve your goal?',
+    description: 'Articulating this can add extra motivaton. "1. If you have a strong enough why you can bear almost any how." - Nietzsche'
+  },
+  {
+    id: 6,
+    title: 'Does this goal conflict with another goal?',
+    description: ''
+  }, 
+  {
+    id: 7,
+    title: 'Do you want to write affirmations?',
+    description: 'Some people find this helpful. These will be posted on your home screen to keep them front and center. Continue to take action towards your destination even when you can’t see it yet! - Visualize them as already achieved'
   }
                 
 ]
@@ -82,7 +96,7 @@ export const formDisplay = (object, state, onChange, handleSubmit, nextClick, ba
        
        <Button size='small' color='primary' style={buttonStyle} onClick={backClick}>Back</Button>
        <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
-       <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter} )</Button>
+       <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter+1}/{goalWizard.length} )</Button>
     </form>
   )
   
