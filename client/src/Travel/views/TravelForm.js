@@ -80,12 +80,20 @@ class TravelForm extends Component {
           </Link>
         </button> {
           !city ? null :
-          <button className="btn btn-sm btn-light">
-            <Link
-              to={ `https://www.airbnb.com/s/${city}/homes?refinement_path=%2Fhomes&allow_override%5B%5D=&s_tag=GOAhPqw_` }
-              target="_blank">Find Airbnb
-            </Link>
-          </button>
+          [
+            <button key="1" className="btn btn-sm btn-light">
+              <Link
+                to={ `https://www.airbnb.com/s/${city}/homes?refinement_path=%2Fhomes&allow_override%5B%5D=&s_tag=GOAhPqw_` }
+                target="_blank">Find Airbnb
+              </Link>
+            </button>,
+            <button key="2" className="btn btn-sm btn-light">
+              <Link
+                to={ `https://www.yelp.com/search?find_desc=&find_loc=${city}` }
+                target="_blank">See Top Rated Activities
+              </Link>
+            </button>
+          ]
         }
       </form>
     )
