@@ -5,6 +5,7 @@ const initialState = []
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_FRIEND:
+      console.log(action)
       return [ ...state, action.newFriend ]
 
     case UPDATE_FRIEND:

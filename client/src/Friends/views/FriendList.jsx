@@ -22,7 +22,7 @@ const Friend = props => {
             <li key={friend.id}>
               <h2>{friend.name}</h2>
               <h3>{friend.email}</h3>
-              {friend.goals.map(goal => {
+              {friend.goals && friend.goals.map(goal => {
                 return (
                   <div key={goal.id}>
                     <h4>{goal.title}</h4>

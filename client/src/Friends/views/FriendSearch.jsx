@@ -22,8 +22,9 @@ class FriendSearch extends Component {
     error: null
   }
 
-  handleAdd = () => {
-
+  handleAdd = friend => {
+    this.props.addFriend(friend)
+    this.setState({ matchedUser: null, error: null })
   }
 
   handleSubmit = ev => {
@@ -45,7 +46,7 @@ class FriendSearch extends Component {
 
   render () {
     const { matchedUser, error } = this.state
-    const { addFriend, classes } = this.props
+    const { classes } = this.props
 
     return (
       <div className='container'>
@@ -58,7 +59,9 @@ class FriendSearch extends Component {
         </form>
         {matchedUser && (
           <div>
-          <button>Add</button>
+            <button onClick={this.handleAdd.bind(this, matchedUser)}>
+              Add
+            </button>
             <UserCard user={matchedUser} goals={[]}/>
           </div>
         )}
