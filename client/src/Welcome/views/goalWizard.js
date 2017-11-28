@@ -45,6 +45,7 @@ const goalWizard = [
     id: 2,
     title: 'How excited are you by this goal? Is it worthwhile?',
     description: 'Are you willing to pay the price necessary to achieve it?',
+
     hasSlider: true,
     sliderName: 'howImportant'
   },

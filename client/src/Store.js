@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { reducer as GoalsReducer } from './Goals'
 import { reducer as TasksReducer } from './Tasks'
 import { reducer as AuthReducer } from './Auth'
+import { reducer as UserReducer } from './User'
 import { reducer as FriendsReducer } from './Friends'
 import { reducer as CategoryReducer } from './Category'
 import { reducer as WelcomeGoalsReducer } from './Welcome'
@@ -13,15 +14,15 @@ import { reducer as WelcomeGoalsReducer } from './Welcome'
 const rootReducer = combineReducers({
   goals: GoalsReducer,
   tasks: TasksReducer,
-  currentUser: AuthReducer,
+  authenticated: AuthReducer,
+  currentUser: UserReducer,
   friends: FriendsReducer,
   categories: CategoryReducer,
   welcomeGoals: WelcomeGoalsReducer
 })
 
-const initialState = {}
-
 const
+  initialState = {},
   middlewares = [
     thunkMiddleware,
     createLogger()

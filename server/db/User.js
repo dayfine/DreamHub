@@ -1,26 +1,48 @@
-const conn = require('./conn');
-const Sequelize = conn.Sequelize;
-const bcrypt = require('bcrypt');
-const Goal = require('./Goal');
-const Task = require('./Task');
+const conn = require('./conn')
+const Sequelize = conn.Sequelize
+const bcrypt = require('bcrypt')
+const Goal = require('./Goal')
+const Task = require('./Task')
 
 const User = conn.define('user', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
+      is: {
+        args: /^\w+$/,
+        msg: 'Username cannot contain special characters'
+      },
+      len: [4, 30]
+    }
   },
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   googleId: {
     type: Sequelize.STRING
   },
   points: {
     type: Sequelize.INTEGER
+  },
+  lastCheckIn: {
+    type: Sequelize.DATE
   }
-});
+})
 
 const generateError = message => {
   const error = new Error(message)
@@ -29,10 +51,11 @@ const generateError = message => {
   return error
 }
 
-// Only fetch from server
 User.getUserDataById = function (id) {
   return this.findById(id, {
-    attributes: { exclude: ['password'] },
+    attributes: {
+      exclude: ['password']
+    },
     include: [
       { model: Goal,
         include: [{ model: Task }]
@@ -44,6 +67,24 @@ User.getUserDataById = function (id) {
       }
     ]
   })
+}
+
+User.getFriendDataByEmail = function (email) {
+  let user
+  return this.findOne({
+    where: { email },
+    attributes: { exclude: ['password'] }
+  })
+    .then(_user => { user = _user })
+    .then(() => user.countFriends())
+    .then(friendCount => {
+      user.dataValues.friendCount = friendCount
+    })
+    .then(() => user.countGoals())
+    .then(goalCount => {
+      user.dataValues.goalCount = goalCount
+    })
+    .then(() => user)
 }
 
 User.login = function (credentials) {
@@ -73,4 +114,4 @@ User.signup = function (credentials) {
     .catch(console.log)
 }
 
-module.exports = User;
+module.exports = User

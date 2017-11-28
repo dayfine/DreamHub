@@ -8,31 +8,32 @@ import Input from 'material-ui/Input';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import styles from './styles';
+
 import { createGoal, fetchGoals } from '../actions';
 import { connect } from 'react-redux';
 import goalWizard, { formDisplay } from './goalWizard';
 
-
-class Quiz extends React.Component{
-  constructor(){
-    super();
-    this.state ={
+class Quiz extends React.Component {
+  constructor () {
+    super()
+    this.state = {
       sliderNum: 1,
       goal: [],
       currentUser: 'Current User',
       counter: 0,
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
     this.handleSkipClick = this.handleSkipClick.bind(this);
   }
-  
+
   handleChange(event){
     this.setState({sliderNum: event.target.value })
   }
-  
+
   handleSubmit(event){
     event.preventDefault();
     console.log('This is the event target from handleSubmit', event.target.name)
@@ -52,7 +53,21 @@ class Quiz extends React.Component{
   handleBackClick(){
     this.setState({counter: this.state.counter-1});
   }
-  
+
+
+  handleNextClick(event){
+    this.setState({counter: this.state.counter+1});
+
+  }
+
+  handleSkipClick(){
+    this.setState({counter: this.state.counter+1});
+  }
+
+  handleBackClick(){
+    this.setState({counter: this.state.counter-1});
+  }
+
   render(){
     const { sliderNum, goal, currentUser, counter } = this.state;
     const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
@@ -63,7 +78,7 @@ class Quiz extends React.Component{
           
            {
               goalWizard.map(question => {
-                 return ( 
+
                    <div style={questionStyle} key={question.id}>
                      {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
                   </div>
@@ -76,7 +91,15 @@ class Quiz extends React.Component{
         </Grid>
     )
   }
-} 
+}
+
+
+const mapState = state => {
+  console.log('This is the state', state)
+  return {}
+}
+
+const mapDispatch = { createGoal }
 
 const mapState = state => {
   console.log('This is the state', state)

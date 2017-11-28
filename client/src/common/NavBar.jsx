@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -29,14 +30,16 @@ const NavBar = props => {
         <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
           <Icon>menu</Icon>
         </IconButton>
-        <Typography type='display1' color='inherit' className={classes.flex}>
-          Welcome to Capstone
-        </Typography>
-        <a href='//material-ui-next.com/demos/app-bar/'>
-          <Typography type='display1' color='accent' className={classes.flex}>
-            Mateterial UI Docs
+          <Typography
+            type='headline'
+            color='inherit'
+            className={classes.flex}
+            component={Link}
+            to='/'
+          >
+            DreamHub
           </Typography>
-        </a>
+
         {props.children}
       </Toolbar>
     </AppBar>

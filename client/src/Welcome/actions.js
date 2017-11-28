@@ -16,6 +16,7 @@ export const getGoals = goals => {
   }
 }
 
+
 //THUNK CREATORS
 export const createGoal = goal => {
   return dispatch => {
@@ -32,4 +33,3 @@ export const fetchGoals = () => {
       .then(goals => dispatch(getGoals(goals)))
   }
 }
-
