@@ -1,12 +1,5 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Button from 'material-ui/Button';
-import Input from 'material-ui/Input';
-//import Slider from 'material-ui/Slider';
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import styles from './styles';
 
 import { createGoal } from '../../Goals/actions';
@@ -54,36 +47,23 @@ class Quiz extends React.Component {
     this.setState({counter: this.state.counter-1});
   }
 
-
-  handleNextClick(event){
-    this.setState({counter: this.state.counter+1});
-
-  }
-
-  handleSkipClick(){
-    this.setState({counter: this.state.counter+1});
-  }
-
-  handleBackClick(){
-    this.setState({counter: this.state.counter-1});
-  }
-
   render(){
-    const { sliderNum, goal, currentUser, counter } = this.state;
-    const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle } = styles;
+    const { counter } = this.state;
+    const { questionStyle } = styles;
     const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
     console.log('THEM Fetch GOAL PROPS', this.props.fetchGoals)
-    return (
-        <Grid container >
-           {goalWizard.map(question => {
-                   <div style={questionStyle} key={question.id}>
-                     {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
-                  </div>
-              }).filter((question, i) => this.state.counter === i)
-            }
-            <p>Goals go here: </p>
 
-        </Grid>
+    return (
+      <Grid container >
+         {goalWizard.map(question => {
+            return (
+              <div style={questionStyle} key={question.id}>
+                {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
+              </div>
+            )}).filter((question, i) => counter === i)
+          }
+          <p>Goals go here: </p>
+      </Grid>
     )
   }
 }

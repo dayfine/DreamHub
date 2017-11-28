@@ -45,7 +45,6 @@ const goalWizard = [
     id: 2,
     title: 'How excited are you by this goal? Is it worthwhile?',
     description: 'Are you willing to pay the price necessary to achieve it?',
-
     hasSlider: true,
     sliderName: 'howImportant'
   },
@@ -62,7 +61,6 @@ const goalWizard = [
     title: 'Let\'s break down your goal into long-term and short-term goals',
     description: '',
     hasTimeline: true,
-    
   },
   {
     id: 5,
@@ -76,7 +74,7 @@ const goalWizard = [
     description: '',
     hasBoolean: true,
     booleanName: 'goalConflict'
-  }, 
+  },
   {
     id: 7,
     title: 'Affirmations',
@@ -84,30 +82,29 @@ const goalWizard = [
     hasMultiInputs: true,
     inputMultiInputsName: 'affirmations'
   }
-                
 ]
 
 export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, backClick, skipClick) =>{
-  return ( 
+  return (
     <form style={formStyle} onSubmit={handleSubmit} key={goalWiz.id}>
       <h3 style={titleStyle}>{goalWiz.title}</h3>
       <Divider />
       <p style={bodyStyle}><em>{goalWiz.description}</em></p>
-      {goalWiz.hasInput ? <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> : null}
-      {goalWiz.hasBoolean ? 
+      {goalWiz.hasInput && <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/>}
+      {goalWiz.hasBoolean ?
         <div style={Object.assign({}, bodyStyle, {marginTop: '14vh'})}>
           <input type='radio' name={goalWiz.booleanName} value=' Yes '/> Yes
           <input style={{marginLeft:'1vw'}} type='radio' name={goalWiz.booleanName} value=' No '/> No
         </div>
         : null
       }
-      {goalWiz.hasSlider ? 
+      {goalWiz.hasSlider ?
         <div>
-          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={Object.assign({}, sliderStyle, {marginTop: '13vh'})} /> 
+          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={Object.assign({}, sliderStyle, {marginTop: '13vh'})} />
           <p style={bodyStyle}>{state.sliderNum}</p>
         </div>
           : null}
-      
+
        {goalWiz.hasTimeline ?
           <div>
             <Input style={inputStyle} label="Ultimate Goal" placeholder="What is your ultimate goal?" type="text" />
@@ -117,14 +114,14 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
             <Input style={inputStyle} label="Daily goal" placeholder="What are your daily goals?" type="text" />
           </div>
       : null}
-    
+
       {goalWiz.hasTextarea ?
         <div>
           <TextField style={inputStyle} multiline rows='4' />
         </div>
       : null}
-    
-    {goalWiz.hasMultiInputs ? 
+
+    {goalWiz.hasMultiInputs ?
       <div>
         <Input style={inputStyle} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> <Button style={{position: 'relative', top: '-4vh', left: '37.4vw', borderRadius: '4px', border: '1px solid #9191ff', outline: 'none'}} size='small' color='primary'>+</Button>
       </div>
@@ -136,7 +133,7 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
     </div>
     </form>
   )
-  
+
 }
 
 export default goalWizard;
