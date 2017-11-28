@@ -9,7 +9,7 @@ import Input from 'material-ui/Input';
 //import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import styles from './styles';
 
-import { createGoal, fetchGoals } from '../actions';
+import { createGoal } from '../../Goals/actions';
 import { connect } from 'react-redux';
 import goalWizard, { formDisplay } from './goalWizard';
 
@@ -40,16 +40,16 @@ class Quiz extends React.Component {
 //    this.props.createGoal(event.target.myInput.value)
 //    event.target.myInput.value='';
   }
-  
+
   handleNextClick(event){
     this.setState({counter: this.state.counter+1});
-  
+
   }
-  
+
   handleSkipClick(){
     this.setState({counter: this.state.counter+1});
   }
-  
+
   handleBackClick(){
     this.setState({counter: this.state.counter-1});
   }
@@ -75,17 +75,12 @@ class Quiz extends React.Component {
     console.log('THEM Fetch GOAL PROPS', this.props.fetchGoals)
     return (
         <Grid container >
-          
-           {
-              goalWizard.map(question => {
-
+           {goalWizard.map(question => {
                    <div style={questionStyle} key={question.id}>
                      {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
                   </div>
-                )
               }).filter((question, i) => this.state.counter === i)
             }
-            
             <p>Goals go here: </p>
 
         </Grid>
@@ -93,19 +88,11 @@ class Quiz extends React.Component {
   }
 }
 
-
-const mapState = state => {
-  console.log('This is the state', state)
-  return {}
-}
+const mapState = state => ({
+  goals: state.goals,
+  currentUser: state.currentUser
+})
 
 const mapDispatch = { createGoal }
-
-const mapState = state => {
-  console.log('This is the state', state)
-  return state
-}
-
-const mapDispatch = { createGoal, fetchGoals }
 
 export default connect(mapState, mapDispatch)(Quiz);
