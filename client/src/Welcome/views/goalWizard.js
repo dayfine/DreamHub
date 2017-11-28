@@ -5,7 +5,7 @@ import Input from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle, formStyle } = styles;
+const { questionStyle, titleStyle, bodyStyle, inputStyle, buttonStyle, textareaStyle, sliderStyle, formStyle, buttonFooter } = styles;
 
 /* wiazard template:
     id: 0,
@@ -92,9 +92,9 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
       <h3 style={titleStyle}>{goalWiz.title}</h3>
       <Divider />
       <p style={bodyStyle}><em>{goalWiz.description}</em></p>
-      {goalWiz.hasInput ? <Input style={inputStyle} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> : null}
+      {goalWiz.hasInput ? <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> : null}
       {goalWiz.hasBoolean ? 
-        <div style={bodyStyle}>
+        <div style={Object.assign({}, bodyStyle, {marginTop: '14vh'})}>
           <input type='radio' name={goalWiz.booleanName} value=' Yes '/> Yes
           <input style={{marginLeft:'1vw'}} type='radio' name={goalWiz.booleanName} value=' No '/> No
         </div>
@@ -102,7 +102,7 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
       }
       {goalWiz.hasSlider ? 
         <div>
-          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={sliderStyle} /> 
+          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={Object.assign({}, sliderStyle, {marginTop: '13vh'})} /> 
           <p style={bodyStyle}>{state.sliderNum}</p>
         </div>
           : null}
@@ -125,12 +125,14 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
     
     {goalWiz.hasMultiInputs ? 
       <div>
-        <Input style={inputStyle} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> <Button style={{position: 'relative', top: '-4vh', left: '37.4vw'}} size='small' color='primary'>+</Button>
+        <Input style={inputStyle} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> <Button style={{position: 'relative', top: '-4vh', left: '37.4vw', borderRadius: '4px', border: '1px solid #9191ff', outline: 'none'}} size='small' color='primary'>+</Button>
       </div>
     : null}
+    <div style={buttonFooter}>
        <Button size='small' color='primary' style={buttonStyle} onClick={backClick}>Back</Button>
        <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
        <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter+1}/{goalWizard.length} )</Button>
+    </div>
     </form>
   )
   

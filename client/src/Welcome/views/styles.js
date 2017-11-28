@@ -1,6 +1,7 @@
 const styles = {
   questionStyle: {
       width: `45vw`,
+      height: `56vh`,
       marginRight: 'auto',
       marginLeft: 'auto',
       marginTop: `1em`,
@@ -29,7 +30,7 @@ const styles = {
   inputStyle: {
       width: `60%`,
       marginRight: '4vw',
-      marginLeft: '10vw'
+      marginLeft: '10vw',
     },
 
   buttonStyle: {
@@ -51,10 +52,16 @@ const styles = {
       marginTop: '2vh',
       width: `60%`
     },
-  
+
   formStyle: {
     borderRadius: `4px`,
     
+  },
+  
+  buttonFooter: {
+    width: `45%`,
+    position: 'absolute',
+    bottom: `8.8em`
   }
 }
 
