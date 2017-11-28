@@ -8,7 +8,6 @@ class TravelForm extends Component {
   constructor() {
     super();
     this.state = {
-      from: '',
       to: '',
       options: []
     };
@@ -25,80 +24,71 @@ class TravelForm extends Component {
 
   onSubmit(ev) {
     ev.preventDefault();
-    const { from, to } = this.state;
-    console.log(this.state);
+    const { to } = this.state;
+    // console.log(this.state);
   }
 
   render() {
     const { onChange, onSubmit } = this;
-    const { from, to, options } = this.state;
-    const fromCode = from.split('-')[0].slice(-5, -2);
-    const toCode = to.split('-')[0].slice(-5, -2);
+    const { to, options } = this.state;
+    const iata = to.split('-')[0].slice(-5, -2);
     const location = to.split('-')[1]
     const city = location ? location.split(', ')[0].trim() : null;
 
     return (
       <form onSubmit={ onSubmit }>
-        <h2>Quick Search for Travel</h2>
-        <p><strong>Enter city or airport name below.</strong></p>
-
-        <input value={ from }
-          type="text"
-          name="from"
-          onChange={ onChange }
-          placeholder="From"
-          autoFocus
-          list="from"
-          className="goal-input-sm"
-        />
-
-        <datalist id="from">
-          {
-            options.slice(0,10).map(option => (<option key={ option.iata } value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }></option>))
-          }
-        </datalist>
+        <h2>Where do you want to go?</h2>
 
         <input value={ to }
           type="text"
           name="to"
           onChange={ onChange }
-          placeholder="To"
           list="to"
           className="goal-input-sm"
         />
 
         <datalist id="to">
           {
-            options.slice(0,10).map(option => (<option key={ option.iata } value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }></option>))
+            options.slice(0,10).map(option => (
+               <option
+               key={ option.iata }
+               value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }>
+               </option>
+            ))
           }
         </datalist>
 
-        <button className="btn btn-sm btn-light">
-          <Link
-            to={ `https://www.google.com/flights/#search;f=${fromCode};t=${toCode};mc=m` }
-            target="_blank">Find Flights/Hotels
-          </Link>
-        </button> {
-          !city ? null :
-          [
-            <button key="1" className="btn btn-sm btn-light">
-              <Link
-                to={ `https://www.airbnb.com/s/${city}/homes?refinement_path=%2Fhomes&allow_override%5B%5D=&s_tag=GOAhPqw_` }
-                target="_blank">Find Airbnb
-              </Link>
-            </button>,
-            <button key="2" className="btn btn-sm btn-light">
-              <Link
-                to={ `https://www.yelp.com/search?find_desc=&find_loc=${city}` }
-                target="_blank">See Top Rated Activities
-              </Link>
-            </button>
-          ]
-        }
+        <div>{ !city ? null : <TravelButtons iata={ iata } city={ city } /> }</div>
+
       </form>
     )
   }
 }
+
+const TravelButtons = ({ iata, city }) => {
+  return (
+    [
+      <button key="0" className="btn btn-sm btn-light travel-btn">
+        <Link
+          to={ `https://www.google.com/flights/#search;f=;t=${iata};mc=m` }
+          target="_blank">Find Flights/Hotels
+        </Link>
+      </button>,
+      <button key="1" className="btn btn-sm btn-light travel-btn">
+        <Link
+          to={ `https://www.airbnb.com/s/${city}/homes?refinement_path=%2Fhomes&allow_override%5B%5D=&s_tag=GOAhPqw_` }
+          target="_blank">Find Airbnb
+        </Link>
+      </button>,
+      <button key="2" className="btn btn-sm btn-light travel-btn">
+        <Link
+          to={ `https://www.yelp.com/search?find_desc=&find_loc=${city}` }
+          target="_blank">See Top Rated Activities
+        </Link>
+      </button>
+    ]
+  )
+};
 
 const findAirport = (input) => {
   var options = {
