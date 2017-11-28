@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import Fuse from 'fuse';
+import Fuse from 'fuse.js';
 import airports from '../db/airports';
 // import { fetchFlight } from '../actions';
 
@@ -10,7 +10,8 @@ class TravelForm extends Component {
     super();
     this.state = {
       from: '',
-      to: ''
+      to: '',
+      options: []
     };
 
     this.onChange = this.onChange.bind(this);
@@ -19,7 +20,9 @@ class TravelForm extends Component {
 
   onChange(ev) {
     const { name, value } = ev.target;
-    console.log(findAirport(value));
+    this.setState({ options: findAirport(value) });
+    // const code = value.slice(-3);
+    // console.log(code);
     this.setState({ [name]: value });
   }
 
@@ -32,7 +35,9 @@ class TravelForm extends Component {
 
   render() {
     const { onChange, onSubmit } = this;
-    const { from, to } = this.state;
+    const { from, to, options } = this.state;
+    const fromCode = from.split('-')[0].slice(-5, -2);
+    const toCode = to.split('-')[0].slice(-5, -2);
 
     return (
       <form onSubmit={ onSubmit }>
@@ -46,20 +51,34 @@ class TravelForm extends Component {
           onChange={ onChange }
           placeholder="From"
           autoFocus
+          list="from"
           className="goal-input-sm"
         />
+
+        <datalist id="from">
+          {
+            options.slice(0,10).map(option => (<option key={ option.iata } value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }></option>))
+          }
+        </datalist>
 
         <input value={ to }
           type="text"
           name="to"
           onChange={ onChange }
           placeholder="To"
+          list="to"
           className="goal-input-sm"
         />
 
+        <datalist id="to">
+          {
+            options.slice(0,10).map(option => (<option key={ option.iata } value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }></option>))
+          }
+        </datalist>
+
         <button className="btn btn-sm btn-light">
           <Link
-            to={ `https://www.google.com/flights/#search;f=${from};t=${to};mc=m` }
+            to={ `https://www.google.com/flights/#search;f=${fromCode};t=${toCode};mc=m` }
             target="_blank">Go!
           </Link>
         </button>
@@ -71,11 +90,12 @@ class TravelForm extends Component {
 const findAirport = (input) => {
   var options = {
     shouldSort: true,
-    threshold: 0.1,
+    tokenize: true,
+    threshold: 0,
     location: 0,
     distance: 100,
     maxPatternLength: 32,
-    minMatchCharLength: 1,
+    minMatchCharLength: 3,
     keys: [
       "name",
       "city",
