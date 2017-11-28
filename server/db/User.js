@@ -51,10 +51,11 @@ const generateError = message => {
   return error
 }
 
-// Only fetch from server
 User.getUserDataById = function (id) {
   return this.findById(id, {
-    attributes: { exclude: ['password'] },
+    attributes: {
+      exclude: ['password']
+    },
     include: [
       { model: Goal,
         include: [{ model: Task }]
@@ -66,6 +67,24 @@ User.getUserDataById = function (id) {
       }
     ]
   })
+}
+
+User.getFriendDataByEmail = function (email) {
+  let user
+  return this.findOne({
+    where: { email },
+    attributes: { exclude: ['password'] }
+  })
+    .then(_user => { user = _user })
+    .then(() => user.countFriends())
+    .then(friendCount => {
+      user.dataValues.friendCount = friendCount
+    })
+    .then(() => user.countGoals())
+    .then(goalCount => {
+      user.dataValues.goalCount = goalCount
+    })
+    .then(() => user)
 }
 
 User.login = function (credentials) {

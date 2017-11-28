@@ -79,7 +79,6 @@ class Checkup extends Component {
   render() {
     const { onOpen, onClose } = this
     const { tasks, classes } = this.props
-    console.log(TaskStatusMapper)
 
     return (
       <div>
