@@ -1,5 +1,5 @@
-# capstone
-ABDJ
+# DreamHub
+Brought to you by ABDJ (Anthony, Burcu, Di, and Jerry)
 
 npm install inside main directory && inside the client folder.
 
