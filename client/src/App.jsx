@@ -25,6 +25,18 @@ import { loadUserData } from './Auth/actions'
 const styles = {}
 const storage = window.localStorage
 
+const FrontPage = ({ authenticated }) => {
+  return authenticated
+    ? (<Home />)
+    : (
+      <div>
+        <Login />
+        <Welcome />
+      </div>
+    )
+}
+
+
 const Home = props => {
   return (
     <Grid container>
@@ -54,22 +66,13 @@ class App extends Component {
   }
 
   render () {
-    // const { authenticated } = this.props
-    let authenticated = true
+    const { authenticated } = this.props
     let viewPaths = [
       {view: AutoCompleteGoal, path: '/test', name: 'Test'},
       {view: Home, path: '/home', name: 'Home'},
-      {view: Welcome, path: '/welcome', name: 'Welcome'},
-      {view: GoalPanel, path: '/goals/:goalId', name: 'Goal Panel'},
-      {view: Friends, path: '/friends', name: 'Friends'},
-      {view: Login, path: '/login', name: 'Login'},
-      {view: Kanban, path: '/kanban/:goalId', name: 'Kanban', disbaled: true}
-      // {view: Goals, path: '/goals', name: 'Goals'},
       // {view: Signup, path: '/signup', name: 'Sign Up'},
       // {view: UserPanel, path: '/me', name: 'User'}
     ]
-
-    if (!authenticated) viewPaths = viewPaths.filter(obj => obj.name === 'Login')
 
     return (
       <div style={{height: '100vh'}}>
@@ -80,7 +83,10 @@ class App extends Component {
           </Grid>
           <Grid item xs={10}>
             <Switch>
-              <Route path='/' exact component={Home} />
+              <Route path='/' exact render={()=> <FrontPage authenticated={authenticated}/>} />
+              <Route path='/kanban/:goalId' component={Kanban} />
+              <Route path='/goals/:goalId' component={GoalPanel} />
+              <Route path='/friends/' component={Friends} />
               {viewPaths.map((_, idx) => {
                 return (
                   <Route key={idx} path={_.path} component={_.view} />
