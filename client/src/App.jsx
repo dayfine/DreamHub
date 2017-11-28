@@ -30,6 +30,10 @@ const Home = props => {
       <Grid item xs={8} >
         <Goals />
         <TravelForm />
+        {/*
+          display travel component only if user responds "yes"
+          to the Travel question in the cards
+        */}
       </Grid>
       <Grid item xs={4} >
         <Checkup />
