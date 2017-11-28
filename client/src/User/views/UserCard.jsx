@@ -22,9 +22,6 @@ class UserCard extends Component {
   render () {
     const { user, goals } = this.props
     const { modalId } = this.state
-    console.log(user)
-    console.log(user.friendCount)
-    console.log(user.goalCount)
 
     return (
       <div>
@@ -37,7 +34,11 @@ class UserCard extends Component {
           <CardContent>
             Email: {user.email}
             <br />
-            {goals.length} Goals
+            {user.goalCount || goals.length} Goals
+            <br />
+            {user.friendCount && (
+              <span>{user.friendCount} Friends</span>
+            )}
             <br />
             The goals above should be a link
           </CardContent>
