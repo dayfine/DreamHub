@@ -1,11 +1,18 @@
 import { ADD_FRIEND, UPDATE_FRIEND, DELETE_FRIEND, SET_FRIENDS } from './actionTypes.js'
 import axios from 'axios'
 
-export const addFriend = newFriend => ({ type: ADD_FRIEND, newFriend })
+const _addFriend = newFriend => ({ type: ADD_FRIEND, newFriend })
 // placeholder, not used
-const updateFriend = (friendId, changes) => ({ type: UPDATE_FRIEND, friendId, changes })
+// const updateFriend = (friendId, changes) => ({ type: UPDATE_FRIEND, friendId, changes })
 const deleteFriend = friendId => ({ type: DELETE_FRIEND, friendId })
 export const setFriends = friends => ({ type: SET_FRIENDS, friends })
+
+export const addFriend = friend => dispatch => {
+  axios.post(`/api/friends/${friend.id}`)
+    .then(res => res.data)
+    .then(() => dispatch(_addFriend(friend)))
+    // .then(() => dispatch(fetchFriends()))
+}
 
 export const fetchFriends = () => dispatch => {
   axios.get('/api/friends')
