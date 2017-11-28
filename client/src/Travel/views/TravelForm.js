@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import airports from '../db/airports';
-// import { fetchFlight } from '../actions';
 
 class TravelForm extends Component {
   constructor() {
@@ -21,8 +20,6 @@ class TravelForm extends Component {
   onChange(ev) {
     const { name, value } = ev.target;
     this.setState({ options: findAirport(value) });
-    // const code = value.slice(-3);
-    // console.log(code);
     this.setState({ [name]: value });
   }
 
@@ -30,7 +27,6 @@ class TravelForm extends Component {
     ev.preventDefault();
     const { from, to } = this.state;
     console.log(this.state);
-    // this.props.fetchFlight(from, to);
   }
 
   render() {
@@ -42,8 +38,7 @@ class TravelForm extends Component {
     return (
       <form onSubmit={ onSubmit }>
         <h2>Quick Search for Travel</h2>
-        <p>Enter city or airport name below.</p>
-        {/* TO DO: find by city or airport name, not just airport code */}
+        <p><strong>Enter city or airport name below.</strong></p>
 
         <input value={ from }
           type="text"
@@ -103,12 +98,8 @@ const findAirport = (input) => {
       "iata"
     ]
   };
-  var fuse = new Fuse(airports, options); // "list" is the item array
+  var fuse = new Fuse(airports, options);
   return fuse.search(input);
 };
-
-// const mapDispatch = { fetchFlight };
-
-// export default connect(null, mapDispatch)(TravelForm);
 
 export default TravelForm;
