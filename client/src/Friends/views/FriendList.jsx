@@ -22,7 +22,7 @@ const Friend = props => {
             <li key={friend.id}>
               <h2>{friend.name}</h2>
               <h3>{friend.email}</h3>
-              {friend.goals && friend.goals.map(goal => {
+              {friend.goals.map(goal => {
                 return (
                   <div key={goal.id}>
                     <h4>{goal.title}</h4>
@@ -45,10 +45,10 @@ const Friend = props => {
   )
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   friends: state.friends
 })
 
 const mapDispatch = { fetchFriends, removeFriend }
 
-export default connect(mapStateToProps, mapDispatch)(Friend)
+export default connect(mapState, mapDispatch)(Friend)

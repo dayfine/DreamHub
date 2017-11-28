@@ -19,12 +19,17 @@ const styles = {
 class FriendSearch extends Component {
   state = {
     matchedUser: null,
-    error: null
+    error: null,
+    search: '',
   }
 
   handleAdd = friend => {
     this.props.addFriend(friend)
-    this.setState({ matchedUser: null, error: null })
+    this.setState({ matchedUser: null, error: null, search: '' })
+  }
+
+  handleChange = ev => {
+    this.setState({ search: ev.target.value })
   }
 
   handleSubmit = ev => {
@@ -44,8 +49,21 @@ class FriendSearch extends Component {
       })
   }
 
+  renderAddButton = matchedUser => {
+    const { friends } = this.props
+    const added = friends.find(f => f.id === matchedUser.id)
+    return added
+      ? (
+        <span>Already a friend</span>
+      ) : (
+        <button onClick={this.handleAdd.bind(this, matchedUser)}>
+          Add
+        </button>
+      )
+  }
+
   render () {
-    const { matchedUser, error } = this.state
+    const { matchedUser, error, search } = this.state
     const { classes } = this.props
 
     return (
@@ -53,15 +71,16 @@ class FriendSearch extends Component {
         <form onSubmit={this.handleSubmit}>
           Add Friend:
           <input
-            type='text' name='email'
+            type='text'
+            name='email'
+            value={ search }
+            onChange={ this.handleChange }
             placeholder='Search friend by email' />
           <button>Submit</button>
         </form>
         {matchedUser && (
           <div>
-            <button onClick={this.handleAdd.bind(this, matchedUser)}>
-              Add
-            </button>
+            {this.renderAddButton(matchedUser)}
             <UserCard user={matchedUser} goals={[]}/>
           </div>
         )}
@@ -74,10 +93,13 @@ class FriendSearch extends Component {
     )
   }
 }
+const mapState = state => ({
+  friends: state.friends
+})
 
 const mapDispatch = { addFriend }
 
-export default connect(null, mapDispatch)(
+export default connect(mapState, mapDispatch)(
                 withStyles(styles)(
                   FriendSearch
                 ))
