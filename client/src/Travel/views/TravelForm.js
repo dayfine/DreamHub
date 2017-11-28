@@ -31,8 +31,8 @@ class TravelForm extends Component {
   render() {
     const { onChange, onSubmit } = this;
     const { to, options } = this.state;
-    const iata = to.split('-')[0].slice(-5, -2);
-    const location = to.split('-')[1]
+    const iata = to.split('—')[0].slice(-5, -2);
+    const location = to.split('—')[1]
     const city = location ? location.split(', ')[0].trim() : null;
 
     return (
@@ -52,7 +52,7 @@ class TravelForm extends Component {
             options.slice(0,10).map(option => (
                <option
                key={ option.iata }
-               value={ `${option.name} (${option.iata}) - ${option.city}, ${option.country}` }>
+               value={ `${option.name} (${option.iata}) — ${option.city}, ${option.country}` }>
                </option>
             ))
           }
@@ -83,7 +83,7 @@ const TravelButtons = ({ iata, city }) => {
       <button key="2" className="btn btn-sm btn-light travel-btn">
         <Link
           to={ `https://www.yelp.com/search?find_desc=&find_loc=${city}` }
-          target="_blank">See Top Rated Activities
+          target="_blank">See Top Activities
         </Link>
       </button>
     ]
