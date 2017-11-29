@@ -6,15 +6,10 @@ import Setting from './UserSetting'
 import Card, { CardContent, CardHeader } from 'material-ui/Card'
 
 const UserCard = props => {
-  const { user, goals } = this.props
-  const { modalId } = this.state
+  const { user, goals } = props
 
   return (
     <div>
-      <Setting
-        open={!!modalId}
-        onClose={this.closeModal}
-      />
       <Card>
         <CardHeader title={user.name} />
         <CardContent>

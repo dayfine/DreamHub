@@ -15,35 +15,29 @@ class Quiz extends React.Component {
       currentUser: 'Current User',
       counter: 0,
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleNextClick = this.handleNextClick.bind(this);
-    this.handleBackClick = this.handleBackClick.bind(this);
-    this.handleSkipClick = this.handleSkipClick.bind(this);
   }
 
-  handleChange(event){
-    this.setState({sliderNum: event.target.value })
+  handleChange = ev => {
+    this.setState({sliderNum: ev.target.value })
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    console.log('This is the event target from handleSubmit', event.target.name)
+  handleSubmit = ev => {
+    ev.preventDefault();
+    console.log('This is the event target from handleSubmit', ev.target.name)
 //    this.props.createGoal(event.target.myInput.value)
 //    event.target.myInput.value='';
   }
 
-  handleNextClick(event){
+  handleNextClick = ev => {
     this.setState({counter: this.state.counter+1});
 
   }
 
-  handleSkipClick(){
+  handleSkipClick = () => {
     this.setState({counter: this.state.counter+1});
   }
 
-  handleBackClick(){
+  handleBackClick = () => {
     this.setState({counter: this.state.counter-1});
   }
 
@@ -51,7 +45,7 @@ class Quiz extends React.Component {
     const { counter } = this.state;
     const { questionStyle } = styles;
     const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
-    console.log('THEM Fetch GOAL PROPS', this.props.fetchGoals)
+    //console.log(goalWizard)
 
     return (
       <Grid container >
