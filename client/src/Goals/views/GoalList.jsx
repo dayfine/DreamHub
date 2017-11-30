@@ -9,7 +9,6 @@ import Card, { CardContent, CardActions } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
 import AutoCompleteGoal from './AutoCompleteGoal'
-import AddCard from '../../common/AddCard'
 import GoalForm from './GoalForm'
 
 import { mapCategoryToGoal } from '../util/mappers'
@@ -60,9 +59,7 @@ class GoalList extends Component {
           goal={goal}
           onClose={this.closeModal}
         />
-
         <AutoCompleteGoal />
-        <AddCard type='goal' />
         <ul>
         {goals.map(goal => {
           return (
@@ -75,8 +72,8 @@ class GoalList extends Component {
                   <IconButton
                     onClick={this.openModal.bind(this, goal.id)}
                     aria-label='Edit'>
-                  <Icon>mode_edit</Icon>
-                </IconButton>
+                    <Icon>mode_edit</Icon>
+                  </IconButton>
                 </div>
                 {goal.category}
                 <br />

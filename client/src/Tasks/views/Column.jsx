@@ -12,7 +12,6 @@ import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
 import { editTask } from '../../Tasks/actions'
 
-
 const styles = theme => ({
   paper: {
     backgroundColor: '#c9c9c9',

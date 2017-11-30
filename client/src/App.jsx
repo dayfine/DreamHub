@@ -26,7 +26,6 @@ const FrontPage = ({ authenticated }) => {
     ? (<Home />)
     : (
       <div>
-        <Login />
         <Welcome />
       </div>
     )
@@ -60,15 +59,14 @@ class App extends Component {
   }
 
   render () {
-    // const { authenticated } = this.props
-    let authenticated = true
+    const { authenticated } = this.props
 
     return (
       <div style={{height: '100vh'}}>
         <NavBar />
         <Grid container style={{paddingTop: 80}}>
           <Switch>
-            <Route path='/' exact render={() => <FrontPage authenticated={authenticated}/>} />
+            <Route path='/' exact render={() => <FrontPage authenticated={authenticated} />} />
             <Route path='/home' component={Home} />
             <Route path='/kanban/:goalId' component={Kanban} />
             <Route path='/goals/:goalId' component={GoalPanel} />

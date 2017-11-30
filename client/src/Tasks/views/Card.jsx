@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeTask } from '../actions'
 
+import TaskForm from './TaskForm'
 import { withStyles } from 'material-ui/styles'
 import Card, { CardContent, CardActions } from 'material-ui/Card'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 
-import TaskForm from './TaskForm'
 
 import { DragSource } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
+
+import { removeTask } from '../actions'
+import { truncate } from '../util/helpers'
 
 const styles = {
   agileCard: {
@@ -81,7 +83,7 @@ class AgileCard extends Component {
             <Typography type='display1'>
               {task.title}
             </Typography>
-            {task.description}
+            {truncate(task.description, 40)}
             <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
             <div className="badge badge-dark">Priority: {task.priority}</div>
           </CardContent>
