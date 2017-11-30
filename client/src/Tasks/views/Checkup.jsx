@@ -26,10 +26,6 @@ const styles = {
   flexCard: {
     display: 'flex',
   },
-  // flexList: {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  // },
   goalInfo: {
     width: 160,
     height: 140
@@ -50,10 +46,6 @@ class Checkup extends Component {
 
   onClose = () => {
     this.setState({ open: false })
-  }
-
-  onUpdate = status => {
-    console.log(status)
   }
 
   renderTaskOptions = (task, classes, editTask) => {
@@ -90,24 +82,24 @@ class Checkup extends Component {
   }
 
   render() {
-    const { onOpen, onClose, onUpdate, renderTaskOptions } = this
+    const { onOpen, onClose, renderTaskOptions } = this
     const { tasks, classes, editTask } = this.props
 
-    return (
+    return tasks.length > 0 && (
       <div>
-        <Button onClick={ this.onOpen }>Check Your Progress</Button>
+        <Button onClick={ onOpen }>Check Your Progress</Button>
         <Dialog
           open={ this.state.open }
-          onRequestClose={ this.onClose }
+          onRequestClose={ onClose }
         >
-          <div className={classes.title}>
+          <div className={ classes.title }>
             <Typography type='headline' color='inherit'>
               How are you doing with the following tasks?
             </Typography>
              <IconButton
-              className={classes.flex}
+              className={ classes.flex }
               color='inherit'
-              onClick={ this.onClose }
+              onClick={ onClose }
               aria-label='Close'>
               <Icon>clear</Icon>
             </IconButton>

@@ -37,5 +37,12 @@ export const TaskStatusMapper = {
 }
 
 export const stalledTasksMapper = tasks => {
-  return tasks.filter(t => t.status !== TASK_STATUS.COMPLETED)
+  const timeDiffToDay = task => {
+    return (new Date(task.updatedAt) - new Date()) / 1000 / 3600 / 24
+  }
+
+  return tasks.filter(t => {
+    return t.status !== TASK_STATUS.COMPLETED &&
+           timeDiffToDay(t) > 3
+  })
 }
