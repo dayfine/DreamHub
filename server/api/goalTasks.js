@@ -14,8 +14,9 @@ router.get('/', (req, res, next)=> {
     .catch(next);
 });
 
-router.get('/search?progress=accomplished', (req, res, next)=> {
-  Goal.findAll({where: {progress: 'Accomplished'}})
+router.get('/search', (req, res, next)=> {
+  console.log('blah', req.query)
+  Goal.findAll({where: {progress: req.query.progress}})
     .then(goals => res.send(goals))
     .catch(next);
 });

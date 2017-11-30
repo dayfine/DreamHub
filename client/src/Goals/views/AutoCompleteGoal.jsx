@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 import Autosuggest from 'react-autosuggest'
 import TextField from 'material-ui/TextField'
@@ -10,6 +11,30 @@ import parse from 'autosuggest-highlight/parse'
 import { withStyles } from 'material-ui/styles'
 
 import { GOAL_PROGRESS } from '../../constants'
+
+const styles = {
+  container: {
+    flexGrow: 1,
+    position: 'relative',
+    height: 30,
+  },
+  suggestionsContainerOpen: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+  },
+  suggestion: {
+    display: 'block',
+  },
+  suggestionsList: {
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+  textField: {
+    width: '100%',
+  },
+}
 
 const renderInput = inputProps => {
   const { classes, autoFocus, value, ref, ...other } = inputProps;
@@ -73,7 +98,6 @@ const getGoals = (value, goals) => {
   let count = 0;
 
   return goals.filter(goal => {
-    console.log(goal.title, count)
     const keep = count < 5 && inputRegex.test(goal.title)
 
     if (keep) count += 1
@@ -82,29 +106,7 @@ const getGoals = (value, goals) => {
   })
 }
 
-const styles = {
-  container: {
-    flexGrow: 1,
-    position: 'relative',
-    height: 30,
-  },
-  suggestionsContainerOpen: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-  },
-  suggestion: {
-    display: 'block',
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: 'none',
-  },
-  textField: {
-    width: '100%',
-  },
-}
+
 
 class GoalAutosuggest extends Component {
   state = {
@@ -112,15 +114,19 @@ class GoalAutosuggest extends Component {
     suggestions: [],
   };
 
-  compomentDidMount() {
+  goals = []
 
+  componentDidMount() {
+    return axios.get('/api/goals/search', {params: {progress: 'Accomplished'}})
+      .then(result => result.data)
+      .then(goals => {
+        this.goals = goals
+      })
+      .catch(console.error)
   }
 
-
   getMatches = ({ value }) => {
-    console.log(this.props, value)
-    const { goals } = this.props
-    this.setState({ suggestions: getGoals(value, goals) })
+    this.setState({ suggestions: getGoals(value, this.goals) })
   };
 
   clearMatches = () => {
