@@ -7,7 +7,6 @@ import Grid from 'material-ui/Grid'
 import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
 import { views as Kanban } from './Tasks'
-import Checkup from './Tasks/views/Checkup'
 import { views as Welcome } from './Welcome'
 import { views as TravelForm } from './Travel'
 import { views as Friends } from './Friends'
@@ -45,7 +44,6 @@ const Home = props => {
         <Goals />
       </Grid>
       <Grid item xs={3} >
-        <Checkup />
         <UserPanel />
       </Grid>
     </Grid>

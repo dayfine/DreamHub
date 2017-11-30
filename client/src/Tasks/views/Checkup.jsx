@@ -35,6 +35,7 @@ const styles = {
   }
 }
 
+// Put on NavBar when checkup is applicable. Needs test data. Needs special color
 class Checkup extends Component {
   state = {
     open: false

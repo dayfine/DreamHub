@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
 import Column from './Column'
+import AddCard from '../../common/AddCard'
 
 import { GoalTaskMapper } from '../util/mappers'
-import AddCard from '../../common/AddCard'
+
 
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+// Main view. Module Entry Point
 const Kanban = props => {
   const { goalId, tasks } = props
   return (

@@ -36,6 +36,7 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging()
 })
 
+// Used by Column, Kanban
 class AgileCard extends Component {
   constructor () {
     super()

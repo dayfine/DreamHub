@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Paper from 'material-ui/Paper'
+import CenterPaper from '../../common/CenterPaper'
 import Divider from 'material-ui/Divider'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
@@ -27,8 +27,8 @@ const GoalPanel = props => {
     editTask({...task, status: newStatus})
   }
 
-  return (
-    <Paper>
+  return !goal ? (<div>Loading...</div>) : (
+    <CenterPaper>
       <Typography type='headline' >
         { goal.title }
       </Typography>
@@ -59,7 +59,7 @@ const GoalPanel = props => {
           )
         })}
       </ol>
-    </Paper>
+    </CenterPaper>
   )
 }
 

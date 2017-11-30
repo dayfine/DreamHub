@@ -12,6 +12,7 @@ import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
 import { editTask } from '../../Tasks/actions'
 
+
 const styles = theme => ({
   paper: {
     backgroundColor: '#c9c9c9',
@@ -31,6 +32,7 @@ const collect = (connect, monitor) => ({
   isOver: monitor.isOver()
 });
 
+// Used by Kanban
 const Column = props => {
   const { header, tasks, connectDropTarget, classes } = props
   return connectDropTarget(

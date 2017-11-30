@@ -7,7 +7,7 @@ const styles = {
     flex: '0 0 auto',
     textTransform: 'none',
     margin: '20px auto 0 auto',
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: '1em',
     backgroundColor: '#f1f1f1'
   }

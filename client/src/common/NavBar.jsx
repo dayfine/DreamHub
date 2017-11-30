@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { views as Auth } from '../Auth'
 import ProperButton from './ProperButton'
+import Checkup from '../Tasks/views/Checkup'
 
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
@@ -16,6 +17,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     backgroundColor: 'black',
+    display: 'flex'
   },
   title: {
     fontFamily: 'Permanent Marker',
@@ -30,7 +32,8 @@ const styles = theme => ({
     marginRight: 16
   },
   textFieldRoot: {
-    padding: 0
+    padding: 0,
+    flex: '0 1 25%'
   },
   textFieldInput: {
     borderRadius: 4,
@@ -65,14 +68,13 @@ const NavBar = props => {
         </Typography>
         <TextField
           placeholder='Search DreamHub'
-          fullWidth
           InputProps={{
             disableUnderline: true,
             classes: {
-              root: classes.textFieldRoot,
               input: classes.textFieldInput,
             },
           }}
+          className={classes.textFieldRoot}
         />
         <ProperButton color='contrast'>
           Goals
@@ -81,6 +83,7 @@ const NavBar = props => {
           Explore
         </ProperButton>
         <div style={{flex: '1 0 20%'}} />
+        <Checkup />
         <Auth />
       </Toolbar>
     </AppBar>
