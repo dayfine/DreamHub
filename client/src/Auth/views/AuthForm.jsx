@@ -1,23 +1,57 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import CenterPaper from '../../common/CenterPaper'
+
+import { withStyles } from 'material-ui/styles'
+import Card, {CardContent} from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+import TextField from 'material-ui/TextField'
+
 import { auth } from '../actions'
 
+const styles = theme => ({
+  // textField: {
+  //   flex: '1 0 80%',
+  // },
+  flexContainer: {
+    // display: 'flex',
+    // // alignItems: 'center',
+    // flexDirection: 'row',
+    // // justify: 'center',
+  }
+})
+
 const AuthForm = props => {
-  const { name, displayName, handleSubmit, error } = props
+  const { name, displayName, handleSubmit, error, classes } = props
 
   return (
-    <div className='col-md-4 col-md-offset-4'>
-      <div className='panel panel-default'>
-        <div className='panel-body'>
-          <form onSubmit={handleSubmit} name={name}>
-            <div className='form-group'>
-              <label htmlFor='email'><small>Email</small></label>
-              <input className='form-control' name='email' type='text' />
+    <CenterPaper>
+      <Card>
+        <CardContent>
+          <Typography type='headline' >
+            { name === 'login' ? 'Sign in to' : 'Sign up for'} DreamHub
+          </Typography>
+
+          <form onSubmit={handleSubmit} name={name} className={classes.flexContainer}>
+            <div>
+              <TextField
+                name='email'
+                label='Email'
+                margin='normal'
+                fullWidth
+                className={classes.textField}
+              />
             </div>
-            <div className='form-group'>
-              <label htmlFor='password'><small>Password</small></label>
-              <input className='form-control' name='password' type='password' />
+            <div>
+              <TextField
+                name='password'
+                type='password'
+                label='Password'
+                margin='normal'
+                fullWidth
+                className={classes.textField}
+              />
             </div>
             <div className='row'>
               <div className='col-xs-6'>
@@ -31,10 +65,9 @@ const AuthForm = props => {
             </div>
             {error && error.response && <div> {error.response.message} </div>}
           </form>
-
-        </div>
-      </div>
-    </div>
+        </CardContent>
+      </Card>
+    </CenterPaper>
   )
 }
 
@@ -55,17 +88,17 @@ const mapSignup = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  handleSubmit (evt) {
-    evt.preventDefault()
-    const formName = evt.target.name
+  handleSubmit (ev) {
+    ev.preventDefault()
+    const formName = ev.target.name
     const credentials = {
-      email: evt.target.email.value,
-      password: evt.target.password.value
+      email: ev.target.email.value,
+      password: ev.target.password.value
     }
 
     dispatch(auth(credentials, ownProps.history, formName))
   }
 })
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(withStyles(styles)(AuthForm))
+export const Signup = connect(mapSignup, mapDispatch)(withStyles(styles)(AuthForm))

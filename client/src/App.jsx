@@ -68,7 +68,7 @@ class App extends Component {
     return (
       <div style={{height: '100vh'}}>
         <NavBar />
-        <Grid container style={{paddingTop: 80}}>
+        <Grid container style={{paddingTop: 80, textAlign: 'center'}}>
           <Switch>
             <Route path='/' exact render={() => <FrontPage authenticated={authenticated}/>} />
             <Route path='/home' component={Home} />
