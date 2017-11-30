@@ -11,10 +11,14 @@ import IconButton from 'material-ui/IconButton'
 const style = theme => ({
   root: {
     width: '100%',
-    color: '#fff'
+    backgroundColor: 'black',
   },
-  flex: {
-    flex: 1
+  title: {
+    fontFamily: 'Permanent Marker',
+    flex: 1,
+    '&:hover': {
+      color: '#eee'
+    }
   },
   menuButton: {
     marginLeft: -12,
@@ -30,15 +34,15 @@ const NavBar = props => {
         <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
           <Icon>menu</Icon>
         </IconButton>
-          <Typography
-            type='headline'
-            color='inherit'
-            className={classes.flex}
-            component={Link}
-            to='/'
-          >
-            DreamHub
-          </Typography>
+        <Typography
+          type='headline'
+          color='inherit'
+          className={classes.title}
+          component={Link}
+          to='/'
+        >
+          DreamHub
+        </Typography>
 
         {props.children}
       </Toolbar>

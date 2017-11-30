@@ -13,6 +13,29 @@ export const GoalTaskMapper = (tasks, goalId) => {
 
 export const MapGoalToTasks = goals => [].concat(...goals.map(g => g.tasks))
 
+// Not used at the moment
 export const MapTaksToGoals = (task, goals) => {
   return goals
+}
+
+// For task status update
+export const TaskStatusMapper = {
+  [TASK_STATUS.CREATED]: [
+    { text: 'Started working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'Finished it, yeh!', status: TASK_STATUS.COMPLETED },
+    { text: 'Maybe later', status: TASK_STATUS.LATER },
+  ],
+  [TASK_STATUS.LATER]: [
+    { text: 'I am working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'I got it done', status: TASK_STATUS.COMPLETED },
+  ],
+  [TASK_STATUS.IN_PROGRESS]: [
+    { text: 'Still working on it', status: TASK_STATUS.IN_PROGRESS },
+    { text: 'Done, yeeeeh!', status: TASK_STATUS.COMPLETED },
+    { text: 'Taking a break from it', status: TASK_STATUS.LATER },
+  ]
+}
+
+export const stalledTasksMapper = tasks => {
+  return tasks.filter(t => t.status !== TASK_STATUS.COMPLETED)
 }

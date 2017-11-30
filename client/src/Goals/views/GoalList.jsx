@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton'
 import Card, { CardContent, CardActions } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
+import AutoCompleteGoal from './AutoCompleteGoal'
 import AddCard from '../../common/AddCard'
 import GoalForm from './GoalForm'
 
@@ -41,6 +42,8 @@ class GoalList extends Component {
           goal={goal}
           onClose={this.closeModal}
         />
+
+        <AutoCompleteGoal />
         <AddCard type='goal' />
         <ul>
         {goals.map(goal => {

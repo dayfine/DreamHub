@@ -31,6 +31,7 @@ module.exports = (User, Goal, Task, Category) => {
   .then(() => {
     return Promise.all([
       Goal.create({ title: 'Travel', description: 'Want to go to somewhere', userId: 1 }),
+      Goal.create({ title: 'Travel to Peru', description: 'See Amazon & Machu Picchu!', userId: 3 }),
       Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 2 }),
       Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 3 }),
       Goal.create({ title: 'Own a house', description: 'American Dream', userId: 4 }),
@@ -42,6 +43,10 @@ module.exports = (User, Goal, Task, Category) => {
   .then(_goals => {
     return Promise.all([
       Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 1 }),
+      Task.create({ title: 'Book Machu Picchu Tour', description: 'Hiking Tour', goalId: 2 }),
+      Task.create({ title: 'Book Hotel @Cusco', description: 'Near the plaza', goalId: 2 }),
+      Task.create({ title: 'Research Activities in Lima', description: 'Just somewhere!', goalId: 2 }),
+      Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 2 }),
       Task.create({ title: 'T2', description: 'Want to go to Burundi', goalId: 2 }),
       Task.create({ title: 'T3', description: 'Spanish alphabet...', goalId: 3 }),
       Task.create({ title: 'T4', description: 'Save some money', goalId: 4, status: 'Completed' }),
