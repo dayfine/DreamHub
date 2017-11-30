@@ -38,7 +38,7 @@ const FrontPage = ({ authenticated }) => {
 const Home = props => {
   return (
     <Grid container>
-      <Grid item xs={8} >
+      <Grid item xs={9} >
         <TravelForm />
         {/*
           display travel component only if user responds "yes"
@@ -46,7 +46,7 @@ const Home = props => {
         */}
         <Goals />
       </Grid>
-      <Grid item xs={4} >
+      <Grid item xs={3} >
         <Checkup />
         <UserPanel />
       </Grid>

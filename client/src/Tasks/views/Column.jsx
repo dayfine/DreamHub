@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Card from './Card';
 
+import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
@@ -10,6 +11,12 @@ import Typography from 'material-ui/Typography';
 import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
 import { editTask } from '../../Tasks/actions'
+
+const styles = theme => ({
+  paper: {
+    backgroundColor: '#c9c9c9',
+  },
+})
 
 const columnTarget = {
   drop (props, monitor) {
@@ -25,10 +32,10 @@ const collect = (connect, monitor) => ({
 });
 
 const Column = props => {
-  const { header, tasks, connectDropTarget } = props
+  const { header, tasks, connectDropTarget, classes } = props
   return connectDropTarget(
     <div className="swimlane-container">
-      <Paper className="swimlane">
+      <Paper classes={{root: "swimlane"}} className={classes.paper}>
         <div className="swimlane-hed">
           <Typography type='headline' >
             { tasks.length } Tasks
@@ -50,5 +57,6 @@ const mapDispatch = ({ editTask });
 
 export default  connect(null, mapDispatch)(
                 DropTarget(DragItemTypes.CARD, columnTarget, collect)(
+                withStyles(styles)(
                   Column
-                ))
+                )))

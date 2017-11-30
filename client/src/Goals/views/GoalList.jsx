@@ -2,6 +2,7 @@ import React, { Component }  from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { withStyles } from 'material-ui/styles'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import Card, { CardContent, CardActions } from 'material-ui/Card'
@@ -13,12 +14,29 @@ import GoalForm from './GoalForm'
 
 import { mapCategoryToGoal } from '../util/mappers'
 
+const styles = {
+  title: {
+    display: 'flex',
+    padding: 24,
+    flexDirection: 'column',
+    color: 'white',
+    backgroundColor: 'black'
+  },
+  flexCard: {
+    display: 'flex',
+  },
+  goalInfo: {
+    width: 160,
+    height: 140
+  },
+  flex: {
+    flex: '1 0 auto',
+  }
+}
+
 class GoalList extends Component {
-  constructor () {
-    super()
-    this.state = {
-      modalId: null
-    }
+  state = {
+    modalId: null
   }
 
   openModal = modalId => {
@@ -49,18 +67,17 @@ class GoalList extends Component {
         {goals.map(goal => {
           return (
             <Card key={goal.id}>
-              <CardActions>
-                <IconButton
-                  onClick={this.openModal.bind(this, goal.id)}
-                  aria-label='Edit'>
+              <CardContent>
+                <div>
+                  <Typography type='display1'>
+                    {goal.title}
+                  </Typography>
+                  <IconButton
+                    onClick={this.openModal.bind(this, goal.id)}
+                    aria-label='Edit'>
                   <Icon>mode_edit</Icon>
                 </IconButton>
-              </CardActions>
-
-              <CardContent>
-                <Typography type='display1'>
-                  {goal.title}
-                </Typography>
+                </div>
                 {goal.category}
                 <br />
                 {goal.description}
@@ -82,4 +99,7 @@ const mapState = state => ({
   goals: mapCategoryToGoal(state.categories, state.goals)
 })
 
-export default connect(mapState)(GoalList)
+export default  connect(mapState)(
+                withStyles(styles)(
+                  GoalList
+                ))
