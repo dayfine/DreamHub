@@ -14,6 +14,12 @@ router.get('/', (req, res, next)=> {
     .catch(next);
 });
 
+router.get('/search?progress=accomplished', (req, res, next)=> {
+  Goal.findAll({where: {progress: 'Accomplished'}})
+    .then(goals => res.send(goals))
+    .catch(next);
+});
+
 router.get('/:id', (req, res, next) => {
   Goal.findById(req.params.id, { include: [ Task ] })
     .then(goal => res.send(goal))

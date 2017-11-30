@@ -112,6 +112,11 @@ class GoalAutosuggest extends Component {
     suggestions: [],
   };
 
+  compomentDidMount() {
+
+  }
+
+
   getMatches = ({ value }) => {
     console.log(this.props, value)
     const { goals } = this.props

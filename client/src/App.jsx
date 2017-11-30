@@ -21,16 +21,6 @@ import { loadUserData } from './Auth/actions'
 
 const storage = window.localStorage
 
-const FrontPage = ({ authenticated }) => {
-  return authenticated
-    ? (<Home />)
-    : (
-      <div>
-        <Welcome />
-      </div>
-    )
-}
-
 const Home = props => {
   return (
     <Grid container>
@@ -66,7 +56,7 @@ class App extends Component {
         <NavBar />
         <Grid container style={{paddingTop: 80}}>
           <Switch>
-            <Route path='/' exact render={() => <FrontPage authenticated={authenticated} />} />
+            <Route path='/' exact component={authenticated ? Home : Welcome} />
             <Route path='/home' component={Home} />
             <Route path='/kanban/:goalId' component={Kanban} />
             <Route path='/goals/:goalId' component={GoalPanel} />

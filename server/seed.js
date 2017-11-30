@@ -43,9 +43,6 @@ module.exports = (User, Goal, Task, Category) => {
   .then(_goals => {
     return Promise.all([
       Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 1 }),
-      Task.create({ title: 'Book Machu Picchu Tour', description: 'Hiking Tour', goalId: 2 }),
-      Task.create({ title: 'Book Hotel @Cusco', description: 'Near the plaza', goalId: 2 }),
-      Task.create({ title: 'Research Activities in Lima', description: 'Just somewhere!', goalId: 2 }),
       Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 2 }),
       Task.create({ title: 'T2', description: 'Want to go to Burundi', goalId: 2 }),
       Task.create({ title: 'T3', description: 'Spanish alphabet...', goalId: 3 }),

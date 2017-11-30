@@ -33,6 +33,7 @@ export const logout = history => dispatch => {
   delete axios.defaults.headers.common['Authorization']
   delete storage.authToken
 
+  history.push('/')
   dispatch(setAuth(false))
   dispatch(resetData())
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import ProperButton from '../../common/ProperButton'
 
 import { logout } from '../actions'
@@ -42,4 +42,4 @@ const mapDispatch = (dispatch, ownProps) => ({
   }
 })
 
-export default connect(mapState, mapDispatch)(AuthForm)
+export default withRouter(connect(mapState, mapDispatch)(AuthForm))
