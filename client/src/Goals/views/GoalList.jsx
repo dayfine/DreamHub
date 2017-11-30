@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
+import Grid from 'material-ui/Grid'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import Card, { CardContent, CardActions } from 'material-ui/Card'
@@ -14,22 +15,8 @@ import GoalForm from './GoalForm'
 import { mapCategoryToGoal } from '../util/mappers'
 
 const styles = {
-  title: {
-    display: 'flex',
-    padding: 24,
-    flexDirection: 'column',
-    color: 'white',
-    backgroundColor: 'black'
-  },
-  flexCard: {
-    display: 'flex',
-  },
-  goalInfo: {
-    width: 160,
-    height: 140
-  },
-  flex: {
-    flex: '1 0 auto',
+  root: {
+    flexGrow: 1
   }
 }
 
@@ -47,22 +34,24 @@ class GoalList extends Component {
   }
 
   render () {
-    const { goals, categories } = this.props
+    const { goals, categories, classes } = this.props
     const { modalId } = this.state
 
     const goal = goals.find(g => g.id === modalId)
 
     return (
-      <div id='container'>
+      <div className={classes.root}>
         <GoalForm
           open={!!modalId}
           goal={goal}
           onClose={this.closeModal}
         />
         <AutoCompleteGoal />
-        <ul>
+        <Grid container>
+
         {goals.map(goal => {
           return (
+            <Grid item sm={6} md={4}>
             <Card key={goal.id}>
               <CardContent>
                 <div>
@@ -84,9 +73,10 @@ class GoalList extends Component {
                 <Link to={ `/goals/${goal.id}`}>See Details</Link>
               </CardContent>
             </Card>
+            </Grid>
           )
         })}
-        </ul>
+        </Grid>
       </div>
     )
   }

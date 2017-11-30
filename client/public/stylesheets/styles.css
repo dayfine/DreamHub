@@ -1,9 +1,35 @@
-html,
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 17px;
-  margin: 0;
-  padding: 0;
+.App {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 16px;
+  padding: 0 24px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mui-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 main {
@@ -26,19 +52,6 @@ ul {
   padding: 0;
 }
 
-/*h1 {
-  font-size: 3em;
-  padding-top: 1em;
-}
-
-h2 {
-  font-size: 1.5em;
-}
-
-h3 {
-  font-size: 1.125em;
-}*/
-
 p {
   text-align: left;
 }
@@ -47,11 +60,6 @@ footer {
   position: static;
   bottom: 0;
   padding: 1em 2em;
-}
-
-#container {
-  margin: 0 auto;
-  max-width: 500px;
 }
 
 #task-container {

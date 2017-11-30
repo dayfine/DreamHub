@@ -1,4 +1,4 @@
-const completedGoals =require('./seed-goal')
+const completedGoals = require('./seed-goal')
 
 module.exports = (User, Goal, Task, Category) => {
   let users

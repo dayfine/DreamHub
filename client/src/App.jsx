@@ -52,7 +52,7 @@ class App extends Component {
     const { authenticated } = this.props
 
     return (
-      <div style={{height: '100vh'}}>
+      <div className='App'>
         <NavBar />
         <Grid container style={{paddingTop: 80}}>
           <Switch>

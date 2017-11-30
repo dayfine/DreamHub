@@ -33,6 +33,7 @@ const styles = theme => ({
   },
   textFieldRoot: {
     padding: 0,
+    minWidth: 120,
     flex: '0 1 25%'
   },
   textFieldInput: {
@@ -82,7 +83,7 @@ const NavBar = props => {
         <ProperButton color='contrast'>
           Explore
         </ProperButton>
-        <div style={{flex: '1 0 20%'}} />
+        <div style={{flex: '1 5 20%'}} />
         <Checkup />
         <Auth />
       </Toolbar>
