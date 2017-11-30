@@ -1,6 +1,8 @@
+const completedGoals =require('./seed-goal')
+
 module.exports = (User, Goal, Task, Category) => {
   let users
-  // let goals, tasks
+
   return Promise.all([
     User.create({ name: 'Anthony', password: 'anthony', email: 'anthony@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
     User.create({ name: 'Burcu', password: 'burcu', email: 'burcu@cap.com' }, { include: [{ model: User, as: 'friends' }] }),
@@ -40,7 +42,7 @@ module.exports = (User, Goal, Task, Category) => {
       Goal.create({ title: 'I am completed', description: '100% done', userId: 5, categoryId: 2, progress: 'Accomplished' })
     ])
   })
-  .then(_goals => {
+  .then(() => {
     return Promise.all([
       Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 1 }),
       Task.create({ title: 'T1', description: 'Just somewhere!', goalId: 2 }),
@@ -56,5 +58,8 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T5', description: 'Fiv, aseomw', goalId: 5 }),
       Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' })
     ])
+  })
+  .then(() => {
+    return Promise.all(completedGoals.map(_goal => Goal.createGoalTasksFromObj(_goal)))
   })
 }

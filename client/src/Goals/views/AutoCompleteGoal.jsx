@@ -168,7 +168,6 @@ class GoalAutosuggest extends Component {
 }
 
 const mapState = state => ({
-  goals: state.goals.filter(g => g.progress === GOAL_PROGRESS.ACCOMPLISHED)
 })
 
 export default  connect(mapState)(

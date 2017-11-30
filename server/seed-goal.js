@@ -10,3 +10,5 @@ const peruTrip = {
     { title: 'Research Activities in Lima', description: 'Just somewhere!', status: 'Completed' }
   ],
 }
+
+module.exports = [ peruTrip ]
