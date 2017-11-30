@@ -8,11 +8,10 @@ import GoalPanel from './Goals/views/GoalPanel'
 import { views as Goals } from './Goals'
 import { views as Kanban } from './Tasks'
 import Checkup from './Tasks/views/Checkup'
-
 import { views as Welcome } from './Welcome'
 import { views as TravelForm } from './Travel'
 import { views as Friends } from './Friends'
-import { views as Auth, Login, Signup } from './Auth'
+import { Login, Signup } from './Auth'
 import { views as UserPanel } from './User'
 
 import NavBar from './common/NavBar'
@@ -21,7 +20,6 @@ import store from './Store'
 import { fetchCategories } from './Category/actions'
 import { loadUserData } from './Auth/actions'
 
-const styles = {}
 const storage = window.localStorage
 
 const FrontPage = ({ authenticated }) => {
@@ -69,7 +67,7 @@ class App extends Component {
 
     return (
       <div style={{height: '100vh'}}>
-        <NavBar children={<Auth />} />
+        <NavBar />
         <Grid container style={{paddingTop: 80}}>
           <Switch>
             <Route path='/' exact render={() => <FrontPage authenticated={authenticated}/>} />
@@ -77,6 +75,8 @@ class App extends Component {
             <Route path='/kanban/:goalId' component={Kanban} />
             <Route path='/goals/:goalId' component={GoalPanel} />
             <Route path='/friends/' component={Friends} />
+            <Route path='/login/' component={Login} />
+            <Route path='/signup/' component={Signup} />
           </Switch>
         </Grid>
       </div>

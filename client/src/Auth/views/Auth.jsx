@@ -1,23 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Button from 'material-ui/Button'
+import { Link } from 'react-router-dom'
+import ProperButton from '../../common/ProperButton'
 
 import { logout } from '../actions'
-
-
-
 
 const AuthForm = ({ authenticated, onLogOut }) => {
   return authenticated
     ? (
-      <Button color='contrast' onClick={onLogOut}>
+      <ProperButton color='contrast' onClick={onLogOut}>
         Logout
-      </Button>
+      </ProperButton>
     ) : (
-      <div>
-        <Button color='contrast'>Sign In</Button>
-        or
-        <Button color='contrast'>Sign Up</Button>
+      <div style={{display: 'inline-flex', flexGrow: 2}}>
+        <ProperButton
+          component={Link}
+          to='/login'
+          color='contrast'
+        >
+          Sign In
+        </ProperButton>
+        <ProperButton
+          component={Link}
+          to='/signup'
+          color='contrast'
+        >
+          Sign Up
+        </ProperButton>
       </div>
 
     )
@@ -34,10 +43,3 @@ const mapDispatch = (dispatch, ownProps) => ({
 })
 
 export default connect(mapState, mapDispatch)(AuthForm)
-
-
-  {
-    //<Button color='contrast' href='//localhost:3001/api/auth/google'>
-    //  Login with Google
-    //</Button>
-  }

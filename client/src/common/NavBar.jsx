@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { views as Auth } from '../Auth'
+import ProperButton from './ProperButton'
+
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
@@ -16,6 +19,7 @@ const styles = theme => ({
   },
   title: {
     fontFamily: 'Permanent Marker',
+    fontSize: '1.75em',
     padding: '0 24px 0 0',
     '&:hover': {
       color: '#eee'
@@ -70,7 +74,14 @@ const NavBar = props => {
             },
           }}
         />
-        {props.children}
+        <ProperButton color='contrast'>
+          Goals
+        </ProperButton>
+        <ProperButton color='contrast'>
+          Explore
+        </ProperButton>
+        <div style={{flex: '1 0 20%'}} />
+        <Auth />
       </Toolbar>
     </AppBar>
   )
