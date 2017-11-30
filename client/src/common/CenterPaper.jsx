@@ -6,7 +6,7 @@ const styles = {
   center: {
     flex: '0 0 auto',
     textTransform: 'none',
-    margin: '0 auto',
+    margin: '20px auto 0 auto',
     textAlign: 'center',
     fontSize: '1em',
     backgroundColor: '#f1f1f1'

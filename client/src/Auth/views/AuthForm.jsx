@@ -11,14 +11,19 @@ import TextField from 'material-ui/TextField'
 import { auth } from '../actions'
 
 const styles = theme => ({
-  // textField: {
-  //   flex: '1 0 80%',
-  // },
-  flexContainer: {
-    // display: 'flex',
-    // // alignItems: 'center',
-    // flexDirection: 'row',
-    // // justify: 'center',
+  cardContainer: {
+    padding: '32px 10px 0 10px',
+    height: 360,
+    display: 'flex',
+  },
+  textField: {
+    // fontSize: '1.5em',
+    // height: '1.5em'
+  },
+  fieldGroup: {
+    minWidth: 280,
+    flex: '0 0 auto',
+    padding: '16px 0'
   }
 })
 
@@ -27,41 +32,41 @@ const AuthForm = props => {
 
   return (
     <CenterPaper>
-      <Card>
+      <Card className={classes.cardContainer}>
         <CardContent>
           <Typography type='headline' >
             { name === 'login' ? 'Sign in to' : 'Sign up for'} DreamHub
           </Typography>
 
-          <form onSubmit={handleSubmit} name={name} className={classes.flexContainer}>
-            <div>
-              <TextField
-                name='email'
-                label='Email'
-                margin='normal'
-                fullWidth
-                className={classes.textField}
-              />
+          <form onSubmit={handleSubmit} name={name}>
+            <div className={classes.fieldGroup}>
+              <Typography type='display1' align='center'>
+                <TextField
+                  name='email'
+                  label='Email'
+                  margin='normal'
+                  fullWidth
+                  required
+                  className={classes.textField}
+                />
+              </Typography>
+              <Typography type='display1' align='center'>
+                <TextField
+                  name='password'
+                  type='password'
+                  label='Password'
+                  margin='normal'
+                  fullWidth
+                  required
+                  className={classes.textField}
+                />
+              </Typography>
             </div>
-            <div>
-              <TextField
-                name='password'
-                type='password'
-                label='Password'
-                margin='normal'
-                fullWidth
-                className={classes.textField}
-              />
-            </div>
-            <div className='row'>
-              <div className='col-xs-6'>
-                <button className='btn btn-primary' type='submit'>{displayName}</button>
-              </div>
-              <div className='col-xs-6'>
-                <a href='/api/auth/google'>
-                  Login With Google
-                </a>
-              </div>
+            <div className='d-flex justify-content-between'>
+              <button className='btn btn-primary' type='submit'>{displayName}</button>
+              <a href='/api/auth/google'>
+                <img src={`../../public/images/gsignin.png`} style={{width: 'auto', height: 44}}/>
+              </a>
             </div>
             {error && error.response && <div> {error.response.message} </div>}
           </form>
