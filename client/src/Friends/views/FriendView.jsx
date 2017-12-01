@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 
+import FriendGoalItem from './FriendGoalItem'
 import classnames from 'classnames';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Collapse from 'material-ui/transitions/Collapse';
@@ -9,7 +10,6 @@ import Avatar from 'material-ui/Avatar';
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography';
 import red from 'material-ui/colors/red';
 
 import { removeFriend } from '../actions'
@@ -96,7 +96,7 @@ class FriendCard extends Component {
           <CardContent>
             {friend.goals.map(goal => {
               return (
-                <div />
+                <FriendGoalItem goal={goal} />
               )
             })}
           </CardContent>
