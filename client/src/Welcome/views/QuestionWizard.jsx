@@ -57,7 +57,7 @@ const RenderInput = props => {
       return (<input {...control} />)
 
     case 'textarea':
-      return (<TextField multiline rows='4' />)
+      return (<TextField multiline rows='4' {...control} />)
 
     default:
       return (<div>Unknown Input Type</div>)
@@ -71,25 +71,38 @@ const RenderConfirmationButton = ({idx, handleAnswer}) => {
 }
 
 const QuestionWizard = props => {
-  const { idx, handleAnswer, handleChange, classes } = props
+  const { idx, answers, handleAnswer, handleChange, classes } = props
   const question = questions[idx]
+
+  // Using single control only
+  const control = question.controls[0]
 
   return (
     <div className={classes.root}>
+
       <span> {idx + 1} of {questions.length} </span>
+
       <Typography align='center' type='headline' className={classes.title}>
         {question.title}
       </Typography>
+
       <Typography align='left' type='body2' className={classes.description}>
         {question.description}
       </Typography>
+
       <div className={classes.inputs}>
-        {question.controls.map((control, idx) => {
-          return (
-            <RenderInput control={{...control, onChange: handleChange}} key={idx} />
-          )
-        })}
-        <RenderConfirmationButton idx={idx} handleAnswer={handleAnswer} />
+        <RenderInput
+          key={idx}
+          control={{
+            ...control,
+            onChange: handleChange,
+            value: answers[control.name]
+          }}
+        />
+        <RenderConfirmationButton
+          idx={idx}
+          handleAnswer={handleAnswer}
+        />
       </div>
     </div>
   )

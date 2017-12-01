@@ -29,38 +29,26 @@ class Quiz extends React.Component {
     super()
     this.state = {
       idx: 0,
-      answers: {
-        // setGoal: '',
-        // progressTrack: '',
-        // excitement: 0,
-        // deadline: '',
-        // longShortTerms: [],
-        // emotionalReason: '',
-        // conflict: false,
-        // affirmations: []
-      },
-      value: ''
+      answers: {},
     }
   }
 
   handleChange = ev => {
-    console.log(ev.target.name, ev.target.value)
+    const update = {}
+    update[ev.target.name] = ev.target.value
+    this.setState({
+      answers: { ...this.state.answers, ...update },
+    })
   }
 
   handleAnswer = ev => {
     ev.preventDefault();
-    console.log(this.state.answers)
-//    console.log('answers obj', this.state.answers)
-//    this.setState({answers: { this.state.answers.setGoal: inputEvent.value }})
-//    console.log('answers obj', this.state.answers)
-
-    // this.props.createGoal(inputEvent.value)
+    // Needs userId in here
+    this.props.createGoal(this.state.answers)
   }
 
   handleNextClick = ev => {
-    const { idx } = this.state // might need to handle state for final creation
     this.handleSkipClick()
-    this.handleAnswer(ev)
   }
 
   handleSkipClick = () => {
@@ -69,7 +57,8 @@ class Quiz extends React.Component {
   }
 
   handleBackClick = () => {
-    this.setState({ idx: this.state.idx - 1 });
+    const { idx } = this.state
+    this.setState({ idx: idx === 0 ? 0 : idx - 1 });
   }
 
   render(){
@@ -81,6 +70,7 @@ class Quiz extends React.Component {
         <div className={classes.quizContainer}>
           <QuestionWizard
             idx={idx}
+            answers={this.state.answers}
             handleAnswer={this.handleAnswer}
             handleChange={this.handleChange}
           />

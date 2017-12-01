@@ -49,43 +49,43 @@ export default [
       }
     ]
   },
-  {
-    id: 4,
-    title: 'Let\'s break down your goal into long-term and short-term goals',
-    description: 'So you can review your plans over time',
-    controls: [
-      {
-        type: 'text',
-        name: 'plan',
-        label: 'Ultimate Goal',
-        placeholder: 'What is your ultimate goal?'
-      },
-      {
-        type: 'text',
-        name: 'plan',
-        label: '12 month goal',
-        placeholder: 'What is your 12 month goal?'
-      },
-      {
-        type: 'text',
-        name: 'plan',
-        label: 'Three month goal',
-        placeholder: 'What is your three month goal?'
-      },
-      {
-        type: 'text',
-        name: 'plan',
-        label: 'Weekly goal',
-        placeholder: 'What is your weekly goal?'
-      },
-      {
-        type: 'text',
-        name: 'plan',
-        label: 'Daily goal',
-        placeholder: 'What is your daily goal?'
-      }
-    ]
-  },
+  // {
+  //   id: 4,
+  //   title: 'Let\'s break down your goal into long-term and short-term goals',
+  //   description: 'So you can review your plans over time',
+  //   controls: [
+  //     {
+  //       type: 'text',
+  //       name: 'plan',
+  //       label: 'Ultimate Goal',
+  //       placeholder: 'What is your ultimate goal?'
+  //     },
+  //     {
+  //       type: 'text',
+  //       name: 'plan',
+  //       label: '12 month goal',
+  //       placeholder: 'What is your 12 month goal?'
+  //     },
+  //     {
+  //       type: 'text',
+  //       name: 'plan',
+  //       label: 'Three month goal',
+  //       placeholder: 'What is your three month goal?'
+  //     },
+  //     {
+  //       type: 'text',
+  //       name: 'plan',
+  //       label: 'Weekly goal',
+  //       placeholder: 'What is your weekly goal?'
+  //     },
+  //     {
+  //       type: 'text',
+  //       name: 'plan',
+  //       label: 'Daily goal',
+  //       placeholder: 'What is your daily goal?'
+  //     }
+  //   ]
+  // },
   {
     id: 5,
     title: 'Is there an emotional reason why you want to achieve your goal?',

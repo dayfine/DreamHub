@@ -1,10 +1,7 @@
-import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, SET_GOALS, GET_GOALS } from './actionTypes';
+import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, SET_GOALS } from './actionTypes'
 
 export default (state = [], action) => {
   switch (action.type) {
-    case GET_GOALS:
-      return action.goals
-      
     case ADD_GOAL:
       return [ ...state, action.goal ]
 

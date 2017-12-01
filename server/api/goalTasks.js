@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { Goal, Task } = require('../db').models;
+const router = require('express').Router()
+const { Goal, Task } = require('../db').models
 
 // Not using at the moment
 // router.get('/', (req, res, next) => {
@@ -8,49 +8,50 @@ const { Goal, Task } = require('../db').models;
 //     .catch(next);
 // });
 
-router.get('/', (req, res, next)=> {
+router.get('/', (req, res, next) => {
   Goal.findAll()
     .then(goals => {
 //    goals.forEach(goal => console.log('These are all the gaols:', goal.dataValues.title, goal.dataValues.description))
-    res.send(goals)})
-    .catch(next);
-});
+      res.send(goals)
+    })
+    .catch(next)
+})
 
-router.get('/search', (req, res, next)=> {
+router.get('/search', (req, res, next) => {
   console.log('blah', req.query)
   Goal.findAll({where: {progress: req.query.progress}})
     .then(goals => res.send(goals))
-    .catch(next);
-});
+    .catch(next)
+})
 
 router.get('/:id', (req, res, next) => {
   Goal.findById(req.params.id, { include: [ Task ] })
     .then(goal => res.send(goal))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Works
 router.post('/', (req, res, next) => {
   Goal.create(req.body)
     .then(goal => res.send(goal))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Works
 router.put('/:id', (req, res, next) => {
   Goal.findById(req.params.id)
     .then(goal => goal.update(req.body))
     .then(_goal => res.send(_goal))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Works
 router.delete('/:id', (req, res, next) => {
   Goal.findById(req.params.id)
     .then(goal => goal.destroy())
     .then(() => res.sendStatus(202))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Tasks
 // Not using at the moment
@@ -65,8 +66,8 @@ router.delete('/:id', (req, res, next) => {
 router.post('/:id/tasks', (req, res, next) => {
   Task.create(req.body)
     .then(task => res.send(task))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Works
 router.put('/:id/tasks/:taskId', (req, res, next) => {
@@ -74,15 +75,15 @@ router.put('/:id/tasks/:taskId', (req, res, next) => {
   Task.findById(req.params.taskId)
     .then(task => task.update(req.body))
     .then(_task => res.send(_task))
-    .catch(next);
-});
+    .catch(next)
+})
 
 // Works
 router.delete('/:id/tasks/:taskId', (req, res, next) => {
   return Task.findById(req.params.taskId)
     .then(task => task.destroy())
     .then(() => res.sendStatus(201))
-    .catch(next);
-});
+    .catch(next)
+})
 
-module.exports = router;
+module.exports = router
