@@ -1,5 +1,5 @@
-const conn = require('./conn');
-const Sequelize = conn.Sequelize;
+const conn = require('./conn')
+const Sequelize = conn.Sequelize
 
 const Category = conn.define('category', {
   name: {
@@ -7,9 +7,13 @@ const Category = conn.define('category', {
     allowNull: false,
     unique: true,
     set (val) {
-      this.setDataValue('name', `${val[0].toUpperCase()}${val.slice(1)}`);
+      this.setDataValue('name', `${val[0].toUpperCase()}${val.slice(1)}`)
     }
+  },
+  color: {
+    type: Sequelize.STRING,
+    defaultValue: '#ff8a80'
   }
-});
+})
 
 module.exports = Category

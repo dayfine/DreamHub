@@ -25,7 +25,10 @@ const styles = theme => ({
     padding: '16px 0'
   },
   error: {
-    backgroundColor: 'red'
+    marginTop: 4,
+    backgroundColor: '#c85a54',
+    color: 'white',
+    textTransform: 'uppercase'
   }
 })
 
@@ -70,7 +73,9 @@ const AuthForm = props => {
               </a>
             </div>
             {error && error.response &&
-              <Typography className={classes.error}>{error.response.data.message}</Typography>
+              <Typography type='subheading' align='center' className={classes.error} >
+                {error.response.data.message}
+              </Typography>
             }
           </form>
         </CardContent>

@@ -12,6 +12,7 @@ const styles = {
   quizContainer: {
     width: '50vw',
     height: '60vh',
+    backgroundColor: 'white'
   },
   buttonGruop: {
     display: 'flex',
