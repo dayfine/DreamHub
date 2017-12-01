@@ -34,8 +34,6 @@ class Quiz extends React.Component {
   
   componentDidMount(){
     this.props.fetchAllGoals()
-    
-   
   }
 
   handleChange(ev) {
@@ -58,7 +56,10 @@ class Quiz extends React.Component {
   }
 
   handleSkipClick = () => {
-    this.setState({counter: this.state.counter+1});
+    const { counter } = this.state;
+    counter > 6 ?
+      this.setState({counter: 0}) :
+      this.setState({counter: counter+1});
   }
 
   handleBackClick = () => {
