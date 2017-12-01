@@ -8,7 +8,7 @@ import { logout } from '../actions'
 const AuthForm = ({ authenticated, onLogOut }) => {
   return authenticated
     ? (
-      <ProperButton color='contrast' onClick={onLogOut}>
+      <ProperButton onClick={onLogOut}>
         Logout
       </ProperButton>
     ) : (
@@ -16,14 +16,12 @@ const AuthForm = ({ authenticated, onLogOut }) => {
         <ProperButton
           component={Link}
           to='/login'
-          color='contrast'
         >
           Sign In
         </ProperButton>
         <ProperButton
           component={Link}
           to='/signup'
-          color='contrast'
         >
           Sign Up
         </ProperButton>

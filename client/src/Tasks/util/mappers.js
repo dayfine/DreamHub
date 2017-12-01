@@ -37,12 +37,13 @@ export const TaskStatusMapper = {
 }
 
 export const stalledTasksMapper = tasks => {
+  console.log('In mapper', tasks)
   const timeDiffToDay = task => {
-    return (new Date(task.updatedAt) - new Date()) / 1000 / 3600 / 24
+    return (new Date() - new Date(task.updatedAt)) / 1000 / 3600 / 24
   }
 
   return tasks.filter(t => {
     return t.status !== TASK_STATUS.COMPLETED &&
-           timeDiffToDay(t) > 3
+           timeDiffToDay(t) > 0 // Dev only, should be 3
   })
 }

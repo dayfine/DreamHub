@@ -16,7 +16,7 @@ const Kanban = props => {
   return (
     <div style={{width: '100%', padding: 20}}>
       <QuickAddTask goalId={goalId} />
-      <Grid container style={{height: 'calc(100vh - 80px)'}} spacing={24}>
+      <Grid container style={{height: 'calc(100vh - 120px)'}} spacing={24}>
         {tasks.map(([status, tasks]) => {
           return (
             <Grid item xs={3} key={status}>

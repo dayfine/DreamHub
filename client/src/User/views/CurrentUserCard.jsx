@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom'
 
 import Setting from './UserSetting'
 
+import { withStyles } from 'material-ui/styles'
 import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
+
+const styles = {
+  media: {
+    height: 140,
+    width: 155,
+    margin: '0 auto'
+  },
+};
 
 // Create a separate modal to open setting, and pull in only for current user
 class CurrentUserCard extends Component {
@@ -24,7 +33,7 @@ class CurrentUserCard extends Component {
     const { user, goals, classes } = this.props
     const { modalId } = this.state
 
-    return (
+    return !user ? (<div>Loading...</div>) : (
       <div>
         <Setting
           open={!!modalId}
@@ -32,6 +41,7 @@ class CurrentUserCard extends Component {
         />
         <Card>
           <CardMedia
+            className={classes.media}
             image={`/public/images/${user.imgUrl}`}
             title='User Profile'
           />
@@ -56,8 +66,11 @@ class CurrentUserCard extends Component {
 }
 
 const mapState = (state, ownProps) => ({
-  user: ownProps.user || state.currentUser,
-  goals: ownProps.goals || state.goals
+  user: state.currentUser,
+  goals: state.goals
 })
 
-export default connect(mapState)(CurrentUserCard)
+export default  connect(mapState)(
+                withStyles(styles)(
+                  CurrentUserCard
+                ))

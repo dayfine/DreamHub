@@ -85,6 +85,7 @@ class Checkup extends Component {
   render() {
     const { onOpen, onClose, renderTaskOptions } = this
     const { tasks, classes, editTask } = this.props
+    console.log(tasks)
 
     return tasks.length > 0 && (
       <div>

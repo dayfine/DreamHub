@@ -7,11 +7,10 @@ import { withStyles } from 'material-ui/styles'
 import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
 
 const styles = {
-  card: {
-    maxWidth: 345,
-  },
   media: {
-    height: 200,
+    height: 140,
+    width: 155,
+    margin: '0 auto'
   },
 };
 
