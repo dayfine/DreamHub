@@ -1,7 +1,5 @@
-import React, { Component }  from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import Setting from './UserSetting'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
@@ -11,8 +9,8 @@ const styles = {
     height: 140,
     width: 155,
     margin: '0 auto'
-  },
-};
+  }
+}
 
 const UserCard = props => {
   const { user, goals, classes } = props
