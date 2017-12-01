@@ -56,6 +56,7 @@ class GoalHome extends Component {
               fullWidth
               centered
             >
+              <Tab label='Details' />
               <Tab label='Board' />
               <Tab label='List' />
               <Tab label='Item Three' />
@@ -65,6 +66,7 @@ class GoalHome extends Component {
             index={this.state.value}
             onChangeIndex={this.handleChangeIndex}
           >
+            <TabContainer>Goal Details</TabContainer>
             <TabContainer>
               <Kanban goalId={goal.id}/>
             </TabContainer>

@@ -15,7 +15,7 @@ const peruTrip = {
 }
 
 const learnML = {
-  title: 'Learn Deeping Learning',
+  title: 'Learn Deep Learning',
   description: '',
   progress: 'Accomplished',
   budget: 300,

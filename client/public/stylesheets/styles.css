@@ -1,7 +1,10 @@
+html, body {
+  height: 100%;
+}
+
 .App {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  padding: 0 24px;
   height: 100vh;
   width: 100vw;
 /*  background: #fffef6;*/
@@ -34,9 +37,12 @@
 }
 
 main {
-  margin: 0 auto;
-  min-height: 500px;
+  margin: 0 auto -40px auto;
+  min-height: 100%;
+  height: 100%;
   text-align: center;
+  padding: 120px 24px 0 24px;
+  max-width: 1200px;
 }
 
 a:hover {
@@ -55,12 +61,6 @@ ul {
 
 p {
   text-align: left;
-}
-
-footer {
-  position: static;
-  bottom: 0;
-  padding: 1em 2em;
 }
 
 #task-container {

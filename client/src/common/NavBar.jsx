@@ -45,9 +45,9 @@ const styles = theme => ({
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
       borderColor: '#81d4fa',
-      boxShadow: '0 0 0 0.2rem rgb(223,223,255)',
-    },
-  },
+      boxShadow: '0 0 0 0.2rem rgb(223,223,255)'
+    }
+  }
 })
 
 const NavBar = props => {
@@ -71,13 +71,13 @@ const NavBar = props => {
           InputProps={{
             disableUnderline: true,
             classes: {
-              input: classes.textFieldInput,
-            },
+              input: classes.textFieldInput
+            }
           }}
           className={classes.textFieldRoot}
         />
-        <ProperButton>
-          Goals
+        <ProperButton component={Link} to='/category'>
+          Categories
         </ProperButton>
         <ProperButton>
           Explore

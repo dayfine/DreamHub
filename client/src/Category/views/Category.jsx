@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 export default class Demo extends React.Component {
-
-  render() {
+  render () {
     return (
-      <div />
-    );
+      <div> Let's do this</div>
+    )
   };
 }

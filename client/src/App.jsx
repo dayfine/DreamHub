@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import NavBar from './common/NavBar'
+import Footer from './common/Footer'
 import Routes from './Routes'
 
 import store from './Store'
@@ -23,6 +24,7 @@ export default class App extends Component {
       <div className='App'>
         <NavBar />
         <Routes />
+        <Footer />
       </div>
     )
   }

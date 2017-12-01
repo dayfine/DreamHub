@@ -10,7 +10,7 @@ import { GoalTaskMapper } from '../util/mappers'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-// Main view. Module Entry Point
+// Main view. Used as one of the view for single goal home.
 const Kanban = props => {
   const { goalId, tasks } = props
   return (
@@ -31,9 +31,7 @@ const Kanban = props => {
 
 const mapState = (state, ownProps) => {
   const { goalId } = ownProps
-  // const { goalId } = ownProps.match.params
   return {
-    goalId: goalId,
     tasks: Object.entries(GoalTaskMapper(state.tasks, +goalId))
   }
 }
