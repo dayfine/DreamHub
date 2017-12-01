@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from 'material-ui/Grid';
 import styles from './styles';
 
-import { createGoal, fetchGoals } from '../../Goals/actions';
+import { createGoal, fetchGoals, fetchAllGoals } from '../../Goals/actions';
 import { connect } from 'react-redux';
 import goalWizard, { formDisplay } from './goalWizard';
 
@@ -14,28 +14,47 @@ class Quiz extends React.Component {
       goal: [],
       currentUser: 'Current User',
       counter: 0,
-      answers: {}
+      answers: {
+        setGoal: '', 
+        progressTrack: '', 
+        excitement: 0,
+        deadline: '',
+        longShortTerms: [],
+        emotionalReason: '',
+        conflict: false,
+        affirmations: []
+      }
     }
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
+    
   }
   
   componentDidMount(){
-    this.props.fetchGoals()
+    this.props.fetchAllGoals()
+    
+   
   }
 
-  handleChange = ev => {
+  handleChange(ev) {
     this.setState({sliderNum: ev.target.value })
   }
 
-  handleSubmit = ev => {
+  handleSubmit(ev) {
     ev.preventDefault();
-    console.log('This is the event target from handleSubmit', ev.target.name)
+    console.log('submit', ev.target)
 //    this.props.createGoal(event.target.myInput.value)
 //    event.target.myInput.value='';
   }
 
-  handleNextClick = ev => {
-    this.setState({counter: this.state.counter+1});
-
+  handleNextClick(ev) {
+    const { counter } = this.state;
+    counter > 6 ?
+      this.setState({counter: 0}) :
+      this.setState({counter: counter+1});
+    
   }
 
   handleSkipClick = () => {
@@ -51,6 +70,8 @@ class Quiz extends React.Component {
     const { questionStyle, goalsListDisplay } = styles;
     const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
     const question = goalWizard[counter];
+    
+
     return (
       <div>
           <div style={questionStyle} key={question.id}>
@@ -58,8 +79,7 @@ class Quiz extends React.Component {
           </div>
         
           <div style={goalsListDisplay}>Goals go here: {this.props.goals.map(goal => {
-              console.log('This is the goal in the map', goal)
-              return <p key={goal.id}>{goal.title}</p>
+              return <p key={goal.id}>{goal.description}</p>
             })} </div>
       </div>
     )
@@ -71,7 +91,7 @@ const mapState = state => ({
   currentUser: state.currentUser
 })
 
-const mapDispatch = { createGoal, fetchGoals }
+const mapDispatch = { createGoal, fetchGoals, fetchAllGoals }
 
 export default connect(mapState, mapDispatch)(Quiz);
 

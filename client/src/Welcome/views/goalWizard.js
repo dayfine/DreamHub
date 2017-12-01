@@ -94,7 +94,7 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
       {
         goalWiz.hasInput && 
         <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} 
-         name={goalWiz.inputName} 
+         name='inputtext' 
          placeholder={goalWiz.placeholderMessage} 
          autoFocus/>}
       

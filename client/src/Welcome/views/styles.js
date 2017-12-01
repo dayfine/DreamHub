@@ -59,14 +59,15 @@ const styles = {
   },
   
   buttonFooter: {
-    width: `45%`,
+    width: `50%`,
     position: 'absolute',
-    bottom: `8.8em`
+    bottom: `8.7em`
   },
   
   goalsListDisplay: {
     position: 'relative',
-    top: '20vh'
+    left: '15em',
+    top: '2em'
   }
 }
 
