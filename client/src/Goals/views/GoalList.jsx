@@ -76,8 +76,6 @@ class GoalList extends Component {
                   <br />
                   {goal.description}
                   <br />
-                  <Link to={ `/kanban/${goal.id}`}>Track progress</Link>
-                  <br />
                   <Link to={ `/goals/${goal.id}`}>See Details</Link>
                 </CardContent>
               </Card>

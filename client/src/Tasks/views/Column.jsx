@@ -38,10 +38,10 @@ const Column = props => {
     <div className="swimlane-container">
       <Paper classes={{root: "swimlane"}} className={classes.paper}>
         <div className="swimlane-hed">
-          <Typography type='headline' >
+          <Typography type='subheading' >
             { tasks.length } Tasks
           </Typography>
-          <Typography type='display1' >
+          <Typography type='headline' >
             <div>{ header }</div>
           </Typography>
         </div>

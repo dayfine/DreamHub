@@ -16,7 +16,7 @@ import TextField from 'material-ui/TextField'
 const styles = theme => ({
   root: {
     width: '100%',
-    backgroundColor: '#83cfca',
+    backgroundColor: '#80cbc4',
     display: 'flex'
   },
   title: {
@@ -45,9 +45,9 @@ const styles = theme => ({
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
       borderColor: '#81d4fa',
-      boxShadow: '0 0 0 0.2rem rgb(223,223,255)',
-    },
-  },
+      boxShadow: '0 0 0 0.2rem rgb(223,223,255)'
+    }
+  }
 })
 
 const NavBar = props => {
@@ -55,12 +55,11 @@ const NavBar = props => {
   return (
     <AppBar position='fixed' className={classes.root}>
       <Toolbar>
-        <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
+        <IconButton className={classes.menuButton} aria-label='Menu'>
           <Icon>menu</Icon>
         </IconButton>
         <Typography
           type='headline'
-          color='inherit'
           className={classes.title}
           component={Link}
           to='/'
@@ -72,15 +71,15 @@ const NavBar = props => {
           InputProps={{
             disableUnderline: true,
             classes: {
-              input: classes.textFieldInput,
-            },
+              input: classes.textFieldInput
+            }
           }}
           className={classes.textFieldRoot}
         />
-        <ProperButton color='contrast'>
-          Goals
+        <ProperButton component={Link} to='/category'>
+          Categories
         </ProperButton>
-        <ProperButton color='contrast'>
+        <ProperButton>
           Explore
         </ProperButton>
         <div style={{flex: '1 5 20%'}} />

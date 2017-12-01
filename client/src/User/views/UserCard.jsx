@@ -1,19 +1,16 @@
-import React, { Component }  from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import Setting from './UserSetting'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
 
 const styles = {
-  card: {
-    maxWidth: 345,
-  },
   media: {
-    height: 200,
-  },
-};
+    height: 140,
+    width: 155,
+    margin: '0 auto'
+  }
+}
 
 const UserCard = props => {
   const { user, goals, classes } = props
@@ -22,7 +19,7 @@ const UserCard = props => {
       <Card>
         <CardMedia
           className={classes.media}
-          image={`/public/images/${user.imageUrl}`}
+          image={`/public/images/${user.imgUrl}`}
           title='User Profile'
         />
         <CardHeader title={user.name} />
