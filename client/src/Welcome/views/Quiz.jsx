@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from 'material-ui/Grid';
 import styles from './styles';
 
-import { createGoal } from '../../Goals/actions';
+import { createGoal, fetchGoals } from '../../Goals/actions';
 import { connect } from 'react-redux';
 import goalWizard, { formDisplay } from './goalWizard';
 
@@ -14,7 +14,12 @@ class Quiz extends React.Component {
       goal: [],
       currentUser: 'Current User',
       counter: 0,
+      answers: {}
     }
+  }
+  
+  componentDidMount(){
+    this.props.fetchGoals()
   }
 
   handleChange = ev => {
@@ -43,21 +48,20 @@ class Quiz extends React.Component {
 
   render(){
     const { counter } = this.state;
-    const { questionStyle } = styles;
+    const { questionStyle, goalsListDisplay } = styles;
     const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
-    //console.log(goalWizard)
-
+    const question = goalWizard[counter];
     return (
-      <Grid container >
-         {goalWizard.map(question => {
-            return (
-              <div style={questionStyle} key={question.id}>
-                {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
-              </div>
-            )}).filter((question, i) => counter === i)
-          }
-          <p>Goals go here: </p>
-      </Grid>
+      <div>
+          <div style={questionStyle} key={question.id}>
+            {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
+          </div>
+        
+          <div style={goalsListDisplay}>Goals go here: {this.props.goals.map(goal => {
+              console.log('This is the goal in the map', goal)
+              return <p key={goal.id}>{goal.title}</p>
+            })} </div>
+      </div>
     )
   }
 }
@@ -67,6 +71,7 @@ const mapState = state => ({
   currentUser: state.currentUser
 })
 
-const mapDispatch = { createGoal }
+const mapDispatch = { createGoal, fetchGoals }
 
 export default connect(mapState, mapDispatch)(Quiz);
+

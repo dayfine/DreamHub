@@ -1,12 +1,12 @@
 const styles = {
   questionStyle: {
-      width: `45vw`,
-      height: `56vh`,
+      width: `50vw`,
+      height: `60vh`,
       marginRight: 'auto',
-      marginLeft: 'auto',
+      marginLeft: '19vw',
       marginTop: `1em`,
-      borderRadius: `10px`,
-      boxShadow: `3px 4px 10px grey`,
+      backgroundColor: '#ffffff',
+      boxShadow:'0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
     },
 
   titleStyle: {
@@ -62,6 +62,11 @@ const styles = {
     width: `45%`,
     position: 'absolute',
     bottom: `8.8em`
+  },
+  
+  goalsListDisplay: {
+    position: 'relative',
+    top: '20vh'
   }
 }
 

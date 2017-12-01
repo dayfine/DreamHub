@@ -90,42 +90,59 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
       <h3 style={titleStyle}>{goalWiz.title}</h3>
       <Divider />
       <p style={bodyStyle}><em>{goalWiz.description}</em></p>
-      {goalWiz.hasInput && <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/>}
-      {goalWiz.hasBoolean ?
+      
+      {
+        goalWiz.hasInput && 
+        <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} 
+         name={goalWiz.inputName} 
+         placeholder={goalWiz.placeholderMessage} 
+         autoFocus/>}
+      
+      {
+        goalWiz.hasBoolean &&
         <div style={Object.assign({}, bodyStyle, {marginTop: '14vh'})}>
           <input type='radio' name={goalWiz.booleanName} value=' Yes '/> Yes
           <input style={{marginLeft:'1vw'}} type='radio' name={goalWiz.booleanName} value=' No '/> No
         </div>
-        : null
       }
-      {goalWiz.hasSlider ?
+      
+      {
+        goalWiz.hasSlider &&
         <div>
-          <input label="How important is this?" onChange={onChange} type="range" min="1" max="10" value={state.sliderNum} style={Object.assign({}, sliderStyle, {marginTop: '13vh'})} />
+          <input label="How important is this?" 
+           onChange={onChange} 
+           type="range" min="1" max="10" 
+           value={state.sliderNum} 
+           style={Object.assign({}, sliderStyle, {marginTop: '13vh'})} />
           <p style={bodyStyle}>{state.sliderNum}</p>
         </div>
-          : null}
+      }
 
-       {goalWiz.hasTimeline ?
-          <div>
-            <Input style={inputStyle} label="Ultimate Goal" placeholder="What is your ultimate goal?" type="text" />
-            <Input style={inputStyle} label="12 month goal" placeholder="What is your 12 month goal?" type="text" />
-            <Input style={inputStyle} label="Three month goal" placeholder="What is your three month goal?" type="text" />
-            <Input style={inputStyle} label="Weekly goal" placeholder="What is your weekly goal?" type="text" />
-            <Input style={inputStyle} label="Daily goal" placeholder="What are your daily goals?" type="text" />
-          </div>
-      : null}
-
-      {goalWiz.hasTextarea ?
+     {
+       goalWiz.hasTimeline &&
         <div>
-          <TextField style={inputStyle} multiline rows='4' />
+          <Input style={inputStyle} label="Ultimate Goal" placeholder="What is your ultimate goal?" type="text" />
+          <Input style={inputStyle} label="12 month goal" placeholder="What is your 12 month goal?" type="text" />
+          <Input style={inputStyle} label="Three month goal" placeholder="What is your three month goal?" type="text" />
+          <Input style={inputStyle} label="Weekly goal" placeholder="What is your weekly goal?" type="text" />
+          <Input style={inputStyle} label="Daily goal" placeholder="What are your daily goals?" type="text" />
         </div>
-      : null}
+    }
 
-    {goalWiz.hasMultiInputs ?
+    {
+      goalWiz.hasTextarea &&
+      <div>
+        <TextField style={inputStyle} multiline rows='4' />
+      </div>
+    }
+
+    {
+      goalWiz.hasMultiInputs &&
       <div>
         <Input style={inputStyle} name={goalWiz.inputName} placeholder={goalWiz.placeholderMessage} autoFocus/> <Button style={{position: 'relative', top: '-4vh', left: '37.4vw', borderRadius: '4px', border: '1px solid #9191ff', outline: 'none'}} size='small' color='primary'>+</Button>
       </div>
-    : null}
+    }
+    
     <div style={buttonFooter}>
        <Button size='small' color='primary' style={buttonStyle} onClick={backClick}>Back</Button>
        <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
@@ -137,3 +154,4 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
 }
 
 export default goalWizard;
+
