@@ -93,7 +93,7 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
       
       {
         goalWiz.hasInput && 
-        <Input style={Object.assign({}, inputStyle, {marginTop: '13vh'})} 
+        <Input id='inputId' style={Object.assign({}, inputStyle, {marginTop: '13vh'})} 
          name='inputtext' 
          placeholder={goalWiz.placeholderMessage} 
          autoFocus/>}
@@ -146,7 +146,7 @@ export const formDisplay = (goalWiz, state, onChange, handleSubmit, nextClick, b
     <div style={buttonFooter}>
        <Button size='small' color='primary' style={buttonStyle} onClick={backClick}>Back</Button>
        <Button size='small' color='accent' style={buttonStyle} onClick={skipClick}>Skip</Button>
-       <Button size='small' color='primary' style={buttonStyle} onClick={nextClick}>Next ( {state.counter+1}/{goalWizard.length} )</Button>
+       <Button size='small' color='primary' style={buttonStyle} onClick={nextClick} type='button'>Next ( {state.counter+1}/{goalWizard.length} )</Button>
     </div>
     </form>
   )

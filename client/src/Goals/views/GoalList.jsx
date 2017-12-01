@@ -94,7 +94,7 @@ const mapState = state => ({
   goals: mapCategoryToGoal(state.categories, state.goals)
 })
 
-export default  connect(mapState)(
+export default connect(mapState)(
                 withStyles(styles)(
                   GoalList
                 ))
