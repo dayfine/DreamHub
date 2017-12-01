@@ -1,2 +1,2 @@
-import views from './views/Welcome';
-export { views };
+import views from './views/Quiz'
+export { views }

@@ -1,9 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import CenterPaper from '../../common/CenterPaper'
 import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button'
+import Divider from 'material-ui/Divider'
+
 import styles from './styles';
 
-import { createGoal, fetchAllGoals } from '../../Goals/actions';
-import { connect } from 'react-redux';
+import { createGoal } from '../../Goals/actions';
+
 import goalWizard, { formDisplay } from './goalWizard';
 
 class Quiz extends React.Component {
@@ -15,8 +21,8 @@ class Quiz extends React.Component {
       counter: 0,
       goals: [{id: 0, description: 'butter'}, {id: 1, description: 'dchicken'}],
       answers: {
-        setGoal: '', 
-        progressTrack: '', 
+        setGoal: '',
+        progressTrack: '',
         excitement: 0,
         deadline: '',
         longShortTerms: [],
@@ -25,47 +31,30 @@ class Quiz extends React.Component {
         affirmations: []
       }
     }
-    
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleNextClick = this.handleNextClick.bind(this);
-    
-  }
-  
-  componentDidMount(){
-    console.log('goala', this.props.goals)
-    this.props.fetchAllGoals()
   }
 
-  handleChange(ev) {
+  handleChange = ev => {
     this.setState({sliderNum: ev.target.value })
   }
 
-  handleSubmit(ev) {
+  handleAnswer = ev => {
     ev.preventDefault();
-    let inputEvent = document.getElementById('inputId')
+    console.log(this.state.answer)
 //    console.log('answers obj', this.state.answers)
 //    this.setState({answers: { this.state.answers.setGoal: inputEvent.value }})
 //    console.log('answers obj', this.state.answers)
 
-    this.props.createGoal(inputEvent.value)
+    // this.props.createGoal(inputEvent.value)
   }
 
-  handleNextClick(ev) {
-    const { counter } = this.state;
-    counter > 6 ?
-      this.setState({counter: 0}) :
-      this.setState({counter: counter+1});
-    
-    this.handleSubmit(ev)
-    
+  handleNextClick = ev => {
+    this.handleSkipClick()
+    this.handleAnswer(ev)
   }
 
   handleSkipClick = () => {
     const { counter } = this.state;
-    counter > 6 ?
-      this.setState({counter: 0}) :
-      this.setState({counter: counter+1});
+    this.setState({ counter: counter > 6 ? 0 : (counter + 1) })
   }
 
   handleBackClick = () => {
@@ -74,21 +63,28 @@ class Quiz extends React.Component {
 
   render(){
     const { counter } = this.state;
-    const { questionStyle, goalsListDisplay } = styles;
-    const { handleSubmit, handleChange, handleNextClick, handleBackClick, handleSkipClick } = this;
-    const question = goalWizard[counter];
-    
+    const { questionStyle } = styles;
+    const question = goalWizard[counter]
 
     return (
-      <div>
-          <div style={questionStyle} key={question.id}>
-            {formDisplay(question, this.state, handleChange, handleSubmit, handleNextClick, handleBackClick, handleSkipClick)}
-          </div>
-        
-          <div style={goalsListDisplay}>Goals: {this.props.goals.map(goal => {
-              return <p key={goal.id}>Title: {goal.title}<br/>Descrption: {goal.description}</p>
-            })} </div>
-      </div>
+      <CenterPaper>
+        <span> {counter+1} of {goalWizard.length} </span>
+        <div style={questionStyle} key={question.id}>
+          {formDisplay(question, this.state, this.handleChange)}
+        </div>
+        <Divider />
+        <div style={styles.buttonFooter}>
+          <Button size='small' color='primary' onClick={this.handleBackClick}>
+            Back
+          </Button>
+          <Button size='small' color='accent' onClick={this.handleSkipClick}>
+            Skip
+          </Button>
+          <Button size='small' color='primary' onClick={this.handleNextClick}>
+            Next
+          </Button>
+        </div>
+      </CenterPaper>
     )
   }
 }
@@ -100,7 +96,7 @@ const mapState = (state, ownProps) => {
     currentUser: state.currentUser
     }
 }
-const mapDispatch = { createGoal, fetchAllGoals }
+const mapDispatch = { createGoal }
 
 export default connect(mapState, mapDispatch)(Quiz);
 

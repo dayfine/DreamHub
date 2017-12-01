@@ -24,7 +24,7 @@ const styles = {
 const Footer = ({classes}) => {
   return (
     <footer className={classes.footer}>
-      <a href='https://github.com/DiAJVince/graceshopper' target='blank'>
+      <a href='https://github.com/dayfine/DreamHub' target='blank'>
         <img
           className={classes.logo}
           src='/public/images/githublogo.png'
