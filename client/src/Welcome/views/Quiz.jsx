@@ -38,8 +38,13 @@ class Quiz extends React.Component {
         // emotionalReason: '',
         // conflict: false,
         // affirmations: []
-      }
+      },
+      value: ''
     }
+  }
+
+  handleChange = ev => {
+    console.log(ev.target.name, ev.target.value)
   }
 
   handleAnswer = ev => {
@@ -74,7 +79,11 @@ class Quiz extends React.Component {
     return (
       <CenterPaper style={{padding: 0 }}>
         <div className={classes.quizContainer}>
-          <QuestionWizard idx={idx} handleAnswer={this.handleAnswer} />
+          <QuestionWizard
+            idx={idx}
+            handleAnswer={this.handleAnswer}
+            handleChange={this.handleChange}
+          />
         </div>
         <Divider />
         <div className={classes.buttonGruop}>

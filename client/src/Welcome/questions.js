@@ -52,7 +52,7 @@ export default [
   {
     id: 4,
     title: 'Let\'s break down your goal into long-term and short-term goals',
-    description: '',
+    description: 'So you can review your plans over time',
     controls: [
       {
         type: 'text',
