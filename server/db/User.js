@@ -36,6 +36,10 @@ const User = conn.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
+  imgUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'missingImg.png'
+  },
   points: {
     type: Sequelize.INTEGER
   },

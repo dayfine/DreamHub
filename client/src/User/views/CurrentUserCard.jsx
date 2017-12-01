@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Setting from './UserSetting'
 
-import Card, { CardContent, CardHeader } from 'material-ui/Card'
+import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
 
 // Create a separate modal to open setting, and pull in only for current user
 class CurrentUserCard extends Component {
@@ -21,7 +21,7 @@ class CurrentUserCard extends Component {
   }
 
   render () {
-    const { user, goals } = this.props
+    const { user, goals, classes } = this.props
     const { modalId } = this.state
 
     return (
@@ -31,6 +31,10 @@ class CurrentUserCard extends Component {
           onClose={this.closeModal}
         />
         <Card>
+          <CardMedia
+            image={`/public/images/${user.imgUrl}`}
+            title='User Profile'
+          />
           <CardHeader title={user.name} />
           <CardContent>
             Email: {user.email}

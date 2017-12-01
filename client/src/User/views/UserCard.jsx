@@ -3,14 +3,28 @@ import { connect } from 'react-redux'
 
 import Setting from './UserSetting'
 
-import Card, { CardContent, CardHeader } from 'material-ui/Card'
+import { withStyles } from 'material-ui/styles'
+import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
+
+const styles = {
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 200,
+  },
+};
 
 const UserCard = props => {
-  const { user, goals } = props
-
+  const { user, goals, classes } = props
   return (
     <div>
       <Card>
+        <CardMedia
+          className={classes.media}
+          image={`/public/images/${user.imageUrl}`}
+          title='User Profile'
+        />
         <CardHeader title={user.name} />
         <CardContent>
           Email: {user.email}
@@ -27,4 +41,4 @@ const UserCard = props => {
   )
 }
 
-export default UserCard
+export default withStyles(styles)(UserCard)

@@ -17,7 +17,15 @@ import { mapCategoryToGoal } from '../util/mappers'
 const styles = {
   root: {
     flexGrow: 1
-  }
+  },
+  controlGroup: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  // topRightControl: {
+
+  // }
 }
 
 class GoalList extends Component {
@@ -54,8 +62,8 @@ class GoalList extends Component {
             <Grid item sm={6} md={4}  key={goal.id}>
               <Card>
                 <CardContent>
-                  <div>
-                    <Typography type='display1'>
+                  <div className={classes.controlGroup}>
+                    <Typography type='headline'>
                       {goal.title}
                     </Typography>
                     <IconButton
