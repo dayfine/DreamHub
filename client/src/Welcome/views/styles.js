@@ -31,14 +31,6 @@ const styles = {
     marginLeft: '10vw'
   },
 
-  buttonStyle: {
-    outline: 'none',
-    width: `33.33%`,
-    position: 'relative',
-    bottom: `.04vh`,
-    marginTop: `3vh`
-  },
-
   textareaStyle: {
     margin: '0 auto'
   },
@@ -51,12 +43,8 @@ const styles = {
   },
 
   formStyle: {
-    borderRadius: `4px`
-  },
-
-  buttonFooter: {
-    display: 'flex',
-    justifyContent: 'space-around'
+    borderRadius: `4px`,
+    height: '100%'
   },
 
   goalsListDisplay: {

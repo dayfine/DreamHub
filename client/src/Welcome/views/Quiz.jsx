@@ -2,44 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CenterPaper from '../../common/CenterPaper'
+import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button'
 import Divider from 'material-ui/Divider'
 
-import styles from './styles';
-
 import { createGoal } from '../../Goals/actions';
+import QuestionWizard from './QuestionWizard';
 
-import goalWizard, { formDisplay } from './goalWizard';
+const styles = {
+  buttonGruop: {
+    display: 'flex'
+  },
+  flex: {
+    flex: 1
+  },
+}
 
 class Quiz extends React.Component {
   constructor () {
     super()
     this.state = {
-      sliderNum: 1,
-      currentUser: 'Current User',
-      counter: 0,
-      goals: [{id: 0, description: 'butter'}, {id: 1, description: 'dchicken'}],
+      idx: 0,
       answers: {
-        setGoal: '',
-        progressTrack: '',
-        excitement: 0,
-        deadline: '',
-        longShortTerms: [],
-        emotionalReason: '',
-        conflict: false,
-        affirmations: []
+        // setGoal: '',
+        // progressTrack: '',
+        // excitement: 0,
+        // deadline: '',
+        // longShortTerms: [],
+        // emotionalReason: '',
+        // conflict: false,
+        // affirmations: []
       }
     }
   }
 
-  handleChange = ev => {
-    this.setState({sliderNum: ev.target.value })
-  }
-
   handleAnswer = ev => {
     ev.preventDefault();
-    console.log(this.state.answer)
+    console.log(this.state.answers)
 //    console.log('answers obj', this.state.answers)
 //    this.setState({answers: { this.state.answers.setGoal: inputEvent.value }})
 //    console.log('answers obj', this.state.answers)
@@ -48,39 +48,38 @@ class Quiz extends React.Component {
   }
 
   handleNextClick = ev => {
+    const { idx } = this.state // might need to handle state for final creation
     this.handleSkipClick()
     this.handleAnswer(ev)
   }
 
   handleSkipClick = () => {
-    const { counter } = this.state;
-    this.setState({ counter: counter > 6 ? 0 : (counter + 1) })
+    const { idx } = this.state
+    this.setState({ idx: idx > 6 ? 0 : (idx + 1) })
   }
 
   handleBackClick = () => {
-    this.setState({counter: this.state.counter-1});
+    this.setState({ idx: this.state.idx - 1 });
   }
 
   render(){
-    const { counter } = this.state;
-    const { questionStyle } = styles;
-    const question = goalWizard[counter]
+    const { idx } = this.state
+    const { classes } = this.props
 
     return (
       <CenterPaper>
-        <span> {counter+1} of {goalWizard.length} </span>
-        <div style={questionStyle} key={question.id}>
-          {formDisplay(question, this.state, this.handleChange)}
+        <div className={classes.questionStyle}>
+          <QuestionWizard idx={idx} handleAnswer={this.handleAnswer} />
         </div>
         <Divider />
-        <div style={styles.buttonFooter}>
-          <Button size='small' color='primary' onClick={this.handleBackClick}>
+        <div className={classes.buttonGruop}>
+          <Button onClick={this.handleBackClick} color='primary' className={classes.flex} >
             Back
           </Button>
-          <Button size='small' color='accent' onClick={this.handleSkipClick}>
+          <Button onClick={this.handleSkipClick} color='accent' className={classes.flex} >
             Skip
           </Button>
-          <Button size='small' color='primary' onClick={this.handleNextClick}>
+          <Button onClick={this.handleNextClick} color='primary' className={classes.flex} >
             Next
           </Button>
         </div>
@@ -89,14 +88,10 @@ class Quiz extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  console.log('State =', state)
-  return {
-    goals: state.goals,
-    currentUser: state.currentUser
-    }
-}
 const mapDispatch = { createGoal }
 
-export default connect(mapState, mapDispatch)(Quiz);
+export default connect(null, mapDispatch)(
+                withStyles(styles)(
+                  Quiz
+                ))
 
