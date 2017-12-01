@@ -15,7 +15,9 @@ export const auth = (credentials, history, formName) => dispatch => {
       dispatch(loadUserData(token))
       history.push('/home')
     })
-    .catch(err => dispatch(setAuth({err})))
+    .catch(err => {
+      dispatch(setAuth({err}))
+    })
 }
 
 export const loadUserData = token => dispatch => {

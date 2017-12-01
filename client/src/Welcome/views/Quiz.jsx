@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 
 import CenterPaper from '../../common/CenterPaper'
 import { withStyles } from 'material-ui/styles'
-import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button'
-import Divider from 'material-ui/Divider'
 
-import { createGoal } from '../../Goals/actions';
-import QuestionWizard from './QuestionWizard';
+import { createGoal } from '../../Goals/actions'
+import QuestionWizard from './QuestionWizard'
 
 const styles = {
   quizContainer: {
@@ -42,7 +40,6 @@ class Quiz extends React.Component {
   }
 
   handleAnswer = ev => {
-    ev.preventDefault();
     // Needs userId in here
     this.props.createGoal(this.state.answers)
   }
@@ -75,7 +72,6 @@ class Quiz extends React.Component {
             handleChange={this.handleChange}
           />
         </div>
-        <Divider />
         <div className={classes.buttonGruop}>
           <Button onClick={this.handleBackClick} color='primary' className={classes.flex} >
             Back

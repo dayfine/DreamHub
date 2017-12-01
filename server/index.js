@@ -33,8 +33,9 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  if (req.headers['content-type'] === 'application/json') {
-    return res.status(err.status).send({error: {message: err.message}})
+  if (req.headers['content-type'].includes('application/json')) {
+    console.log(err, '======', err.message)
+    return res.status(err.status).send({message: err.message})
   }
   return res.status(err.status || 500).send(err)
 })

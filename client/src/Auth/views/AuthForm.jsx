@@ -7,6 +7,8 @@ import { withStyles } from 'material-ui/styles'
 import Card, {CardContent} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Popover from 'material-ui/Popover'
 
 import { auth } from '../actions'
 
@@ -17,19 +19,19 @@ const styles = theme => ({
     display: 'flex',
     margin: -16
   },
-  textField: {
-    // fontSize: '1.5em',
-    // height: '1.5em'
-  },
   fieldGroup: {
     minWidth: 280,
     flex: '0 0 auto',
     padding: '16px 0'
+  },
+  error: {
+    backgroundColor: 'red'
   }
 })
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error, classes } = props
+  console.log(error)
 
   return (
     <CenterPaper>
@@ -48,7 +50,6 @@ const AuthForm = props => {
                   margin='normal'
                   fullWidth
                   required
-                  className={classes.textField}
                 />
               </Typography>
               <Typography type='display1' align='center'>
@@ -59,17 +60,18 @@ const AuthForm = props => {
                   margin='normal'
                   fullWidth
                   required
-                  className={classes.textField}
                 />
               </Typography>
             </div>
             <div className='d-flex justify-content-between'>
-              <button className='btn btn-primary' type='submit'>{displayName}</button>
+              <Button raised type='submit'>{displayName}</Button>
               <a href='/api/auth/google'>
-                <img src={`../../public/images/gsignin.png`} style={{width: 'auto', height: 44}}/>
+                <img src={`../../public/images/gsignin.png`} style={{width: 'auto', height: 44}} />
               </a>
             </div>
-            {error && error.response && <div> {error.response.message} </div>}
+            {error && error.response &&
+              <Typography className={classes.error}>{error.response.data.message}</Typography>
+            }
           </form>
         </CardContent>
       </Card>
