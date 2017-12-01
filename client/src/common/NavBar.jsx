@@ -16,7 +16,7 @@ import TextField from 'material-ui/TextField'
 const styles = theme => ({
   root: {
     width: '100%',
-    backgroundColor: 'black',
+    backgroundColor: '#83cfca',
     display: 'flex'
   },
   title: {
