@@ -11,8 +11,13 @@ import { createGoal } from '../../Goals/actions';
 import QuestionWizard from './QuestionWizard';
 
 const styles = {
+  quizContainer: {
+    width: '50vw',
+    height: '60vh',
+  },
   buttonGruop: {
-    display: 'flex'
+    display: 'flex',
+    backgroundColor: '#ccc'
   },
   flex: {
     flex: 1
@@ -67,8 +72,8 @@ class Quiz extends React.Component {
     const { classes } = this.props
 
     return (
-      <CenterPaper>
-        <div className={classes.questionStyle}>
+      <CenterPaper style={{padding: 0 }}>
+        <div className={classes.quizContainer}>
           <QuestionWizard idx={idx} handleAnswer={this.handleAnswer} />
         </div>
         <Divider />

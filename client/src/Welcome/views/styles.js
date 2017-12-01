@@ -7,15 +7,10 @@ const styles = {
     boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
   },
 
-  titleStyle: {
-    fontFamily: 'sans-serif',
-    fontSize: `3vh`,
-    width: '40vw',
-    textAlign: 'center',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    padding: `.3vw`,
-    paddingTop: `1vw`
+  title: {
+    marginTop: 12,
+    padding: 12,
+    backgroundColor: '#4f9a94'
   },
 
   bodyStyle: {
@@ -45,12 +40,6 @@ const styles = {
   formStyle: {
     borderRadius: `4px`,
     height: '100%'
-  },
-
-  goalsListDisplay: {
-    position: 'relative',
-    left: '15em',
-    top: '2em'
   }
 }
 

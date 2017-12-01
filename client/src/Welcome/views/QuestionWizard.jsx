@@ -6,78 +6,70 @@ import Divider from 'material-ui/Divider'
 import Input from 'material-ui/Input'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
 
 import questions from '../questions'
 
-// Make human a variable for the current user
+const RenderInput = props => {
+  const { control } = props
+
+  switch (control.type) {
+    case 'text':
+      return (<Input autoFocus {...control} />)
+
+    case 'radio':
+      return (
+        <div>
+          <input {...control} value='true' /> Yes
+          <input {...control} value='false' /> No
+        </div>
+      )
+
+    case 'range':
+      return (<input {...control} />)
+
+    case 'date':
+      return (<input {...control} />)
+
+    case 'textarea':
+      return (<TextField multiline rows='4' />)
+
+    default:
+      return (<div>Unknown Input Type</div>)
+  }
+}
+
+const RenderConfirmationButton = ({idx}) => {
+  return idx === questions.length - 1 && (
+    <Button>+</Button>
+  )
+}
 
 const QuestionWizard = props => {
   const { idx, handleAnswer, classes } = props
   const question = questions[idx]
 
   return (
-    <div className={classes.questionStyle}>
+    <div>
       <form className={classes.formStyle} onSubmit={handleAnswer} key={question.id}>
         <span> {idx + 1} of {questions.length} </span>
-        <h3 className={classes.titleStyle}>{question.title}</h3>
+        <div className={classes.title}>
+          <Typography align='center' type='headline'>
+            {question.title}
+          </Typography>
+        </div>
         <Divider />
-        <p className={classes.bodyStyle}>
-          <em>{question.description}</em>
-        </p>
-
-        {
-        question.hasInput &&
-        <Input id='inputId'
-          className={classes.inputStyle}
-          name='inputtext'
-          placeholder={question.placeholderMessage}
-          autoFocus />}
-
-        {
-        question.hasBoolean &&
-        <div className={classes.bodyStyle}>
-          <input type='radio' name={question.booleanName} value=' Yes ' /> Yes
-          <input type='radio' name={question.booleanName} value=' No ' /> No
+        <div className={classes.body}>
+          <Typography align='center' type='caption'>
+            {question.description}
+          </Typography>
+          {question.controls.map((control, idx) => {
+            return (
+              <RenderInput control={control} key={idx} />
+            )
+          })}
+          <RenderConfirmationButton idx={idx} />
         </div>
-      }
-
-        {
-        question.hasSlider &&
-        <div>
-          <input label='How important is this?'
-            type='range' min='1' max='10'
-            value={idx}
-            className={classes.sliderStyle} />
-          <p className={classes.bodyStyle}>{idx}</p>
-        </div>
-      }
-
-        {
-       question.hasTimeline &&
-       <div>
-         <Input className={classes.inputStyle} label='Ultimate Goal' placeholder='What is your ultimate goal?' type='text' />
-         <Input className={classes.inputStyle} label='12 month goal' placeholder='What is your 12 month goal?' type='text' />
-         <Input className={classes.inputStyle} label='Three month goal' placeholder='What is your three month goal?' type='text' />
-         <Input className={classes.inputStyle} label='Weekly goal' placeholder='What is your weekly goal?' type='text' />
-         <Input className={classes.inputStyle} label='Daily goal' placeholder='What are your daily goals?' type='text' />
-       </div>
-    }
-
-        {
-      question.hasTextarea &&
-      <div>
-        <TextField className={classes.inputStyle} multiline rows='4' />
-      </div>
-    }
-
-        {
-      question.hasMultiInputs &&
-      <div>
-        <Input className={classes.inputStyle} name={question.inputName} placeholder={question.placeholderMessage} autoFocus />
-        <Button size='small' color='primary'>+</Button>
-      </div>
-    }
-
       </form>
     </div>
   )
