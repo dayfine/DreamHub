@@ -1,6 +1,5 @@
 .App {
   font-family: 'Roboto', sans-serif;
-  text-align: center;
   font-size: 16px;
   padding: 0 24px;
   height: 100vh;
@@ -124,14 +123,6 @@ footer {
   width: 100%;
 }
 
-.goal-item {
-  border: 1px solid #ced4da;
-  border-radius: 1rem;
-  padding: 10px;
-  margin-bottom: 1em;
-  width: 400px;
-}
-
 .task-item {
   background: #fff;
   border: 1px solid #ced4da;
@@ -152,6 +143,10 @@ footer {
 
 .goal-edit {
   display: inline-block;
+  padding: 16px;
+  margin-bottom: 1em;
+  width: 600px;
+  height: 60vh;
 }
 
 .swimlane-container {

@@ -14,7 +14,8 @@ import { GOAL_PROGRESS } from '../../constants'
 
 const styles = {
   container: {
-    flexGrow: 1,
+    width: '60%',
+    margin: '0 auto',
     position: 'relative',
     height: 50,
   },

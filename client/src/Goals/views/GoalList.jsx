@@ -51,28 +51,28 @@ class GoalList extends Component {
 
         {goals.map(goal => {
           return (
-            <Grid item sm={6} md={4}>
-            <Card key={goal.id}>
-              <CardContent>
-                <div>
-                  <Typography type='display1'>
-                    {goal.title}
-                  </Typography>
-                  <IconButton
-                    onClick={this.openModal.bind(this, goal.id)}
-                    aria-label='Edit'>
-                    <Icon>mode_edit</Icon>
-                  </IconButton>
-                </div>
-                {goal.category}
-                <br />
-                {goal.description}
-                <br />
-                <Link to={ `/kanban/${goal.id}`}>See progress on Kanban board</Link>
-                <br />
-                <Link to={ `/goals/${goal.id}`}>See Details</Link>
-              </CardContent>
-            </Card>
+            <Grid item sm={6} md={4}  key={goal.id}>
+              <Card>
+                <CardContent>
+                  <div>
+                    <Typography type='display1'>
+                      {goal.title}
+                    </Typography>
+                    <IconButton
+                      onClick={this.openModal.bind(this, goal.id)}
+                      aria-label='Edit'>
+                      <Icon>mode_edit</Icon>
+                    </IconButton>
+                  </div>
+                  {goal.category}
+                  <br />
+                  {goal.description}
+                  <br />
+                  <Link to={ `/kanban/${goal.id}`}>Track progress</Link>
+                  <br />
+                  <Link to={ `/goals/${goal.id}`}>See Details</Link>
+                </CardContent>
+              </Card>
             </Grid>
           )
         })}

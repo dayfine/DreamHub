@@ -15,6 +15,7 @@ const styles = theme => ({
     padding: '32px 10px 0 10px',
     height: 360,
     display: 'flex',
+    margin: -16
   },
   textField: {
     // fontSize: '1.5em',
