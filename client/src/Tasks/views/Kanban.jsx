@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 
 import Grid from 'material-ui/Grid'
 import Column from './Column'
+import QuickAddTask from './QuickAddTask'
 
 import { GoalTaskMapper } from '../util/mappers'
-import AddCard from '../../common/AddCard'
 
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+// Main view. Module Entry Point
 const Kanban = props => {
   const { goalId, tasks } = props
   return (
-    <div>
-      <h2>Goal: Travel</h2>
-      <AddCard type='task' goalId={goalId}/>
-      <Grid container style={{height: 'calc(100vh - 80px)'}}>
+    <div style={{width: '100%', padding: 20}}>
+      <QuickAddTask goalId={goalId} />
+      <Grid container style={{height: 'calc(100vh - 80px)'}} spacing={24}>
         {tasks.map(([status, tasks]) => {
           return (
             <Grid item xs={3} key={status}>

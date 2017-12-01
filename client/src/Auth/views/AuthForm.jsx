@@ -1,40 +1,79 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import CenterPaper from '../../common/CenterPaper'
+
+import { withStyles } from 'material-ui/styles'
+import Card, {CardContent} from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+import TextField from 'material-ui/TextField'
+
 import { auth } from '../actions'
 
+const styles = theme => ({
+  cardContainer: {
+    padding: '32px 10px 0 10px',
+    height: 360,
+    display: 'flex',
+    margin: -16
+  },
+  textField: {
+    // fontSize: '1.5em',
+    // height: '1.5em'
+  },
+  fieldGroup: {
+    minWidth: 280,
+    flex: '0 0 auto',
+    padding: '16px 0'
+  }
+})
+
 const AuthForm = props => {
-  const { name, displayName, handleSubmit, error } = props
+  const { name, displayName, handleSubmit, error, classes } = props
 
   return (
-    <div className='col-md-4 col-md-offset-4'>
-      <div className='panel panel-default'>
-        <div className='panel-body'>
+    <CenterPaper>
+      <Card className={classes.cardContainer}>
+        <CardContent>
+          <Typography type='headline' >
+            { name === 'login' ? 'Sign in to' : 'Sign up for'} DreamHub
+          </Typography>
+
           <form onSubmit={handleSubmit} name={name}>
-            <div className='form-group'>
-              <label htmlFor='email'><small>Email</small></label>
-              <input className='form-control' name='email' type='text' />
+            <div className={classes.fieldGroup}>
+              <Typography type='display1' align='center'>
+                <TextField
+                  name='email'
+                  label='Email'
+                  margin='normal'
+                  fullWidth
+                  required
+                  className={classes.textField}
+                />
+              </Typography>
+              <Typography type='display1' align='center'>
+                <TextField
+                  name='password'
+                  type='password'
+                  label='Password'
+                  margin='normal'
+                  fullWidth
+                  required
+                  className={classes.textField}
+                />
+              </Typography>
             </div>
-            <div className='form-group'>
-              <label htmlFor='password'><small>Password</small></label>
-              <input className='form-control' name='password' type='password' />
-            </div>
-            <div className='row'>
-              <div className='col-xs-6'>
-                <button className='btn btn-primary' type='submit'>{displayName}</button>
-              </div>
-              <div className='col-xs-6'>
-                <a href='/api/auth/google'>
-                  Login With Google
-                </a>
-              </div>
+            <div className='d-flex justify-content-between'>
+              <button className='btn btn-primary' type='submit'>{displayName}</button>
+              <a href='/api/auth/google'>
+                <img src={`../../public/images/gsignin.png`} style={{width: 'auto', height: 44}}/>
+              </a>
             </div>
             {error && error.response && <div> {error.response.message} </div>}
           </form>
-
-        </div>
-      </div>
-    </div>
+        </CardContent>
+      </Card>
+    </CenterPaper>
   )
 }
 
@@ -55,17 +94,17 @@ const mapSignup = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  handleSubmit (evt) {
-    evt.preventDefault()
-    const formName = evt.target.name
+  handleSubmit (ev) {
+    ev.preventDefault()
+    const formName = ev.target.name
     const credentials = {
-      email: evt.target.email.value,
-      password: evt.target.password.value
+      email: ev.target.email.value,
+      password: ev.target.password.value
     }
 
     dispatch(auth(credentials, ownProps.history, formName))
   }
 })
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(withStyles(styles)(AuthForm))
+export const Signup = connect(mapSignup, mapDispatch)(withStyles(styles)(AuthForm))

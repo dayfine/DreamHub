@@ -1,5 +1,6 @@
 const conn = require('./conn')
 const Sequelize = conn.Sequelize
+const Task = require('./Task')
 
 const Goal = conn.define('goal', {
   title: {
@@ -18,5 +19,10 @@ const Goal = conn.define('goal', {
     type: Sequelize.INTEGER
   }
 })
+
+Goal.createGoalTasksFromObj = function (obj) {
+  // obj expects to include an array of tasks
+  return Goal.create(obj, {include: [ Task ]})
+}
 
 module.exports = Goal

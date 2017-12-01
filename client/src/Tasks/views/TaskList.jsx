@@ -17,7 +17,8 @@ const styles = {
   }
 }
 
-const GoalPanel = props => {
+// Place holding to be used by Goal Panel, needs format
+const TaskList = props => {
   // Expects tasks to be calculated and passed along
   const { tasks, classes, editTask } = props
   const { COMPLETED, CREATED } = TASK_STATUS
@@ -58,5 +59,5 @@ const mapDispatch = ({ editTask })
 
 export default connect(null, mapDispatch)(
                 withStyles(styles)(
-                  GoalPanel
+                  TaskList
                 ))

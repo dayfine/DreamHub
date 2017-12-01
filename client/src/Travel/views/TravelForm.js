@@ -36,7 +36,7 @@ class TravelForm extends Component {
     const city = location ? location.split(', ')[0].trim() : null;
 
     return (
-      <form onSubmit={ onSubmit }>
+      <form onSubmit={ onSubmit } className='container' align='center'>
         <h2>Where do you want to go?</h2>
 
         <input value={ to }

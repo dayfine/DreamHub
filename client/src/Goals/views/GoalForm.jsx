@@ -46,7 +46,7 @@ class GoalForm extends Component {
         onRequestClose={ onClose }
       >
       { goal &&
-        <div className='goal-item goal-edit'>
+        <div className='goal-edit'>
           <input
             type='text'
             onChange={ handleEdit }
