@@ -1,35 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchFriends, removeFriend } from '../actions'
+
+
 import FriendSearch from './FriendSearch.jsx'
 import FriendView from './FriendView.jsx'
 
+import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 
 const Friend = props => {
-  const { friends, removeFriend } = props
+  const { friends } = props
 
   return (
     <div className='container'>
       <FriendSearch />
-      <br />
-      <div>
+      <Divider />
+      <Typography type='headline'>
         My Friends
-      </div>
+      </Typography>
       <ul>
         {friends.map(friend => {
           return (
-
-            <li key={friend.id}>
-              <FriendView friend={friend}/> 
-              <button
-                onClick={removeFriend.bind(this, friend.id)}
-                className='btn btn-sm btn-danger'
-              >
-                Delete Friend
-              </button>
-              <br/><br/>
-            </li>
+            <FriendView key={friend.id} friend={friend}/>
           )
         })}
       </ul>
@@ -41,6 +33,6 @@ const mapState = state => ({
   friends: state.friends
 })
 
-const mapDispatch = { fetchFriends, removeFriend }
+const mapDispatch = {}
 
 export default connect(mapState, mapDispatch)(Friend)

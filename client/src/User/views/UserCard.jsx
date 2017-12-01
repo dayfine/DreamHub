@@ -21,7 +21,7 @@ const UserCard = props => {
       <Card>
         <CardMedia
           className={classes.media}
-          image={`/public/images/${user.imageUrl}`}
+          image={`/public/images/${user.imgUrl}`}
           title='User Profile'
         />
         <CardHeader title={user.name} />

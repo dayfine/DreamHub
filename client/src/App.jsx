@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div className='App'>
         <NavBar />
-        <NavTabs />
+        {/*<NavTabs />*/}
         <Grid container style={{paddingTop: 120, maxWidth: 1200, margin: '0 auto'}}>
           <Switch>
             <Route path='/' exact component={authenticated ? Home : Welcome} />

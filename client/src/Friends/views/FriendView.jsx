@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+
 import classnames from 'classnames';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Collapse from 'material-ui/transitions/Collapse';
 import Avatar from 'material-ui/Avatar';
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography';
 import red from 'material-ui/colors/red';
+
+import { fetchFriends, removeFriend } from '../actions'
 
 const styles = theme => ({
   card: {
@@ -22,19 +25,25 @@ const styles = theme => ({
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
+    marginRight: 10
   },
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  // avatar: {
+  //   backgroundColor: red[500],
+  // },
   flexGrow: {
     flex: '0.5 1 auto'
   },
+  controlGroup: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
 });
 
-class RecipeReviewCard extends React.Component {
+class FriendCard extends Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -43,27 +52,22 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes, friend } = this.props;
-    console.log('im in friend view' + JSON.stringify(friend))
     return (
       <div>
         <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                {friend.name.slice(0,1).toUpperCase()}
-              </Avatar>
-            }
-            action={
-              <IconButton>
-                <Icon>expand_more</Icon>
-              </IconButton>
-            }
-            title={friend.name}
-            subheader={friend.email}
-          />
-          <CardActions disableActionSpacing>
-            <div className={classes.flexGrow} /> 
-            Goals
+          <div className={classes.controlGroup}>
+            <CardHeader
+              avatar={
+                <Avatar
+                  aria-label='friend.name'
+                  className={classes.avatar}
+                  alt={friend.name}
+                  src={`/public/images/${friend.imgUrl}`}
+                />
+              }
+              title={friend.name}
+              subheader={friend.email}
+            />
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
@@ -74,17 +78,21 @@ class RecipeReviewCard extends React.Component {
             >
               <Icon>expand_more</Icon>
             </IconButton>
-          </CardActions>
+          </div>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <CardActions>
+              <Button>Unfriend</Button>
+              <Button>Poke</Button>
+            </CardActions>
             <CardContent>
               {friend.goals.map(goal => {
                 return (
-                  <div key={goal.id}>                    
-                    <Typography paragraph type="body2">
-                      <h4>{goal.title}</h4>
+                  <div key={goal.id}>
+                    <Typography type="subheading">
+                      {goal.title}
                     </Typography>
-                    <Typography paragraph>
-                     <h5>>>> {goal.description}</h5>
+                    <Typography type="body2">
+                     >>> {goal.description}
                     </Typography>
                   </div>
                 )
@@ -97,8 +105,5 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(FriendCard);
