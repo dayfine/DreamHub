@@ -63,17 +63,17 @@ const GoalPanel = props => {
   )
 }
 
-const mapState = (state, ownProps) => {
-  const { goalId } = ownProps.match.params
-  return {
-    goal: state.goals.find(g => g.id === +goalId),
-    goalTasks: state.tasks.filter(t => t.goalId === +goalId)
-  }
-}
+// const mapState = (state, ownProps) => {
+//   const { goalId } = ownProps.match.params
+//   return {
+//     goal: state.goals.find(g => g.id === +goalId),
+//     goalTasks: state.tasks.filter(t => t.goalId === +goalId)
+//   }
+// }
 
 const mapDispatch = ({ editTask })
 
-export default connect(mapState, mapDispatch)(
+export default connect(null, mapDispatch)(
                 withStyles(styles)(
                   GoalPanel
                 ))

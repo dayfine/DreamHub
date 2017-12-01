@@ -30,14 +30,15 @@ const Kanban = props => {
 }
 
 const mapState = (state, ownProps) => {
-  const { goalId } = ownProps.match.params
+  const { goalId } = ownProps
+  // const { goalId } = ownProps.match.params
   return {
     goalId: goalId,
     tasks: Object.entries(GoalTaskMapper(state.tasks, +goalId))
   }
 }
 
-export default  DragDropContext(HTML5Backend)(
+export default DragDropContext(HTML5Backend)(
                 connect(mapState)(
                   Kanban
                 ))
