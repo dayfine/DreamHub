@@ -35,7 +35,6 @@ const styles = theme => ({
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error, classes } = props
-  console.log(error)
 
   return (
     <CenterPaper>

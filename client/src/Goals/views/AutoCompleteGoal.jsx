@@ -115,19 +115,9 @@ class GoalAutosuggest extends Component {
     suggestions: [],
   };
 
-  goals = []
-
-  componentDidMount() {
-    return axios.get('/api/goals/search', {params: {progress: 'Accomplished'}})
-      .then(result => result.data)
-      .then(goals => {
-        this.goals = goals
-      })
-      .catch(console.error)
-  }
-
   getMatches = ({ value }) => {
-    this.setState({ suggestions: getGoals(value, this.goals) })
+    const { goals } = this.props
+    this.setState({ suggestions: getGoals(value, goals) })
   };
 
   clearMatches = () => {
@@ -169,6 +159,7 @@ class GoalAutosuggest extends Component {
 }
 
 const mapState = state => ({
+  goals: state.pastGoals
 })
 
 export default  connect(mapState)(

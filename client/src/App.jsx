@@ -8,6 +8,7 @@ import Routes from './Routes'
 
 import store from './Store'
 import { fetchCategories } from './Category/actions'
+import { fetchPastGoals } from './Explore/actions'
 import { loadUserData } from './Auth/actions'
 
 const storage = window.localStorage
@@ -15,6 +16,7 @@ const storage = window.localStorage
 class App extends Component {
   componentDidMount () {
     store.dispatch(fetchCategories())
+    store.dispatch(fetchPastGoals())
 
     if (storage.authToken) {
       store.dispatch(loadUserData(storage.authToken))
