@@ -33,9 +33,9 @@ module.exports = (User, Goal, Task, Category) => {
   .then(() => {
     return Promise.all([
       Goal.create({ title: 'Travel', description: 'Want to go to somewhere', userId: 1 }),
-      Goal.create({ title: 'Travel to Peru', description: 'See Amazon & Machu Picchu!', userId: 3 }),
-      Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 2 }),
-      Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 3 }),
+      Goal.create({ title: 'Travel to Peru', description: 'See Amazon & Machu Picchu!', userId: 2 }),
+      Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 3 }),
+      Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 2 }),
       Goal.create({ title: 'Own a house', description: 'American Dream', userId: 4 }),
       Goal.create({ title: 'Testie', description: 'American Drum', userId: 5 }),
       Goal.create({ title: 'Tastie', description: 'American Drim', userId: 5 }),
