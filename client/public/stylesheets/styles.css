@@ -82,6 +82,13 @@ p {
   font-size: 12px;
 }
 
+#bubblechart {
+  margin: 0 auto;
+  text-align: center;
+  min-width: 300px;
+  max-width: 600px;
+}
+
 .travel-btn {
   margin-right: 1em;
 }
