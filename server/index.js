@@ -11,7 +11,7 @@ const
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
 } else {
-  app.use('/build', express.static(path.join(__dirname, '..', 'client', 'build')))
+  app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 }
 
 // app.get('*.js', function (req, res, next) {
@@ -29,7 +29,6 @@ app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')
 app.use('/api', require('./api'))
 
 const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
-console.log(indexPath)
 app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
