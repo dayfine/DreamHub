@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Bubbles from './Bubbles';
 
-const BubbleChart = (props) => {
-  const width = 960, height = 960;
+const BubbleChart = ({ goalTasks }) => {
+  const width = 600, height = 600;
 
   return (
-    <div>
+    <div id="bubblechart">
       <h2>Visualize Your Goals</h2>
-      <Bubbles { ...props } width={ width } height={ height } />
+      <Bubbles tasks={goalTasks} width={ width } height={ height } />
     </div>
   )
 };
 
-const mapState = (props) => { return props };
-
-export default connect(mapState)(BubbleChart);
+export default BubbleChart;

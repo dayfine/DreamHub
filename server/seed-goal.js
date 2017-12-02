@@ -35,6 +35,7 @@ const apartmentSearch = {
   title: 'Find a new apartment',
   description: 'By end of July',
   progress: 'Stalled',
+  userId: 2,
   tasks: [
     { title: 'Search apt rental sites', status: 'Created', priority: 50 },
     { title: 'Determine budget', status: 'Created', priority: 50 },
@@ -51,6 +52,7 @@ const getHealthy = {
   title: 'Be healthy',
   description: 'Change your habits and do better stuff',
   progress: 'Stalled',
+  userId: 2,
   tasks: [
     { title: 'Sleep 8 hours', priority: 100 },
     { title: 'Go to the gym twice a week', priority: 75 },
@@ -72,6 +74,7 @@ const amsterdamTrip = {
   description: 'Visiting Netherlands',
   progress: 'Abandoned',
   categoryId: 1,
+  userId: 2,
   tasks: [
     { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priority: 100 },
     { title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1 },

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import { schemePastel2 } from 'd3-scale-chromatic';
 
 class Bubbles extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Bubbles extends Component {
     const columnForColors = "status";
     const svg = d3.select("svg");
 
-    const colorCircles = d3.scaleOrdinal(d3.schemeCategory10);
+    const colorCircles = d3.scaleOrdinal(schemePastel2);
     const scaleRadius = d3.scaleLinear().domain([d3.min(data, function(d) {
           return +d[columnForRadius];
         }), d3.max(data, function(d) {
@@ -30,34 +31,34 @@ class Bubbles extends Component {
       .style("fill", function(d) {
         return colorCircles(d[columnForColors])
       })
-      .attr('transform', 'translate(' + [width / 2, height / 3] + ')')
-      // .on("mouseover", function(d) {
-      //   tooltip.html(`${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
-      //   return tooltip.style("visibility", "visible");
-      // })
-      // .on("mousemove", function() {
-      //   return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
-      // })
-      // .on("mouseout", function() {
-      //   return tooltip.style("visibility", "hidden");
-      // })
+      .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
+      .on("mouseover", function(d) {
+        tooltip.html(`${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
+        return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+        return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+      })
+      .on("mouseout", function() {
+        return tooltip.style("visibility", "hidden");
+      })
       .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended))
 
-    // const tooltip = bubbles
-    //   .append("div")
-    //   .style("position", "absolute")
-    //   .style("visibility", "hidden")
-    //   .style("color", "white")
-    //   .style("padding", "8px")
-    //   .style("background-color", "#626D71")
-    //   .style("border-radius", "6px")
-    //   .style("text-align", "center")
-    //   .style("font-family", "monospace")
-    //   .style("width", "400px")
-    //   .text("");
+    const tooltip = bubbles
+      .append("div")
+      .style("position", "absolute")
+      .style("visibility", "hidden")
+      .style("color", "white")
+      .style("padding", "8px")
+      .style("background-color", "#626D71")
+      .style("border-radius", "6px")
+      .style("text-align", "center")
+      .style("font-family", "monospace")
+      .style("width", "400px")
+      .text("");
 
     const simulation = d3.forceSimulation(data)
       .force("charge", d3.forceManyBody().strength([-600]))
@@ -94,6 +95,12 @@ class Bubbles extends Component {
     }
   }
 
+  componentDidMount() {
+    const { tasks } = this.props;
+    console.log(tasks)
+    if (tasks && tasks.length) this.renderBubbles(tasks);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.tasks !== this.props.tasks) {
       this.renderBubbles(nextProps.tasks)
@@ -103,8 +110,7 @@ class Bubbles extends Component {
   shouldComponentUpdate() { return false }
 
   render() {
-    const { width, height, tasks } = this.props;
-    if (tasks.length) this.renderBubbles(tasks);
+    const { width, height } = this.props;
     return (
       <svg width={ width } height={ height } />
     )
