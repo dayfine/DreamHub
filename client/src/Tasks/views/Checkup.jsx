@@ -55,12 +55,12 @@ class Checkup extends Component {
     }
 
     return (
-      <Card key={task.id} className={classes.flexCard}>
+      <Card key={task.id} className={classes.flexCard} >
         <CardContent className={classes.goalInfo} style={{width: '18em'}}>
           <Typography type="headline" style={{borderBottom: '1px solid #f2f2f2'}}>
             {task.title}
           </Typography>
-          <Typography type="subheading" color="secondary" style={{paddingTop: '10px'}}>
+          <Typography type="subheading" color="secondary" style={{paddingTop: '5px'}}>
             {truncate(task.description, 40)}
           </Typography>
         </CardContent>
