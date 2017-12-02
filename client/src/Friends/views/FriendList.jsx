@@ -24,12 +24,17 @@ class Friend extends Component{
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col'>
             <FriendSearch />
             <Divider />
-            <Typography type='headline'>
-              My Friends
-            </Typography>
+        </div>
+        <div className='row'>
+          <Typography type='headline'>
+            My Friends
+          </Typography>
+        </div>
+        <div className='row'>
+          <div className='col'>
+            
             <ul>
               {friends.map(friend => {
                 return (

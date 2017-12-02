@@ -25,15 +25,16 @@ const FriendGoalItem = props => {
   return (
     <div>
       <Typography type='subheading'>
-        {goal.title}
+        <h5>{goal.title}</h5>
       </Typography>
       <Typography type='body2'>
-        {goal.description}
+        <h6>{goal.description}</h6>
       </Typography>
       <Typography type='body2'>
-        {goal.progress}
+        <i>Status: {goal.progress}</i>
       </Typography>
       {progressButton}
+      <br /><br />
     </div>
   )
 }
