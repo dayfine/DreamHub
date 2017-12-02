@@ -32,6 +32,9 @@ class Quiz extends React.Component {
     }
   }
 
+  // Note: this implmentation mixes controlled and uncontrolled components.
+  //       it might make more sense to let inputs each have internal state,
+  //       and then push to parent on page flips. That's more codes tho.
   handleChange = ev => {
     const update = {}
     update[ev.target.name] = ev.target.value

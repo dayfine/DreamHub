@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 
+import ProperButton from '../../common/ProperButton'
 import { withStyles } from 'material-ui/styles'
 import Input from 'material-ui/Input'
 import List, { ListItem, ListItemText } from 'material-ui/List'
@@ -10,7 +11,7 @@ import IconButton from 'material-ui/IconButton'
 import Paper from 'material-ui/Paper'
 import Divider from 'material-ui/Divider'
 import Popover from 'material-ui/Popover'
-import { Swatches } from 'react-color'
+import { SwatchesPicker } from 'react-color'
 
 import { createCategory } from '../actions'
 
@@ -27,6 +28,14 @@ const styles = theme => ({
   list: {
     maxHeight: 300,
     overflow: 'scroll'
+  },
+  addBar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  addIcon: {
+    marginRight: 10,
   }
 })
 
@@ -38,7 +47,7 @@ const catFilter = (term, categories) => {
 class Category extends Component {
   state = {
     search: '',
-    color: '',
+    color: '#ff8a80',
     open: false,
     anchorEl: null,
   }
@@ -51,11 +60,31 @@ class Category extends Component {
     const { search, color } = this.state
     if (search === '') return
     this.props.createCategory({ color, name: search})
-    this.setState({ search: '', color: '' })
+    this.setState({ search: '', color: '#ff8a80' })
   }
+
+  archor = null
+
+  onRequestOpen = () => {
+    this.setState({
+      open: true,
+      anchorEl: findDOMNode(this.archor),
+    });
+  }
+
+  onRequestClose = () => {
+    this.setState({ open: false })
+  }
+
+  onColorChangeComplete = (color, event) => {
+    this.setState({ color: color.hex })
+    this.onRequestClose()
+  };
+
 
   render () {
     const { categories, classes } = this.props
+    const { search, color, open, anchorEl,} = this.state
 
     return (
       <Paper>
@@ -72,7 +101,7 @@ class Category extends Component {
         </div>
         <Divider />
         <List className={classes.list}>
-          {catFilter(this.state.search, categories).map(category => {
+          {catFilter(search, categories).map(category => {
             return (
               <ListItem button key={category.id}>
                 <Icon style={{color: category.color}}>fiber_manual_record</Icon>
@@ -82,39 +111,31 @@ class Category extends Component {
           })}
         </List>
         <Divider />
-        <div>
-          <div onClick={this.handleAdd}>
-            <IconButton >
-              <Icon>add</Icon>
-            </IconButton>
+        <div className={classes.addBar}>
+          <ProperButton onClick={this.handleAdd}>
+            <Icon className={classes.addIcon}>add</Icon>
             Create new category
-          </div>
-          <Button
-            ref={node => {
-              this.button = node;
-            }}
-            raised
-            className={classes.button}
-            onClick={this.handleClickButton}
+          </ProperButton>
+          <IconButton
+            ref={node => { this.archor = node }}
+            onClick={this.onRequestOpen}
           >
-            Open Popover
-          </Button>
+            <Icon style={{ color }}>fiber_manual_record</Icon>
+          </IconButton>
           <Popover
             open={open}
             anchorEl={anchorEl}
-            anchorReference={anchorReference}
-            anchorPosition={{ top: positionTop, left: positionLeft }}
-            onRequestClose={this.handleRequestClose}
+            onRequestClose={this.onRequestClose}
             anchorOrigin={{
-              vertical: anchorOriginVertical,
-              horizontal: anchorOriginHorizontal,
+              vertical: 'center',
+              horizontal: 'right',
             }}
             transformOrigin={{
-              vertical: transformOriginVertical,
-              horizontal: transformOriginHorizontal,
+              vertical: 'bottom',
+              horizontal: 'left',
             }}
           >
-            <Swatches />
+            <SwatchesPicker onChangeComplete={this.onColorChangeComplete} />
           </Popover>
         </div>
       </Paper>
