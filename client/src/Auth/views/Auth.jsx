@@ -8,7 +8,7 @@ import { logout } from '../actions'
 const AuthForm = ({ authenticated, onLogOut }) => {
   return authenticated
     ? (
-      <div style={{display: 'inline-flex', flexGrow: 2}}>
+      <div style={{display: 'inline-flex', flexGrow: 2, justifyContent: 'flex-end'}}>
         <ProperButton component={Link} to='/me'>
           My Profile
         </ProperButton>
@@ -17,7 +17,7 @@ const AuthForm = ({ authenticated, onLogOut }) => {
         </ProperButton>
       </div>
     ) : (
-      <div style={{display: 'inline-flex', flexGrow: 2}}>
+      <div style={{display: 'inline-flex', flexGrow: 2, justifyContent: 'flex-end'}}>
         <ProperButton component={Link} to='/login'>
           Sign In
         </ProperButton>
