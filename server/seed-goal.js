@@ -3,6 +3,7 @@ const peruTrip = {
   description: '',
   progress: 'Accomplished',
   budget: 1200,
+  userId: 3,
   categoryId: 1,
   tasks: [
     { title: 'Obtain Visa', description: 'Check requirements online', status: 'Completed' },
@@ -19,6 +20,7 @@ const learnML = {
   description: '',
   progress: 'Accomplished',
   budget: 300,
+  userId: 3,
   categoryId: 1,
   tasks: [
     { title: 'Get a GPU', description: 'Budget under $300', status: 'Completed' },
