@@ -7,3 +7,8 @@ export const mapCategoryToGoal = (categories, goals) => {
 
   return goals
 }
+
+// Update Goal
+export const MapTaksToGoals = (task, goals) => {
+  return goals
+}
