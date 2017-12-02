@@ -3,8 +3,8 @@ package-lock.json
 secrets.js
 
 # production
-/build
-client/build
+# /build
+# client/build
 
 # Logs
 logs
