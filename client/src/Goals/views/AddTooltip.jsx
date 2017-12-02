@@ -34,12 +34,10 @@ class AddTooltip extends Component {
     const { classes } = this.props
     return (
       <div>
-        <Dialog
-          open={ this.open }
-          onRequestClose={ this.closeModal }
-        >
-          <GoalForm />
-        </Dialog>
+        <GoalForm
+          open={ this.state.open }
+          onClose={ this.closeModal }
+        />
         <Tooltip placement='bottom' title='Add new goal'>
           <Button
             fab color='accent'

@@ -41,7 +41,16 @@ class GoalForm extends Component {
     const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
 
-    return !goal ? (<div>M</div>) : (
+    console.log(this.props)
+
+    return !goal ?
+        ( <Dialog
+            open={ open }
+            onRequestClose={ onClose }
+          >
+            <button onClick={onClose}>M</button>
+          </Dialog> )
+        : (
         <div className='goal-edit'>
           <input
             type='text'
