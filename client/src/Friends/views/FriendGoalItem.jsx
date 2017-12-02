@@ -23,7 +23,7 @@ const FriendGoalItem = props => {
   }
 
   return (
-    <div>
+    <div style={{maxHeight:'200px'}}>
       <Typography type='subheading'>
         <h5>{goal.title}</h5>
       </Typography>

@@ -26,6 +26,7 @@ class Friend extends Component{
         <div className='row'>
             <FriendSearch />
             <Divider />
+            <br /><br />
         </div>
         <div className='row'>
           <Typography type='headline'>
@@ -33,8 +34,7 @@ class Friend extends Component{
           </Typography>
         </div>
         <div className='row'>
-          <div className='col'>
-            
+          <div className='col'>            
             <ul>
               {friends.map(friend => {
                 return (
@@ -46,7 +46,7 @@ class Friend extends Component{
               })}
             </ul>
           </div>
-          <div className='col'>
+          <div className='col' style={{height:'25em', overflow:'scroll'}}>
             <FriendGoalView friend={friends.find(f=>f.id===this.state.friendId)}/>
           </div>
         </div>
