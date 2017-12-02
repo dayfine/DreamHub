@@ -6,27 +6,24 @@ import Button from 'material-ui/Button'
 import Icon from 'material-ui/Icon'
 import Tooltip from 'material-ui/Tooltip'
 
-import { setCurrTask } from './currentTaskReducer'
-
 const styles = theme => ({
   absolute: {
     flip: false,
     position: 'absolute',
-    bottom: 32,
-    right: 32
+    bottom: 60,
+    left: 32
   }
 })
 
 const AddTooltip = props => {
-  const { classes, setCurrTask } = props
+  const { classes } = props
   return (
     <div>
-      <Tooltip placement='bottom' title='Add new event'>
+      <Tooltip placement='bottom' title='Add new goal'>
         <Button
           fab color='accent'
           className={classes.absolute}
-          onClick={setCurrTask.bind(this, -1)}
-          >
+        >
           <Icon children='add' />
         </Button>
       </Tooltip>

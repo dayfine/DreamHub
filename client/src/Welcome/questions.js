@@ -11,6 +11,13 @@ export default [
     }
   },
   {
+    title: 'You want to travel! Where to?',
+    description: 'Let\'s see what is it like out there',
+    control: {
+      type: 'travel'
+    }
+  },
+  {
     title: 'Describe your goal and see what we get',
     description: 'The more specific the goal the better.',
     control: {

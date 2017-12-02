@@ -8,17 +8,7 @@ const { Goal, Task } = require('../db').models
 //     .catch(next);
 // });
 
-router.get('/', (req, res, next) => {
-  Goal.findAll()
-    .then(goals => {
-//    goals.forEach(goal => console.log('These are all the gaols:', goal.dataValues.title, goal.dataValues.description))
-      res.send(goals)
-    })
-    .catch(next)
-})
-
 router.get('/search', (req, res, next) => {
-  console.log('blah', req.query)
   Goal.findAll({where: {progress: req.query.progress}})
     .then(goals => res.send(goals))
     .catch(next)

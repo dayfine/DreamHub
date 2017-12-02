@@ -83,7 +83,7 @@ const NavBar = ({ clear, classes }) => {
         <ProperButton component={Link} to='/category'>
           Categories
         </ProperButton>
-        <ProperButton>
+        <ProperButton component={Link} to='/explore'>
           Explore
         </ProperButton>
         <div style={{flex: '1 5 20%'}} />

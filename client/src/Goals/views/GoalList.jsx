@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 
 import AutoCompleteGoal from './AutoCompleteGoal'
 import GoalForm from './GoalForm'
+import AddTooltip from '../../common/AddTooltip'
 
 import { mapCategoryToGoal } from '../util/mappers'
 
@@ -54,9 +55,7 @@ class GoalList extends Component {
           goal={goal}
           onClose={this.closeModal}
         />
-        <AutoCompleteGoal />
         <Grid container>
-
         {goals.map(goal => {
           return (
             <Grid item sm={6} md={4}  key={goal.id}>
@@ -66,23 +65,34 @@ class GoalList extends Component {
                     <Typography type='headline'>
                       {goal.title}
                     </Typography>
+
                     <IconButton
-                      onClick={this.openModal.bind(this, goal.id)}
-                      aria-label='Edit'>
-                      <Icon>mode_edit</Icon>
+                      aria-label='Open Details'
+                      component={Link}
+                      to={ `/goals/${goal.id}`}
+                    >
+                      <Icon>open_in_new</Icon>
                     </IconButton>
                   </div>
-                  {goal.category}
-                  <br />
-                  {goal.description}
-                  <br />
-                  <Link to={ `/goals/${goal.id}`}>See Details</Link>
+                  <div className={classes.controlGroup}>
+                    <div>
+                      {goal.category}
+                      <br />
+                      {goal.progress}
+                      <br />
+                    </div>
+                    <IconButton
+                      aria-label='Expand'>
+                      <Icon>more_vert</Icon>
+                    </IconButton>
+                  </div>
                 </CardContent>
               </Card>
             </Grid>
           )
         })}
         </Grid>
+        <AddTooltip />
       </div>
     )
   }

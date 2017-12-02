@@ -9,6 +9,7 @@ import { LinearProgress } from 'material-ui/Progress'
 
 import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
 import { views as Category } from '../../Category'
+import { views as Travel } from '../../Travel'
 import questions from '../questions'
 
 const styles = {
@@ -48,8 +49,8 @@ const RenderInput = ({ control }) => {
     case 'radio':
       return (
         <div>
-          <input {...control} value='true' /> Yes
-          <input {...control} value='false' /> No
+          <Button {...control} raised color='primary' value='true'>Yes</Button>
+          <Button {...control} raised color='accent' value='false'>No</Button>
         </div>
       )
 
@@ -64,6 +65,9 @@ const RenderInput = ({ control }) => {
 
     case 'category':
       return (<Category {...control} />)
+
+    case 'travel':
+      return (<Travel {...control} />)
 
     case 'autoComplete':
       return (<AutoCompleteGoal {...control} />)
