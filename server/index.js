@@ -26,7 +26,7 @@ app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')
 
 app.use('/api', require('./api'))
 
-const indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html')
+const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
 app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
