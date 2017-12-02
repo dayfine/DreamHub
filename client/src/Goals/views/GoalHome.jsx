@@ -14,6 +14,7 @@ import { editTask } from '../../Tasks/actions'
 
 import Kanban from '../../Tasks/views/Kanban'
 import GoalPanel from './GoalPanel'
+import { views as BubbleChart } from '../../Graph'
 
 const styles = {
   goalContainer: {
@@ -46,7 +47,7 @@ const RenderTabContainer = props => {
       return (<GoalPanel goal={goal} goalTasks={goalTasks} />)
 
     case 3:
-      return (<div>Item Three</div>)
+      return (<BubbleChart goalTasks={goalTasks} />)
 
     default:
       return (<div>Goal Details</div>)

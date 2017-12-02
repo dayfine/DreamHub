@@ -94,6 +94,12 @@ class Bubbles extends Component {
     }
   }
 
+  componentDidMount() {
+    const { tasks } = this.props;
+    console.log(tasks)
+    if (tasks && tasks.length) this.renderBubbles(tasks);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.tasks !== this.props.tasks) {
       this.renderBubbles(nextProps.tasks)
@@ -103,8 +109,7 @@ class Bubbles extends Component {
   shouldComponentUpdate() { return false }
 
   render() {
-    const { width, height, tasks } = this.props;
-    if (tasks.length) this.renderBubbles(tasks);
+    const { width, height } = this.props;
     return (
       <svg width={ width } height={ height } />
     )
