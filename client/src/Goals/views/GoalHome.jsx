@@ -15,41 +15,69 @@ import { editTask } from '../../Tasks/actions'
 import Kanban from '../../Tasks/views/Kanban'
 import GoalPanel from './GoalPanel'
 
-const styles = {}
+const styles = {
+  goalContainer: {
+    marginTop: '-30px',
+    height: 'calc(100vh - 190px)',
+    minWidth: 720,
+    flex: 1
+  },
+  body: {
+    height: '100%'
+  },
+  overflow: {
+    padding: 16,
+    height: 'calc(100% - 60px)',
+    overflowY: 'scroll'
+  }
+}
 
-const TabContainer = props => {
-  return (
-    <div style={{ padding: 8 * 3 }}>
-      {props.children}
-    </div>
-  )
+const RenderTabContainer = props => {
+  const { idx, goal, goalTasks } = props
+
+  switch (idx) {
+    case 0:
+      return (<div>Goal Details</div>)
+
+    case 1:
+      return (<Kanban goalId={goal.id}/>)
+
+    case 2:
+      return (<GoalPanel goal={goal} goalTasks={goalTasks} />)
+
+    case 3:
+      return (<div>Item Three</div>)
+
+    default:
+      return (<div>Goal Details</div>)
+  }
 }
 
 class GoalHome extends Component {
   state = {
-    value: 0,
+    idx: 0,
   }
 
-  handleChange = (ev, value) => {
-    this.setState({ value });
+  handleChange = (ev, idx) => {
+    this.setState({ idx });
   }
 
-  handleChangeIndex = index => {
-    this.setState({ value: index });
+  handleChangeIndex = idx => {
+    this.setState({ idx });
   }
 
   render () {
     const { goal, goalTasks, classes } = this.props
 
     return !goal ? (<div>Loading...</div>) : (
-      <div>
+      <div className={classes.goalContainer}>
         <Typography type='display1' >
           { goal.title }
         </Typography>
-        <Paper>
+        <Paper className={classes.body}>
           <AppBar position='relative' color='default'>
             <Tabs
-              value={this.state.value}
+              value={this.state.idx}
               onChange={this.handleChange}
               indicatorColor='primary'
               textColor='primary'
@@ -59,22 +87,12 @@ class GoalHome extends Component {
               <Tab label='Details' />
               <Tab label='Board' />
               <Tab label='List' />
-              <Tab label='Item Three' />
+              <Tab label='Chart' />
             </Tabs>
           </AppBar>
-          <SwipeableViews
-            index={this.state.value}
-            onChangeIndex={this.handleChangeIndex}
-          >
-            <TabContainer>Goal Details</TabContainer>
-            <TabContainer>
-              <Kanban goalId={goal.id}/>
-            </TabContainer>
-            <TabContainer>
-              <GoalPanel goal={goal} goalTasks={goalTasks} />
-            </TabContainer>
-            <TabContainer>Item Three</TabContainer>
-          </SwipeableViews>
+          <div className={classes.overflow}>
+            <RenderTabContainer idx={this.state.idx} {...this.props} />
+          </div>
         </Paper>
       </div>
     )

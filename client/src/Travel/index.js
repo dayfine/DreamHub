@@ -1,2 +1,2 @@
-import views from './views/TravelForm';
-export { views };
+import views from './views/TravelForm'
+export { views }

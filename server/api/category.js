@@ -1,28 +1,28 @@
-const router = require("express").Router();
-const { Category } = require('../db').models;
+const router = require('express').Router()
+const { Category } = require('../db').models
 
 router
-  .get("/", (req, res, next) => {
-    Category.findAll({ order: ["name"] })
+  .get('/', (req, res, next) => {
+    Category.findAll({ order: ['name'] })
       .then(categories => res.send(categories))
-      .catch(next);
+      .catch(next)
   })
-  .post("/:name", (req, res, next) => {
-    Category.create({ name: req.params.name })
+  .post('/', (req, res, next) => {
+    Category.create(req.body)
       .then(category => res.send(category))
-      .catch(next);
+      .catch(next)
   })
-  .put("/:id", (req, res, next) => {
+  .put('/:id', (req, res, next) => {
     Category.findById(req.params.id)
       .then(category => category.update(req.body))
       .then(category => res.send(category))
-      .catch(next);
+      .catch(next)
   })
-  .delete("/:id", (req, res, next) => {
+  .delete('/:id', (req, res, next) => {
     Category.findById(req.params.id)
       .then(category => category.destroy())
       .then(result => res.send(result))
-      .catch(next);
-  });
+      .catch(next)
+  })
 
-module.exports = router;
+module.exports = router

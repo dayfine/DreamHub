@@ -12,8 +12,8 @@ export const fetchCategories = () => dispatch => {
     .then(goals => dispatch(setCategories(goals)))
 }
 
-export const createCategory = name => dispatch => {
-  axios.post(`/api/category/${name}`)
+export const createCategory = category => dispatch => {
+  axios.post(`/api/category/`, category)
     .then(res => res.data)
     .then(category => dispatch(addCategory(category)))
 }

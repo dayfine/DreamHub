@@ -9,11 +9,10 @@ import IconButton from 'material-ui/IconButton'
 import Card, { CardContent, CardActions } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
-import AutoCompleteGoal from './AutoCompleteGoal'
-import GoalForm from './GoalForm'
-import AddTooltip from '../../common/AddTooltip'
+import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
+import GoalForm from '../../Goals/views/GoalForm'
 
-import { mapCategoryToGoal } from '../util/mappers'
+// import { mapCategoryToGoal } from '../util/mappers'
 
 const styles = {
   root: {
@@ -24,9 +23,6 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  // topRightControl: {
-
-  // }
 }
 
 class GoalList extends Component {
@@ -65,7 +61,6 @@ class GoalList extends Component {
                     <Typography type='headline'>
                       {goal.title}
                     </Typography>
-
                     <IconButton
                       aria-label='Open Details'
                       component={Link}
@@ -77,14 +72,7 @@ class GoalList extends Component {
                   <div className={classes.controlGroup}>
                     <div>
                       {goal.category}
-                      <br />
-                      {goal.progress}
-                      <br />
                     </div>
-                    <IconButton
-                      aria-label='Expand'>
-                      <Icon>more_vert</Icon>
-                    </IconButton>
                   </div>
                 </CardContent>
               </Card>
@@ -92,14 +80,14 @@ class GoalList extends Component {
           )
         })}
         </Grid>
-        <AddTooltip />
       </div>
     )
   }
 }
 
 const mapState = state => ({
-  goals: mapCategoryToGoal(state.categories, state.goals)
+  goals: state.goals
+  // goals: mapCategoryToGoal(state.categories, state.goals)
 })
 
 export default connect(mapState)(

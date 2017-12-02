@@ -7,6 +7,7 @@ import Button from 'material-ui/Button'
 
 import { createGoal } from '../../Goals/actions'
 import QuestionWizard from './QuestionWizard'
+import questions from '../questions'
 
 const styles = {
   quizContainer: {
@@ -32,6 +33,9 @@ class Quiz extends React.Component {
     }
   }
 
+  // Note: this implmentation mixes controlled and uncontrolled components.
+  //       it might make more sense to let inputs each have internal state,
+  //       and then push to parent on page flips. That's more codes tho.
   handleChange = ev => {
     const update = {}
     update[ev.target.name] = ev.target.value
@@ -50,18 +54,17 @@ class Quiz extends React.Component {
   }
 
   handleSkipClick = () => {
-    const { idx } = this.state
-    this.setState({ idx: idx > 6 ? 0 : (idx + 1) })
+    this.setState({ idx: this.state.idx + 1 })
   }
 
   handleBackClick = () => {
-    const { idx } = this.state
-    this.setState({ idx: idx === 0 ? 0 : idx - 1 });
+    this.setState({ idx: this.state.idx - 1 })
   }
 
   render(){
     const { idx } = this.state
     const { classes } = this.props
+    const len = questions.length
 
     return (
       <CenterPaper style={{padding: 0 }}>
@@ -74,13 +77,28 @@ class Quiz extends React.Component {
           />
         </div>
         <div className={classes.buttonGruop}>
-          <Button onClick={this.handleBackClick} color='primary' className={classes.flex} >
+          <Button
+            onClick={this.handleBackClick}
+            color='primary'
+            className={classes.flex}
+            disabled={idx===0}
+          >
             Back
           </Button>
-          <Button onClick={this.handleSkipClick} color='accent' className={classes.flex} >
+          <Button
+            onClick={this.handleSkipClick}
+            color='accent'
+            className={classes.flex}
+            disabled={idx===len-1}
+          >
             Skip
           </Button>
-          <Button onClick={this.handleNextClick} color='primary' className={classes.flex} >
+          <Button
+            onClick={this.handleNextClick}
+            color='primary'
+            className={classes.flex}
+            disabled={idx===len-1}
+          >
             Next
           </Button>
         </div>

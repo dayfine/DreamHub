@@ -21,13 +21,13 @@ module.exports = (User, Goal, Task, Category) => {
   })
   .then(() => {
     return Promise.all([
-      Category.create({ name: 'Traveling' }),
-      Category.create({ name: 'Learning' }),
-      Category.create({ name: 'Exercises' }),
-      Category.create({ name: 'Social & Families' }),
-      Category.create({ name: 'Meditation' }),
-      Category.create({ name: 'Cooking' }),
-      Category.create({ name: 'Reading & Writing' })
+      Category.create({ name: 'Traveling', color: '#123456' }),
+      Category.create({ name: 'Learning', color: '#a23ee2' }),
+      Category.create({ name: 'Exercises', color: '#889a11' }),
+      Category.create({ name: 'Social & Families', color: '#c3e3ff' }),
+      Category.create({ name: 'Meditation', color: '#983444' }),
+      Category.create({ name: 'Cooking', color: '#350318' }),
+      Category.create({ name: 'Reading & Writing', color: '#27123a' })
     ])
   })
   .then(() => {

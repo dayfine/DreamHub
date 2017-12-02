@@ -2,13 +2,21 @@ import React from 'react'
 import { withStyles } from 'material-ui/styles'
 
 const styles = {
-  footer: {
+  root: {
     position: 'static',
     bottom: 0,
     height: 40,
-    backgroundColor: '#ccc',
+    background: '#ccc',
+    color: 'white'
+  },
+  rootClear: {
+    position: 'static',
+    bottom: 0,
+    height: 40,
+    background: 'rgba(0, 0, 0, 0.0)'
+  },
+  flexGroup: {
     padding: 5,
-    color: 'white',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center'
@@ -21,17 +29,19 @@ const styles = {
   }
 }
 
-const Footer = ({classes}) => {
+const Footer = ({ clear, classes }) => {
   return (
-    <footer className={classes.footer}>
-      <a href='https://github.com/dayfine/DreamHub' target='blank'>
-        <img
-          className={classes.logo}
-          src='/public/images/githublogo.png'
-          alt='Github Repo'
-        />
-      </a>
-      <span className={classes.names}>Built by: Anthony, Burcu, Di, and Jerry</span>
+    <footer className={clear ? classes.rootClear : classes.root}>
+      <div className={classes.flexGroup}>
+        <a href='https://github.com/dayfine/DreamHub' target='blank'>
+          <img
+            className={classes.logo}
+            src={`/public/images/githublogo${clear ? '-dark' : ''}.png`}
+            alt='Github Repo'
+          />
+        </a>
+        <span className={classes.names}>Built by: Anthony, Burcu, Di, and Jerry</span>
+      </div>
     </footer>
   )
 }

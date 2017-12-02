@@ -14,9 +14,9 @@ import HTML5Backend from 'react-dnd-html5-backend'
 const Kanban = props => {
   const { goalId, tasks } = props
   return (
-    <div style={{width: '100%', padding: 20}}>
+    <div style={{width: '100%', height: '100%', padding: 20, overflow: 'scroll'}}>
       <QuickAddTask goalId={goalId} />
-      <Grid container style={{height: 'calc(100vh - 120px)'}} spacing={24}>
+      <Grid container spacing={24}>
         {tasks.map(([status, tasks]) => {
           return (
             <Grid item xs={3} key={status}>

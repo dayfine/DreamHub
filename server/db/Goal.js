@@ -11,7 +11,7 @@ const Goal = conn.define('goal', {
     type: Sequelize.TEXT
   },
   progress: {
-    // 'Current', 'Accomplished', 'Stalled' 'Abandoned'
+    // 'Current', 'Accomplished', 'Ready', 'Stalled' 'Abandoned'
     type: Sequelize.STRING,
     defaultValue: 'Current'
   },

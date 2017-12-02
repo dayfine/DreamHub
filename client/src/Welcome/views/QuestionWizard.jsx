@@ -5,7 +5,11 @@ import Input from 'material-ui/Input'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
+import { LinearProgress } from 'material-ui/Progress'
 
+import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
+import { views as Category } from '../../Category'
+import { views as Travel } from '../../Travel'
 import questions from '../questions'
 
 const styles = {
@@ -14,12 +18,14 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     minWidth: 270,
-    minHeight: 370
+    minHeight: 370,
+    backgroundColor: '#fafafa'
   },
   title: {
     padding: 12,
-    paddingTop: 24,
-    backgroundColor: '#4f9a94'
+    paddingTop: 36,
+    backgroundColor: '#4f9a94',
+    color: '#eee'
   },
   description: {
     flex: 1,
@@ -35,18 +41,16 @@ const styles = {
   }
 }
 
-const RenderInput = props => {
-  const { control } = props
-
+const RenderInput = ({ control }) => {
   switch (control.type) {
     case 'text':
       return (<Input autoFocus {...control} />)
 
     case 'radio':
       return (
-        <div>
-          <input {...control} value='true' /> Yes
-          <input {...control} value='false' /> No
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <Button {...control} raised color='primary' value='true'>Yes</Button>
+          <Button {...control} raised color='accent' value='false'>No</Button>
         </div>
       )
 
@@ -58,6 +62,15 @@ const RenderInput = props => {
 
     case 'textarea':
       return (<TextField multiline rows='4' {...control} />)
+
+    case 'category':
+      return (<Category {...control} />)
+
+    case 'travel':
+      return (<Travel {...control} />)
+
+    case 'autoComplete':
+      return (<AutoCompleteGoal {...control} />)
 
     default:
       return (<div>Unknown Input Type</div>)
@@ -74,14 +87,8 @@ const QuestionWizard = props => {
   const { idx, answers, handleAnswer, handleChange, classes } = props
   const question = questions[idx]
 
-  // Using single control only
-  const control = question.controls[0]
-
   return (
     <div className={classes.root}>
-
-      <span> {idx + 1} of {questions.length} </span>
-
       <Typography align='center' type='headline' className={classes.title}>
         {question.title}
       </Typography>
@@ -91,19 +98,24 @@ const QuestionWizard = props => {
       </Typography>
 
       <div className={classes.inputs}>
+        {question.control &&
         <RenderInput
-          key={idx}
           control={{
-            ...control,
+            ...question.control,
             onChange: handleChange,
-            value: answers[control.name]
+            value: answers[question.control.name]
           }}
-        />
+        />}
         <RenderConfirmationButton
           idx={idx}
           handleAnswer={handleAnswer}
         />
       </div>
+
+      <LinearProgress
+        mode='determinate'
+        value={100 * ((idx + 1) / questions.length)}
+      />
     </div>
   )
 }
