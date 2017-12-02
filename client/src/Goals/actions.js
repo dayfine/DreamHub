@@ -40,7 +40,6 @@ export const updateGoalProgress = () => (dispatch, getState) => {
 
   goals.forEach(g => {
     g.tasks = tasks.filter(task => task.goalId === g.id)
-    console.log(g.tasks)
 
     let ready = g.progress !== GOAL_PROGRESS.ACCOMPLISHED &&
                 g.progress !== GOAL_PROGRESS.ABANDONED &&

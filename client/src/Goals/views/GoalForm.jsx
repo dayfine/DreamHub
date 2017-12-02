@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
+import AutoCompleteGoal from './AutoCompleteGoal'
 
 import { removeGoal, editGoal } from '../actions'
 
@@ -40,7 +41,7 @@ class GoalForm extends Component {
     const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
 
-    return !goal ? (<div>Loading...</div>) : (
+    return !goal ? (<div>M</div>) : (
         <div className='goal-edit'>
           <input
             type='text'
