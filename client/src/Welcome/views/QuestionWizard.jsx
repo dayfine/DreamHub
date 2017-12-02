@@ -15,7 +15,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     minWidth: 270,
-    minHeight: 370
+    minHeight: 370,
+    backgroundColor: '#fafafa'
   },
   title: {
     padding: 12,

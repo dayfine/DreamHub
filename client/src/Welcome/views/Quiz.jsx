@@ -54,7 +54,7 @@ class Quiz extends React.Component {
 
   handleSkipClick = () => {
     const { idx } = this.state
-    this.setState({ idx: idx > 6 ? 0 : (idx + 1) })
+    this.setState({ idx: idx > 5 ? 0 : (idx + 1) })
   }
 
   handleBackClick = () => {

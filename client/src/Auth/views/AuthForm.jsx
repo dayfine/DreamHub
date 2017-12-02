@@ -17,7 +17,8 @@ const styles = theme => ({
     padding: '32px 10px 0 10px',
     height: 360,
     display: 'flex',
-    margin: -16
+    margin: -16,
+    background: '#fafafa'
   },
   fieldGroup: {
     minWidth: 280,
@@ -26,7 +27,7 @@ const styles = theme => ({
   },
   error: {
     marginTop: 4,
-    backgroundColor: '#c85a54',
+    background: '#c85a54',
     color: 'white',
     textTransform: 'uppercase'
   }

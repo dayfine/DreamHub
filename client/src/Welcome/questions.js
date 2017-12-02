@@ -25,7 +25,7 @@ export default [
   },
   {
     id: 2,
-    title: 'How excited are you by this goal? Is it worthwhile?',
+    title: 'How excited are you by this goal?',
     description: 'Are you willing to pay the price necessary to achieve it?',
     controls: [
       {
@@ -88,7 +88,7 @@ export default [
   // },
   {
     id: 5,
-    title: 'Is there an emotional reason why you want to achieve your goal?',
+    title: 'What is the emotional reason behind the goal?',
     description: 'Articulating this can add extra motivaton. "If you have a strong enough why you can bear almost any how." - Nietzsche',
     controls: [
       {

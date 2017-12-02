@@ -16,7 +16,12 @@ import TextField from 'material-ui/TextField'
 const styles = theme => ({
   root: {
     width: '100%',
-    backgroundColor: '#80cbc4',
+    background: '#80cbc4',
+    display: 'flex'
+  },
+  rootClear: {
+    width: '100%',
+    background: 'rgba(0, 0, 0, 0.0)',
     display: 'flex'
   },
   title: {
@@ -50,10 +55,9 @@ const styles = theme => ({
   }
 })
 
-const NavBar = props => {
-  const { classes } = props
+const NavBar = ({ clear, classes }) => {
   return (
-    <AppBar position='fixed' className={classes.root}>
+    <AppBar className={clear ? classes.rootClear : classes.root}>
       <Toolbar>
         <IconButton className={classes.menuButton} aria-label='Menu'>
           <Icon>menu</Icon>
