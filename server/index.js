@@ -10,6 +10,8 @@ const
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
+} else {
+  app.use(express.static('client/build'))
 }
 
 app.get('*.js', function (req, res, next) {
@@ -23,6 +25,7 @@ app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')))
+app.use('/build', express.static(path.join(__dirname, '..', 'client', 'build')))
 
 app.use('/api', require('./api'))
 
@@ -41,15 +44,6 @@ app.use((err, req, res, next) => {
   }
   return res.status(err.status || 500).send(err)
 })
-
-if (process.env.NODE_ENV !== 'production') {
-  require('../secrets')
-  // const proxy = require('express-http-proxy')
-  // app.use('/*', proxy('http://localhost:3000'))
-} else {
-  // Only serve build directory in production
-  app.use(express.static('client/build'))
-}
 
 db.sync()
   .then(() => db.seed())
