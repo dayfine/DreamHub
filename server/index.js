@@ -14,11 +14,11 @@ if (process.env.NODE_ENV !== 'production') {
   app.use('/build', express.static(path.join(__dirname, '..', 'client', 'build')))
 }
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz'
-  res.set('Content-Encoding', 'gzip')
-  next()
-})
+// app.get('*.js', function (req, res, next) {
+//   req.url = req.url + '.gz'
+//   res.set('Content-Encoding', 'gzip')
+//   next()
+// })
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
