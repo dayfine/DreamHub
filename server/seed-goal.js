@@ -37,14 +37,14 @@ const apartmentSearch = {
   progress: 'Stalled',
   userId: 2,
   tasks: [
-    { title: 'Search apt rental sites', status: 'Created', priority: 50 },
-    { title: 'Determine budget', status: 'Created', priority: 50 },
-    { title: 'Prepare application docs', status: 'Created', priority: 25 },
-    { title: 'Actively start searching', status: 'Created', priority: 25 },
-    { title: 'Pick neighborhoods', status: 'Created', priority: 50 },
-    { title: 'Ask around', status: 'Created', priority: 50 },
-    { title: 'Check facebook and craigslist', status: 'Created', priority: 50 },
-    { title: 'Make list to track locations', status: 'Created', priority: 25 }
+    { title: 'Search apt rental sites', status: 'Created' },
+    { title: 'Determine budget', status: 'Created' },
+    { title: 'Prepare application docs', status: 'Created', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Actively start searching', status: 'Created', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Pick neighborhoods', status: 'Created' },
+    { title: 'Ask around', status: 'Created' },
+    { title: 'Check facebook and craigslist', status: 'Created' },
+    { title: 'Make list to track locations', status: 'Created', priorityValue: 25, priorityText: 'Low' }
   ]
 }
 
@@ -54,18 +54,18 @@ const getHealthy = {
   progress: 'Stalled',
   userId: 2,
   tasks: [
-    { title: 'Sleep 8 hours', priority: 100 },
-    { title: 'Go to the gym twice a week', priority: 75 },
-    { title: 'Eat better', description: 'Needs more detail', priority: 75 },
-    { title: 'Limit binge watching to once a week', priority: 25 },
-    { title: 'Go out to the nature', priority: 50 },
-    { title: 'Prioritize family & friends more often', priority: 50 },
-    { title: 'Treat yo self', description:'At least once a week', priority: 50 },
-    { title: 'Take daily walks', priority: 75 },
-    { title: 'Read more books', priority: 25 },
-    { title: 'Meditate', priority: 25 },
-    { title: 'Go to yoga', priority: 25 },
-    { title: 'Review other habits', priority: 25 }
+    { title: 'Sleep 8 hours', priorityValue: 100, priorityText: 'Urgent' },
+    { title: 'Go to the gym twice a week', priorityValue: 75 },
+    { title: 'Eat better', description: 'Needs more detail', priorityValue: 75, priorityText: 'High' },
+    { title: 'Limit binge watching to once a week', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Go out to the nature', priorityValue: 50 },
+    { title: 'Prioritize family & friends more often', priorityValue: 50 },
+    { title: 'Treat yo self', description:'At least once a week', priorityValue: 50 },
+    { title: 'Take daily walks', priorityValue: 75, priorityText: 'High' },
+    { title: 'Read more books', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Meditate', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Go to yoga', priorityValue: 25, priorityText: 'Low' },
+    { title: 'Review other habits', priorityValue: 25, priorityText: 'Low' }
   ]
 }
 
@@ -76,14 +76,14 @@ const amsterdamTrip = {
   categoryId: 1,
   userId: 2,
   tasks: [
-    { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priority: 100 },
-    { title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1, },
-    { title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priority: 75 },
-    { title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priority: 75 },
-    { title: 'Pick 3 activities', status: 'Later', priority: 25 },
-    { title: 'Commit to this goal', status: 'In Progress', priority: 50 },
-    { title: 'Dream about it', status: 'In Progress', priority: 50 },
-    { title: 'Start planning', status: 'Completed', priority: 50 }
+    { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priorityValue: 100 },
+    { title: 'Book plane ticket', status: 'Created', priorityValue: 75, goalId: 1, },
+    { title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priorityValue: 75 },
+    { title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priorityValue: 75 },
+    { title: 'Pick 3 activities', status: 'Later', priorityValue: 25 },
+    { title: 'Commit to this goal', status: 'In Progress', priorityValue: 50 },
+    { title: 'Dream about it', status: 'In Progress', priorityValue: 50 },
+    { title: 'Start planning', status: 'Completed', priorityValue: 50 }
   ]
 }
 

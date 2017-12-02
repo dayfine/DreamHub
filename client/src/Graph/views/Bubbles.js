@@ -7,12 +7,11 @@ class Bubbles extends Component {
   constructor(props) {
     super(props);
     this.renderBubbles = this.renderBubbles.bind(this);
-    this.mouseOver = this.mouseOver.bind(this);
   }
 
   renderBubbles(data, selection) {
     const { width, height } = this.props;
-    const columnForRadius = "priority";
+    const columnForRadius = "priorityValue";
     const columnForColors = "status";
     const svg = d3.select("svg");
 
@@ -21,9 +20,7 @@ class Bubbles extends Component {
           return +d[columnForRadius];
         }), d3.max(data, function(d) {
           return +d[columnForRadius];
-        })]).range([10, 100])
-
-    const self = this;
+        })]).range([10, 80]);
 
     const bubbles = svg.selectAll('svg')
       .data(data)
@@ -37,9 +34,8 @@ class Bubbles extends Component {
       })
       .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
       .on("mouseover", function(d) {
-        // tooltip.html(`Title ${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
-        // return tooltip.style("visibility", "visible");
-        self.mouseOver(this, d, tooltip)
+        tooltip.html(`Task: ${d.title}<br />Status: ${d.status}<br />Priority: ${d.priorityText}`);
+        return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
         return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
@@ -61,7 +57,6 @@ class Bubbles extends Component {
       .style("background-color", "#626D71")
       .style("border-radius", "6px")
       .style("text-align", "center")
-      .style("font-family", "monospace")
       .style("width", "300px")
       .text("");
 
@@ -84,13 +79,13 @@ class Bubbles extends Component {
       if (!d3.event.active) simulation.alphaTarget(1).restart();
       d.fx = d.x;
       d.fy = d.y;
-      // return tooltip.style("visibility", "hidden");
+      return tooltip.style("visibility", "hidden");
     }
 
     function dragged(d) {
       d.fx = d3.event.x;
       d.fy = d3.event.y;
-      // return tooltip.style("visibility", "hidden");
+      return tooltip.style("visibility", "hidden");
     }
 
     function dragended(d) {
@@ -98,12 +93,6 @@ class Bubbles extends Component {
       d.fx = null;
       d.fy = null;
     }
-  }
-
-    mouseOver(elem, d, tip) {
-      console.log(elem, d)
-      tip.html(d.title);
-      return tip.style("visibility", "visible");
   }
 
   componentDidMount() {
@@ -118,7 +107,7 @@ class Bubbles extends Component {
     }
   }
 
-  shouldComponentUpdate() { return true }
+  shouldComponentUpdate() { return false }
 
   render() {
     const { width, height } = this.props;
