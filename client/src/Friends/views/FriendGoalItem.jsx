@@ -24,17 +24,24 @@ const FriendGoalItem = props => {
 
   return (
     <div style={{maxHeight:'200px'}}>
-      <Typography type='subheading'>
-        <h5>{goal.title}</h5>
-      </Typography>
-      <Typography type='body2'>
-        <h6>{goal.description}</h6>
-      </Typography>
-      <Typography type='body2'>
-        <i>Status: {goal.progress}</i>
-      </Typography>
-      {progressButton}
-      <br /><br />
+        <br />
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <h5>{goal.title}</h5>
+              <h6>{goal.description}</h6>
+            </div>
+            <div className="col">
+              <div>
+                <i>Status: {goal.progress}</i>
+              </div>
+              <div>
+                {progressButton}
+              </div>
+            </div>
+          </div>
+        </div>
+        <br /><br />
     </div>
   )
 }

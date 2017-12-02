@@ -15,6 +15,7 @@ const FriendGoalView = props => {
       <Card>
         <CardContent>
         <h4>{friend.name}'s Goals</h4>
+        <Divider />
         {friend.goals.map(goal => {
            return (
             <div>

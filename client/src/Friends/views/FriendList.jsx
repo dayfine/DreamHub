@@ -46,7 +46,7 @@ class Friend extends Component{
               })}
             </ul>
           </div>
-          <div className='col' style={{height:'25em', overflow:'scroll'}}>
+          <div className='col' style={{height:'30em', overflow:'scroll'}}>
             <FriendGoalView friend={friends.find(f=>f.id===this.state.friendId)}/>
           </div>
         </div>
