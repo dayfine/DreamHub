@@ -5,6 +5,7 @@ import Input from 'material-ui/Input'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
+import { LinearProgress } from 'material-ui/Progress'
 
 import questions from '../questions'
 
@@ -18,8 +19,9 @@ const styles = {
   },
   title: {
     padding: 12,
-    paddingTop: 24,
-    backgroundColor: '#4f9a94'
+    paddingTop: 36,
+    backgroundColor: '#4f9a94',
+    color: '#eee'
   },
   description: {
     flex: 1,
@@ -79,9 +81,6 @@ const QuestionWizard = props => {
 
   return (
     <div className={classes.root}>
-
-      <span> {idx + 1} of {questions.length} </span>
-
       <Typography align='center' type='headline' className={classes.title}>
         {question.title}
       </Typography>
@@ -104,6 +103,11 @@ const QuestionWizard = props => {
           handleAnswer={handleAnswer}
         />
       </div>
+
+      <LinearProgress
+        mode='determinate'
+        value={100 * ((idx + 1) / questions.length)}
+      />
     </div>
   )
 }
