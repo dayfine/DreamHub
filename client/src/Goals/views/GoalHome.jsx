@@ -14,6 +14,7 @@ import { editTask } from '../../Tasks/actions'
 
 import Kanban from '../../Tasks/views/Kanban'
 import GoalPanel from './GoalPanel'
+import GoalForm from './GoalForm'
 
 const styles = {
   goalContainer: {
@@ -37,7 +38,7 @@ const RenderTabContainer = props => {
 
   switch (idx) {
     case 0:
-      return (<div>Goal Details</div>)
+      return (<GoalForm goal={goal}>Goal Details</GoalForm>)
 
     case 1:
       return (<Kanban goalId={goal.id}/>)

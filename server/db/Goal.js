@@ -17,6 +17,22 @@ const Goal = conn.define('goal', {
   },
   budget: {
     type: Sequelize.INTEGER
+  },
+  affirmations: {
+    type: Sequelize.STRING
+  },
+  deadline: {
+    type: Sequelize.DATEONLY
+  },
+  importance: {
+    type: Sequelize.INTEGER,
+    defaultValue: 5
+  },
+  measurement: {
+    type: Sequelize.STRING
+  },
+  reasons: {
+    type: Sequelize.TEXT
   }
 })
 

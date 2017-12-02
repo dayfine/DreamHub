@@ -11,7 +11,7 @@ class GoalForm extends Component {
   constructor (props) {
     super()
     this.state = {
-      goal: null
+      goal: props.goal
     }
   }
 
@@ -40,12 +40,7 @@ class GoalForm extends Component {
     const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
 
-    return (
-      <Dialog
-        open={ open }
-        onRequestClose={ onClose }
-      >
-      { goal &&
+    return !goal ? (<div>Loading...</div>) : (
         <div className='goal-edit'>
           <input
             type='text'
@@ -86,8 +81,6 @@ class GoalForm extends Component {
             value={goal.description || ''}
             className='goal-input-sm goal-textinput' />
         </div>
-      }
-    </Dialog>
     )
   }
 }
