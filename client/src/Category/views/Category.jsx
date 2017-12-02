@@ -16,6 +16,12 @@ import { SwatchesPicker } from 'react-color'
 import { createCategory } from '../actions'
 
 const styles = theme => ({
+  root: {
+    minWidth: 200,
+    maxWidth: 360,
+    zIndex: 100,
+    margin: '0 auto'
+  },
   searchInputBox: {
     margin: 10,
     borderRadius: 10,
@@ -87,7 +93,7 @@ class Category extends Component {
     const { search, color, open, anchorEl,} = this.state
 
     return (
-      <Paper>
+      <Paper className={classes.root}>
         <div className={classes.searchInputBox}>
           <IconButton>
             <Icon>search</Icon>

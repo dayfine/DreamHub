@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import { LinearProgress } from 'material-ui/Progress'
 
+import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
+import { views as Category } from '../../Category'
 import questions from '../questions'
 
 const styles = {
@@ -38,9 +40,7 @@ const styles = {
   }
 }
 
-const RenderInput = props => {
-  const { control } = props
-
+const RenderInput = ({ control }) => {
   switch (control.type) {
     case 'text':
       return (<Input autoFocus {...control} />)
@@ -62,6 +62,12 @@ const RenderInput = props => {
     case 'textarea':
       return (<TextField multiline rows='4' {...control} />)
 
+    case 'category':
+      return (<Category {...control} />)
+
+    case 'autoComplete':
+      return (<AutoCompleteGoal {...control} />)
+
     default:
       return (<div>Unknown Input Type</div>)
   }
@@ -77,9 +83,6 @@ const QuestionWizard = props => {
   const { idx, answers, handleAnswer, handleChange, classes } = props
   const question = questions[idx]
 
-  // Using single control only
-  const control = question.controls[0]
-
   return (
     <div className={classes.root}>
       <Typography align='center' type='headline' className={classes.title}>
@@ -91,14 +94,14 @@ const QuestionWizard = props => {
       </Typography>
 
       <div className={classes.inputs}>
+        {question.control &&
         <RenderInput
-          key={idx}
           control={{
-            ...control,
+            ...question.control,
             onChange: handleChange,
-            value: answers[control.name]
+            value: answers[question.control.name]
           }}
-        />
+        />}
         <RenderConfirmationButton
           idx={idx}
           handleAnswer={handleAnswer}
