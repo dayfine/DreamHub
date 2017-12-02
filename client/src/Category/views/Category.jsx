@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
-import Input, { InputAdornment } from 'material-ui/Input'
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import Input from 'material-ui/Input'
+import List, { ListItem, ListItemText } from 'material-ui/List'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import Paper from 'material-ui/Paper'
 import Divider from 'material-ui/Divider'
+import Popover from 'material-ui/Popover'
+import { Swatches } from 'react-color'
 
 import { createCategory } from '../actions'
 
@@ -34,11 +37,21 @@ const catFilter = (term, categories) => {
 
 class Category extends Component {
   state = {
-    search: ''
+    search: '',
+    color: '',
+    open: false,
+    anchorEl: null,
   }
 
   handleChange = ev => {
     this.setState({ search: ev.target.value })
+  }
+
+  handleAdd = () => {
+    const { search, color } = this.state
+    if (search === '') return
+    this.props.createCategory({ color, name: search})
+    this.setState({ search: '', color: '' })
   }
 
   render () {
@@ -69,7 +82,41 @@ class Category extends Component {
           })}
         </List>
         <Divider />
-        <div>create a new category</div>
+        <div>
+          <div onClick={this.handleAdd}>
+            <IconButton >
+              <Icon>add</Icon>
+            </IconButton>
+            Create new category
+          </div>
+          <Button
+            ref={node => {
+              this.button = node;
+            }}
+            raised
+            className={classes.button}
+            onClick={this.handleClickButton}
+          >
+            Open Popover
+          </Button>
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            anchorReference={anchorReference}
+            anchorPosition={{ top: positionTop, left: positionLeft }}
+            onRequestClose={this.handleRequestClose}
+            anchorOrigin={{
+              vertical: anchorOriginVertical,
+              horizontal: anchorOriginHorizontal,
+            }}
+            transformOrigin={{
+              vertical: transformOriginVertical,
+              horizontal: transformOriginHorizontal,
+            }}
+          >
+            <Swatches />
+          </Popover>
+        </div>
       </Paper>
     )
   }
