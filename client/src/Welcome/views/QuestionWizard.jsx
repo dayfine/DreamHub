@@ -48,7 +48,7 @@ const RenderInput = ({ control }) => {
 
     case 'radio':
       return (
-        <div>
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
           <Button {...control} raised color='primary' value='true'>Yes</Button>
           <Button {...control} raised color='accent' value='false'>No</Button>
         </div>

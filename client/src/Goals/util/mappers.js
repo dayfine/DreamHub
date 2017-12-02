@@ -1,4 +1,4 @@
-import { updateGoal } from '../actions'
+import { editGoal } from '../actions'
 import { TASK_STATUS, GOAL_PROGRESS } from '../../constants'
 
 export const mapCategoryToGoal = (categories, goals) => {
@@ -24,7 +24,7 @@ export const goalProgressMapper = (goals, tasks) => {
     let ready = g.tasks.every(t => TASK_STATUS.COMPLETED)
 
     if (ready) {
-      updateGoal({...g, progress: GOAL_PROGRESS.READY})
+      editGoal({...g, progress: GOAL_PROGRESS.READY})
     }
 
     // lastUpdated, ready = true
