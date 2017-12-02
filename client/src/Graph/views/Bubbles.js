@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
 class Bubbles extends Component {
@@ -8,7 +7,7 @@ class Bubbles extends Component {
     this.renderBubbles = this.renderBubbles.bind(this);
   }
 
-  renderBubbles(data) {
+  renderBubbles(data, selection) {
     const { width, height } = this.props;
     const columnForRadius = "priority";
     const columnForColors = "status";
@@ -32,10 +31,33 @@ class Bubbles extends Component {
         return colorCircles(d[columnForColors])
       })
       .attr('transform', 'translate(' + [width / 2, height / 3] + ')')
+      // .on("mouseover", function(d) {
+      //   tooltip.html(`${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
+      //   return tooltip.style("visibility", "visible");
+      // })
+      // .on("mousemove", function() {
+      //   return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+      // })
+      // .on("mouseout", function() {
+      //   return tooltip.style("visibility", "hidden");
+      // })
       .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended))
+
+    // const tooltip = bubbles
+    //   .append("div")
+    //   .style("position", "absolute")
+    //   .style("visibility", "hidden")
+    //   .style("color", "white")
+    //   .style("padding", "8px")
+    //   .style("background-color", "#626D71")
+    //   .style("border-radius", "6px")
+    //   .style("text-align", "center")
+    //   .style("font-family", "monospace")
+    //   .style("width", "400px")
+    //   .text("");
 
     const simulation = d3.forceSimulation(data)
       .force("charge", d3.forceManyBody().strength([-600]))
@@ -81,9 +103,11 @@ class Bubbles extends Component {
   shouldComponentUpdate() { return false }
 
   render() {
-    const { tasks } = this.props;
+    const { width, height, tasks } = this.props;
     if (tasks.length) this.renderBubbles(tasks);
-    return (<circle />)
+    return (
+      <svg width={ width } height={ height } />
+    )
   }
 }
 
