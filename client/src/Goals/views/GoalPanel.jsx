@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import CenterPaper from '../../common/CenterPaper'
@@ -62,14 +62,6 @@ const GoalPanel = props => {
     </CenterPaper>
   )
 }
-
-// const mapState = (state, ownProps) => {
-//   const { goalId } = ownProps.match.params
-//   return {
-//     goal: state.goals.find(g => g.id === +goalId),
-//     goalTasks: state.tasks.filter(t => t.goalId === +goalId)
-//   }
-// }
 
 const mapDispatch = ({ editTask })
 

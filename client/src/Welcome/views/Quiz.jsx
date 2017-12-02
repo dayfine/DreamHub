@@ -45,6 +45,7 @@ class Quiz extends React.Component {
   }
 
   handleAnswer = ev => {
+    console.log(this.state)
     // Needs userId in here
     this.props.createGoal(this.state.answers)
   }
