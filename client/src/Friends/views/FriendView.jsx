@@ -46,18 +46,14 @@ const styles = theme => ({
 });
 
 class FriendCard extends Component {
-  state = { expanded: false };
 
-  handleExpandClick = () => {
-    this.setState({ expanded: !this.state.expanded });
-  }
   handleUnfriend = () => {
     const { friend, removeFriend } = this.props
     removeFriend(friend.id)
   }
 
   render() {
-    const { classes, friend } = this.props;
+    const { classes, friend, expanded, handleExpandClick } = this.props;
     return (
       <Card className={classes.card}>
         <div className={classes.controlGroup}>
@@ -75,16 +71,16 @@ class FriendCard extends Component {
           />
           <IconButton
             className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
+              [classes.expandOpen]: expanded,
             })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
+            onClick={handleExpandClick.bind(null,friend.id)}
+            aria-expanded={expanded}
             aria-label="Show more"
           >
             <Icon>expand_more</Icon>
           </IconButton>
         </div>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>         
           <CardActions>
             <Button
               raised
@@ -92,7 +88,7 @@ class FriendCard extends Component {
               >Unfriend
             </Button>
             <Button>Poke</Button>
-          </CardActions>
+          </CardActions>       
           <CardContent>
             {friend.goals.map(goal => {
               return (
