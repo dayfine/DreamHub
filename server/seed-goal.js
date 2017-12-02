@@ -37,7 +37,7 @@ const apartmentSearch = {
   progress: 'Stalled',
   tasks: [
     { title: 'Search apt rental sites', status: 'Created', priority: 50 },
-    { title: 'Determine budget', status: 'Created', priority: 50, },
+    { title: 'Determine budget', status: 'Created', priority: 50 },
     { title: 'Prepare application docs', status: 'Created', priority: 25 },
     { title: 'Actively start searching', status: 'Created', priority: 25 },
     { title: 'Pick neighborhoods', status: 'Created', priority: 50 },
@@ -58,7 +58,7 @@ const getHealthy = {
     { title: 'Limit binge watching to once a week', priority: 25 },
     { title: 'Go out to the nature', priority: 50 },
     { title: 'Prioritize family & friends more often', priority: 50 },
-    { title: 'Treat yo self', description:'At least once a week', priority: 50 },
+    { title: 'Treat yo self', description: 'At least once a week', priority: 50 },
     { title: 'Take daily walks', priority: 75 },
     { title: 'Read more books', priority: 25 },
     { title: 'Meditate', priority: 25 },
@@ -71,10 +71,10 @@ const amsterdamTrip = {
   title: 'Amsterdam Trip',
   description: 'Visiting Netherlands',
   progress: 'Abandoned',
-  categoryId: 0,
+  categoryId: 1,
   tasks: [
     { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priority: 100 },
-    { title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1, },
+    { title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1 },
     { title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priority: 75 },
     { title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priority: 75 },
     { title: 'Pick 3 activities', status: 'Later', priority: 25 },
@@ -119,7 +119,7 @@ const travelUSA = {
   description: '',
   progress: 'In Progress',
   budget: 2000,
-  userId: 6,
+  userId: 5,
   categoryId: 1,
   tasks: [
     { title: 'Research each state', description: 'Find out points of interest I want to visit in each state', status: 'Completed' },
@@ -202,7 +202,7 @@ const resellSneakers = {
   ]
 }
 
-module.exports = [ 
-  peruTrip, learnML, runNYCMarathon, wedding, fantasyDraft, resellSneakers, 
-  loseWeight, learnFrench, travelUSA, apartmentSearch, getHealthy, amsterdamTrip 
+module.exports = [
+  peruTrip, learnML, runNYCMarathon, wedding, fantasyDraft, resellSneakers,
+  loseWeight, learnFrench, travelUSA, apartmentSearch, getHealthy, amsterdamTrip
 ]

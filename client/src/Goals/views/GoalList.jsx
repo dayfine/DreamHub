@@ -13,6 +13,8 @@ import AutoCompleteGoal from './AutoCompleteGoal'
 import GoalForm from './GoalForm'
 import AddTooltip from '../../common/AddTooltip'
 
+import { updateGoalProgress } from '../actions'
+
 import { mapCategoryToGoal } from '../util/mappers'
 
 const styles = {
@@ -24,14 +26,15 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  // topRightControl: {
-
-  // }
 }
 
 class GoalList extends Component {
   state = {
     modalId: null
+  }
+
+  componentDidMount () {
+    this.props.updateGoalProgress()
   }
 
   openModal = modalId => {
@@ -102,7 +105,9 @@ const mapState = state => ({
   goals: mapCategoryToGoal(state.categories, state.goals)
 })
 
-export default connect(mapState)(
+const mapDispatch = ({ updateGoalProgress })
+
+export default connect(mapState, mapDispatch)(
                 withStyles(styles)(
                   GoalList
                 ))
