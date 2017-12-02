@@ -31,6 +31,59 @@ const learnML = {
   ]
 }
 
+const apartmentSearch = {
+  title: 'Find a new apartment',
+  description: 'By end of July',
+  progress: 'Stalled',
+  tasks: [
+    { title: 'Search apt rental sites', status: 'Created', priority: 50 },
+    { title: 'Determine budget', status: 'Created', priority: 50, },
+    { title: 'Prepare application docs', status: 'Created', priority: 25 },
+    { title: 'Actively start searching', status: 'Created', priority: 25 },
+    { title: 'Pick neighborhoods', status: 'Created', priority: 50 },
+    { title: 'Ask around', status: 'Created', priority: 50 },
+    { title: 'Check facebook and craigslist', status: 'Created', priority: 50 },
+    { title: 'Make list to track locations', status: 'Created', priority: 25 }
+  ]
+}
+
+const getHealthy = {
+  title: 'Be healthy',
+  description: 'Change your habits and do better stuff',
+  progress: 'Stalled',
+  tasks: [
+    { title: 'Sleep 8 hours', priority: 100 },
+    { title: 'Go to the gym twice a week', priority: 75 },
+    { title: 'Eat better', description: 'Needs more detail', priority: 75 },
+    { title: 'Limit binge watching to once a week', priority: 25 },
+    { title: 'Go out to the nature', priority: 50 },
+    { title: 'Prioritize family & friends more often', priority: 50 },
+    { title: 'Treat yo self', description:'At least once a week', priority: 50 },
+    { title: 'Take daily walks', priority: 75 },
+    { title: 'Read more books', priority: 25 },
+    { title: 'Meditate', priority: 25 },
+    { title: 'Go to yoga', priority: 25 },
+    { title: 'Review other habits', priority: 25 }
+  ]
+}
+
+const amsterdamTrip = {
+  title: 'Amsterdam Trip',
+  description: 'Visiting Netherlands',
+  progress: 'Abandoned',
+  categoryId: 0,
+  tasks: [
+    { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priority: 100 },
+    { title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1, },
+    { title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priority: 75 },
+    { title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priority: 75 },
+    { title: 'Pick 3 activities', status: 'Later', priority: 25 },
+    { title: 'Commit to this goal', status: 'In Progress', priority: 50 },
+    { title: 'Dream about it', status: 'In Progress', priority: 50 },
+    { title: 'Start planning', status: 'Completed', priority: 50 }
+  ]
+}
+
 const loseWeight = {
   title: 'Lose at least 80 lbs of fat',
   description: '',
@@ -151,5 +204,5 @@ const resellSneakers = {
 
 module.exports = [ 
   peruTrip, learnML, runNYCMarathon, wedding, fantasyDraft, resellSneakers, 
-  loseWeight, learnFrench, travelUSA 
+  loseWeight, learnFrench, travelUSA, apartmentSearch, getHealthy, amsterdamTrip 
 ]

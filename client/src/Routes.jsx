@@ -8,6 +8,7 @@ import { views as Welcome } from './Welcome'
 import { views as Friends } from './Friends'
 import { Login, Signup } from './Auth'
 import { views as UserPanel } from './User'
+import { views as Graph } from './Graph'
 
 export default ({ authenticated }) => {
   return (
@@ -23,6 +24,7 @@ export default ({ authenticated }) => {
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
         <Route path='/me' component={UserPanel} />
+        <Route path='/graph' component={Graph} />
       </Switch>
     </main>
   )
