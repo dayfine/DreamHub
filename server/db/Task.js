@@ -14,8 +14,8 @@ const Task = conn.define('task', {
     type: Sequelize.DATEONLY
   },
   priority: {
-    type: Sequelize.STRING,
-    defaultValue: 'Medium'
+    type: Sequelize.INTEGER,
+    defaultValue: 50
   },
   status: {
     type: Sequelize.STRING,

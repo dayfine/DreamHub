@@ -1,2 +1,2 @@
-import views from './views/Graph';
+import views from './views/BubbleChart';
 export { views };

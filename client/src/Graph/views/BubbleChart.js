@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../Tasks';
+import d3 from 'd3';
 import Bubbles from './Bubbles';
 
 const BubbleChart = (props) => {
+  const width = 960, height = 960;
+
   return (
     <div id="chart">
       <h2>Visualize Your Goals</h2>
-      <svg width="1000" height="1000">
-        <Bubbles { ...props } />
+      <svg className="bubbleChart" width={ width } height={ height }>
+        <Bubbles { ...props } width={ width } height={ height } />
       </svg>
     </div>
   )
