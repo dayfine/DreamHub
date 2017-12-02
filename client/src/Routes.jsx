@@ -10,6 +10,7 @@ import { views as TravelForm } from './Travel'
 import { views as Friends } from './Friends'
 import { Login, Signup } from './Auth'
 import { views as UserPanel } from './User'
+import { views as Graph } from './Graph'
 
 const Routes = ({ authenticated }) => {
   return (
@@ -23,6 +24,7 @@ const Routes = ({ authenticated }) => {
         <Route path='/signup' component={Signup} />
         <Route path='/category' component={Category} />
         <Route path='/me' component={UserPanel} />
+        <Route path='/graph' component={Graph} />
       </Switch>
     </main>
   )
