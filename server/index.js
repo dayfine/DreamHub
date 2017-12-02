@@ -11,7 +11,7 @@ const
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
 } else {
-  app.use(express.static('client/build'))
+  app.use('/build', express.static(path.join(__dirname, '..', 'client', 'build')))
 }
 
 app.get('*.js', function (req, res, next) {
@@ -25,11 +25,11 @@ app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')))
-app.use('/build', express.static(path.join(__dirname, '..', 'client', 'build')))
 
 app.use('/api', require('./api'))
 
 const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
+console.log(indexPath)
 app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
