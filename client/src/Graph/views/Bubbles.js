@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import { select } from 'd3-selection';
 import { schemePastel2 } from 'd3-scale-chromatic';
 
 class Bubbles extends Component {
   constructor(props) {
     super(props);
     this.renderBubbles = this.renderBubbles.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
   }
 
   renderBubbles(data, selection) {
@@ -21,6 +23,8 @@ class Bubbles extends Component {
           return +d[columnForRadius];
         })]).range([10, 100])
 
+    const self = this;
+
     const bubbles = svg.selectAll('svg')
       .data(data)
       .enter()
@@ -33,8 +37,9 @@ class Bubbles extends Component {
       })
       .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
       .on("mouseover", function(d) {
-        tooltip.html(`${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
-        return tooltip.style("visibility", "visible");
+        // tooltip.html(`Title ${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
+        // return tooltip.style("visibility", "visible");
+        self.mouseOver(this, d, tooltip)
       })
       .on("mousemove", function() {
         return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
@@ -47,7 +52,7 @@ class Bubbles extends Component {
         .on("drag", dragged)
         .on("end", dragended))
 
-    const tooltip = bubbles
+    const tooltip = d3.select('#bubblechart')
       .append("div")
       .style("position", "absolute")
       .style("visibility", "hidden")
@@ -57,7 +62,7 @@ class Bubbles extends Component {
       .style("border-radius", "6px")
       .style("text-align", "center")
       .style("font-family", "monospace")
-      .style("width", "400px")
+      .style("width", "300px")
       .text("");
 
     const simulation = d3.forceSimulation(data)
@@ -95,6 +100,12 @@ class Bubbles extends Component {
     }
   }
 
+    mouseOver(elem, d, tip) {
+      console.log(elem, d)
+      tip.html(d.title);
+      return tip.style("visibility", "visible");
+  }
+
   componentDidMount() {
     const { tasks } = this.props;
     console.log(tasks)
@@ -107,12 +118,12 @@ class Bubbles extends Component {
     }
   }
 
-  shouldComponentUpdate() { return false }
+  shouldComponentUpdate() { return true }
 
   render() {
     const { width, height } = this.props;
     return (
-      <svg width={ width } height={ height } />
+      <svg ref={node => this.node = node} width={ width } height={ height } />
     )
   }
 }
