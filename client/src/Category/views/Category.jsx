@@ -14,6 +14,11 @@ import Popover from 'material-ui/Popover'
 import { SwatchesPicker } from 'react-color'
 
 import { createCategory } from '../actions'
+import { editGoal } from '../../Goals/actions'
+
+// This reusable componennt expects either a goal prop or a passIdBack function
+// to execute the category change
+
 
 const styles = theme => ({
   root: {
@@ -55,7 +60,7 @@ class Category extends Component {
     super()
     this.state = {
       category: props.category,
-      listOpen: !props.category,
+      listOpen: false,
       search: '',
       color: '#ff8a80',
       paletteOpen: false,
@@ -67,12 +72,17 @@ class Category extends Component {
     this.setState({ listOpen: true })
   }
 
-
   handleChange = ev => {
     this.setState({ search: ev.target.value })
   }
 
   handleSelect = category => {
+    console.log(category)
+    const { passIdBack, goal, editGoal } = this.props
+    console.log(this.props)
+    if (!passIdBack && goal) {
+      editGoal({ ...goal, categoryId: category.id })
+    }
     this.setState({ category, listOpen: false })
   }
 
@@ -113,15 +123,21 @@ class Category extends Component {
     const { categories, classes } = this.props
     const { category, listOpen, search, color, paletteOpen, anchorEl,} = this.state
 
-    return (category && !listOpen)
+    return !listOpen
       ? (
       <ListItem
         button
         onClick={this.onOpenForm}
         className={classes.root}
       >
-        <Icon style={{color: category.color}}>fiber_manual_record</Icon>
-        <ListItemText secondary={category.name} />
+        <Icon
+          style={{color: category ? category.color : '#000'}}
+        >
+          fiber_manual_record
+        </Icon>
+        <ListItemText
+          secondary={ category ? category.name : 'Uncategoriezed'}
+        />
       </ListItem>
       ) : (
       <Paper className={classes.root}>
@@ -138,6 +154,14 @@ class Category extends Component {
         </div>
         <Divider />
         <List className={classes.list}>
+          <ListItem
+            button
+            key={0}
+            onClick={this.handleSelect.bind(null, null)}
+          >
+            <Icon style={{color: '#000'}}>fiber_manual_record</Icon>
+            <ListItemText secondary='Uncategoriezed' />
+          </ListItem>
           {catFilter(search, categories).map(_category => {
             return (
               <ListItem
@@ -188,7 +212,7 @@ const mapState = state => ({
   categories: state.categories
 })
 
-const mapDispatch = ({ createCategory })
+const mapDispatch = ({ createCategory, editGoal })
 
 export default connect(mapState, mapDispatch)(
                 withStyles(styles)(

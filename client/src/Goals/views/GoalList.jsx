@@ -13,6 +13,7 @@ import Typography from 'material-ui/Typography'
 import AddTooltip from './AddTooltip'
 import Resolution from './Resolution'
 import ProperButton from '../../common/ProperButton'
+import { views as Category } from '../../Category'
 
 import { GOAL_PROGRESS } from '../../constants'
 import { updateGoalProgress } from '../actions'
@@ -36,16 +37,10 @@ const styles = {
   pulse: {
     animation: 'pulse 1s infinite',
     border: '3px solid'
+  },
+  category: {
+    alignSelf: 'flex-start'
   }
-}
-
-const RenderCategoryDot = ({ goal, categories }) => {
-  const cat = categories.find(c => c.id === goal.categoryId)
-  const color = cat ? cat.color : '#000'
-
-  return (
-    <Icon style={{ color }}>fiber_manual_record</Icon>
-  )
 }
 
 const RenderProgressHeader = ({ progress }) => {
@@ -150,11 +145,13 @@ class GoalList extends Component {
                     </div>
 
                     <div className={classes.controlGroup}>
-                      <div className={classes.controlGroup}>
-                        <RenderCategoryDot goal={goal} categories={categories} />
-                        {goal.category}
+                      <div className={classes.category}>
+                        <Category
+                          category={categories.find(c => c.id === goal.categoryId)}
+                          passIdBack={null}
+                          goal={goal}
+                        />
                       </div>
-
                       <RenderProgressButton
                         progress={goal.progress}
                         classes={classes}
