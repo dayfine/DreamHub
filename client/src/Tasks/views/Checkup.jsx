@@ -37,6 +37,13 @@ const styles = {
   },
   flex: {
     flex: '1 0 auto',
+  },
+  checkIn: {
+    whiteSpace: 'nowrap',
+  },
+  checkInAnimated: {
+    whiteSpace: 'nowrap',
+    animation: 'checkin .5s infinite',
   }
 }
 
@@ -52,6 +59,10 @@ class Checkup extends Component {
 
   onClose = () => {
     this.setState({ open: false })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.tasks.length === 0) this.onClose()
   }
 
   renderTaskOptions = (task, classes, editTask) => {
@@ -94,7 +105,13 @@ class Checkup extends Component {
 
     return tasks.length > 0 && (
       <div>
-        <Button color='accent' raised onClick={ onOpen }>Check In!</Button>
+        <Button
+          color='accent' raised
+          onClick={ onOpen }
+          className={ classes[`checkIn${this.state.open ? '' : 'Animated'}`] }
+        >
+          Check In!
+        </Button>
         <Dialog
           open={ this.state.open }
           onRequestClose={ onClose }

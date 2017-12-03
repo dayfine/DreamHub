@@ -86,7 +86,7 @@ const NavBar = ({ clear, classes }) => {
         <ProperButton component={Link} to='/explore'>
           Explore
         </ProperButton>
-        <div style={{flex: '1 5 20%'}} />
+        <div style={{flex: '1 5 15%'}} />
         <Checkup />
         <Auth />
       </Toolbar>

@@ -12,8 +12,20 @@ class GoalForm extends Component {
   constructor (props) {
     super()
     this.state = {
-      goal: props.goal
+      title: '',
+      description: '',
+      progress: '',
+      budget: 0,
+      deadline: null,
+      importance: 5,
+      measurement: '',
+      reasons: '',
+      affirmations: '',
     }
+  }
+
+  componentDidMount () {
+    if (this.props.goal) this.setState({ ...this.props.goal })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -21,13 +33,10 @@ class GoalForm extends Component {
   }
 
   handleEdit = ev => {
-    const update = {}
-    const { name, value } = ev.target
-    update[name] = name === 'categoryId' ? (+value) : value
+    let { name, value } = ev.target
+    value = name === 'categoryId' ? (+value) : value
 
-    this.setState({
-      goal: { ...this.state.goal, ...update }
-    })
+    this.setState({ name: value })
   }
 
   handleSave = ev => {
@@ -38,25 +47,28 @@ class GoalForm extends Component {
 
   render () {
     const { categories, removeGoal, editGoal, open, onClose } = this.props
-    const { goal } = this.state
     const { handleDelete, handleEdit, handleSave } = this
+    const {
+      title,
+      description,
+      progress,
+      budget,
+      deadline,
+      importance,
+      measurement,
+      reasons,
+      affirmations,
+    } = this.state
 
     console.log(this.props)
 
-    return !goal ?
-        ( <Dialog
-            open={ open }
-            onRequestClose={ onClose }
-          >
-            <button onClick={onClose}>M</button>
-          </Dialog> )
-        : (
+    return (
         <div className='goal-edit'>
           <input
             type='text'
             onChange={ handleEdit }
             name='title'
-            value={goal.title}
+            value={this.state.title}
             autoFocus
             className='goal-input-sm' />
 
@@ -74,7 +86,7 @@ class GoalForm extends Component {
 
           <div>
             <label>Category</label>
-            <select name="categoryId" value={ goal.categoryId } onChange={ handleEdit }>
+            <select name="categoryId" value={ this.state.categoryId } onChange={ handleEdit }>
               <option value={''}>Choose a category...</option>
               {categories.map(category => {
                 return (
@@ -88,7 +100,7 @@ class GoalForm extends Component {
           <textarea
             onChange={ handleEdit }
             name='description'
-            value={goal.description || ''}
+            value={this.state.description || ''}
             className='goal-input-sm goal-textinput' />
         </div>
     )
