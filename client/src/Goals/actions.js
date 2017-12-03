@@ -14,7 +14,6 @@ export const fetchGoals = () => dispatch => {
 }
 
 export const createGoal = goal => dispatch => {
-  console.log(goal)
   axios.post('/api/goals', goal)
     .then(res => res.data)
     .then(goal => dispatch(addGoal(goal)))

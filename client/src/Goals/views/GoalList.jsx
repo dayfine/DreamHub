@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { withStyles } from 'material-ui/styles'
+import Dialog from 'material-ui/Dialog'
 import Grid from 'material-ui/Grid'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
@@ -10,8 +11,9 @@ import Card, { CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
 import AddTooltip from './AddTooltip'
-
+import Resolution from './Resolution'
 import ProperButton from '../../common/ProperButton'
+
 import { GOAL_PROGRESS } from '../../constants'
 import { updateGoalProgress } from '../actions'
 import { mapCategoryToGoal } from '../util/mappers'
@@ -65,11 +67,12 @@ const RenderProgressHeader = ({ progress }) => {
   }
 }
 
-const RenderProgressButton = ({ progress, classes }) => {
+const RenderProgressButton = ({ progress, classes, onClick }) => {
   switch (progress) {
     case GOAL_PROGRESS.READY:
       return (
         <ProperButton
+          onClick={onClick}
           raised
           color='primary'
           className={classes.pulse}
@@ -81,6 +84,7 @@ const RenderProgressButton = ({ progress, classes }) => {
     case GOAL_PROGRESS.STALLED:
       return (
         <ProperButton
+          onClick={onClick}
           raised
           color='accent'
           className={classes.pulse}
@@ -95,6 +99,18 @@ const RenderProgressButton = ({ progress, classes }) => {
 }
 
 class GoalList extends Component {
+  state = {
+    modalId: null
+  }
+
+  openModal = modalId => {
+    this.setState({ modalId })
+  }
+
+  closeModal = () => {
+    this.setState({ modalId: null })
+  }
+
   componentDidMount () {
     this.props.updateGoalProgress()
   }
@@ -104,6 +120,9 @@ class GoalList extends Component {
 
     return (
       <div className={classes.root}>
+        <Dialog open={!!this.state.modalId}>
+          <Resolution onClose={this.closeModal} />
+        </Dialog>
         <Grid container className={classes.overflow}>
           {goals.map(goal => {
             return (
@@ -124,12 +143,18 @@ class GoalList extends Component {
                         <Icon>open_in_new</Icon>
                       </IconButton>
                     </div>
+
                     <div className={classes.controlGroup}>
                       <div className={classes.controlGroup}>
                         <RenderCategoryDot goal={goal} categories={categories} />
                         {goal.category}
                       </div>
-                      <RenderProgressButton progress={goal.progress} classes={classes} />
+
+                      <RenderProgressButton
+                        progress={goal.progress}
+                        classes={classes}
+                        onClick={this.openModal.bind(null, goal.id)}
+                      />
                     </div>
                   </CardContent>
                 </Card>

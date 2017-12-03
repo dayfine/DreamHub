@@ -51,15 +51,24 @@ const catFilter = (term, categories) => {
 }
 
 class Category extends Component {
-  state = {
-    search: '',
-    color: '#ff8a80',
-    open: false,
-    anchorEl: null,
+  constructor(props) {
+    super()
+    this.state = {
+      category: props.category,
+      search: '',
+      color: '#ff8a80',
+      open: false,
+      anchorEl: null,
+    }
   }
+
 
   handleChange = ev => {
     this.setState({ search: ev.target.value })
+  }
+
+  handleSelect = ev => {
+    console.log(ev.target)
   }
 
   handleAdd = () => {
@@ -109,7 +118,7 @@ class Category extends Component {
         <List className={classes.list}>
           {catFilter(search, categories).map(category => {
             return (
-              <ListItem button key={category.id}>
+              <ListItem button key={category.id} onClick={this.handleSelect}>
                 <Icon style={{color: category.color}}>fiber_manual_record</Icon>
                 <ListItemText secondary={category.name} />
               </ListItem>
