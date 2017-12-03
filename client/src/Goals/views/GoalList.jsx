@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 
 import AddTooltip from './AddTooltip'
 
+import ProperButton from '../../common/ProperButton'
 import { GOAL_PROGRESS } from '../../constants'
 import { updateGoalProgress } from '../actions'
 import { mapCategoryToGoal } from '../util/mappers'
@@ -23,6 +24,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  pulse: {
+    animation: 'pulse 2s infinite',
+    border: '3px solid'
   }
 }
 
@@ -51,6 +56,16 @@ const RenderProgressHeader = ({ progress }) => {
   }
   return (
     <div style={{ backgroundColor, height: 12 }} />
+  )
+}
+
+const RenderProgressButton = ({ progress, classes }) => {
+  return (
+    <ProperButton
+      className={progress === GOAL_PROGRESS.STALLED
+                  ? classes.pulse : ''}>
+      {progress}
+    </ProperButton>
   )
 }
 
@@ -89,9 +104,7 @@ class GoalList extends Component {
                         {goal.category}
                         <RenderCategoryDot goal={goal} categories={categories} />
                       </div>
-                      <div>
-                        {goal.progress}
-                      </div>
+                      <RenderProgressButton progress={goal.progress} classes={classes} />
                     </div>
                   </CardContent>
                 </Card>

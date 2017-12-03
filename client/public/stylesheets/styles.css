@@ -51,6 +51,24 @@ main {
   align-items: flex-start;
 }
 
+@keyframes pulse {
+  0% {
+    border-color: rgba(255, 23, 68, 1);
+  }
+  25% {
+    border-color: rgba(255, 23, 68, 25);
+  }
+  50% {
+    border-color: rgba(255, 23, 68, 1);
+  }
+  75% {
+    border-color: rgba(255, 23, 68, .25);
+  }
+  100% {
+    border-color: rgba(255, 23, 68, 1);
+  }
+}
+
 a:hover {
   text-decoration: none;
 }
