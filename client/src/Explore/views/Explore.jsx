@@ -1,4 +1,4 @@
-import React, { Component }  from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -6,11 +6,8 @@ import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
-import Card, { CardContent, CardActions } from 'material-ui/Card'
+import Card, { CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-
-import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
-import GoalForm from '../../Goals/views/GoalForm'
 
 import { mapCategoryToGoal } from '../../Goals/util/mappers'
 
@@ -22,39 +19,18 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
-  },
+  }
 }
 
 class GoalList extends Component {
-  state = {
-    modalId: null
-  }
-
-  openModal = modalId => {
-    this.setState({ modalId })
-  }
-
-  closeModal = () => {
-    this.setState({ modalId: null })
-  }
-
   render () {
-    const { goals, categories, classes } = this.props
-    const { modalId } = this.state
-
-    const goal = goals.find(g => g.id === modalId)
+    const { goals, classes } = this.props
 
     return (
-      <div className={classes.root}>
-        <GoalForm
-          open={!!modalId}
-          goal={goal}
-          onClose={this.closeModal}
-        />
-        <Grid container>
+      <Grid container>
         {goals.map(goal => {
           return (
-            <Grid item sm={6} md={4}  key={goal.id}>
+            <Grid item sm={6} md={4} key={goal.id}>
               <Card>
                 <CardContent>
                   <div className={classes.controlGroup}>
@@ -64,8 +40,8 @@ class GoalList extends Component {
                     <IconButton
                       aria-label='Open Details'
                       component={Link}
-                      to={ `/goals/${goal.id}`}
-                    >
+                      to={`/goals/${goal.id}`}
+                  >
                       <Icon>open_in_new</Icon>
                     </IconButton>
                   </div>
@@ -79,8 +55,7 @@ class GoalList extends Component {
             </Grid>
           )
         })}
-        </Grid>
-      </div>
+      </Grid>
     )
   }
 }

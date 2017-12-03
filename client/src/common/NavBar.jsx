@@ -9,8 +9,6 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import Icon from 'material-ui/Icon'
-import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
 
 const styles = theme => ({
@@ -26,15 +24,11 @@ const styles = theme => ({
   },
   title: {
     fontFamily: 'Permanent Marker',
-    fontSize: '1.75em',
+    fontSize: '2em',
     padding: '0 24px 0 0',
     '&:hover': {
       color: '#eee'
     }
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 16
   },
   textFieldRoot: {
     padding: 0,
@@ -59,9 +53,6 @@ const NavBar = ({ clear, classes }) => {
   return (
     <AppBar className={clear ? classes.rootClear : classes.root}>
       <Toolbar>
-        <IconButton className={classes.menuButton} aria-label='Menu'>
-          <Icon>menu</Icon>
-        </IconButton>
         <Typography
           type='headline'
           className={classes.title}

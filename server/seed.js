@@ -34,10 +34,10 @@ module.exports = (User, Goal, Task, Category) => {
     return Promise.all([
       Goal.create({ title: 'Travel', description: 'Want to go to somewhere', userId: 5 }),
       Goal.create({ title: 'Travel to Peru', description: 'See Amazon & Machu Picchu!', userId: 3 }),
-      Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 5 }),
+      Goal.create({ title: 'Change TaskMapper Ln 46', description: 'For Screencast!', userId: 5 }),
       Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 5 }),
       Goal.create({ title: 'Own a house', description: 'American Dream', userId: 5 }),
-      Goal.create({ title: 'Travel', description: 'Visit every country in the world.', userId: 5 }),
+      Goal.create({ title: 'Meditate', description: 'Visit every country in the world.', userId: 5 }),
       Goal.create({ title: 'Learn to cook', description: 'Stop spending money eating out!', userId: 5 }),
       Goal.create({ title: 'Learn Japanese', description: 'Get ready for job relocation in Osaka', userId: 5, categoryId: 2, progress: 'Accomplished' })
     ])
@@ -57,14 +57,14 @@ module.exports = (User, Goal, Task, Category) => {
       Task.create({ title: 'T4', description: 'Liu - Test', goalId: 6, status: 'Completed' }),
       Task.create({ title: 'T5', description: 'Fiv, aseomw', goalId: 5 }),
       Task.create({ title: 'T6', description: 'LOL', goalId: 5, status: 'Completed' }),
-      Task.create({ title: 'Find flights', description: 'check Google Flights', status: 'In Progress', priority: 100, goalId: 1, }),
-      Task.create({ title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1, }),
+      Task.create({ title: 'Find flights', description: 'check Google Flights', status: 'In Progress', priority: 100, goalId: 1 }),
+      Task.create({ title: 'Book plane ticket', status: 'Created', priority: 75, goalId: 1 }),
       Task.create({ title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priority: 75, goalId: 1 }),
       Task.create({ title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priority: 75, goalId: 1 }),
       Task.create({ title: 'Pick 3 activities', status: 'Later', priority: 25, goalId: 1 }),
       Task.create({ title: 'Commit to this goal', status: 'In Progress', priority: 50, goalId: 1 }),
       Task.create({ title: 'Dream about it', status: 'In Progress', priority: 50, goalId: 1 }),
-      Task.create({ title: 'Start planning', status: 'Completed', priority: 50, goalId: 1 }),
+      Task.create({ title: 'Start planning', status: 'Completed', priority: 50, goalId: 1 })
     ])
   })
   .then(() => {

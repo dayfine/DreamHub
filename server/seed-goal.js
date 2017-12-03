@@ -60,7 +60,7 @@ const getHealthy = {
     { title: 'Limit binge watching to once a week', priorityValue: 25, priorityText: 'Low' },
     { title: 'Go out to the nature', priorityValue: 50 },
     { title: 'Prioritize family & friends more often', priorityValue: 50 },
-    { title: 'Treat yo self', description:'At least once a week', priorityValue: 50 },
+    { title: 'Treat yo self', description: 'At least once a week', priorityValue: 50 },
     { title: 'Take daily walks', priorityValue: 75, priorityText: 'High' },
     { title: 'Read more books', priorityValue: 25, priorityText: 'Low' },
     { title: 'Meditate', priorityValue: 25, priorityText: 'Low' },
@@ -77,7 +77,7 @@ const amsterdamTrip = {
   userId: 2,
   tasks: [
     { title: 'Check flights', description: 'check Google Flights', status: 'In Progress', priorityValue: 100 },
-    { title: 'Book plane ticket', status: 'Created', priorityValue: 75, goalId: 1, },
+    { title: 'Book plane ticket', status: 'Created', priorityValue: 75, goalId: 1 },
     { title: 'Book stay', description: 'check airbnb & hotels', status: 'Created', priorityValue: 75 },
     { title: 'Take vacation time', description: 'Talk to boss', status: 'Later', priorityValue: 75 },
     { title: 'Pick 3 activities', status: 'Later', priorityValue: 25 },
