@@ -78,7 +78,7 @@ class AgileCard extends Component {
           <div className={classes.flexContainer}>
             <div>
               <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
-              <div className="badge badge-dark">Priority: {task.priority}</div>
+              <div className="badge badge-dark">Priority: {task.priorityText}</div>
             </div>
             <IconButton
               onClick={openModal}

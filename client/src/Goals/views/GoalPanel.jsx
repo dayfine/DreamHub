@@ -61,7 +61,7 @@ const GoalPanel = props => {
                     <div className='badge badge-dark'>Due Date:</div>
                     { task.dueDate || 'N/A' }
                     <div className='badge badge-dark'>Priority:</div>
-                    { task.priority || 'N/A' }
+                    { task.priorityText }
                   </Grid>
                   <Grid item xs={1}>
                     <Checkbox
