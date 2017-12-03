@@ -6,7 +6,7 @@ const BubbleChart = ({ goalTasks }) => {
 
   return (
     <div id="bubblechart">
-      <h2>Visualize Your Goals</h2>
+      <h2>Visualize Your Tasks</h2>
       <Bubbles tasks={goalTasks} width={ width } height={ height } />
     </div>
   )

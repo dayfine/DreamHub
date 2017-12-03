@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import { select } from 'd3-selection';
 import { schemePastel2 } from 'd3-scale-chromatic';
 
 class Bubbles extends Component {
@@ -10,7 +11,7 @@ class Bubbles extends Component {
 
   renderBubbles(data, selection) {
     const { width, height } = this.props;
-    const columnForRadius = "priority";
+    const columnForRadius = "priorityValue";
     const columnForColors = "status";
     const svg = d3.select("svg");
 
@@ -19,7 +20,7 @@ class Bubbles extends Component {
           return +d[columnForRadius];
         }), d3.max(data, function(d) {
           return +d[columnForRadius];
-        })]).range([10, 100])
+        })]).range([10, 80]);
 
     const bubbles = svg.selectAll('svg')
       .data(data)
@@ -33,7 +34,7 @@ class Bubbles extends Component {
       })
       .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
       .on("mouseover", function(d) {
-        tooltip.html(`${d.title} <br> priority: ${d[columnForRadius]} <br> status: ${d[columnForColors]}`);
+        tooltip.html(`Task: ${d.title}<br />Status: ${d.status}<br />Priority: ${d.priorityText}`);
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function() {
@@ -47,7 +48,7 @@ class Bubbles extends Component {
         .on("drag", dragged)
         .on("end", dragended))
 
-    const tooltip = bubbles
+    const tooltip = d3.select('#bubblechart')
       .append("div")
       .style("position", "absolute")
       .style("visibility", "hidden")
@@ -56,8 +57,7 @@ class Bubbles extends Component {
       .style("background-color", "#626D71")
       .style("border-radius", "6px")
       .style("text-align", "center")
-      .style("font-family", "monospace")
-      .style("width", "400px")
+      .style("width", "300px")
       .text("");
 
     const simulation = d3.forceSimulation(data)
@@ -79,13 +79,13 @@ class Bubbles extends Component {
       if (!d3.event.active) simulation.alphaTarget(1).restart();
       d.fx = d.x;
       d.fy = d.y;
-      // return tooltip.style("visibility", "hidden");
+      return tooltip.style("visibility", "hidden");
     }
 
     function dragged(d) {
       d.fx = d3.event.x;
       d.fy = d3.event.y;
-      // return tooltip.style("visibility", "hidden");
+      return tooltip.style("visibility", "hidden");
     }
 
     function dragended(d) {
@@ -112,7 +112,7 @@ class Bubbles extends Component {
   render() {
     const { width, height } = this.props;
     return (
-      <svg width={ width } height={ height } />
+      <svg ref={node => this.node = node} width={ width } height={ height } />
     )
   }
 }
