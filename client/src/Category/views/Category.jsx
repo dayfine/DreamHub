@@ -63,20 +63,32 @@ class Category extends Component {
     }
   }
 
+  onOpenForm = () => {
+    this.setState({ listOpen: true })
+  }
+
 
   handleChange = ev => {
     this.setState({ search: ev.target.value })
   }
 
   handleSelect = category => {
-    this.setState({ category })
+    this.setState({ category, listOpen: false })
   }
 
   handleAdd = () => {
     const { search, color } = this.state
     if (search === '') return
-    this.props.createCategory({ color, name: search})
-    this.setState({ search: '', color: '#ff8a80' })
+
+    return this.props.createCategory({ color, name: search})
+      .then( category => {
+        this.setState({
+          category,
+          search: '',
+          color: '#ff8a80',
+          listOpen: false
+        })
+      })
   }
 
   archor = null
@@ -97,17 +109,21 @@ class Category extends Component {
     this.onRequestClose()
   }
 
-  renderCategoryLabel = () => {
-
-  }
-
   render () {
     const { categories, classes } = this.props
-    const { search, color, paletteOpen, anchorEl,} = this.state
+    const { category, listOpen, search, color, paletteOpen, anchorEl,} = this.state
 
-    return this.state.category
-      ? (<div>{this.state.category.name}</div>)
-      : (
+    return (category && !listOpen)
+      ? (
+      <ListItem
+        button
+        onClick={this.onOpenForm}
+        className={classes.root}
+      >
+        <Icon style={{color: category.color}}>fiber_manual_record</Icon>
+        <ListItemText secondary={category.name} />
+      </ListItem>
+      ) : (
       <Paper className={classes.root}>
         <div className={classes.searchInputBox}>
           <IconButton>
@@ -122,15 +138,15 @@ class Category extends Component {
         </div>
         <Divider />
         <List className={classes.list}>
-          {catFilter(search, categories).map(category => {
+          {catFilter(search, categories).map(_category => {
             return (
               <ListItem
                 button
-                key={category.id}
-                onClick={this.handleSelect.bind(null, category)}
+                key={_category.id}
+                onClick={this.handleSelect.bind(null, _category)}
               >
-                <Icon style={{color: category.color}}>fiber_manual_record</Icon>
-                <ListItemText secondary={category.name} />
+                <Icon style={{color: _category.color}}>fiber_manual_record</Icon>
+                <ListItemText secondary={_category.name} />
               </ListItem>
             )
           })}

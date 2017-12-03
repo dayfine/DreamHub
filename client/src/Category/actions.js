@@ -7,25 +7,29 @@ const deleteCategory = id => ({ type: DELETE_CATEGORY, id })
 export const setCategories = categories => ({ type: SET_CATEGORIES, categories })
 
 export const fetchCategories = () => dispatch => {
-  axios.get('/api/category')
+  return axios.get('/api/category')
     .then(res => res.data)
     .then(goals => dispatch(setCategories(goals)))
 }
 
 export const createCategory = category => dispatch => {
-  axios.post(`/api/category/`, category)
+  return axios.post(`/api/category/`, category)
     .then(res => res.data)
-    .then(category => dispatch(addCategory(category)))
+    .then(category => {
+      console.log(category)
+      dispatch(addCategory(category))
+      return category
+    })
 }
 
 export const removeCategory = id => dispatch => {
-  axios.delete(`/api/category/${id}`)
+  return axios.delete(`/api/category/${id}`)
     .then(res => res.data)
     .then(() => dispatch(deleteCategory(id)))
 }
 
 export const editCategory = (id, changes) => dispatch => {
-  axios.put(`/api/category/${id}`, changes)
+  return axios.put(`/api/category/${id}`, changes)
     .then(res => res.data)
     .then(category => dispatch(updateCategory(category)))
 }
