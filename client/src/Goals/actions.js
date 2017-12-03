@@ -14,19 +14,19 @@ export const fetchGoals = () => dispatch => {
 }
 
 export const createGoal = goal => dispatch => {
+  console.log(goal)
   axios.post('/api/goals', goal)
     .then(res => res.data)
     .then(goal => dispatch(addGoal(goal)))
 }
 
-export const removeGoal = (id) => dispatch => {
+export const removeGoal = id => dispatch => {
   axios.delete(`/api/goals/${id}`)
     .then(res => res.data)
     .then(() => dispatch(deleteGoal(id)))
 }
 
-export const editGoal = (goal) => dispatch => {
-  console.log(goal.id)
+export const editGoal = goal => dispatch => {
   axios.put(`/api/goals/${goal.id}`, goal)
     .then(res => res.data)
     .then(goal => dispatch(updateGoal(goal)))

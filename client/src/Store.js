@@ -21,13 +21,16 @@ const rootReducer = combineReducers({
   pastGoals: ExploreReducer
 })
 
-const
-  initialState = {},
-  middlewares = [
-    thunkMiddleware,
-    createLogger()
-  ],
-  enhancers = composeWithDevTools(
+const initialState = {}
+let middlewares = [
+  thunkMiddleware
+]
+
+if (process.env.NODE_ENV !== 'production') {
+  middlewares = [ ...middlewares, createLogger() ]
+}
+
+const enhancers = composeWithDevTools(
     applyMiddleware(...middlewares)
   )
 

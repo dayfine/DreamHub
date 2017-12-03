@@ -18,7 +18,13 @@ import { mapCategoryToGoal } from '../util/mappers'
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    height: 'calc(100vh - 240px)'
+  },
+  overflow: {
+    height: '100%',
+    overflow: 'scroll',
+    marginBottom: 50
   },
   controlGroup: {
     display: 'flex',
@@ -98,7 +104,7 @@ class GoalList extends Component {
 
     return (
       <div className={classes.root}>
-        <Grid container>
+        <Grid container className={classes.overflow}>
           {goals.map(goal => {
             return (
               <Grid item sm={6} md={4} key={goal.id}>
