@@ -55,9 +55,10 @@ class Category extends Component {
     super()
     this.state = {
       category: props.category,
+      listOpen: !props.category,
       search: '',
       color: '#ff8a80',
-      open: false,
+      paletteOpen: false,
       anchorEl: null,
     }
   }
@@ -67,8 +68,8 @@ class Category extends Component {
     this.setState({ search: ev.target.value })
   }
 
-  handleSelect = ev => {
-    console.log(ev.target)
+  handleSelect = category => {
+    this.setState({ category })
   }
 
   handleAdd = () => {
@@ -82,26 +83,31 @@ class Category extends Component {
 
   onRequestOpen = () => {
     this.setState({
-      open: true,
+      paletteOpen: true,
       anchorEl: findDOMNode(this.archor),
-    });
+    })
   }
 
   onRequestClose = () => {
-    this.setState({ open: false })
+    this.setState({ paletteOpen: false })
   }
 
   onColorChangeComplete = (color, event) => {
     this.setState({ color: color.hex })
     this.onRequestClose()
-  };
+  }
 
+  renderCategoryLabel = () => {
+
+  }
 
   render () {
     const { categories, classes } = this.props
-    const { search, color, open, anchorEl,} = this.state
+    const { search, color, paletteOpen, anchorEl,} = this.state
 
-    return (
+    return this.state.category
+      ? (<div>{this.state.category.name}</div>)
+      : (
       <Paper className={classes.root}>
         <div className={classes.searchInputBox}>
           <IconButton>
@@ -118,7 +124,11 @@ class Category extends Component {
         <List className={classes.list}>
           {catFilter(search, categories).map(category => {
             return (
-              <ListItem button key={category.id} onClick={this.handleSelect}>
+              <ListItem
+                button
+                key={category.id}
+                onClick={this.handleSelect.bind(null, category)}
+              >
                 <Icon style={{color: category.color}}>fiber_manual_record</Icon>
                 <ListItemText secondary={category.name} />
               </ListItem>
@@ -138,7 +148,7 @@ class Category extends Component {
             <Icon style={{ color }}>fiber_manual_record</Icon>
           </IconButton>
           <Popover
-            open={open}
+            open={paletteOpen}
             anchorEl={anchorEl}
             onRequestClose={this.onRequestClose}
             anchorOrigin={{

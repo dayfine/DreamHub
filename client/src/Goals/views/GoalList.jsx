@@ -67,12 +67,12 @@ const RenderProgressHeader = ({ progress }) => {
   }
 }
 
-const RenderProgressButton = ({ progress, classes, onClick }) => {
+const RenderProgressButton = ({ progress, classes, onClick, goalId }) => {
   switch (progress) {
     case GOAL_PROGRESS.READY:
       return (
         <ProperButton
-          onClick={onClick}
+          onClick={onClick.bind(null, goalId)}
           raised
           color='primary'
           className={classes.pulse}
@@ -84,7 +84,8 @@ const RenderProgressButton = ({ progress, classes, onClick }) => {
     case GOAL_PROGRESS.STALLED:
       return (
         <ProperButton
-          onClick={onClick}
+          component={Link}
+          to={`/goals/${goalId}`}
           raised
           color='accent'
           className={classes.pulse}
@@ -117,11 +118,15 @@ class GoalList extends Component {
 
   render () {
     const { goals, categories, classes } = this.props
+    const { modalId } = this.state
 
     return (
       <div className={classes.root}>
-        <Dialog open={!!this.state.modalId}>
-          <Resolution onClose={this.closeModal} />
+        <Dialog open={!!modalId}>
+          <Resolution
+            goal={goals.find(g=>g.id==modalId)}
+            onClose={this.closeModal}
+          />
         </Dialog>
         <Grid container className={classes.overflow}>
           {goals.map(goal => {
@@ -153,7 +158,8 @@ class GoalList extends Component {
                       <RenderProgressButton
                         progress={goal.progress}
                         classes={classes}
-                        onClick={this.openModal.bind(null, goal.id)}
+                        onClick={this.openModal}
+                        goalId={goal.id}
                       />
                     </div>
                   </CardContent>
