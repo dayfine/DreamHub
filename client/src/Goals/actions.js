@@ -38,8 +38,9 @@ export const updateGoalProgress = () => (dispatch, getState) => {
     return (new Date() - new Date(task.updatedAt)) / 1000 / 3600 / 24
   }
 
-  goals.forEach(g => {
+  for (let g of goals) {
     g.tasks = tasks.filter(task => task.goalId === g.id)
+    if (g.tasks.length === 0) continue
 
     let ready = g.progress !== GOAL_PROGRESS.ACCOMPLISHED &&
                 g.progress !== GOAL_PROGRESS.ABANDONED &&
@@ -56,5 +57,5 @@ export const updateGoalProgress = () => (dispatch, getState) => {
     if (stalled) {
       dispatch(editGoal({...g, progress: GOAL_PROGRESS.STALLED}))
     }
-  })
+  }
 }

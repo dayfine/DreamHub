@@ -53,19 +53,37 @@ main {
 
 @keyframes pulse {
   0% {
-    border-color: rgba(255, 23, 68, 1);
+    border-color: rgba(255, 255, 255, .2);
   }
   25% {
-    border-color: rgba(255, 23, 68, 25);
+    border-color: rgba(255, 255, 255, .45);
   }
   50% {
-    border-color: rgba(255, 23, 68, 1);
+    border-color: rgba(255, 255, 255, .6);
   }
   75% {
-    border-color: rgba(255, 23, 68, .25);
+    border-color: rgba(255, 255, 255, .45);
   }
   100% {
-    border-color: rgba(255, 23, 68, 1);
+    border-color: rgba(255, 255, 255, .2);
+  }
+}
+
+@keyframes checkin {
+  0% {
+    background: rgba(255, 23, 68, 1);
+  }
+  25% {
+    background: rgba(255, 23, 68, 55);
+  }
+  50% {
+    background: rgba(255, 23, 68, .1);
+  }
+  75% {
+    background: rgba(255, 23, 68, .55);
+  }
+  100% {
+    background: rgba(255, 23, 68, 1);
   }
 }
 

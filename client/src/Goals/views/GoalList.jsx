@@ -26,7 +26,7 @@ const styles = {
     alignItems: 'center'
   },
   pulse: {
-    animation: 'pulse 2s infinite',
+    animation: 'pulse 1s infinite',
     border: '3px solid'
   }
 }
@@ -41,32 +41,51 @@ const RenderCategoryDot = ({ goal, categories }) => {
 }
 
 const RenderProgressHeader = ({ progress }) => {
-  let backgroundColor
   switch (progress) {
     case GOAL_PROGRESS.READY:
-      backgroundColor = '#00e676'; break
+      return (<div style={{ background: '#00e676', height: 12 }} />)
+
     case GOAL_PROGRESS.ACCOMPLISHED:
-      backgroundColor = '#4f9b94'; break
+      return (<div style={{ background: '#4f9b94', height: 12 }} />)
+
     case GOAL_PROGRESS.STALLED:
-      backgroundColor = '#d32f2f'; break
+      return (<div style={{ background: '#d32f2f', height: 12 }} />)
+
     case GOAL_PROGRESS.ABANDONED:
-      backgroundColor = '#c85a54'; break
+      return (<div style={{ background: '#c85a54', height: 12 }} />)
+
     default:
-      backgroundColor = '#00bcd4'
+      return (<div style={{ background: '#00bcd4', height: 12 }} />)
   }
-  return (
-    <div style={{ backgroundColor, height: 12 }} />
-  )
 }
 
 const RenderProgressButton = ({ progress, classes }) => {
-  return (
-    <ProperButton
-      className={progress === GOAL_PROGRESS.STALLED
-                  ? classes.pulse : ''}>
-      {progress}
-    </ProperButton>
-  )
+  switch (progress) {
+    case GOAL_PROGRESS.READY:
+      return (
+        <ProperButton
+          raised
+          color='primary'
+          className={classes.pulse}
+        >
+          {progress}
+        </ProperButton>
+      )
+
+    case GOAL_PROGRESS.STALLED:
+      return (
+        <ProperButton
+          raised
+          color='accent'
+          className={classes.pulse}
+        >
+          {progress}
+        </ProperButton>
+      )
+
+    default:
+      return (<ProperButton disabled>{progress}</ProperButton>)
+  }
 }
 
 class GoalList extends Component {
@@ -101,8 +120,8 @@ class GoalList extends Component {
                     </div>
                     <div className={classes.controlGroup}>
                       <div className={classes.controlGroup}>
-                        {goal.category}
                         <RenderCategoryDot goal={goal} categories={categories} />
+                        {goal.category}
                       </div>
                       <RenderProgressButton progress={goal.progress} classes={classes} />
                     </div>

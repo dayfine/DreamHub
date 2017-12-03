@@ -80,6 +80,9 @@ const NavBar = ({ clear, classes }) => {
           }}
           className={classes.textFieldRoot}
         />
+        <ProperButton component={Link} to='/home'>
+          Home
+        </ProperButton>
         <ProperButton component={Link} to='/explore'>
           Explore
         </ProperButton>
