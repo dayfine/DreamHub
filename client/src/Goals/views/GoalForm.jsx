@@ -115,10 +115,12 @@ class GoalForm extends Component {
     return (
       <div className={classes.formContainer}>
         {Object.keys(initialState).map(prop => {
+          const type = prop === 'deadline' ? 'date' : 'text'
           return (
             <TextField
               key={prop}
               label={prop}
+              type={type}
               onChange={this.handleEdit}
               name={prop}
               fullWidth

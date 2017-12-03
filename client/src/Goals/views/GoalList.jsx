@@ -14,6 +14,7 @@ import AddTooltip from './AddTooltip'
 import Resolution from './Resolution'
 import ProperButton from '../../common/ProperButton'
 import { views as Category } from '../../Category'
+import { views as Travel } from '../../Travel'
 
 import { GOAL_PROGRESS } from '../../constants'
 import { updateGoalProgress } from '../actions'
@@ -125,6 +126,7 @@ class GoalList extends Component {
         </Dialog>
         <Grid container className={classes.overflow}>
           {goals.map(goal => {
+            let category = categories.find(c => c.id === goal.categoryId)
             return (
               <Grid item sm={6} md={4} key={goal.id}>
                 <Card>
@@ -147,7 +149,7 @@ class GoalList extends Component {
                     <div className={classes.controlGroup}>
                       <div className={classes.category}>
                         <Category
-                          category={categories.find(c => c.id === goal.categoryId)}
+                          category={category}
                           passIdBack={null}
                           goal={goal}
                         />
@@ -159,6 +161,9 @@ class GoalList extends Component {
                         goalId={goal.id}
                       />
                     </div>
+                    {category && category.name === 'Traveling' && (
+                      <Travel />
+                    )}
                   </CardContent>
                 </Card>
               </Grid>

@@ -37,28 +37,33 @@ class TravelForm extends Component {
     const city = location ? location.split(', ')[0].trim() : null
 
     return (
-      <form onSubmit={onSubmit} className='container' align='center'>
-        <input value={to}
-          type='text'
-          name='to'
-          onChange={onChange}
-          list='to'
-          className='goal-input-sm'
+      <div style={{ display: 'flex'}}>
+        <div style={{whiteSpace: 'nowrap'}}>
+          Where to:
+        </div>
+        <form onSubmit={onSubmit} className='container' align='center'>
+          <input value={to}
+            type='text'
+            name='to'
+            onChange={onChange}
+            list='to'
+            className='goal-input-sm'
         />
 
-        <datalist id='to'>
-          {
+          <datalist id='to'>
+            {
             options.slice(0, 10).map(option => (
               <option
                 key={option.iata}
                 value={`${option.name} (${option.iata}) — ${option.city}, ${option.country}`} />
             ))
           }
-        </datalist>
+          </datalist>
 
-        <div>{ !city ? null : <TravelButtons iata={iata} city={city} /> }</div>
+          <div>{ !city ? null : <TravelButtons iata={iata} city={city} /> }</div>
 
-      </form>
+        </form>
+      </div>
     )
   }
 }

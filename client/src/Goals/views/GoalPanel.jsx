@@ -58,12 +58,9 @@ const GoalPanel = props => {
                     </Typography>
                   </Grid>
                   <Grid item xs={3} direction='column' justify='flex-start'>
-                    Due Date:
-                    <br />
+                    <div className='badge badge-dark'>Due Date:</div>
                     { task.dueDate || 'N/A' }
-                    <br />
-                    Priority:
-                    <br />
+                    <div className='badge badge-dark'>Priority:</div>
                     { task.priority || 'N/A' }
                   </Grid>
                   <Grid item xs={1}>

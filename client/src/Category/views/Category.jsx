@@ -77,11 +77,14 @@ class Category extends Component {
   }
 
   handleSelect = category => {
-    console.log(category)
     const { passIdBack, goal, editGoal } = this.props
-    console.log(this.props)
+    const categoryId = category ? category.id : null
+
     if (!passIdBack && goal) {
-      editGoal({ ...goal, categoryId: category.id })
+      editGoal({ ...goal, categoryId })
+    }
+    if (passIdBack && !goal) {
+      editGoal({ ...goal, categoryId })
     }
     this.setState({ category, listOpen: false })
   }
