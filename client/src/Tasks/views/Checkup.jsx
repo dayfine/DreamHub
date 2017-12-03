@@ -9,6 +9,7 @@ import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 import Dialog from 'material-ui/Dialog'
+import Divider from 'material-ui/Divider'
 import { grey } from 'material-ui/colors'
 
 import { editTask } from '../actions'
@@ -19,16 +20,20 @@ const styles = {
   title: {
     display: 'flex',
     padding: 24,
-    flexDirection: 'column',
+    paddingTop: 36,
     color: 'white',
-    backgroundColor: 'black'
+    backgroundColor: '#c85a54',
+    fontSize: '1.35em',
+    justifyContent: 'center',
+    minHeight: 130
   },
   flexCard: {
     display: 'flex',
+    borderBottom: "1px solid black"
   },
   goalInfo: {
-    width: 160,
-    height: 140
+    width: 320,
+    height: 120
   },
   flex: {
     flex: '1 0 auto',
@@ -56,11 +61,11 @@ class Checkup extends Component {
 
     return (
       <Card key={task.id} className={classes.flexCard} >
-        <CardContent className={classes.goalInfo} style={{width: '18em'}}>
-          <Typography type="headline" style={{borderBottom: '1px solid #f2f2f2'}}>
+        <CardContent className={classes.goalInfo}>
+          <Typography type="headline">
             {task.title}
           </Typography>
-          <Typography type="subheading" color="secondary" style={{paddingTop: '5px'}}>
+          <Typography type="subheading" color="secondary">
             {truncate(task.description, 40)}
           </Typography>
         </CardContent>
@@ -78,6 +83,7 @@ class Checkup extends Component {
           )
         })}
         </List>
+        <Divider />
       </Card>
     )
   }
@@ -88,13 +94,13 @@ class Checkup extends Component {
 
     return tasks.length > 0 && (
       <div>
-        <Button onClick={ onOpen }>Check Your Progress</Button>
+        <Button color='accent' raised onClick={ onOpen }>Check In!</Button>
         <Dialog
           open={ this.state.open }
           onRequestClose={ onClose }
         >
-          <div className={ classes.title } style={{backgroundColor: '#F44336'}}>
-            <Typography type='headline' color='inherit' style={{fontSize: '1.5em'}}>
+          <div className={ classes.title }>
+            <Typography type='headline' color='inherit' >
               How are you doing with the following tasks?
             </Typography>
              <IconButton
@@ -102,12 +108,11 @@ class Checkup extends Component {
               color='inherit'
               onClick={ onClose }
               aria-label='Close'
-              style={{position: 'relative', top: '-2.8em', left: '18.8em', outline: 'none'}}
-              iconStyle={{width: '3%', height: '3%'}}>
-              <Icon>clear</Icon>
+            >
+              <Icon style={{fontSize: '1em'}}>clear</Icon>
             </IconButton>
           </div>
-          <div style={{height: '34em'}}>
+          <div className={ classes.list }>
           {tasks.map(task => renderTaskOptions(task, classes, editTask))}
           </div>
         </Dialog>
