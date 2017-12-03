@@ -43,6 +43,11 @@ class Form extends Component {
         onRequestClose={onClose}
       >
         <div className="task-item">
+            <IconButton
+              onClick={removeTask.bind(this, currentTask.goalId, currentTask.id)}
+              aria-label='Delete'>
+              <Icon>delete</Icon>
+            </IconButton>
           <input
             type="text"
             onChange={ handleEdit }

@@ -1,27 +1,51 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Dialog from 'material-ui/Dialog'
+import { withStyles } from 'material-ui/styles'
+import TextField from 'material-ui/TextField'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import AutoCompleteGoal from './AutoCompleteGoal'
 
+import ProperButton from '../../common/ProperButton'
+
 import { removeGoal, editGoal } from '../actions'
+
+const initialState = {
+  title: '',
+  description: '',
+  progress: '',
+  budget: 0,
+  deadline: null,
+  importance: 5,
+  measurement: '',
+  reasons: '',
+  affirmations: '',
+}
+
+const styles = {
+  formContainer: {
+    padding: 24,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    minHeight: 320,
+    maxHeight: 720,
+    minWidth: 400,
+    maxWidth: 960,
+    overflow: 'scroll',
+  }
+}
+
+const RenderButtonGroups = props => {
+
+}
 
 class GoalForm extends Component {
   constructor (props) {
     super()
-    this.state = {
-      title: '',
-      description: '',
-      progress: '',
-      budget: 0,
-      deadline: null,
-      importance: 5,
-      measurement: '',
-      reasons: '',
-      affirmations: '',
-    }
+    this.state = initialState
   }
 
   componentDidMount () {
@@ -46,68 +70,46 @@ class GoalForm extends Component {
   }
 
   render () {
-    const { categories, removeGoal, editGoal, open, onClose } = this.props
-    const { handleDelete, handleEdit, handleSave } = this
-    const {
-      title,
-      description,
-      progress,
-      budget,
-      deadline,
-      importance,
-      measurement,
-      reasons,
-      affirmations,
-    } = this.state
-
-    console.log(this.props)
+    const { classes, removeGoal, editGoal, open, onClose } = this.props
 
     return (
-        <div className='goal-edit'>
-          <input
-            type='text'
-            onChange={ handleEdit }
-            name='title'
-            value={this.state.title}
-            autoFocus
-            className='goal-input-sm' />
-
-          <button
-            onClick={ handleSave }
-            className='btn btn-sm btn-success'>
+      <div className={classes.formContainer}>
+        {Object.keys(initialState).map(prop => {
+          return (
+            <TextField
+              label={prop}
+              onChange={ this.handleEdit }
+              name={prop}
+              value={this.state[prop]}
+            />
+          )
+        })}
+        <div>
+          <ProperButton
+            onClick={ this.handleSave }
+          >
             Save
-          </button>
-
-          <button
+          </ProperButton>
+          <ProperButton
             onClick={ onClose }
-            className='btn btn-sm btn-secondary'>
+          >
             Cancel
-          </button>
-
-          <div>
-            <label>Category</label>
-            <select name="categoryId" value={ this.state.categoryId } onChange={ handleEdit }>
-              <option value={''}>Choose a category...</option>
-              {categories.map(category => {
-                return (
-                  <option value={category.id} key={category.id}>
-                    {category.name}
-                  </option>)
-              })}
-            </select>
-          </div>
-
-          <textarea
-            onChange={ handleEdit }
-            name='description'
-            value={this.state.description || ''}
-            className='goal-input-sm goal-textinput' />
+          </ProperButton>
+          <ProperButton
+            onClick={ this.onClose }
+          >
+            Delete
+          </ProperButton>
         </div>
+      </div>
     )
   }
 }
 
-const mapState = state => ({ categories: state.categories })
+const mapState = state => ({})
 const mapDispatch = { removeGoal, editGoal }
 
-export default connect(mapState, mapDispatch)(GoalForm)
+export default connect(mapState, mapDispatch)(
+                withStyles(styles)(
+                  GoalForm
+                ))

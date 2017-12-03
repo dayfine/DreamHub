@@ -8,10 +8,14 @@ import { withStyles } from 'material-ui/styles'
 import Card, { CardMedia, CardContent, CardHeader } from 'material-ui/Card'
 
 const styles = {
+  card: {
+    padding: '20px 32px',
+    minWidth: 280
+  },
   media: {
     height: 140,
     width: 155,
-    margin: '0 auto'
+    margin: '0 auto',
   },
 };
 
@@ -39,7 +43,7 @@ class CurrentUserCard extends Component {
           open={!!modalId}
           onClose={this.closeModal}
         />
-        <Card>
+        <Card className={classes.card}>
           <CardMedia
             className={classes.media}
             image={`/public/images/${user.imgUrl}`}
@@ -55,9 +59,7 @@ class CurrentUserCard extends Component {
               <span>{user.friendCount} Friends</span>
             )}
             <br />
-            The goals above should be a link
-            <br />
-            <Link to={`friends`}>Friends</Link>
+            <Link to={`friends`}>See Friends</Link>
           </CardContent>
         </Card>
       </div>

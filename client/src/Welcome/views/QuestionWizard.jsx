@@ -10,6 +10,7 @@ import { LinearProgress } from 'material-ui/Progress'
 import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
 import { views as Category } from '../../Category'
 import { views as Travel } from '../../Travel'
+import { Signup } from '../../Auth'
 import questions from '../questions'
 
 const styles = {
@@ -77,9 +78,11 @@ const RenderInput = ({ control }) => {
   }
 }
 
-const RenderConfirmationButton = ({idx, handleAnswer}) => {
+const RenderSignUpPrompt = ({idx, handleAnswer}) => {
   return idx === questions.length - 1 && (
-    <Button onClick={handleAnswer}>+</Button>
+    <div style={{ margin: '-100px auto 0 auto', display: 'inline-block' }}>
+      <Signup />
+    </div>
   )
 }
 
@@ -106,7 +109,7 @@ const QuestionWizard = props => {
             value: answers[question.control.name]
           }}
         />}
-        <RenderConfirmationButton
+        <RenderSignUpPrompt
           idx={idx}
           handleAnswer={handleAnswer}
         />

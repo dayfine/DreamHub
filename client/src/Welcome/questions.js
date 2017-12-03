@@ -114,5 +114,8 @@ export default [
       type: 'text',
       name: 'affirmations'
     }
+  },
+  {
+    title: 'Almost there!'
   }
 ]

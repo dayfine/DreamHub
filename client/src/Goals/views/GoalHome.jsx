@@ -15,7 +15,6 @@ import { editTask } from '../../Tasks/actions'
 import Kanban from '../../Tasks/views/Kanban'
 import GoalPanel from './GoalPanel'
 import { views as BubbleChart } from '../../Graph'
-import GoalForm from './GoalForm'
 
 const styles = {
   goalContainer: {
@@ -39,15 +38,12 @@ const RenderTabContainer = props => {
 
   switch (idx) {
     case 0:
-      return (<GoalForm goal={goal}>Goal Details</GoalForm>)
-
-    case 1:
-      return (<Kanban goalId={goal.id}/>)
-
-    case 2:
       return (<GoalPanel goal={goal} goalTasks={goalTasks} />)
 
-    case 3:
+    case 1:
+      return (<Kanban goalId={goal.id} />)
+
+    case 2:
       return (<BubbleChart goalTasks={goalTasks} />)
 
     default:
@@ -88,7 +84,6 @@ class GoalHome extends Component {
             >
               <Tab label='Details' />
               <Tab label='Board' />
-              <Tab label='List' />
               <Tab label='Chart' />
             </Tabs>
           </AppBar>

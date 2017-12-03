@@ -19,11 +19,11 @@ const styles = {
   agileCard: {
     margin: 5
   },
-  actionHeader: {
-    // Not really sure about float right
-    fontSize: '.5em',
-    float: 'right',
-    marginBottom: -10
+  flexContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0 16px 8px 16px'
   }
 }
 
@@ -67,26 +67,24 @@ class AgileCard extends Component {
           onClose={closeModal}
         />
         <Card className={classes.agileCard}>
-          <CardActions className={classes.actionHeader}>
+          <CardContent>
+            <Typography type='display1'>
+            {truncate(task.title, 20)}
+            </Typography>
+            {truncate(task.description, 40)}
+
+          </CardContent>
+          <div className={classes.flexContainer}>
+            <div>
+              <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
+              <div className="badge badge-dark">Priority: {task.priority}</div>
+            </div>
             <IconButton
               onClick={openModal}
               aria-label='Edit'>
               <Icon>mode_edit</Icon>
             </IconButton>
-            <IconButton
-              onClick={removeTask.bind(this, task.goalId, task.id)}
-              aria-label='Delete'>
-              <Icon>delete</Icon>
-            </IconButton>
-          </CardActions>
-          <CardContent>
-            <Typography type='display1'>
-              {task.title}
-            </Typography>
-            {truncate(task.description, 40)}
-            <div>{ task.dueDate ? `Due date: ${ task.dueDate }` : null }</div>
-            <div className="badge badge-dark">Priority: {task.priority}</div>
-          </CardContent>
+          </div>
         </Card>
       </div>
     )
