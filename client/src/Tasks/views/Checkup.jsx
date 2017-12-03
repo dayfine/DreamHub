@@ -55,12 +55,12 @@ class Checkup extends Component {
     }
 
     return (
-      <Card key={task.id} className={classes.flexCard}>
-        <CardContent className={classes.goalInfo}>
-          <Typography type="headline">
+      <Card key={task.id} className={classes.flexCard} >
+        <CardContent className={classes.goalInfo} style={{width: '18em'}}>
+          <Typography type="headline" style={{borderBottom: '1px solid #f2f2f2'}}>
             {task.title}
           </Typography>
-          <Typography type="subheading" color="secondary">
+          <Typography type="subheading" color="secondary" style={{paddingTop: '5px'}}>
             {truncate(task.description, 40)}
           </Typography>
         </CardContent>
@@ -73,7 +73,7 @@ class Checkup extends Component {
               onClick={onUpdate.bind(null, _.status)}
               button
             >
-              <ListItemText primary={_.text} />
+              <ListItemText primary={_.text} style={{fontSize: "1em"}}/>
             </ListItem>
           )
         })}
@@ -93,19 +93,21 @@ class Checkup extends Component {
           open={ this.state.open }
           onRequestClose={ onClose }
         >
-          <div className={ classes.title }>
-            <Typography type='headline' color='inherit'>
+          <div className={ classes.title } style={{backgroundColor: '#F44336'}}>
+            <Typography type='headline' color='inherit' style={{fontSize: '1.5em'}}>
               How are you doing with the following tasks?
             </Typography>
              <IconButton
               className={ classes.flex }
               color='inherit'
               onClick={ onClose }
-              aria-label='Close'>
+              aria-label='Close'
+              style={{position: 'relative', top: '-2.8em', left: '18.8em', outline: 'none'}}
+              iconStyle={{width: '3%', height: '3%'}}>
               <Icon>clear</Icon>
             </IconButton>
           </div>
-          <div>
+          <div style={{height: '34em'}}>
           {tasks.map(task => renderTaskOptions(task, classes, editTask))}
           </div>
         </Dialog>

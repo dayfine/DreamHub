@@ -122,7 +122,7 @@ const travelUSA = {
   description: '',
   progress: 'In Progress',
   budget: 2000,
-  userId: 6,
+  userId: 5,
   categoryId: 1,
   tasks: [
     { title: 'Research each state', description: 'Find out points of interest I want to visit in each state', status: 'Completed' },

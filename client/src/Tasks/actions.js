@@ -7,7 +7,7 @@ const deleteTask = id => ({ type: DELETE_TASK, id })
 export const setTasks = tasks => ({ type: SET_TASKS, tasks })
 
 export const getGoalTasks = (goalId) => dispatch => {
-  const id = goalId || 1;
+  const id = goalId
   axios.get(`/api/goals/${id}/tasks`)
     .then(res => res.data)
     .then(tasks => dispatch(setTasks(tasks)))

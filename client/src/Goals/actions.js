@@ -1,4 +1,5 @@
 import { ADD_GOAL, UPDATE_GOAL, DELETE_GOAL, SET_GOALS } from './actionTypes'
+import { TASK_STATUS, GOAL_PROGRESS } from '../constants'
 import axios from 'axios'
 
 const addGoal = goal => ({ type: ADD_GOAL, goal })
@@ -29,4 +30,31 @@ export const editGoal = (goal) => dispatch => {
   axios.put(`/api/goals/${goal.id}`, goal)
     .then(res => res.data)
     .then(goal => dispatch(updateGoal(goal)))
+}
+
+export const updateGoalProgress = () => (dispatch, getState) => {
+  const { goals, tasks } = getState()
+  const timeDiffToDay = task => {
+    return (new Date() - new Date(task.updatedAt)) / 1000 / 3600 / 24
+  }
+
+  goals.forEach(g => {
+    g.tasks = tasks.filter(task => task.goalId === g.id)
+
+    let ready = g.progress !== GOAL_PROGRESS.ACCOMPLISHED &&
+                g.progress !== GOAL_PROGRESS.ABANDONED &&
+                g.tasks.every(t => t.status === TASK_STATUS.COMPLETED)
+
+    let stalled = g.progress !== GOAL_PROGRESS.ACCOMPLISHED &&
+                  g.progress !== GOAL_PROGRESS.ABANDONED &&
+                  g.tasks.every(t => timeDiffToDay(t) > 3)
+
+    if (ready) {
+      dispatch(editGoal({...g, progress: GOAL_PROGRESS.READY}))
+    }
+
+    if (stalled) {
+      dispatch(editGoal({...g, progress: GOAL_PROGRESS.STALLED}))
+    }
+  })
 }

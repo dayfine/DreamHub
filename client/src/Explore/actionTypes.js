@@ -1,0 +1,1 @@
+export const SET_EXLPORE_GOALS = 'SET_EXLPORE_GOALS/SET'

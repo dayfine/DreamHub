@@ -34,12 +34,12 @@ module.exports = (User, Goal, Task, Category) => {
     return Promise.all([
       Goal.create({ title: 'Travel', description: 'Want to go to somewhere', userId: 5 }),
       Goal.create({ title: 'Travel to Peru', description: 'See Amazon & Machu Picchu!', userId: 3 }),
-      Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 2 }),
-      Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 3 }),
-      Goal.create({ title: 'Own a house', description: 'American Dream', userId: 4 }),
-      Goal.create({ title: 'Testie', description: 'American Drum', userId: 5 }),
-      Goal.create({ title: 'Tastie', description: 'American Drim', userId: 5 }),
-      Goal.create({ title: 'I am completed', description: '100% done', userId: 5, categoryId: 2, progress: 'Accomplished' })
+      Goal.create({ title: 'Travel', description: 'Want to go to Burundi', userId: 5 }),
+      Goal.create({ title: 'Learn Spanish', description: 'Be conversant', userId: 5 }),
+      Goal.create({ title: 'Own a house', description: 'American Dream', userId: 5 }),
+      Goal.create({ title: 'Travel', description: 'Visit every country in the world.', userId: 5 }),
+      Goal.create({ title: 'Learn to cook', description: 'Stop spending money eating out!', userId: 5 }),
+      Goal.create({ title: 'Learn Japanese', description: 'Get ready for job relocation in Osaka', userId: 5, categoryId: 2, progress: 'Accomplished' })
     ])
   })
   .then(() => {

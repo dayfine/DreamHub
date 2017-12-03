@@ -10,21 +10,26 @@ const
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
+} else {
+  app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 }
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz'
-  res.set('Content-Encoding', 'gzip')
-  next()
-})
+// app.get('*.js', function (req, res, next) {
+//   req.url = req.url + '.gz'
+//   res.set('Content-Encoding', 'gzip')
+//   next()
+// })
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
-app.use('/public', express.static(path.join(__dirname, '../client/public')))
+app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')))
 
 app.use('/api', require('./api'))
+
+const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
+app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
   const error = new Error('page not found')
@@ -33,21 +38,11 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  if (req.headers['content-type'].includes('application/json')) {
-    console.log(err, '======', err.message)
+  if (req.headers['content-type'] && req.headers['content-type'].includes('application/json')) {
     return res.status(err.status).send({message: err.message})
   }
   return res.status(err.status || 500).send(err)
 })
-
-if (process.env.NODE_ENV !== 'production') {
-  require('../secrets')
-  // const proxy = require('express-http-proxy')
-  // app.use('/*', proxy('http://localhost:3000'))
-} else {
-  // Only serve build directory in production
-  app.use(express.static('client/build'))
-}
 
 db.sync()
   .then(() => db.seed())

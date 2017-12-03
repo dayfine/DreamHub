@@ -12,7 +12,7 @@ import Typography from 'material-ui/Typography'
 import AutoCompleteGoal from '../../Goals/views/AutoCompleteGoal'
 import GoalForm from '../../Goals/views/GoalForm'
 
-// import { mapCategoryToGoal } from '../util/mappers'
+import { mapCategoryToGoal } from '../../Goals/util/mappers'
 
 const styles = {
   root: {
@@ -86,8 +86,7 @@ class GoalList extends Component {
 }
 
 const mapState = state => ({
-  goals: state.goals
-  // goals: mapCategoryToGoal(state.categories, state.goals)
+  goals: mapCategoryToGoal(state.categories, state.pastGoals)
 })
 
 export default connect(mapState)(

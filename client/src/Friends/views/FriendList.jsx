@@ -1,36 +1,63 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-
 import FriendSearch from './FriendSearch.jsx'
-import FriendView from './FriendView.jsx'
+import FriendView from './FriendView.jsx' 
+import FriendGoalView from './FriendGoalView.jsx' 
 
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 
-const Friend = props => {
-  const { friends } = props
+class Friend extends Component{
+  constructor(props){
+    super(props)
+    this.state = { expanded: false, friendId: 0 };
+    this.handleExpandClick = this.handleExpandClick.bind(this)
+  }
+  
+  handleExpandClick = (id) => {
+    this.setState({ expanded: !this.state.expanded, friendId: id });
+  }
 
-  return (
-    <div className='container'>
-      <FriendSearch />
-      <Divider />
-      <Typography type='headline'>
-        My Friends
-      </Typography>
-      <ul>
-        {friends.map(friend => {
-          return (
-            <FriendView key={friend.id} friend={friend}/>
-          )
-        })}
-      </ul>
-    </div>
-  )
+  render(){
+    const { friends } = this.props
+    return (
+      <div className='container'>
+        <div className='row'>
+            <FriendSearch />
+            <Divider />
+            <br /><br />
+        </div>
+        <div className='row'>
+          <Typography type='headline'>
+            My Friends
+          </Typography>
+        </div>
+        <div className='row'>
+          <div className='col'>            
+            <ul>
+              {friends.map(friend => {
+                return (
+                  <FriendView key={friend.id} 
+                              friend={friend} 
+                              handleExpandClick={this.handleExpandClick} 
+                              expanded={this.state.expended} />
+                )
+              })}
+            </ul>
+          </div>
+          <div className='col' style={{height:'30em', overflow:'scroll'}}>
+            <FriendGoalView friend={friends.find(f=>f.id===this.state.friendId)}/>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapState = state => ({
-  friends: state.friends
+  friends: state.friends,
+  friendId: 0
 })
 
 const mapDispatch = {}
