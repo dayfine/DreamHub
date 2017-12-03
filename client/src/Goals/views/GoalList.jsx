@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 
 import AddTooltip from './AddTooltip'
 
+import { GOAL_PROGRESS } from '../../constants'
 import { updateGoalProgress } from '../actions'
 import { mapCategoryToGoal } from '../util/mappers'
 
@@ -23,6 +24,34 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center'
   }
+}
+
+const RenderCategoryDot = ({ goal, categories }) => {
+  const cat = categories.find(c => c.id === goal.categoryId)
+  const color = cat ? cat.color : '#000'
+
+  return (
+    <Icon style={{ color }}>fiber_manual_record</Icon>
+  )
+}
+
+const RenderProgressHeader = ({ progress }) => {
+  let backgroundColor
+  switch (progress) {
+    case GOAL_PROGRESS.READY:
+      backgroundColor = '#00e676'; break
+    case GOAL_PROGRESS.ACCOMPLISHED:
+      backgroundColor = '#4f9b94'; break
+    case GOAL_PROGRESS.STALLED:
+      backgroundColor = '#d32f2f'; break
+    case GOAL_PROGRESS.ABANDONED:
+      backgroundColor = '#c85a54'; break
+    default:
+      backgroundColor = '#00bcd4'
+  }
+  return (
+    <div style={{ backgroundColor, height: 12 }} />
+  )
 }
 
 class GoalList extends Component {
@@ -40,6 +69,7 @@ class GoalList extends Component {
             return (
               <Grid item sm={6} md={4} key={goal.id}>
                 <Card>
+                  <RenderProgressHeader progress={goal.progress} />
                   <CardContent>
                     <div className={classes.controlGroup}>
                       <Typography type='headline'>
@@ -50,21 +80,18 @@ class GoalList extends Component {
                         aria-label='Open Details'
                         component={Link}
                         to={`/goals/${goal.id}`}
-                    >
+                      >
                         <Icon>open_in_new</Icon>
                       </IconButton>
                     </div>
                     <div className={classes.controlGroup}>
-                      <div>
+                      <div className={classes.controlGroup}>
                         {goal.category}
-                        <br />
-                        {goal.progress}
-                        <br />
+                        <RenderCategoryDot goal={goal} categories={categories} />
                       </div>
-                      <IconButton
-                        aria-label='Expand'>
-                        <Icon>more_vert</Icon>
-                      </IconButton>
+                      <div>
+                        {goal.progress}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -79,7 +106,8 @@ class GoalList extends Component {
 }
 
 const mapState = state => ({
-  goals: mapCategoryToGoal(state.categories, state.goals)
+  goals: mapCategoryToGoal(state.categories, state.goals),
+  categories: state.categories
 })
 
 const mapDispatch = ({ updateGoalProgress })
