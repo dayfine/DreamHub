@@ -1,21 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import CenterPaper from '../../common/CenterPaper'
 import Grid from 'material-ui/Grid'
 import Divider from 'material-ui/Divider'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
+import List, { ListItem } from 'material-ui/List'
 import green from 'material-ui/colors/green'
 import Checkbox from 'material-ui/Checkbox'
 
 import GoalForm from './GoalForm'
 import { TASK_STATUS } from '../../constants'
 import { editTask } from '../../Tasks/actions'
+import { truncate } from '../../Tasks/util/helpers'
 
 const styles = {
   checked: {
     color: green[500]
+  },
+  flexCard: {
+    display: 'flex',
+    padding: 20,
+    borderBottom: '1px solid #ccc'
+  },
+  flex: {
+    flex: '1 0 auto'
   }
 }
 
@@ -30,36 +39,45 @@ const GoalPanel = props => {
   }
 
   return !goal ? (<div>Loading...</div>) : (
-    <Grid container spacing={24}>
+    <Grid container spacing={24} justify='space-between'>
       <Grid item xs={4}>
         <GoalForm goal={goal} />
       </Grid>
-      <Grid item xs={8}>
-        <CenterPaper>
-          <ol>
-            { goalTasks.map(task => {
-              return (
-                <li key={task.id}>
-                  Title: { task.title }
-                  <br />
-                  Description: { task.description }
-                  <br />
-                  Due Date: { task.dueDate }
-                  <br />
-                  Priority: { task.priority }
-                  <br />
-                  Status: { task.status }
-                  <Divider light />
-                  <Checkbox
-                    checked={task.status === COMPLETED}
-                    onChange={toggleStatus.bind(this, task.id)}
-                    className={classes.checked}
-                  />
-                </li>
-              )
-            })}
-          </ol>
-        </CenterPaper>
+      <Grid item xs={6}>
+        <List>
+          {goalTasks.map(task => {
+            return (
+              <ListItem key={task.id}>
+                <Grid container className={classes.flexCard}>
+                  <Grid item xs={8} direction='column'>
+                    <Typography type='subheading'>
+                      {truncate(task.title, 20)}
+                    </Typography>
+                    <Typography type='caption' color='secondary'>
+                      {truncate(task.description, 60)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3} direction='column' justify='flex-start'>
+                    Due Date:
+                    <br />
+                    { task.dueDate || 'N/A' }
+                    <br />
+                    Priority:
+                    <br />
+                    { task.priority || 'N/A' }
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Checkbox
+                      checked={task.status === COMPLETED}
+                      onChange={toggleStatus.bind(this, task.id)}
+                      className={classes.checked}
+                    />
+                  </Grid>
+                </Grid>
+              </ListItem>
+            )
+          })}
+        </List>
       </Grid>
     </Grid>
   )

@@ -25,7 +25,7 @@ const initialState = {
 
 const styles = {
   formContainer: {
-    padding: 24,
+    padding: '24px 36px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -80,6 +80,7 @@ class GoalForm extends Component {
               label={prop}
               onChange={ this.handleEdit }
               name={prop}
+              fullWidth
               value={this.state[prop]}
             />
           )

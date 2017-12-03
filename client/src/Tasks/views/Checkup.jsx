@@ -74,7 +74,7 @@ class Checkup extends Component {
       <Card key={task.id} className={classes.flexCard} >
         <CardContent className={classes.goalInfo}>
           <Typography type="headline">
-            {task.title}
+            {truncate(task.title, 20)}
           </Typography>
           <Typography type="subheading" color="secondary">
             {truncate(task.description, 40)}

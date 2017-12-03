@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import Card from './Card';
+import Card from './Card'
 
 import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
-import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper'
+import Divider from 'material-ui/Divider'
+import Typography from 'material-ui/Typography'
 
 import { DropTarget } from 'react-dnd'
 import { DragItemTypes } from '../../constants'
@@ -14,8 +14,8 @@ import { editTask } from '../../Tasks/actions'
 
 const styles = theme => ({
   paper: {
-    backgroundColor: '#c9c9c9',
-  },
+    backgroundColor: '#c9c9c9'
+  }
 })
 
 const columnTarget = {
@@ -24,24 +24,24 @@ const columnTarget = {
     const status = props.header
     props.editTask({...oldTask, status})
   }
-};
+}
 
 const collect = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver()
-});
+})
 
 // Used by Kanban
 const Column = props => {
   const { header, tasks, connectDropTarget, classes } = props
   return connectDropTarget(
-    <div className="swimlane-container">
-      <Paper classes={{root: "swimlane"}} className={classes.paper}>
-        <div className="swimlane-hed">
-          <Typography type='subheading' >
+    <div className='swimlane-container'>
+      <Paper classes={{root: 'swimlane'}} className={classes.paper}>
+        <div className='swimlane-hed'>
+          <Typography type='caption' >
             { tasks.length } Tasks
           </Typography>
-          <Typography type='headline' >
+          <Typography type='subheading' >
             <div>{ header }</div>
           </Typography>
         </div>
@@ -54,9 +54,9 @@ const Column = props => {
   )
 }
 
-const mapDispatch = ({ editTask });
+const mapDispatch = ({ editTask })
 
-export default  connect(null, mapDispatch)(
+export default connect(null, mapDispatch)(
                 DropTarget(DragItemTypes.CARD, columnTarget, collect)(
                 withStyles(styles)(
                   Column

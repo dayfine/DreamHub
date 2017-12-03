@@ -68,11 +68,12 @@ class AgileCard extends Component {
         />
         <Card className={classes.agileCard}>
           <CardContent>
-            <Typography type='display1'>
-            {truncate(task.title, 20)}
+            <Typography type='title'>
+              {truncate(task.title, 20)}
             </Typography>
-            {truncate(task.description, 40)}
-
+            <Typography type='caption'>
+              {truncate(task.description, 60)}
+            </Typography>
           </CardContent>
           <div className={classes.flexContainer}>
             <div>
