@@ -30,9 +30,14 @@ passport.use(strategy)
 router
   .get('/', passport.authenticate('google', {scope: 'email'}))
 
-  .get('/callback', passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }))
+  .get('/callback',
+        passport.authenticate('google', { session: false }),
+        (req, res, next) => {
+          if (!req.user) return res.sendStatus(403)
+          token =
+          res.redirect(`/?=${generateToken(req.user)}`)
+          console.log(req.user)
+        }
+  )
 
 module.exports = router
