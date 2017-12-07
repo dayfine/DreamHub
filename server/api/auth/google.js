@@ -2,6 +2,8 @@ const
   router = require('express').Router(),
   passport = require('passport'),
   { User } = require('../../db').models,
+  jwt = require('jsonwebtoken'),
+  secret = process.env.SECRET,
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
   googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -28,15 +30,24 @@ const
 passport.use(strategy)
 
 router
-  .get('/', passport.authenticate('google', {scope: 'email'}))
+  .get('/',
+        passport.authenticate('google', {scope: 'email'}),
+        (req, res, next) => {
+          console.log('hitting it!!!!')
+          console.log(req)
+          next()
+        }
+  )
 
   .get('/callback',
         passport.authenticate('google', { session: false }),
         (req, res, next) => {
           if (!req.user) return res.sendStatus(403)
-          token =
-          res.redirect(`/?=${generateToken(req.user)}`)
+
           console.log(req.user)
+          const paylod = {id: req.user.id}
+          const token = jwt.sign(paylod, secret)
+          res.send(token)
         }
   )
 

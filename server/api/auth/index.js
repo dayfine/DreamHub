@@ -6,9 +6,9 @@ const
   secret = process.env.SECRET
 
 router
-  .use('/google', require('./oauth-google'))
-
   .use(jwtAuth.initialize())
+
+  .use('/google', require('./google'))
 
   .get('/me', jwtAuth.authenticate(), (req, res, next) => {
     res.send(req.user)
