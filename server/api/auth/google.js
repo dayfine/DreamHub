@@ -13,16 +13,17 @@ const
   strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
     const
       googleId = profile.id,
-      name = profile.displayName,
-      email = profile.emails[0].value
+      name = profile.displayName || `Google User ${googleId}`.slice(0, 30),
+      email = profile.emails[0].value,
+      id = googleId.slice(0, 10)
 
     console.log(profile)
 
     User.find({where: {googleId}})
       .then(user => user
         ? done(null, user)
-        : User.create({name, email, googleId})
-          .then(user => done(null, user))
+        : User.create({id, name, email, googleId})
+          .then(_user => done(null, _user))
       )
       .catch(done)
   })
