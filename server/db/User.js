@@ -5,6 +5,11 @@ const Goal = require('./Goal')
 const Task = require('./Task')
 
 const User = conn.define('user', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -12,7 +17,7 @@ const User = conn.define('user', {
     validate: {
       notEmpty: true,
       is: {
-        args: /^\w+$/,
+        args: /^(\w+\s*)*\w+$/,
         msg: 'Username cannot contain special characters'
       },
       len: [4, 30]
@@ -27,11 +32,13 @@ const User = conn.define('user', {
     }
   },
   password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // No password required for OAuth
+
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   googleId: {
     type: Sequelize.STRING

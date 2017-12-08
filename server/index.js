@@ -6,7 +6,7 @@ const
   cors = require('cors'),
   path = require('path'),
   db = require('./db'),
-  port = process.env.PORT || 3001
+  port = process.env.PORT || 3000
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
@@ -24,11 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
+app.use('/dist', express.static(path.join(__dirname, '../dist')))
 app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')))
 
 app.use('/api', require('./api'))
 
-const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
+const indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html')
+// const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
 app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
