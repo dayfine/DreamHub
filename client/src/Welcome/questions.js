@@ -1,7 +1,7 @@
 export default [
   {
     title: 'Hello Dreamer!',
-    description: 'Welcome come to DreamHub! Let\'s get started with our goalWizard.'
+    description: 'To get a sense of the functionality of DreamHub, login using the test account below: \nusername: test@test.test\npassword: test'
   },
   {
     title: 'What is this goal related to?',

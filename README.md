@@ -4,8 +4,9 @@ From Fullstack Academy of Code, Flex Program of 1706
 
 
 ### To Try
-To get a sense of the functionality of DreamHub, sign up for an account, or use the test account below:
-
+To get a sense of the functionality of DreamHub, login using the test account below:
+username: test@test.test
+password: test
 
 
 ### Develop
