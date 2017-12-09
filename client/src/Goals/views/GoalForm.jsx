@@ -19,29 +19,6 @@ const initialState = {
   affirmations: '',
 }
 
-const RenderButtonGroups = ({ newForm, handleClick }) => {
-  return newForm
-    ? (
-      <div>
-        <ProperButton onClick={ handleClick.bind(null, 'add') }>
-          Add
-        </ProperButton>
-        <ProperButton onClick={ handleClick.bind(null, 'cancel') }>
-          Cancel
-        </ProperButton>
-      </div>
-    ) : (
-      <div>
-        <ProperButton onClick={ handleClick.bind(null, 'update') }>
-          Save
-        </ProperButton>
-        <ProperButton onClick={ handleClick.bind(null, 'delete') }>
-          Delete
-        </ProperButton>
-      </div>
-    )
-}
-
 class GoalForm extends Component {
   constructor (props) {
     super()
@@ -67,7 +44,8 @@ class GoalForm extends Component {
     this.setState({ goal: { ...this.state.goal, ...update } })
   }
 
-  handleClick = type => {
+  handleClick = type => ev => {
+    ev.preventDefault()
     const { goal } = this.state
     const { createGoal, removeGoal, editGoal, userId, onClose } = this.props
 
@@ -92,9 +70,13 @@ class GoalForm extends Component {
 
   render () {
     const { classes } = this.props
+    const newForm = !this.state.goal.id
 
     return (
-      <div className={classes.formContainer}>
+      <form
+        className={ classes.formContainer }
+        onSubmit={ this.handleClick(newForm ? 'add' : 'update') }
+      >
         {Object.keys(initialState).map(prop => {
           const type = prop === 'deadline' ? 'date' : 'text'
           return (
@@ -110,19 +92,20 @@ class GoalForm extends Component {
             />
           )
         })}
-        <RenderButtonGroups
-          newForm={!this.state.goal.id}
-          handleClick={this.handleClick}
-          classes={classes}
-        />
+        <div>
+          <ProperButton type='submit'>
+            { newForm ? 'Add' : 'Save' }
+          </ProperButton>
+          <ProperButton onClick={ this.handleClick(newForm ? 'cancel': 'delete') }>
+            { newForm ? 'Cancel' : 'Delete' }
+          </ProperButton>
+        </div>
         {this.state.showSuccess && <strong>Change successful!</strong>}
-      </div>
+      </form>
 
     )
   }
 }
-
-
 
 const styles = {
   formContainer: {
