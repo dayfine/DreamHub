@@ -44,7 +44,6 @@ export const stalledTasksMapper = tasks => {
   return tasks.filter(t => {
     return t.status !== TASK_STATUS.COMPLETED &&
            timeDiffToDay(t) > 1
-           // For presentation 0.0025
            // Dev only, should be 3
   })
 }

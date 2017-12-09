@@ -5,8 +5,10 @@ import ProperButton from '../../common/ProperButton'
 
 import { logout } from '../actions'
 
-const AuthForm = ({ authenticated, onLogOut }) => {
-  return authenticated
+const storage = window.localStorage
+
+const AuthForm = ({ onLogOut }) => {
+  return storage.authToken
     ? (
       <div style={{display: 'inline-flex', flexGrow: 2, justifyContent: 'flex-end'}}>
         <ProperButton component={Link} to='/me'>
@@ -30,14 +32,10 @@ const AuthForm = ({ authenticated, onLogOut }) => {
     )
 }
 
-const mapState = state => ({
-  authenticated: state.authenticated
-})
-
 const mapDispatch = (dispatch, ownProps) => ({
   onLogOut () {
     dispatch(logout(ownProps.history))
   }
 })
 
-export default withRouter(connect(mapState, mapDispatch)(AuthForm))
+export default withRouter(connect(null, mapDispatch)(AuthForm))

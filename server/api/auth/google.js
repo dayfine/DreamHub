@@ -31,24 +31,16 @@ const
 passport.use(strategy)
 
 router
-  .get('/',
-        passport.authenticate('google', {scope: 'email'}),
-        (req, res, next) => {
-          console.log('hitting it!!!!')
-          console.log(req)
-          next()
-        }
-  )
+  .get('/', passport.authenticate('google', {scope: 'email'}))
 
   .get('/callback',
         passport.authenticate('google', { session: false }),
         (req, res, next) => {
           if (!req.user) return res.sendStatus(403)
 
-          console.log(req.user)
           const paylod = {id: req.user.id}
           const token = jwt.sign(paylod, secret)
-          res.send(token)
+          res.redirect(`/?=${token}`)
         }
   )
 

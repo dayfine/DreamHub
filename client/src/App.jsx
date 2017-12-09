@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   render () {
-    const { authenticated } = this.props
+    const authenticated = !!storage.authToken
     return (
       <div className={`App${authenticated ? '' : ' Landing'}`}>
         <NavBar clear={!authenticated} />
@@ -35,8 +35,4 @@ class App extends Component {
   }
 }
 
-const mapState = state => ({
-  authenticated: state.authenticated
-})
-
-export default withRouter(connect(mapState)(App))
+export default withRouter(App)

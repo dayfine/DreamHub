@@ -13,6 +13,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // set token from oauth
+      if (document.location.search.indexOf('=') === 1) {
+        window.localStorage.setItem('authToken', document.location.search.slice(2))
+        window.location = '/'
+      }
+    </script>
     <script src="/dist/bundle.js" defer></script>
   </body>
 </html>
