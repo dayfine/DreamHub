@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import Icon from 'material-ui/Icon'
-import IconButton from 'material-ui/IconButton'
-import AutoCompleteGoal from './AutoCompleteGoal'
-
 import ProperButton from '../../common/ProperButton'
 
 import { createGoal, removeGoal, editGoal } from '../actions'
@@ -21,21 +17,6 @@ const initialState = {
   measurement: '',
   reasons: '',
   affirmations: '',
-}
-
-const styles = {
-  formContainer: {
-    padding: '24px 36px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    minHeight: 320,
-    maxHeight: 720,
-    minWidth: 400,
-    maxWidth: 960,
-    overflow: 'scroll',
-  }
 }
 
 const RenderButtonGroups = ({ newForm, handleClick }) => {
@@ -125,6 +106,7 @@ class GoalForm extends Component {
               name={prop}
               fullWidth
               value={this.state.goal[prop]}
+              required={prop==='title' || prop === 'deadline'}
             />
           )
         })}
@@ -137,6 +119,23 @@ class GoalForm extends Component {
       </div>
 
     )
+  }
+}
+
+
+
+const styles = {
+  formContainer: {
+    padding: '24px 36px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    minHeight: 320,
+    maxHeight: 720,
+    minWidth: 400,
+    maxWidth: 960,
+    overflow: 'scroll',
   }
 }
 

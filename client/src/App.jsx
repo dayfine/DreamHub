@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 import NavBar from './common/NavBar'
 import Footer from './common/Footer'

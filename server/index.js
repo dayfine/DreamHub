@@ -1,17 +1,19 @@
-const
-  express = require('express'),
-  app = express(),
-  bodyParser = require('body-parser'),
-  morgan = require('morgan'),
-  cors = require('cors'),
-  path = require('path'),
-  db = require('./db'),
-  port = process.env.PORT || 3000
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const cors = require('cors')
+const path = require('path')
+const db = require('./db')
+const port = process.env.PORT || 3000
+let indexPath
 
 if (process.env.NODE_ENV !== 'production') {
   require('../secrets')
+  indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html')
 } else {
   app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
+  indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
 }
 
 // app.get('*.js', function (req, res, next) {
@@ -29,8 +31,6 @@ app.use('/public', express.static(path.join(__dirname, '..', 'client', 'public')
 
 app.use('/api', require('./api'))
 
-const indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html')
-// const indexPath = path.join(__dirname, '..', 'client', 'build', 'index.html')
 app.get('*', (req, res, next) => res.sendFile(indexPath))
 
 app.use((req, res, next) => {
@@ -40,7 +40,9 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-  if (req.headers['content-type'] && req.headers['content-type'].includes('application/json')) {
+  if (req.headers['content-type'] &&
+    req.headers['content-type'].includes('application/json')
+  ) {
     return res.status(err.status).send({message: err.message})
   }
   return res.status(err.status || 500).send(err)
