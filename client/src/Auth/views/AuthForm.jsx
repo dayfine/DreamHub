@@ -67,11 +67,9 @@ const AuthForm = props => {
               </Typography>
             </div>
             <div className='d-flex justify-content-between'>
-              {displayName === 'Login' && (
-                <Button raised type='submit' color='accent'>
-                  {displayName}
-                </Button>
-              )}
+              <Button raised type='submit' color='accent'>
+                {displayName}
+              </Button>
 
               <a href='/api/auth/google'>
                 <img src={`../../public/images/gsignin.png`} style={{width: 'auto', height: 44}} />

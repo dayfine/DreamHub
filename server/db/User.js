@@ -5,14 +5,9 @@ const Goal = require('./Goal')
 const Task = require('./Task')
 
 const User = conn.define('user', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
     unique: true,
     validate: {
       notEmpty: true,
