@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 
-import MarkdownEditor from '../../common/MarkdownEditor'
+// import MarkdownEditor from '../../common/MarkdownEditor'
 import { TASK_STATUS, TASK_PRIORITY } from '../../constants'
 
 // Task Edit Form, needs format
@@ -73,8 +73,6 @@ class Form extends Component {
             name="description"
             value={ currentTask.description || '' }
             className="task-input-sm task-textinput" />
-
-          <MarkdownEditor />
 
           <div>Due date:
             {/* TO DO: Need to be able to clear date */}
